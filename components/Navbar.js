@@ -176,7 +176,7 @@ function Navbar() {
                                 <div className='flex items-center space-x-1' >
 
                                     <Link href='/'>
-                                        <p className=' align-center text-center font-Dancing font-bold  text-3xl pl-1 pr-1 cursor-pointer lg:text-left lg:ml-6 '>Chutlunds.live</p>
+                                        <p className=' align-center text-center font-Dancing font-bold  text-3xl pl-1 pr-1 cursor-pointer lg:text-left lg:ml-6 '>chutlunds.com</p>
                                     </Link>
                                     {location &&
                                         <div className='cursor-pointer' onClick={handleClickFlag}>
@@ -381,10 +381,10 @@ function Navbar() {
 
                     <div className='flex items-center space-x-1 md:space-x-3  ml-2' >
 
-                        <img src='/android-chrome-96x96.png' alt="loading..." className='h-12' />
+                        <img src='/erotic.png' alt="loading..." className='h-16' />
 
                         <Link href='/'>
-                            <p className=' align-center text-center font-Dancing font-bold  text-4xl cursor-pointer lg:text-left lg:ml-2'>Chutlunds.live</p>
+                            <p className=' align-center text-center font-Dancing font-bold  text-4xl cursor-pointer lg:text-left lg:ml-2'>chutlunds.com</p>
                         </Link>
                         {location &&
 

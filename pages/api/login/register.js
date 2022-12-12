@@ -49,7 +49,7 @@ export default async function handler(req, res) {
         var mailOptions = {
             to: email,
             subject: "Chutlunds account activation",
-            html: "<h3>OTP for account verification of Chutlunds.live is </h3>" + "<h1 style='font-weight:bold;'>" + otp + "</h1>" // html body
+            html: "<h3>OTP for account verification of Chutlunds.com is </h3>" + "<h1 style='font-weight:bold;'>" + otp + "</h1>" // html body
         };
 
         transporter.sendMail(mailOptions, async (error, info) => {
