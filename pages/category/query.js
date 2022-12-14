@@ -17,15 +17,20 @@ function Category({ video_collection, pages, query, keyword, currentPage, filter
   const router = useRouter();
   const currentPageNumberURL = currentPage
 
-
+  function capitalizeFirstLetter(string) {
+    console.log(string.charAt(0).toUpperCase() + string.slice(1));
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
   return (
 
     <div className="">
 
+
+
       <Head>
-        <title>{keyword} sex videos - Free download | Chutlunds</title>
-        <meta name="description" content={`${keyword} sex videos, ${keyword} porn videos, desi mms, desi porn videos, devar bhabhi ki chudai, aunty ki chudai collection.`} />
+        <title>{capitalizeFirstLetter(keyword)} sex videos | Chutlunds</title>
+        <meta name="description" content={`Watch free collection of ${capitalizeFirstLetter(keyword)} sex videos, ${keyword} porn videos, latest ${keyword} videos in high quality only on Chutlunds.`} />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
       </Head>
 

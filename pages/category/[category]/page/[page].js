@@ -26,12 +26,16 @@ function Category({ video_collection, pages }) {
     const { category, page } = router.query
     const currentPageNumberURL = page
 
-
+    function capitalizeFirstLetter(string) {
+        console.log(string.charAt(0).toUpperCase() + string.slice(1));
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
     return (
         <>
             <Head>
-                <title>{category} sex videos - Free download | Chutlunds | Page {page}</title>
-                <meta name="description" content={`${category} sex videos, ${category} porn videos, desi mms, desi porn videos, devar bhabhi ki chudai, aunty ki chudai collection.`} />
+                <title>{capitalizeFirstLetter(category)} sex videos - Free download | Chutlunds | Page {page}</title>
+                <meta name="description" content={`Watch free collection of ${capitalizeFirstLetter(category)} sex videos, ${category} porn videos, latest ${category} videos in high quality only on Chutlunds.`} />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
                 <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
             </Head>
 

@@ -41,15 +41,22 @@ function Index({ video_collection, pages, pornstarInformation }) {
         )
     }
 
+    function capitalizeFirstLetter(string) {
+        console.log(string.charAt(0).toUpperCase() + string.slice(1));
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
 
     return (
         <>
 
+
             <Head>
-                <title>{`${pornstarname.toUpperCase().replace('+', " ").replace("+", " ")} Porn Videos - Chutlunds`}</title>
+                <title>{`${capitalizeFirstLetter(pornstarname.replace('+', " ").replace("+", " "))} Porn Videos - Chutlunds`}</title>
                 <meta name="description"
-                    content={`Watch ${pornstarname.toUpperCase().replace('+', " ").replace("+", " ")} HD sex video`} />
+                    content={`Check out the best porn videos, images, gifs and playlists from pornstar ${capitalizeFirstLetter(pornstarname.replace('+', " ").replace("+", " "))}. Browse through the content she uploaded herself on her verified pornstar profile, only on Chutlunds.com. Subscribe to ${capitalizeFirstLetter(pornstarname.replace('+', " ").replace("+", " "))}'s feed and add her as a friend. See ${capitalizeFirstLetter(pornstarname.replace('+', " ").replace("+", " "))} naked in an incredible selection of hardcore FREE sex movies.`} />
             </Head>
+
+   
 
 
             <div className=''>

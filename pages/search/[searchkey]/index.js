@@ -63,15 +63,22 @@ function Category({ video_collection, pages }) {
   }, []);
 
 
+  function capitalizeFirstLetter(string) {
+    console.log(string.charAt(0).toUpperCase() + string.slice(1));
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   return (
     <>
 
 
       <Head>
-        <title>{`'${searchkey.toUpperCase().replace('+', " ").replace("+", " ")}' Porn Videos - Chutlunds`}</title>
+        <title>{`${capitalizeFirstLetter(searchkey.replace('+', " ").replace("+", " "))} Porn Videos - Chutlunds`}</title>
         <meta name="description"
-          content={`Watch ${searchkey.toUpperCase().replace('+', " ").replace("+", " ")} HD sex video`} />
+          content={`Watch ${capitalizeFirstLetter(searchkey.replace('+', " ").replace("+", " "))} porn videos for free, here on Chutlunds.com. Discover the growing collection of high quality Most Relevant XXX movies and clips. No other sex tube is more popular and features more ${capitalizeFirstLetter(searchkey.replace('+', " ").replace("+", " "))} scenes than Chutlunds! Browse through our impressive selection of porn videos in HD quality on any device you own.`} />
       </Head>
+
+
 
 
       <Header keyword={searchkey.replace("+", " ")} pageNumber={currentPageNumberURL} />

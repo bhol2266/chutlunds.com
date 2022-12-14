@@ -19,7 +19,7 @@ const MobileAppModal = () => {
         <div>
 
             <Head>
-                <title>Free Porn App for Android | Chutlunds App</title>
+                <title>Chutlunds Mobile App for Android | Chutlunds App</title>
                 <meta name="description"
                     content="The FREE Chutlunds app lets you stream your favorite porn videos in the palm of your hand, with no ads. Through its fast and simple navigation, you can enjoy the best Chutlunds videos, combine your favorite categories, watch VR porn with one click, and even use your Chromecast to watch videos on the big screen. All the while, we keep your porn viewing secure and private." />
             </Head>

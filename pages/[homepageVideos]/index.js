@@ -24,11 +24,16 @@ function Category({ video_collection, pages }) {
     const { homepageVideos } = router.query
     const currentPageNumberURL = '1'
 
+    function capitalizeFirstLetter(string) {
+        console.log(string.charAt(0).toUpperCase() + string.slice(1));
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+
 
     return (
         <>
             <Head>
-                <title>{`${homepageVideos.toUpperCase()} Porn Videos`}</title>
+                <title>{`${capitalizeFirstLetter(homepageVideos)} Porn Videos`}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
             </Head>

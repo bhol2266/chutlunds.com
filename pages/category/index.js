@@ -61,11 +61,9 @@ function Index() {
 
         <div className="">
             <Head>
-                <title>Categories | desi sex videos, desi mms</title>
-                <meta name="description" content="Free desi sex videos, desi mms, Indian sex videos, desi porn videos, devar bhabhi ki chudai, aunty ki chudai collection." />
-                <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+                <title>Chutlunds Categories: Find Your Favorite Free Hardcore Porn Videos</title>
+                <meta name="description" content="Chutlunds has the best hardcore porn videos. Discover the newest XXX to stream in your favorite sex category. See the hottest amateurs and pornstars in action." />
             </Head>
-
 
 
             <div className='flex items-center py-2 my-1 justify-between  rounded-lg'>

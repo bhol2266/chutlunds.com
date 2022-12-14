@@ -42,7 +42,7 @@ function Pics({ dload_links }) {
         <div className=" ">
 
             <Head>
-                <title>Indian Nude Photos | Desi Scandals</title>
+                <title>Indian Nude Photos | Desi Scandals - Chutlunds</title>
                 <meta name="description"
                     content="Yaha par aap enjoy kar sakte ho Indian girls ki nude aur sex photos alag alag category mein. Hot Girl ke nude selfies ya phir chudai ka xxx photos wives ka." />
                 <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
