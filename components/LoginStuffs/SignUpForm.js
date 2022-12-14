@@ -161,7 +161,7 @@ export const SignUpForm = () => {
 
                         {Email.length > 10 &&
                             <div className='absolute right-2'>
-                                {/* <p className='text-red-500 text-xs font-inter'>Format incorrect</p> */}
+                                {/* <p className='text-button text-xs font-inter'>Format incorrect</p> */}
                                 <CheckCircleIcon className={`text-green-400 h-[20px] ${validateEmail(Email) ? "" : "hidden"}`} />
                                 <XCircleIcon className={`text-red-400 h-[20px] ${!validateEmail(Email) ? "" : "hidden"}`} />
                             </div>
@@ -186,7 +186,7 @@ export const SignUpForm = () => {
                     <input required onChange={e => setconfirmPassword(e.target.value)} className='p-2 px-3  text-[#323232] rounded-lg   border-[1px] border-gray-400 w-full  outline-none text-sm xl:text--md mt-[23px] placeholder:text-gray-400 bg-transparent ' type='password' placeholder='Confirm Password' />
 
                     <div className='h-[20px]'>
-                        <p className={` rounded text-center  w-full text-md text-red-500 mt-1 font-semiboldpx-1 pt-1 ${message.length > 0 ? "visible" : "invisible"}`}>{message}</p>
+                        <p className={` rounded text-center  w-full text-md text-button mt-1 font-semiboldpx-1 pt-1 ${message.length > 0 ? "visible" : "invisible"}`}>{message}</p>
                     </div>
 
                     {/* Bottom */}
@@ -197,7 +197,7 @@ export const SignUpForm = () => {
                     <div className='mt-[18px]'>
                         {!loading &&
 
-                            <button type='submit' className='font-normal text-[14px] text-center w-[154px] h-[30px]   text-white hover:bg-red-600 bg-red-500 rounded-[5px]  '>Continue</button>
+                            <button type='submit' className='font-normal text-[14px] text-center w-[154px] h-[30px]   text-white hover:bg-button_hover bg-button rounded-[5px]  '>Continue</button>
                         }
                         {loading &&
                             <div className='mx-auto'>
@@ -216,7 +216,7 @@ export const SignUpForm = () => {
                     <div className='flex items-center  space-x-[10px] ml-[15px]'>
                         <h2 className='text-center text-[#323232]  font-inter  text-[13px]'>Existing user ?</h2>
 
-                        <button onClick={gotoLogin} type="submit" value="submit" className='font-normal text-[14px] text-center w-[80px] h-[30px]  border-[1px] border-red-500 rounded-[5px] hover:bg-red-500 text-[#323232] hover:text-white '>Sign In</button>
+                        <button onClick={gotoLogin} type="submit" value="submit" className='font-normal text-[14px] text-center w-[80px] h-[30px]  border-[1px] border-button rounded-[5px] hover:bg-button text-[#323232] hover:text-white '>Sign In</button>
                     </div>
                 </div>
 

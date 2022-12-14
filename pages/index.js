@@ -174,20 +174,20 @@ export default function Home({ video_collection, pages, desiVideosDataArray, des
   }, []);
 
   function shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
-  
+    let currentIndex = array.length, randomIndex;
+
     // While there remain elements to shuffle.
     while (currentIndex != 0) {
-  
+
       // Pick a remaining element.
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
-  
+
       // And swap it with the current element.
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex], array[currentIndex]];
     }
-  
+
     return array;
   }
 
@@ -248,9 +248,10 @@ export default function Home({ video_collection, pages, desiVideosDataArray, des
   return (
     <div className=" ">
 
+
       <Head>
-        <title>Desi sex videos - full hd indian sex videos download</title>
-        <meta name="description" content="Free desi sex videos, desi mms, Indian sex videos, desi porn videos, devar bhabhi ki chudai, aunty ki chudai collection." />
+        <title>Chutlunds: Free Porn Videos and 4K Sex Movies</title>
+        <meta name="description" content="Chutlunds is the hottest free porn site in the world! Cum like never before and explore millions of fresh and free porn videos! Get lit on Chutlunds!" />
 
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="msvalidate.01" content="8A6530C78E46DD0011117B2ECB618480" />
@@ -270,7 +271,7 @@ export default function Home({ video_collection, pages, desiVideosDataArray, des
             Free desi sex videos, desi mms, Indian sex videos, desi porn videos, devar bhabhi ki chudai, aunty ki chudai collection. full hd indian sex videos download free.
           </h1>
 
-
+          {/* 
 
           {countryVideos.length !== 0 &&
             <>
@@ -282,17 +283,16 @@ export default function Home({ video_collection, pages, desiVideosDataArray, des
           <HomepageTitle title='Desi Sex Videos' />
           <Videos data={shuffle(desiVideosDataArray).slice(0, 12)} />
           <HomepageTitle title='Desi MMS' />
-          <Videos data={shuffle(desiMmsVideoArray).slice(0, 12)} />
+          <Videos data={shuffle(desiMmsVideoArray).slice(0, 12)} /> */}
 
-
+          <HomepageTitle title='Popular Porn Videos' />
+          <Videos data={video_collection[2].slice(0, 12)} />
           <HomepageTitle title='Trending Porn Videos' />
           <Videos data={video_collection[0].slice(0, 12)} />
           <HomepageTitle title='Upcoming Porn Videos' />
-          <Videos data={video_collection[1].slice(0, 12)} />
-          <HomepageTitle title='Popular Porn Videos' />
-          <Videos data={video_collection[2].slice(0, 12)} />
+          <Videos data={video_collection[1]} />
           <HomepageTitle title='New Porn Videos' />
-          <Videos data={video_collection[3].slice(0, 12)} />
+          <Videos data={video_collection[3]} />
 
         </div>
       </main>

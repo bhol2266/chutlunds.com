@@ -31,8 +31,8 @@ var navigation = [
     { name: 'Leaked Pictures', href: '/photo', current: false },
     { name: 'Pornstars', href: '/pornstar', current: false },
     { name: 'MobileApp', href: '/chutlundsAPK', current: false },
-    { name: 'Live Cams', href: "https://chaturbate.com/in/?tour=LQps&campaign=3v7pk&track=default&room=ukdevelopers", current: false },
-    { name: 'Meet & Fuck', href: "https://chaturbate.com/in/?tour=LQps&campaign=3v7pk&track=default&room=ukdevelopers", current: false },
+    // { name: 'Live Cams', href: "https://chaturbate.com/in/?tour=LQps&campaign=3v7pk&track=default&room=ukdevelopers", current: false },
+    // { name: 'Meet & Fuck', href: "https://chaturbate.com/in/?tour=LQps&campaign=3v7pk&track=default&room=ukdevelopers", current: false },
 ]
 
 function classNames(...classes) {
@@ -166,7 +166,7 @@ function Navbar() {
 
         <div className='font-inter'>
 
-            <div className="bg-red-500 p-2  shadow-md lg:hidden">
+            <div className="bg-[#13274F] text-white p-2  shadow-md lg:hidden">
 
                 <Disclosure as="nav" >
                     {({ open }) => (
@@ -176,7 +176,7 @@ function Navbar() {
                                 <div className='flex items-center space-x-1' >
 
                                     <Link href='/'>
-                                        <p className=' align-center text-center font-Dancing font-bold  text-3xl pl-1 pr-1 cursor-pointer lg:text-left lg:ml-6 '>chutlunds.com</p>
+                                        <p className=' align-center text-center font-Dancing font-bold  text-3xl pl-1 pr-1 cursor-pointer lg:text-left lg:ml-6 '>Chutlunds.com</p>
                                     </Link>
                                     {location &&
                                         <div className='cursor-pointer' onClick={handleClickFlag}>
@@ -201,7 +201,7 @@ function Navbar() {
 
                                 <div className='flex items-center'>
 
-                                    <div onClick={handleSearchIconClick} className=' lg:hidden mr-2 cursor-pointer p-2  hover:bg-gray-700 hover:text-white rounded-md '>
+                                    <div onClick={handleSearchIconClick} className=' lg:hidden mr-2 cursor-pointer p-2  hover:bg-button hover:text-white rounded-md '>
                                         <SearchIcon className='h-6 w-6' />
                                     </div>
 
@@ -234,7 +234,7 @@ function Navbar() {
 
                                                 {!loggedIn &&
                                                     <Menu.Item>
-                                                        <button onClick={() => { router.push('/account/login') }} className='text-white w-[150px] h-[30px] text-[11px] font-inter px-[25px] py-[7px] bg-red-500 hover:bg-red-600 rounded mt-[24px] mx-auto'>
+                                                        <button onClick={() => { router.push('/account/login') }} className='text-white w-[150px] h-[30px] text-[11px] font-inter px-[25px] py-[7px] bg-button hover:bg-button_hover rounded mt-[24px] mx-auto'>
                                                             Sign In / Sign Up
                                                         </button>
                                                     </Menu.Item>
@@ -243,13 +243,13 @@ function Navbar() {
                                                 }
 
                                                 {loggedIn &&
-                                                    <h2 className='font-Opensans  text-[14px] cursor-pointer text-center text-theme font-semibold my-2'>{getCookie("email")}</h2>
+                                                    <h2 className='font-Opensans text-theme  text-[14px] cursor-pointer text-center text-theme font-semibold my-2'>{getCookie("email")}</h2>
                                                 }
 
 
                                                 {loggedIn &&
                                                     <Menu.Item>
-                                                        <button onClick={signOut} className='text-white w-[150px] h-[30px] text-[11px] font-inter px-[25px] py-[7px] bg-red-500 hover:bg-red-600 rounded mt-[8px] mx-auto'>
+                                                        <button onClick={signOut} className='text-white w-[150px] h-[30px] text-[11px] font-inter px-[25px] py-[7px] bg-button hover:bg-button_hover rounded mt-[8px] mx-auto'>
                                                             Sign Out
                                                         </button>
                                                     </Menu.Item>
@@ -264,7 +264,7 @@ function Navbar() {
                                     </Menu>
 
 
-                                    <Disclosure.Button className="lg:hidden items-center justify-center   rounded-md text-black hover:text-white hover:bg-gray-700 p-2">
+                                    <Disclosure.Button className="lg:hidden items-center justify-center rounded-md text-white hover:bg-button p-2">
                                         <span className="sr-only">Open main menu</span>
                                         {open ? (
                                             <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -319,9 +319,9 @@ function Navbar() {
 
                     <form className=' w-full flex items-center' onSubmit={goSearch}>
 
-                        <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='flex-grow  outline-none text-inter text-sm border-gray-300 rounded pl-2  h-[35px]' type="text" placeholder='Search your favourite porn video...' />
+                        <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='flex-grow  outline-none text-inter text-sm border-gray-300 rounded pl-2  h-[35px] text-theme' type="text" placeholder='Search your favourite porn video...' />
 
-                        <button type="submit" className='bg-red-800  hover:bg-red-900 text-white text-sm p-2 pl-4 pr-4 m-1 rounded '>Search</button>
+                        <button type="submit" className='bg-button  hover:bg-button_hover text-white text-sm p-2 pl-4 pr-4 m-1 rounded '>Search</button>
 
                     </form>
                     {showSuggested &&
@@ -330,9 +330,9 @@ function Navbar() {
                                 return (
                                     <div key={tag} onClick={() => {
                                         setsearchKey(tag); setshowSuggested(false); router.push(`/search/${tag.trim()}`)
-                                    }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-red-100 pl-4'>
+                                    }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-blue-100 pl-4'>
                                         {/* <img src='/login/history.png' className='h-[20px]' /> */}
-                                        <p className='text-[12px] fontinter'>{tag}</p>
+                                        <p className='text-[12px] fontinter text-theme'>{tag}</p>
 
                                     </div>
                                 )
@@ -347,22 +347,22 @@ function Navbar() {
 
 
             </div>
-            <div className='flex justify-between items-center mb-1 bg-red-100 shadow-lg lg:hidden font-arial px-2'>
+            <div className='flex justify-between items-center mb-1 bg-blue-100 shadow-lg lg:hidden font-arial px-2'>
 
                 <Link href='/'>
-                    <p className=' sm:text-xl text-[16px] text-sm text-gray-700  text-center p-1 hover:text-red-600  '>Home</p>
+                    <p className=' sm:text-xl text-[16px] text-sm text-theme  text-center p-1 hover:text-red-600  '>Home</p>
                 </Link>
 
                 <Link href='/category'>
-                    <p className=' sm:text-xl text-[16px] text-sm text-gray-700  text-center p-1 hover:text-red-600  '>Catergories</p>
+                    <p className=' sm:text-xl text-[16px] text-sm text-theme  text-center p-1 hover:text-red-600  '>Catergories</p>
                 </Link>
 
                 <Link href='/photo'>
-                    <p className=' sm:text-xl text-[16px] text-sm text-gray-700  text-center p-1 hover:text-red-600 '>Leaked Pictures</p>
+                    <p className=' sm:text-xl text-[16px] text-sm text-theme  text-center p-1 hover:text-red-600 '>Leaked Pictures</p>
                 </Link>
 
                 <Link href='/chutlundsAPK'>
-                    <p className=' sm:text-xl text-[16px] text-sm text-gray-700  text-center p-1 hover:text-red-600 '>Mobile App</p>
+                    <p className=' sm:text-xl text-[16px] text-sm text-theme  text-center p-1 hover:text-red-600 '>Mobile App</p>
                 </Link>
 
 
@@ -377,14 +377,14 @@ function Navbar() {
 
 
                 {/* Navbar */}
-                <div className=' flex items-center justify-between bg-red-500 pt-2 pb-2'>
+                <div className=' flex items-center justify-between bg-[#13274F] pt-2 pb-2 text-white'>
 
                     <div className='flex items-center space-x-1 md:space-x-3  ml-2' >
 
                         <img src='/erotic.png' alt="loading..." className='h-16' />
 
                         <Link href='/'>
-                            <p className=' align-center text-center font-Dancing font-bold  text-4xl cursor-pointer lg:text-left lg:ml-2'>chutlunds.com</p>
+                            <p className=' align-center text-center font-Dancing font-bold  text-4xl cursor-pointer lg:text-left lg:ml-2'>Chutlunds.com</p>
                         </Link>
                         {location &&
 
@@ -408,8 +408,8 @@ function Navbar() {
                              cursor-pointer hover:scale-105  transition-all   '>
                                 <img
                                     src='/livesex.png'
-                                    height={40}
-                                    width={40}
+                                    height={35}
+                                    width={35}
                                     alt='loading'
                                 ></img>
                                 <p className='font-bold '>Live Sex</p>
@@ -424,7 +424,7 @@ function Navbar() {
 
 
                             <div className='relative'>
-                                <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='w-[250px] flex-grow border-2 outline-none border-gray-300 rounded pl-2 h-10  text-sm' type="text" placeholder='Search your favourite porn video...' />
+                                <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='w-[250px] flex-grow border-2 outline-none border-gray-300 rounded pl-2 h-10  text-sm text-theme' type="text" placeholder='Search your favourite porn video...' />
 
                                 {showSuggested &&
 
@@ -433,9 +433,9 @@ function Navbar() {
                                             return (
                                                 <div key={tag} onClick={() => {
                                                     setsearchKey(tag); setshowSuggested(false); router.push(`/search/${tag.trim()}`)
-                                                }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-red-100 pl-4'>
+                                                }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-blue-100 pl-4'>
                                                     {/* <img src='/login/history.png' className='h-[20px]' /> */}
-                                                    <p className='text-[12px] fontinter'>{tag}</p>
+                                                    <p className='text-[12px] fontinter text-theme'>{tag}</p>
 
                                                 </div>
                                             )
@@ -443,7 +443,7 @@ function Navbar() {
                                     </div>
                                 }
                             </div>
-                            <button type="submit" className='ml-4 bg-red-800  hover:bg-red-900 text-white text-sm h-10  pl-4 pr-4 m-1 rounded '>Search</button>
+                            <button type="submit" className='ml-4 bg-button  hover:bg-button_hover text-white text-sm h-10  pl-4 pr-4 m-1 rounded '>Search</button>
 
 
 
@@ -488,7 +488,7 @@ function Navbar() {
 
 
 
-                <div className='w-full bg-red-100 text-green-900  items-center justify-around   flex mb-2 p-1 shadow-lg'>
+                <div className='w-full bg-blue-100 text-theme items-center justify-around   flex mb-2 p-1 shadow-lg'>
                     {navigation.map(item => {
 
                         return (

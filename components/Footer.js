@@ -14,15 +14,15 @@ function Footer() {
 
     return (
 
-        <div className={`font-footer mx-auto bg-red-500  ${spinnerLoading ? "hidden" : ""}  mt-10`}>
+        <div className={`font-footer mx-auto bg-theme  ${spinnerLoading ? "hidden" : ""}  mt-10 text-white`}>
 
-            < div className=" w-4/5 mx-auto p-1 mt-1 flex items-center justify-between ">
+            < div className=" w-4/5 mx-auto p-1 mt-1 flex items-center justify-between  ">
                 <div className=" flex flex-wrap justify-between min-w-full">
                     <Link
                         passHref={true}
                         href={'/contact'}
                     >
-                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white text-black  ">Contact / support</p>
+                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   ">Contact / support</p>
                     </Link>
 
 
@@ -30,14 +30,14 @@ function Footer() {
                         passHref={true}
                         href={'/faq'}
                     >
-                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white text-black  ">FAQ</p>
+                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   ">FAQ</p>
 
                     </Link>
                     <Link
                         passHref={true}
                         href={'/parentalcontrol'}
                     >
-                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white text-black  ">Parental control</p>
+                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   ">Parental control</p>
 
                     </Link>
 
@@ -47,7 +47,7 @@ function Footer() {
                         passHref={true}
                         href={'/terms'}
                     >
-                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white text-black  ">Terms of use</p>
+                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   ">Terms of use</p>
 
                     </Link>
                     <Link
@@ -55,13 +55,13 @@ function Footer() {
                         href={'/privacy'}
                     >
 
-                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white text-black  ">2257 Statement & Privacy Policy</p>
+                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   ">2257 Statement & Privacy Policy</p>
                     </Link>
                     <Link
                         passHref={true}
                         href={'/dmca'}
                     >
-                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white text-black  ">DMCA / Copyright Claims</p>
+                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   ">DMCA / Copyright Claims</p>
 
                     </Link>
                 </div>
@@ -69,7 +69,7 @@ function Footer() {
             </div>
 
             <div className='flex p-2 items-center justify-between  w-4/5 mx-auto'>
-                <p className='text-sm sm:text-md md:text-lg font-poppins font-bold'>© 2022 Chutlunds.live IS A FREE PORN VIDEOS</p>
+                <p className='text-sm sm:text-md md:text-lg font-poppins font-bold'>© 2022 Chutlunds.com IS A FREE PORN VIDEOS</p>
 
                 <div className='p-2  rounded'>
 

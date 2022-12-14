@@ -151,7 +151,7 @@ export const LoginForm = () => {
 
                     <div className='h-[40px]'>
                         {!loading &&
-                            <button type="submit" className="transition duration-200 bg-red-500 hover:bg-red-600  text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block">
+                            <button type="submit" className="transition duration-200 bg-button hover:bg-theme text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block">
                                 {!loading && <span className="inline-block mr-2">Login</span>}
                                 {!loading && <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -171,7 +171,7 @@ export const LoginForm = () => {
                     </div>
 
                     <div className='h-[50px]'>
-                        <p className={` rounded text-center  text-md text-red-500 font-semobold mt-3 px-1 py-1 ${message.length > 0 ? "visible" : "invisible"}`}>{message}</p>
+                        <p className={` rounded text-center  text-md text-button font-semobold mt-3 px-1 py-1 ${message.length > 0 ? "visible" : "invisible"}`}>{message}</p>
                     </div>
 
 
@@ -179,13 +179,13 @@ export const LoginForm = () => {
 
             </form>
 
-            <button className="transition duration-200  pb-1 cursor-pointer  text-sm rounded-lg text-[#323232] block mx-auto font-arial ">
+            <button className="transition duration-200  pb-1 cursor-pointer  text-sm rounded-lg  block mx-auto font-arial ">
                 <span className="inline-block ml-1">Don't have an account ?</span>
 
-                <span onClick={registerClick} className="inline-block ml-1 text-red-500">Register</span>
+                <span onClick={registerClick} className="inline-block ml-1 hover:text-button_hover text-button">Register</span>
             </button>
 
-            <button onClick={forgotPassword} className="transition duration-200  py-3 cursor-pointer  text-sm rounded-lg text-[#323232] block mx-auto font-inter hover:text-red-300">
+            <button onClick={forgotPassword} className="transition duration-200  py-3 cursor-pointer  text-sm rounded-lg text-[#323232] block mx-auto font-inter hover:text-button_hover">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block align-text-top">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
                 </svg>

@@ -45,10 +45,10 @@ const HomepageTitle = ({ title, country, language }) => {
 
             {title &&
                 <Link href={href}>
-                    <div className="flex justify-between items-center  rounded bg-red-500  p-2 px-3  hover:bg-red-600 ">
+                    <div className="flex justify-between items-center  rounded bg-button text-white  p-2 px-3  hover:bg-theme ">
                         <div className="flex space-x-2 items-center ">
 
-                            <h2 className="lg:text-2xl text-lg  text-gray-800 font-arial " >{title}</h2>
+                            <h2 className="lg:text-2xl text-lg  font-arial " >{title}</h2>
 
                             {title.includes('Popular Porn Videos in') &&
                                 <ReactCountryFlag

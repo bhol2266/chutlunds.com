@@ -61,10 +61,10 @@ function Videos({ data }) {
                     <LightningBoltIcon className="h-8 text-red-500" />
 
                     <h2 className="font-inter text-sm md:text-md">We could not find any videos</h2>
-                    <h2 className="font-inter md:text-lg text font-semibold text-red-500 text-center">Repeat your search with another keyword or filter</h2>
+                    <h2 className="font-inter md:text-lg text font-semibold text-theme text-center">Repeat your search with another keyword or filter</h2>
                     <button onClick={() => {
                         router.back()
-                    }} className="bg-red-500 rounded-lg font-inter text-white px-3 py-1 hover:bg-red-700">Go Back</button>
+                    }} className="bg-button rounded-lg font-inter text-white px-3 py-1 hover:bg-button_hover">Go Back</button>
 
                 </div>
             }

@@ -239,7 +239,7 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps }) 
         <div>
             <div className='flex items-center md:pr-10 pt-2  sm:py-1'>
                 <div className='flex  '>
-                    <h1 className='text-xl md:text-2xl xl:text-3xl  font-semibold text-red-900 font-inter my-1  '>{keyword}</h1>
+                    <h1 className='text-xl md:text-2xl xl:text-3xl  font-semibold text-theme font-inter my-1  '>{keyword}</h1>
                 </div>
                 <p className='text-md md:text-xl flex-grow font-inter  text-right text-gray-900 '>{`Page-${pageNumber}`}</p>
             </div>
@@ -248,10 +248,10 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps }) 
             <div className='w-fit   md:flex sm:py-1'>
 
                 {/* This filtered applied bar */}
-                <div className='flex items-center flex-wrap justify-start space-x-1 md:space-x-2 mb-2 md:mb-0   '>
+                <div className='flex items-center flex-wrap justify-start space-x-1 md:space-x-2 mb-2 md:mb-0 mr-1'>
                     {Final_filteredArray.map(item => {
                         return (
-                            <div key={item} onClick={() => { removefilter(item) }} className=' text-xs md:text-sm hover:bg-red-800 cursor-pointer bg-red-500 rounded-lg px-2 py-1 flex items-center space-x-1'>
+                            <div key={item} onClick={() => { removefilter(item) }} className=' text-xs md:text-sm hover:bg-button_hover cursor-pointer bg-button rounded-lg px-2 py-1 flex items-center space-x-1'>
                                 <p className=' text-white font-inter ' >{item}</p>
                                 <XCircleIcon className='h-4 md:h-6 text-white' />
                             </div>
@@ -286,7 +286,7 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps }) 
                                             {({ active }) => (
                                                 <p onClick={() => { clickHandler(item.query) }} className={classNames(
                                                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                    'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-red-500 cursor-pointer'
+                                                    'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-button cursor-pointer'
                                                 )}
                                                 >
                                                     <span className={`${item.name === filter_isPresent ? "text-green-500" : ""}`}>{item.name}</span>
@@ -332,7 +332,7 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps }) 
                                                 {({ active }) => (
                                                     <p onClick={() => { clickHandler(item.query) }} className={classNames(
                                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                        'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-red-500 cursor-pointer'
+                                                        'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-button cursor-pointer'
                                                     )}
                                                     >
                                                         <span className={`${item.name === quality_isPresent ? "text-green-500" : ""}`}>{item.name}</span>                                                    </p>
@@ -375,7 +375,7 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps }) 
                                                 {({ active }) => (
                                                     <p onClick={() => { clickHandler(item.query) }} className={classNames(
                                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                        'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-red-500 cursor-pointer'
+                                                        'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-button cursor-pointer'
                                                     )}
                                                     >
                                                         <span className={`${item.name === duration_isPresent ? "text-green-500" : ""}`}>{item.name}</span>                                                    </p>
@@ -418,7 +418,7 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps }) 
                                                 {({ active }) => (
                                                     <p onClick={() => { clickHandler(item.query) }} className={classNames(
                                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                        'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-red-500 cursor-pointer'
+                                                        'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-button cursor-pointer'
                                                     )}
                                                     >
                                                         <span className={`${item.name === date_isPresent ? "text-green-500" : ""}`}>{item.name}</span>                                                    </p>

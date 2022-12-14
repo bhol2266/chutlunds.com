@@ -114,7 +114,7 @@ function Search({ tags }) {
                 {tagsArray.map(keyword => {
                     return (
                         <Link key={keyword} href={`/search/${keyword.trim().replace(/ /g, "+")}`}>
-                            <div className='my-1 mr-1.5 lg:mr-3 p-1 px-2 text-xs text-black bg-gray-300 rounded font-semibold hover:bg-red-700  font-poppins hover:text-white md:text-lg  '>
+                            <div className='my-1 mr-1.5 lg:mr-3 p-1 px-2 text-xs text-black bg-gray-300 rounded font-semibold hover:bg-theme  font-poppins hover:text-white md:text-lg  '>
                                 {keyword}
                             </div>
                         </Link>

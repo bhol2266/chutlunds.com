@@ -97,10 +97,14 @@ function Videoplayer({ serverError, videolink_qualities_screenshots, preloaded_v
         return (
             <div className='my-72 flex flex-col items-center justify-center'>
                 <h1 className='text-center '> Something went wrong!</h1>
-                <button onClick={() => { router.push('/') }} className='mx-auto my-4 bg-red-500 text-white rounded px-8 py-1 hover:bg-red-700'>Go to Home -&gt;</button>
+                <button onClick={() => { router.push('/') }} className='mx-auto my-4 bg-theme text-white rounded px-8 py-1 hover:bg-red-700'>Go to Home -&gt;</button>
             </div>
         )
     }
+    function capitalizeFirstLetter(string) {
+        console.log(string.charAt(0).toUpperCase() + string.slice(1));
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
 
 
     return (
@@ -110,8 +114,8 @@ function Videoplayer({ serverError, videolink_qualities_screenshots, preloaded_v
 
             {noVideo &&
                 <Head>
-                    <title>{`${videoTitleBackUp}-720P`} | Chutlunds</title>
-                    <meta name="description" content={`Watch Free ${videoTitleBackUp} sex video.`} />
+                    <title>{`${videoTitleBackUp}-720p`} | Chutlunds</title>
+                    <meta name="description" content={`${capitalizeFirstLetter(videoTitleBackUp)} sex video.`} />
                     <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
                 </Head>
             }
@@ -120,7 +124,7 @@ function Videoplayer({ serverError, videolink_qualities_screenshots, preloaded_v
 
                 <Head>
                     <title>{`${video_details.Title}- ${videolink_qualities_screenshots.video_qualities_available[videolink_qualities_screenshots.video_qualities_available.length - 1].toUpperCase()}`} | Chutlunds</title>
-                    <meta name="description" content={`Watch Free ${video_details.Title} , ${tagString} sex videos.`} />
+                    <meta name="description" content={`${capitalizeFirstLetter(video_details.Title)} , ${tagString} sex videos.`} />
                     <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
                 </Head>
             }
@@ -164,7 +168,7 @@ function Videoplayer({ serverError, videolink_qualities_screenshots, preloaded_v
                     <MultiformatAds />
 
                     <div className='flex flex-col p-1 px-3 space-x-2  items-center md:flex-row sm:justify-items-start'>
-                        <p className='font-semibold text-red-500 text-[18px] lg:text-[24px] font-manrope'>Videos related to</p>
+                        <p className='font-semibold text-button text-[18px] lg:text-[24px] font-manrope'>Videos related to</p>
                         <p className='font-semibold text-[15px] lg:text-[20px] pl-1 font-inter'>{video_details.Title}</p>
                     </div>
                     <Videos data={relatedVideos} />
@@ -178,13 +182,13 @@ function Videoplayer({ serverError, videolink_qualities_screenshots, preloaded_v
                     }
                     <MultiformatAds />
                     <MultiformatAds />
-                    {countryVideo.length !== 0 &&
+                    {/* {countryVideo.length !== 0 &&
                         <Videos data={countryVideo} />
                     }
 
                     <MultiformatAds />
                     <MultiformatAds />
-              
+               */}
 
                 </div>
             }
@@ -208,7 +212,7 @@ function Videoplayer({ serverError, videolink_qualities_screenshots, preloaded_v
 
                                 <div className='flex space-x-4 items-center justify-center absolute top-[35px] mx-auto left-0 right-0'>
                                     <InformationCircleIcon className='h-8 text-black' />
-                                    <span className=' text-sm font-semibold font-inter lg:text-lg  text-red-500 w-fit'> This Video Is No Longer Available.</span>
+                                    <span className=' text-sm font-semibold font-inter lg:text-lg  text-theme w-fit'> This Video Is No Longer Available.</span>
                                 </div>
                             }
                         </div>

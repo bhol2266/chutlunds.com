@@ -28,7 +28,7 @@ const Pagination = ({ data }) => {
 
                 <Link href={`${url}/page/${parseInt(currentPageNumberURL) - 1}`}>
                     <div className={`${parseInt(currentPageNumberURL) === 1 ? "hidden" : ""}`} >
-                        <button className={`scale-90 md:scale-100 font-inter sm:text-med font-bold   sm:mx-4  rounded-lg bg-red-500 px-6 py-2 text-white hover:bg-red-700`}>{'<'}</button>
+                        <button className={`scale-90 md:scale-100 font-inter sm:text-med font-bold   sm:mx-4  rounded-lg bg-button px-6 py-2 text-white hover:button_hover`}>{'<'}</button>
                     </div>
                 </Link>
 
@@ -44,7 +44,7 @@ const Pagination = ({ data }) => {
 
                 <Link href={`${url}/page/${parseInt(currentPageNumberURL) + 1}`}>
                     <div className={`${parseInt(currentPageNumberURL) === parseInt(pages[1].trim()) ? "hidden" : ""}`} >
-                        <button className={`scale-90 md:scale-100 font-inter sm:text-md font-bold   sm:mx-4  rounded-lg bg-red-500 px-6 py-2 text-white hover:bg-red-700 ml-1`}>{'>'}</button>
+                        <button className={`scale-90 md:scale-100 font-inter sm:text-md font-bold   sm:mx-4  rounded-lg bg-button px-6 py-2 text-white hover:button_hover ml-1`}>{'>'}</button>
                     </div>
                 </Link>
             </div>

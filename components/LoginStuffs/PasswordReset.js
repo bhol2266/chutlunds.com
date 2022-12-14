@@ -198,7 +198,7 @@ export const PasswordReset = () => {
 
                         {OTP_Sent === 0 &&
                             <div className=' mt-[3px]'>
-                                <p className={` rounded text-center w-full  text-[16px] xl:text-[18px] text-red-500 font-semibold px-1 pb-1 ${message.length > 0 ? "block" : "hidden"}`}>{message}</p>
+                                <p className={` rounded text-center w-full  text-[16px] xl:text-[18px] text-theme font-semibold px-1 pb-1 ${message.length > 0 ? "block" : "hidden"}`}>{message}</p>
                             </div>
                         }
                     </div>
@@ -227,7 +227,7 @@ export const PasswordReset = () => {
                             </div>
 
                             <div className='mb-6 min-h-[30px] xl:min-h-[40px]'>
-                                <p className={` rounded text-center w-full  text-[16px] xl:text-[18px] text-red-500 font-semibold px-1 pb-1 ${message.length > 0 ? "visible" : "invisible"}`}>{message}</p>
+                                <p className={` rounded text-center w-full  text-[16px] xl:text-[18px] text-theme font-semibold px-1 pb-1 ${message.length > 0 ? "visible" : "invisible"}`}>{message}</p>
                             </div>
 
                             <div className='flex flex-col items-center justify-start w-full'>
@@ -256,16 +256,16 @@ export const PasswordReset = () => {
                         <div className='flex flex-col space-y-3' >
 
                             {OTP_Sent === 1 &&
-                                <button onClick={resendOTP} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto  text-white  bg-red-500 hover:bg-red-600 rounded-[5px] block'>Re-send OTP</button>
+                                <button onClick={resendOTP} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto  text-white  bg-theme hover:bg-red-600 rounded-[5px] block'>Re-send OTP</button>
                             }
 
                             {OTP_Sent === 0 &&
 
-                                <button onClick={resendOTP} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto text-white bg-red-500 hover:bg-red-600 rounded-[5px] block'>{passwordUpdated ?"Go to login":"Confirm" }</button>
+                                <button onClick={resendOTP} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto text-white bg-theme hover:bg-red-600 rounded-[5px] block'>{passwordUpdated ?"Go to login":"Confirm" }</button>
                             }
 
                             {OTP_Sent === 1 &&
-                                <button onClick={updatePassword} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto  text-white  bg-red-500 hover:bg-red-600 rounded-[5px] block'>Update Password</button>
+                                <button onClick={updatePassword} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto  text-white  bg-theme hover:bg-red-600 rounded-[5px] block'>Update Password</button>
                             }
 
                         </div>

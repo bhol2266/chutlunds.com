@@ -31,7 +31,11 @@ module.exports = {
       },
       colors: {
         'github': '#24292F',
-        "color": "#414a4c"
+        "color": "#414a4c",
+        "theme": "#13274F",
+        "button": "#5072A7",
+        "button_hover": "#93c5fd",
+        
       },
       fontFamily: {
         body: ['Pushster'],

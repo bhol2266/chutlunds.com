@@ -155,7 +155,7 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
 
                     {/* <DownloadIcon className='h-7 text-gray-700' /> */}
 
-                    <button onClick={download} className='font-inter text-[12px] lg:text-lg px-2 lg:px-4 py-1 lg:py-1.5 bg-red-500 rounded-md text-white text-center lg:mt-1'>Download</button>
+                    <button onClick={download} className='font-inter text-[12px] lg:text-lg px-2 lg:px-4 py-1 lg:py-1.5 bg-button rounded-md text-white text-center lg:mt-1'>Download</button>
                     <Menu as="div" className="relative  text-left">
                         <div className=' w-fit relative '>
                             <Menu.Button className="flex items-center space-x-1">
