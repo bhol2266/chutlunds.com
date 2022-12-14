@@ -69,9 +69,9 @@ function Index() {
             <div className='flex items-center py-2 my-1 justify-between  rounded-lg'>
                 <h2 className='text-center lg:text-left  flex-grow text-3xl font-Dmsans'>Porn Categories</h2>
             </div>
-            <h1 className="text-center lg:text-left text-sm md:text-lg shadow-xl py-2 my-1 font-inter">
+            {/* <h1 className="text-center lg:text-left text-sm md:text-lg shadow-xl py-2 my-1 font-inter">
                 Collections of free desi sex videos, desi mms, Indian sex videos, desi porn videos, devar bhabhi ki chudai, aunty ki chudai collection. full hd indian sex videos download free.
-            </h1>
+            </h1> */}
 
             <Outstreams />
             <PopunderAds_2 />
