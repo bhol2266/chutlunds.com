@@ -381,14 +381,14 @@ function Navbar() {
 
                     <div className='flex items-center space-x-1 md:space-x-3  ml-2' >
 
-                        <img src='/erotic.png' alt="loading..." className='h-16' />
+                        <img src='/erotic.png' alt="loading..." className='w-14' />
 
                         <Link href='/'>
-                            <p className=' align-center text-center font-Dancing font-bold  text-4xl cursor-pointer lg:text-left lg:ml-2'>Chutlunds.com</p>
+                            <p className=' align-center text-center font-Dancing font-bold  text-4xl cursor-pointer lg:text-left '>Chutlunds.com</p>
                         </Link>
                         {location &&
 
-                            <div className='cursor-pointer' onClick={handleClickFlag}>
+                            <div className='cursor-pointer pt-1' onClick={handleClickFlag}>
                                 <ReactCountryFlag
                                     svg
                                     countryCode={location.countryCode}
@@ -404,8 +404,8 @@ function Navbar() {
 
 
                         <a target="_blank" href={countryBlocked ? "https://go.xxxiijmp.com/?userId=9ea31ff27db3b7242eabcc2d26ac0eaf38f093c68528e70c2e7f5a72df55c42e" : "https://chaturbate.com/in/?tour=LQps&campaign=3v7pk&track=default&room=ukdevelopers"} rel="noopener noreferrer">
-                            <div className='  flex  items-center 
-                             cursor-pointer hover:scale-105  transition-all   '>
+                            <div className='pl-8  flex  items-center 
+                             cursor-pointer hover:scale-105  transition-all space-x-2'>
                                 <img
                                     src='/livesex.png'
                                     height={35}

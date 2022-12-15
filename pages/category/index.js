@@ -11,7 +11,23 @@ import MultiformatAds from '../../components/Ads/MultiFormatAds';
 import PopunderAds_2 from '../../components/Ads/Popunder_2';
 
 
-
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
 
 function Index() {
 
@@ -79,7 +95,7 @@ function Index() {
             <MultiformatAds />
 
             <div className={`grid grid-cols-3 py-3 sm:grid-cols-3 gap-2 md:gap-3 lg:gap-4  md:grid-cols-4 lg:grid-cols-5`}>
-                {jsonData.map(category => {
+                {shuffle(jsonData).map(category => {
                     return (
                         <Link key={category.name} href={`/category/${category.name.toLowerCase().trim().substring(0, category.name.indexOf('.png'))}`}>
                                 <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
