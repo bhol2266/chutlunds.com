@@ -43,12 +43,7 @@ export const LoginForm = () => {
 
 
     const SignIn = async (auth_provider) => {
-        try {
-            await googleSignIn();
-        } catch (error) {
-            console.log(error);
-        }
-
+        router.push(`/api/${auth_provider}`)
 
     }
 
@@ -145,14 +140,14 @@ export const LoginForm = () => {
 
             <div className=' w-full  mt-[76px]  mx-auto  flex flex-col items-start  space-y-6 px-6'>
 
-                <div onClick={() => SignIn('google')}
+            <div onClick={() => SignIn('user/google')}
                     className='hover:bg-slate-200 w-full rounded-xl  flex items-center justify-center space-x-4 cursor-pointer py-1.5  px-6 border-[1px] border-slate-300  '>
                     <img src='/login/google.png' className='lg:h-[38px] object-contain h-[28px] w-[28px] cursor-pointer ml-1'></img>
                     <h2 className=' font-semibold font-inter text-[#323232] text-[11px] lg:text-[14px]'>Continue with Google</h2>
                 </div>
 
 
-                <div onClick={() => SignIn('facebook')}
+                <div onClick={() => SignIn('user/facebook')}
                     className='hover:bg-slate-200 w-full  flex items-center justify-center space-x-4 cursor-pointer py-1.5  px-6  rounded-xl border-[1px] border-slate-300 '>
                     <img src='/login/facebook.png' className='lg:h-[40px] object-contain h-[28px] w-[28px] cursor-pointer ml-1'></img>
                     <h2 className='font-semibold font-inter text-[#323232] text-[11px] lg:text-[14px]'>Continue with Facebook</h2>

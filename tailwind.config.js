@@ -36,6 +36,8 @@ module.exports = {
         'theme': '#13274F',
         'button': '#5072A7',
         'button_hover': '#93c5fd',
+        'semiblack': '#232b2b',
+
       },
       fontFamily: {
         'body': ['Pushster'],

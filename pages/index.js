@@ -13,24 +13,26 @@ import videosContext from '../context/videos/videosContext';
 // import { getHomePageVideos } from '../config/getHomepageVideos';
 import { updateCountry } from '../config/firebase/lib';
 
-import { getViewTypeFromCookie, setViewTypeCookie } from '../config/utils';
 import Pornstar_slider from '../components/pornstar_slider';
 import Channels_slider from '../components/channels_slider';
 import Category_slider from '../components/category_slider';
-
+import ReactCountryFlag from "react-country-flag"
+import { setViewTypeCookie } from '../config/utils'; 
 
 export default function Home({ video_collection, trendingChannels, tags, trendingCategories, trendingPornstars }) {
 
 
-  const { currentLocation, setcurrentLocation,viewType, setViewType } = useContext(videosContext);
+  const { currentLocation, setcurrentLocation, viewType, setViewType } = useContext(videosContext);
   const [countryVideos, setcountryVideos] = useState([]);
   const [countryLanguage, setcountryLanguage] = useState('');
+  const [lang, setLang] = useState('');
+
 
   const router = useRouter()
 
 
   async function fetchVideos(data) {
-    const lang = getLanguge(data.countryName)
+    setLang(getLanguge(data.countryName))
 
     setcountryLanguage(lang)
 
@@ -101,10 +103,6 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
     fetchLocation()
 
-    setViewType(getViewTypeFromCookie());
-
-
-
   }, []);
 
   function shuffle(array) {
@@ -145,11 +143,11 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
       </Head>
 
 
-      <div className='flex justify-between items-center m-4 md:hidden'>
+      <div className='flex justify-between items-center my-4 md:hidden'>
         <h2 className='text-[20px]  font-semibold  font-inter'>Trending Channels</h2>
         <img
           className='h-[20px] w-[20px] cursor-pointer'
-          src={viewType === undefined ? './grid.png' : (viewType === 'horizontal' ? './horizontal.png' : './grid.png')}
+          src={viewType === undefined ? './grid.png' : (viewType === 'horizontal' ? './grid.png' : './horizontal.png')}
           onClick={toggleViewType}
           alt="Toggle View"
         />
@@ -158,7 +156,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
       <div className="w-full overflow-x-auto whitespace-nowrap py-2  scrollbar-hide md:hidden select-none">
         {tags.map((tag, index) => (
-          <a key={tag.tag} href={`/search/${tag.tag.trim()}`} className="bg-theme text-white px-3 py-1.5 rounded-lg m-1 inline-block text-sm">
+          <a key={tag.tag} href={`/search/${tag.tag.trim()}`} className="bg-[#DDE0E9] text-semiblack px-3 py-1.5 rounded-lg m-1 inline-block text-sm font-medium">
 
             {tag.tag}
           </a>
@@ -175,41 +173,79 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
           <Outstreams />
 
 
-          <HomepageTitle title={video_collection[0].videosGroupName} />
+          <h2 className="lg:text-2xl text-lg font-semibold text-gray-800  pb-2 font-inter">Trending</h2>
+
           <Videos data={video_collection[0].finalDataArray} />
+
+          <a href={`/trending`}>
+            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-2 cursor-pointer hover:scale-105 transition-transform duration-300' />
+          </a>
 
 
           {countryVideos.length !== 0 &&
             <>
-              <HomepageTitle title={`Popular Porn Videos in ${currentLocation.countryCode}`} country={currentLocation.countryName} language={countryLanguage} />
+
+              <div className="flex items-center space-x-2 items-center">
+                <h2 className="lg:text-2xl text-lg font-semibold text-gray-800 pb-2 font-inter mt-3">
+                  {`Popular Porn Videos in ${currentLocation.countryCode}`}
+                </h2>
+                <ReactCountryFlag
+                  svg
+                  countryCode={currentLocation.countryCode}
+                  style={{
+                    fontSize: '25px',
+                    lineHeight: '25px',
+                  }}
+                  aria-label={currentLocation.countryCode} // Ensure aria-label is dynamic or descriptive
+                />
+              </div>
               <Videos data={shuffle(countryVideos).slice(0, 12)} />
+              <a href={`/search/${lang.toLowerCase().trim()}`}>
+                <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-6 cursor-pointer hover:scale-105 transition-transform duration-300' />
+              </a>
             </>
           }
 
-          <h2 className='text-[20px] md:hidden font-semibold m-4 font-inter'>Trending Pornstars</h2>
+          <h2 className='text-[20px] md:hidden font-semibold m-y4 font-inter'>Trending Pornstars</h2>
           <Pornstar_slider trendingPornstars={trendingPornstars} />
 
 
-          <HomepageTitle title={video_collection[1].videosGroupName} />
+          <h2 className="lg:text-2xl text-lg font-semibold text-gray-800  pb-2 font-inter">Upcoming</h2>
           <Videos data={video_collection[1].finalDataArray} />
+          <a href={`/upcoming`}>
+            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-2 cursor-pointer hover:scale-105 transition-transform duration-300' />
+          </a>
 
-          <h2 className='text-[20px] md:hidden font-semibold m-4 font-inter'>Trending Categories</h2>
+          <h2 className='text-[20px] md:hidden font-semibold my-4 font-inter'>Trending Categories</h2>
           <Category_slider trendingCategories={trendingCategories.slice(1)} />
 
 
 
-          <HomepageTitle title={video_collection[2].videosGroupName} />
+          <h2 className="lg:text-2xl text-lg font-semibold text-gray-800  pb-2 font-inter">Featured</h2>
           <Videos data={video_collection[2].finalDataArray} />
+          <a href={`/channels`}>
+            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-2 cursor-pointer hover:scale-105 transition-transform duration-300' />
+          </a>
 
-          <HomepageTitle title={video_collection[3].videosGroupName} />
+
+          <h2 className="lg:text-2xl text-lg font-semibold text-gray-800  pb-2 font-inter">Popular</h2>
           <Videos data={video_collection[3].finalDataArray} />
+          <a href={`/popular`}>
+            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-2 cursor-pointer hover:scale-105 transition-transform duration-300' />
+          </a>
 
-          <HomepageTitle title={video_collection[4].videosGroupName} />
+          <h2 className="lg:text-2xl text-lg font-semibold text-gray-800  pb-2 font-inter">New Videos</h2>
           <Videos data={video_collection[4].finalDataArray} />
+          <a href={`/new_videos`}>
+            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-2 cursor-pointer hover:scale-105 transition-transform duration-300' />
+          </a>
 
-          <HomepageTitle title={video_collection[5].videosGroupName} />
+
+          <h2 className="lg:text-2xl text-lg font-semibold text-gray-800  pb-2 font-inter">Random</h2>
           <Videos data={video_collection[5].finalDataArray} />
-
+          <a href={`/random`}>
+            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-2 cursor-pointer hover:scale-105 transition-transform duration-300' />
+          </a>
 
 
         </div>

@@ -12,12 +12,12 @@ import Outstream from './Ads/Outstream';
 import PopunderAds_2 from "./Ads/Popunder2";
 import PopunderAds from "./Ads/Popunder";
 import InterstitialAds from "./Ads/InterstitialAds";
-import TwinRed_Popunder from "./Ads/TwinRed_Popunder";
+import { getViewTypeFromCookie } from "../config/utils";
 
 function Videos({ data, type }) {
 
 
-    const { viewType } = useContext(videosContext);
+    const { viewType, setViewType } = useContext(videosContext);
 
     const router = useRouter()
 
@@ -31,25 +31,29 @@ function Videos({ data, type }) {
             // || window.location.href.includes('/video')
         }
         setpageLoaded(true)
+        setViewType(getViewTypeFromCookie());
+        console.log(viewType);
+
 
     }, []);
 
     return (
         <div className=" w-full h-fit ">
 
+            {viewType &&
 
+                <div className={`grid py-1 gap-2 md:gap-3 lg:gap-4 ${viewType === 'horizontal' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 4xl:grid-cols-5' : 'grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 4xl:grid-cols-5'}`}>
+                    {
+                        data.map(video => {
+                            return (
+                                <VideoThumbnail key={video.thumbnail} details={video} type={type} />
+                            )
+                        })
+                    }
 
-            <div className={`grid py-1 gap-2 md:gap-3 lg:gap-4 sm:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4 4xl:grid-cols-5 ${viewType === 'horizontal' ? 'grid-cols-2' : 'grid-cols-2'}`}>
+                </div>
 
-                {
-                    data.map(video => {
-                        return (
-                            <VideoThumbnail key={video.thumbnail} details={video} type={type} />
-                        )
-                    })
-                }
-
-            </div>
+            }
 
             {data.length === 0 &&
                 <div className="flex flex-col justify-center items-center space-y-2 w-full my-20 ">

@@ -24,7 +24,7 @@ var navigation = [
     { name: 'Pornstars', href: '/pornstar', current: false },
     { name: 'Channels', href: '/channels', current: false },
     { name: 'Sex Chat', href: 'https://play.google.com/store/apps/details?id=com.bhola.livevideochat4&hl=en-IN', current: false },
-    { name: 'Join Now', href: '/membership', current: false },
+    // { name: 'Join Now', href: '/membership', current: false },
     // { name: 'Live Cams', href: "https://chaturbate.com/in/?tour=LQps&campaign=3v7pk&track=default&room=ukdevelopers", current: false },
     // { name: 'Meet & Fuck', href: "https://chaturbate.com/in/?tour=LQps&campaign=3v7pk&track=default&room=ukdevelopers", current: false },
 ]
@@ -39,6 +39,7 @@ function Navbar() {
     const { user, logOut } = UserAuth();
 
     const router = useRouter();
+    const currentPath = router.pathname;
 
     const context = useContext(videosContext);
     const { currentLocation, countryBlocked } = context;
@@ -139,7 +140,6 @@ function Navbar() {
             }
             var filteredTagArray = tagsData.filter(keyword => {
                 if (keyword.trim().toLowerCase().includes(e.target.value.trim().toLowerCase())) {
-                    console.log(e.target.value.length);
                     return keyword
                 }
             })
@@ -149,9 +149,9 @@ function Navbar() {
 
     return (
 
-        <div className='font-inter'>
+        <div className='font-inter bg-semiblack'>
 
-            <div className="bg-theme text-white p-2  shadow-md lg:hidden">
+            <div className=" text-white p-2  lg:hidden">
 
                 <Disclosure as="nav" >
                     {({ open }) => (
@@ -161,7 +161,7 @@ function Navbar() {
                                 <div className='flex items-center space-x-1' >
 
                                     <Link href='/'>
-                                    <p className=' align-center text-center font-Dancing font-bold  text-3xl pl-1 pr-1 cursor-pointer lg:text-left lg:ml-6 '>Chutlunds.com</p>
+                                        <img src='/logo.png' alt="loading..." className='w-[200px]' />
                                     </Link>
                                     {location &&
                                         <div className='cursor-pointer' onClick={handleClickFlag}>
@@ -228,7 +228,7 @@ function Navbar() {
                                                 }
 
                                                 {user &&
-                                                    <h2 className='font-Opensans text-theme  text-[14px] cursor-pointer text-center font-semibold my-2'>{user.email}</h2>
+                                                    <h2 className='font-Opensans text-white  text-[14px] cursor-pointer text-center font-semibold my-2'>{user.email}</h2>
                                                 }
 
 
@@ -304,7 +304,7 @@ function Navbar() {
 
                     <form className=' w-full flex items-center' onSubmit={goSearch}>
 
-                        <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='flex-grow  outline-none text-inter text-sm border-gray-300 rounded pl-2  h-[35px] text-theme' type="text" placeholder='Search your favourite porn video...' />
+                        <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='flex-grow  outline-none text-inter text-sm border-gray-300 rounded pl-2  h-[35px] text-white' type="text" placeholder='Search your favourite porn video...' />
 
                         <button type="submit" className='bg-button  hover:bg-button_hover text-white text-sm p-2 pl-4 pr-4 m-1 rounded '>Search</button>
 
@@ -317,7 +317,7 @@ function Navbar() {
                                         setsearchKey(tag); setshowSuggested(false); router.push(`/search/${tag.trim()}`)
                                     }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-red-100 pl-4'>
                                         {/* <img src='/login/history.png' className='h-[20px]' /> */}
-                                        <p className='text-[12px] fontinter text-theme'>{tag}</p>
+                                        <p className='text-[12px] fontinter text-white'>{tag}</p>
 
                                     </div>
                                 )
@@ -332,48 +332,52 @@ function Navbar() {
 
 
             </div>
-            <div className='flex justify-around items-center mb-1 bg-blue-100 shadow-lg lg:hidden font-arial px-2'>
 
+            <div className='flex justify-around items-center shadow-lg lg:hidden font-arial'>
                 <Link href='/'>
-                    <p className=' sm:text-xl xl:text-[28px] text-md text-theme  text-center p-1 hover:text-red-600  '>Home</p>
+
+                    <p className={`sm:text-xl xl:text-[28px] text-md text-white text-center p-1  border-b-[3px] ${currentPath === '/' ? 'border-[#FFBB00]' : 'hover:border-[#FFBB00] border-transparent'}`}>
+                        Home
+                    </p>
                 </Link>
 
                 <Link href='/category'>
-                    <p className=' sm:text-xl xl:text-[28px] text-md text-theme  text-center p-1 hover:text-red-600  '>Catergories</p>
+                    <p className={`sm:text-xl xl:text-[28px] text-md text-white text-center p-1  border-b-[3px] ${currentPath === '/category' ? 'border-[#FFBB00]' : 'hover:border-[#FFBB00] border-transparent'}`}>
+                        Categories
+                    </p>
                 </Link>
 
                 <Link href='/channels'>
-                    <div className='group flex items-center justify-center space-x-1 p-1'>
-                        <img src="/channel.png" alt="" className='h-5 mb-1' />
-                        <p className=' sm:text-xl xl:text-[28px] text-md text-theme  text-center  group-hover:text-red-600 '>Channels</p>
+                    <div className={`group flex items-center justify-center space-x-1 -mb-1 pb-1  border-b-[3px] ${currentPath === '/channels' ? 'border-[#FFBB00]' : 'hover:border-[#FFBB00] border-transparent'}`}>
+                        <img src="/channel.png" alt="" className='h-5 m' />
+                        <p className={`sm:text-xl xl:text-[28px] text-md text-white text-center mb-0`}>
+                            Channels
+                        </p>
                     </div>
                 </Link>
 
+
                 <Link href='/membership'>
-                    <p className=' sm:text-md text-sm text-white rounded-md text-center px-3 p-1 m-1  bg-red-500 hover:bg-red-600 block_popunder'>Join Now</p>
+                    <p className='sm:text-md text-sm text-semiblack rounded-[22px] text-center px-3 p-1 m-1 bg-[#FFBB00] hover:scale-105 transition-transform duration-30'>
+                        Join Now
+                    </p>
                 </Link>
-
-
-
-
-
             </div>
+
 
 
             {/* Large Sreeen NavBar  */}
 
-            <div className='flex-col hidden lg:flex ' >
+            <div className='flex-col hidden lg:flex  ' >
 
 
                 {/* Navbar */}
-                <div className=' flex items-center justify-between bg-theme pt-2 pb-2 text-white'>
+                <div className=' flex items-center justify-between  pt-2 pb-2 text-white '>
 
                     <div className='flex items-center space-x-1 md:space-x-3  ml-2' >
 
-                        <img src='/erotic.png' alt="loading..." className='w-14' />
-
                         <Link href='/'>
-                        <p className=' align-center text-center font-Dancing font-bold  text-4xl cursor-pointer lg:text-left '>Chutlunds.com</p>
+                            <img src='/logo.png' alt="loading..." className='w-[250px]' />
                         </Link>
                         {location &&
 
@@ -413,7 +417,7 @@ function Navbar() {
 
 
                             <div className='relative'>
-                                <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='w-[250px] flex-grow border-2 outline-none border-gray-300 rounded pl-2 h-10  text-sm text-theme' type="text" placeholder='Search your favourite porn video...' />
+                                <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='w-[250px] flex-grow border-2 outline-none border-gray-300 rounded pl-2 h-10  text-sm text-white' type="text" placeholder='Search your favourite porn video...' />
 
                                 {showSuggested &&
 
@@ -423,7 +427,7 @@ function Navbar() {
                                                 <div key={tag} onClick={() => {
                                                     setsearchKey(tag); setshowSuggested(false); router.push(`/search/${tag.trim()}`)
                                                 }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-red-100 pl-4'>
-                                                    <p className='text-[12px] fontinter text-theme'>{tag}</p>
+                                                    <p className='text-[12px] fontinter text-white'>{tag}</p>
 
                                                 </div>
                                             )
@@ -464,7 +468,9 @@ function Navbar() {
                                     <button className='font-inter bg-green-500 px-3 py-1 rounded' onClick={signOut_method}>Logout</button>
                                 </div>
                             }
-
+                            <Link href='/membership'>
+                                <button className="bg-[#FFBB00] text-semiblack rounded-[22px] font-semibold text-center px-5 p-1.5 m-1 text-md block_popunder hover:scale-105 transition-transform duration-300">Join Now</button>
+                            </Link>
 
                         </div>
                     </div>
@@ -476,21 +482,24 @@ function Navbar() {
 
 
 
-                <div className='w-full bg-blue-100 text-theme items-center justify-around   flex mb-2 p-1 shadow-lg'>
+                <div className='w-full  text-white items-center justify-around   flex  px-1 shadow-lg'>
                     {navigation.map(item => {
+                        const isActive = currentPath === item.href;
 
                         return (
-                            <Link href={item.href} key={item.name}>
-
-                                <p key={item.name} className={`${item.name === "Join Now" ? "text-white rounded-md text-center px-3 p-1 m-1  bg-red-500 text-lg hover:bg-red-600 block_popunder" : "text-xl 2xl:text-2xl font-semibold hover:text-red-400"} cursor-pointer p-1 `}>{item.name}</p>
+                            <Link href={item.href} legacyBehavior key={item.name}>
+                                <a
+                                    className={`text-xl 2xl:text-2xl font-semibold text-white cursor-pointer p-1 border-b-4 
+                    ${isActive ? 'border-[#FFBB00]' : 'border-transparent hover:border-[#FFBB00]'}
+                    transition-colors duration-300`}
+                                >
+                                    {item.name}
+                                </a>
                             </Link>
                         )
                     })}
 
 
-                    {/* <a target="_blank" href="https://chaturbate.com/in/?tour=LQps&campaign=3v7pk&track=default&room=ukdevelopers" rel="noopener noreferrer">
-                        <p className='text-xl font-semibold cursor-pointer p-1 text-black hover:text-red-700'>Live Sex</p>
-                    </a> */}
 
 
                 </div>
