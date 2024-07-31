@@ -146,7 +146,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
       <div className='flex justify-between items-center my-4 md:hidden'>
         <h2 className='text-[20px]  font-semibold  font-inter'>Trending Channels</h2>
         <img
-          className='h-[20px] w-[20px] cursor-pointer'
+          className='h-[20px] w-[20px] cursor-pointer sm:hidden'
           src={viewType === undefined ? './grid.png' : (viewType === 'horizontal' ? './grid.png' : './horizontal.png')}
           onClick={toggleViewType}
           alt="Toggle View"
