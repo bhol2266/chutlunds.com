@@ -17,12 +17,14 @@ import Pornstar_slider from '../components/pornstar_slider';
 import Channels_slider from '../components/channels_slider';
 import Category_slider from '../components/category_slider';
 import ReactCountryFlag from "react-country-flag"
-import { setViewTypeCookie } from '../config/utils'; 
+import { setViewTypeCookie } from '../config/utils';
 
 export default function Home({ video_collection, trendingChannels, tags, trendingCategories, trendingPornstars }) {
 
 
   const { currentLocation, setcurrentLocation, viewType, setViewType } = useContext(videosContext);
+  const [clientViewType, setClientViewType] = useState(null); // this is a work around for toogle view "viewType", which was not updating when page reloads
+
   const [countryVideos, setcountryVideos] = useState([]);
   const [countryLanguage, setcountryLanguage] = useState('');
   const [lang, setLang] = useState('');
@@ -105,6 +107,10 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
   }, []);
 
+  useEffect(() => {
+    setClientViewType(viewType);
+  }, [viewType]);
+
   function shuffle(array) {
     let currentIndex = array.length, randomIndex;
 
@@ -145,12 +151,16 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
       <div className='flex justify-between items-center my-4 md:hidden'>
         <h2 className='text-[20px]  font-semibold  font-inter'>Trending Channels</h2>
+
+
         <img
           className='h-[20px] w-[20px] cursor-pointer sm:hidden'
-          src={viewType === undefined ? './grid.png' : (viewType === 'horizontal' ? './grid.png' : './horizontal.png')}
+          src={clientViewType === 'horizontal' ? './grid.png' : './horizontal.png'}
           onClick={toggleViewType}
           alt="Toggle View"
         />
+        {console.log(viewType)}
+
       </div>
       <Channels_slider trendingChannels={trendingChannels} />
 
