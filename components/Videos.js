@@ -40,7 +40,6 @@ function Videos({ data, type }) {
     return (
         <div className=" w-full h-fit ">
 
-            {viewType &&
 
                 <div className={`grid py-1 gap-2 md:gap-3 lg:gap-4 ${viewType === 'horizontal' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 4xl:grid-cols-5' : 'grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 4xl:grid-cols-5'}`}>
                     {
@@ -53,7 +52,7 @@ function Videos({ data, type }) {
 
                 </div>
 
-            }
+            
 
             {data.length === 0 &&
                 <div className="flex flex-col justify-center items-center space-y-2 w-full my-20 ">
