@@ -304,20 +304,20 @@ function Navbar() {
 
                     <form className=' w-full flex items-center' onSubmit={goSearch}>
 
-                        <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='flex-grow  outline-none text-inter text-sm border-gray-300 rounded pl-2  h-[35px] text-white' type="text" placeholder='Search your favourite porn video...' />
+                        <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='flex-grow  outline-none text-inter text-sm border-gray-300 rounded pl-2  h-[35px] text-semiblack' type="text" placeholder='Search your favourite porn video...' />
 
                         <button type="submit" className='bg-button  hover:bg-button_hover text-white text-sm p-2 pl-4 pr-4 m-1 rounded '>Search</button>
 
                     </form>
                     {showSuggested &&
-                        <div className='bg-white max-h-[300px] z-50  overflow-scroll scrollbar-hide'>
+                        <div className='bg-white max-h-[300px] rounded z-50  overflow-scroll scrollbar-hide'>
                             {tags.map(tag => {
                                 return (
                                     <div key={tag} onClick={() => {
                                         setsearchKey(tag); setshowSuggested(false); router.push(`/search/${tag.trim()}`)
-                                    }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-red-100 pl-4'>
+                                    }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-gray-300 pl-4'>
                                         {/* <img src='/login/history.png' className='h-[20px]' /> */}
-                                        <p className='text-[12px] fontinter text-white'>{tag}</p>
+                                        <p className='text-[12px] fontinter text-semiblack'>{tag}</p>
 
                                     </div>
                                 )
@@ -417,17 +417,17 @@ function Navbar() {
 
 
                             <div className='relative'>
-                                <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='w-[250px] flex-grow border-2 outline-none border-gray-300 rounded pl-2 h-10  text-sm text-white' type="text" placeholder='Search your favourite porn video...' />
+                                <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='w-[250px] flex-grow border-2 outline-none border-gray-300 rounded pl-2 h-10  text-sm text-semiblack' type="text" placeholder='Search your favourite porn video...' />
 
                                 {showSuggested &&
 
-                                    <div className='bg-white absolute top-[44px] left-0 right-0 max-h-[300px] z-50 overflow-hidden overflow-scroll scrollbar-hide'>
+                                    <div className='bg-white rounded absolute top-[44px] left-0 right-0 max-h-[300px] z-50 overflow-hidden overflow-scroll scrollbar-hide'>
                                         {tags.map(tag => {
                                             return (
                                                 <div key={tag} onClick={() => {
                                                     setsearchKey(tag); setshowSuggested(false); router.push(`/search/${tag.trim()}`)
-                                                }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-red-100 pl-4'>
-                                                    <p className='text-[12px] fontinter text-white'>{tag}</p>
+                                                }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-gray-300 pl-4'>
+                                                    <p className='text-[12px] fontinter text-semiblack'>{tag}</p>
 
                                                 </div>
                                             )
