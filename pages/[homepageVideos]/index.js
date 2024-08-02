@@ -15,7 +15,7 @@ function Category({ video_collection, pages }) {
     if (router.isFallback) {
         return (
             <div className="flex justify-center mx-auto mt-10 ">
-                <BeatLoader loading size={25} color={'#13274F'} />
+                <BeatLoader loading size={25} color={'#232b2b'} />
             </div>
         )
     }
