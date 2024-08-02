@@ -315,7 +315,7 @@ function Navbar() {
                                 return (
                                     <div key={tag} onClick={() => {
                                         setsearchKey(tag); setshowSuggested(false); router.push(`/search/${tag.trim()}`)
-                                    }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-gray-300 pl-4'>
+                                    }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-gray-200 pl-4'>
                                         {/* <img src='/login/history.png' className='h-[20px]' /> */}
                                         <p className='text-[12px] fontinter text-semiblack'>{tag}</p>
 
@@ -426,7 +426,7 @@ function Navbar() {
                                             return (
                                                 <div key={tag} onClick={() => {
                                                     setsearchKey(tag); setshowSuggested(false); router.push(`/search/${tag.trim()}`)
-                                                }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-gray-300 pl-4'>
+                                                }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-gray-200 pl-4'>
                                                     <p className='text-[12px] fontinter text-semiblack'>{tag}</p>
 
                                                 </div>

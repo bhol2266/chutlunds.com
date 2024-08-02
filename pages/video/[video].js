@@ -48,7 +48,10 @@ const Videoplayer = () => {
 
         const fetchVideoDetails = async () => {
 
-            const api = `${process.env.BACKEND_URL}videoPlayer`;
+
+            let api = `/api/spangbang/videoPlayer`
+
+            // const api = `${process.env.BACKEND_URL}videoPlayer`;
 
             const rawResponse = await fetch(api, {
                 method: 'POST',

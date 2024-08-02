@@ -1,10 +1,13 @@
 
+
+
 export function Scrape_Video_Item($) {
 
 
     const finalDataArray = [];
 
     $('.main_results .video-item').each((i, el) => {
+
         const thumbnail = $(el).find('picture img').attr('data-src');
         const title = $(el).find('picture img').attr('alt');
         const duration = $(el).find('.l').text();
@@ -33,6 +36,7 @@ export function Scrape_Video_Item($) {
     });
     if (finalDataArray.length == 0) {
         $('.video-item').each((i, el) => {
+
             const thumbnail = $(el).find('picture img').attr('data-src');
             const title = $(el).find('picture img').attr('alt');
             const duration = $(el).find('.l').text();
