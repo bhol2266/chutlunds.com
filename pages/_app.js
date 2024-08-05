@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar'
 import VideoState from '../context/videos/VideoState'
 import '../styles/globals.css'
 import '../styles/nProgress.css'
+import Banner_for_chutlund2 from '../components/Banner_for_chutlund2'
 
 
 
@@ -69,6 +70,7 @@ function MyApp({ Component, pageProps }) {
         <SignUpFormOTP/>
         <PasswordReset/> */}
           <Navbar />
+          <Banner_for_chutlund2/>
           <div className={`${currentRoute == "/membership" ? "" : "basicMargin"} `}>
             <Component {...pageProps} />
           </div>
