@@ -28,12 +28,6 @@ function Category({ video_collection, pages, query, keyword, currentPage, filter
 
       <div>
 
-        <Head>
-          <title>{`${capitalizeFirstLetter(keyword.replace('+', " ").replace("+", " "))} Porn Videos - Chutlunds`}</title>
-          <meta name="description"
-            content={`Watch ${capitalizeFirstLetter(keyword.replace('+', " ").replace("+", " "))} porn videos for free, here on Chutlunds.com. Discover the growing collection of high quality Most Relevant XXX movies and clips. No other sex tube is more popular and features more ${capitalizeFirstLetter(keyword.replace('+', " ").replace("+", " "))} scenes than Chutlunds! Browse through our impressive selection of porn videos in HD quality on any device you own.`} />
-        </Head>
-
         <Header keyword={keyword.replace("+", " ")} pageNumber={currentPageNumberURL} filteredObjsArrayProps={filteredObjsArray} />
         <div className="flex">
           <Sidebar />

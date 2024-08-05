@@ -9,28 +9,28 @@ import PopunderAds from '../../components/Ads/Popunder';
 
 
 function shuffle(array) {
-    let currentIndex = array.length,  randomIndex;
-  
+    let currentIndex = array.length, randomIndex;
+
     // While there remain elements to shuffle.
     while (currentIndex != 0) {
-  
-      // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-  
-      // And swap it with the current element.
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
+
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
     }
-  
+
     return array;
-  }
+}
 
 function Index() {
 
     const router = useRouter();
 
-    useEffect( () => {
+    useEffect(() => {
         let index = 0
 
         async function downloadImage(url, name) {
@@ -75,33 +75,48 @@ function Index() {
         <div className="">
             <Head>
                 <title>Chutlunds Categories: Find Your Favorite Free Hardcore Porn Videos</title>
-                <meta name="description" content="Chutlunds has the best hardcore porn videos. Discover the newest XXX to stream in your favorite sex category. See the hottest amateurs and pornstars in action." />
+                <meta name="description" content="  Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
+
+
+                <meta name="keywords" content="blowjob, japanese, big ass, deepthroat, jav, asian" />
+                <meta property="og:title" content="Chutlunds Categories: Find Your Favorite Free Hardcore Porn Videos" />
+                <meta property="og:description" content="  Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
+                <meta name="twitter:title" content="Chutlunds Categories: Find Your Favorite Free Hardcore Porn Videos" />
+                <meta name="twitter:description" content=" Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
+                <link rel="canonical" href={`https://chutlunds.com/category`} />
+
+
+
+
             </Head>
 
 
             <div className='flex items-center py-2 my-1 justify-between  rounded-lg'>
-                <h2 className='text-center lg:text-left  flex-grow text-3xl font-Dmsans'>Porn Categories</h2>
+                <span className='text-center lg:text-left  flex-grow text-3xl font-Dmsans'>Top Porn Categories</span>
             </div>
-            {/* <h1 className="text-center lg:text-left text-sm md:text-lg shadow-xl py-2 my-1 font-inter">
-                Collections of free desi sex videos, desi mms, Indian sex videos, desi porn videos, devar bhabhi ki chudai, aunty ki chudai collection. full hd indian sex videos download free.
-            </h1> */}
+            <h1 className="text-center lg:text-left text-sm md:text-lg shadow-xl py-2 my-1 font-inter">
+                Explore a Variety of Free Videos: Japanese, Hentai, Russian, Chinese, Asian, Korean Porn, and More
+            </h1>
+
 
             <Outstreams />
             <PopunderAds />
 
             <div className={`grid grid-cols-3 py-3 sm:grid-cols-3 gap-2 md:gap-3 lg:gap-4  md:grid-cols-4 lg:grid-cols-5`}>
-                {shuffle(jsonData).map(category => {
+                {jsonData.map(category => {
                     return (
                         <Link key={category.name} href={`/category/${category.name.toLowerCase().trim().substring(0, category.name.indexOf('.png'))}`}>
-                                <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
-                                    <img
-                                        className='object-cover w-full'
-                                        alt={category.name}
-                                        src={`${process.env.CLOUDFLARE_STORAGE}category_images/${category.name}`}
-                                        loading="lazy"
-                                    ></img>
-                                    <h2 className='font-inter rounded-b absolute text-sm sm:text-lg  px-1 bottom-0 w-full text-center  z-10 text-white bg-transparent bg-black bg-opacity-50'>{category.name.charAt(0).toUpperCase() + category.name.substring(0, category.name.indexOf('.png')).substring(1)}</h2>
-                                </div>
+                            <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
+                                <img
+                                    className='object-cover w-full'
+                                    alt={category.name}
+                                    src={`${process.env.CLOUDFLARE_STORAGE}category_images/${category.name}`}
+                                    loading="lazy"
+                                ></img>
+                                <h2 className='font-inter rounded-b absolute text-sm sm:text-lg px-1 bottom-0 w-full text-center z-10 text-white bg-black bg-opacity-50'>
+                                    {category.name.charAt(0).toUpperCase() + category.name.substring(0, category.name.indexOf('.png')).substring(1)}
+                                </h2>
+                            </div>
                         </Link>
                         // items[i].charAt(0).toUpperCase() + items[i].substring(1);
 

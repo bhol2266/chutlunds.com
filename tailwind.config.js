@@ -34,8 +34,8 @@ module.exports = {
         'github': '#24292F',
         'color': '#414a4c',
         'theme': '#13274F',
-        'button': '#5072A7',
-        'button_hover': '#93c5fd',
+        'button': '#6C6C6C ',
+        'button_hover': '#8C8C8C',
         'semiblack': '#232b2b',
 
       },

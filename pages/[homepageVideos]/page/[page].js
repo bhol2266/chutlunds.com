@@ -33,8 +33,19 @@ function Category({ video_collection, pages }) {
     return (
         <>
             <Head>
-                <title>{`${capitalizeFirstLetter(homepageVideos)} Porn Videos`}</title>
+    
+                <title>{`${capitalizeFirstLetter(homepageVideos)} Porn Videos | Page -${page}`}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <meta name="description" content={`${capitalizeFirstLetter(homepageVideos)} Porn Videos! - blowjob, japanese, big ass Porn - SpankBang`} />
+                <meta name="keywords" content="blowjob, japanese, big ass, deepthroat, jav, asian" />
+                <meta property="og:title" content={`${capitalizeFirstLetter(homepageVideos)} Porn Videos`} />
+                <meta property="og:description" content={`${capitalizeFirstLetter(homepageVideos)} Porn Videos! - blowjob, japanese, big ass Porn - SpankBang`} />
+                <meta property="og:type" content="website" />
+                <meta name="twitter:title" content={`${capitalizeFirstLetter(homepageVideos)} Porn Videos`} />
+                <meta name="twitter:description" content={`${capitalizeFirstLetter(homepageVideos)} Porn Videos! - blowjob, japanese, big ass Porn - SpankBang`} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <link rel="canonical" href={`https://chutlunds.com/${homepageVideos}/page/${page}`} />
+
 
             </Head>
             <Header keyword={homepageVideos} pageNumber={currentPageNumberURL} />

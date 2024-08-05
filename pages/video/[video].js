@@ -148,7 +148,7 @@ const Videoplayer = () => {
     if (serverError) {
         return (
             <div className='my-72 flex flex-col items-center justify-center'>
-                <h1 className='text-center '> Something went wrong!</h1>
+                <span className='text-center '> Something went wrong!</span>
                 <button onClick={() => { router.push('/') }} className='mx-auto my-4 bg-theme text-white rounded px-8 py-1 hover:bg-red-700'>Go to Home -&gt;</button>
             </div>
         );
@@ -161,8 +161,15 @@ const Videoplayer = () => {
                 <>
                     <Head>
                         <title>{`${noVideo ? videoTitleBackup : videoDetails.Title} - ${noVideo ? "720p" : videolinkQualitiesScreenshots.video_qualities_available[videolinkQualitiesScreenshots.video_qualities_available.length - 1].toUpperCase()}`} | Chutlunds</title>
-                        <meta name="description" content={`${capitalizeFirstLetter(noVideo ? videoTitleBackup : videoDetails.Title)} sex video${noVideo ? "." : `, ${tagString} sex videos.`}`} />
+                        <meta name="description" content={`${capitalizeFirstLetter(noVideo ? videoTitleBackup : videoDetails.Title)} sex video`} />
                         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+                        <meta name="keywords" content={tagString} />
+                        <meta property="og:title" content={`${noVideo ? videoTitleBackup : videoDetails.Title} - ${noVideo ? "720p" : videolinkQualitiesScreenshots.video_qualities_available[videolinkQualitiesScreenshots.video_qualities_available.length - 1].toUpperCase()}`} />
+                        <meta property="og:description" content={`${capitalizeFirstLetter(noVideo ? videoTitleBackup : videoDetails.Title)} sex video`} />
+                        <meta name="twitter:title" content={`${noVideo ? videoTitleBackup : videoDetails.Title} - ${noVideo ? "720p" : videolinkQualitiesScreenshots.video_qualities_available[videolinkQualitiesScreenshots.video_qualities_available.length - 1].toUpperCase()}`} />
+                        <meta name="twitter:description" content={`${capitalizeFirstLetter(noVideo ? videoTitleBackup : videoDetails.Title)} sex video`} />
+                        <link rel="canonical" href={`https://chutlunds.com/video/${video}`} />
+
                     </Head>
 
                     <div className='flex text-sm md:text-lg '>
@@ -211,7 +218,7 @@ const Videoplayer = () => {
                         {relatedVideos.length !== 0 && (
                             <div className='relative'>
                                 <h1 className='my-10 mb-16 font-semibold font-inter lg:text-xl text-center'>{videoTitleBackup.replaceAll("+", " ")}</h1>
-                                <h2 className='font-poppins md:text-lg'>Related videos to {videoTitleBackup.replaceAll("+", " ")}</h2>
+                                <span className='font-poppins md:text-lg'>Related videos to {videoTitleBackup.replaceAll("+", " ")}</span>
                                 <Videos data={relatedVideos} />
                                 {showNotAvailableMessage && (
                                     <div className='flex space-x-4 items-center justify-center absolute top-[35px] mx-auto left-0 right-0'>

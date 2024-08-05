@@ -85,7 +85,15 @@ function Search({ tags }) {
                 <title>Most popular and trending porn searches- Chutlunds</title>
                 <meta name="description"
                     content="Most popular and trending porn searches - HD porn videos and adult movies- Chutlunds" />
-            </Head>
+                G
+                <meta property="og:title" content="Most popular and trending porn searches- Chutlunds" />
+                <meta property="og:description" content="Most popular and trending porn searches - HD porn videos and adult movies- Chutlunds" />
+                <meta name="twitter:title" content="Most popular and trending porn searches- Chutlunds" />
+                <meta name="twitter:description" content="Most popular and trending porn searches - HD porn videos and adult movies- Chutlunds" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <link rel="canonical" href={`https://chutlunds.com/search`} />
+
+            </Head> 
 
             <Outstreams />
             <Popunder />
@@ -104,15 +112,15 @@ function Search({ tags }) {
 
             <div className='flex items-center space-x-2 mt-4'>
                 <img src='/login/label.png' className='h-[25px] w-[25px]' />
-                <h1 className='text-lg font-bold md:text-2xl font-poppins'> All Tags</h1>
+                <h1 className='text-lg font-bold md:text-2xl font-poppins'> Popular Search Tags</h1>
             </div>
 
-            <div className='my-2 flex flex-wrap '>
+            <div className='my-2 flex flex-wrap'>
                 {tagsArray.map(keyword => {
                     return (
                         <Link key={keyword} href={`/search/${keyword.trim().replace(/ /g, "+")}`}>
-                            <div className='my-1 mr-1.5 lg:mr-3 p-1 px-2 text-xs text-black bg-gray-300 rounded font-semibold hover:bg-theme  font-poppins hover:text-white md:text-lg  '>
-                                {keyword}
+                            <div className='my-1 mr-1.5 lg:mr-3 p-1 px-2 text-xs text-black bg-gray-300 rounded font-semibold hover:bg-theme font-poppins hover:text-white md:text-lg'>
+                                <h2 className='text-center'>{keyword}</h2>
                             </div>
                         </Link>
                     )

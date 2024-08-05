@@ -22,14 +22,6 @@ function Category({ video_collection, pages, query, keyword, currentPage, filter
 
     <div className="">
 
-
-
-      <Head>
-        <title>{capitalizeFirstLetter(keyword)} sex videos | Chutlunds</title>
-        <meta name="description" content={`Watch free collection of ${capitalizeFirstLetter(keyword)} sex videos, ${keyword} porn videos, latest ${keyword} videos in high quality only on Chutlunds.`} />
-        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-      </Head>
-
       <div>
 
         <Header keyword={keyword} pageNumber={currentPageNumberURL} filteredObjsArrayProps={filteredObjsArray} />

@@ -1,52 +1,52 @@
-import { AuthContextProvider } from '../context/AuthContext'
-import Head from 'next/head'
-import Router, { useRouter } from 'next/router'
-import Script from 'next/script'
-import NProgress from 'nprogress'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
-import VideoState from '../context/videos/VideoState'
-import '../styles/globals.css'
-import '../styles/nProgress.css'
-import Banner_for_chutlund2 from '../components/Banner_for_chutlund2'
-
-
+import { AuthContextProvider } from '../context/AuthContext';
+import Head from 'next/head';
+import Router, { useRouter } from 'next/router';
+import Script from 'next/script';
+import NProgress from 'nprogress';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
+import VideoState from '../context/videos/VideoState';
+import '../styles/globals.css';
+import '../styles/nProgress.css';
+import Banner_for_chutlund2 from '../components/Banner_for_chutlund2';
 
 function MyApp({ Component, pageProps }) {
-
   const router = useRouter();
   const currentRoute = router.pathname;
 
-  Router.events.on("routeChangeStart", (ur = -0) => {
+  Router.events.on('routeChangeStart', () => {
     NProgress.start();
-
-  })
-  Router.events.on("routeChangeComplete", (url) => {
+  });
+  Router.events.on('routeChangeComplete', () => {
     NProgress.done();
-  })
-
+  });
 
   return (
     <>
-
       <Head>
-        <meta name='asg_verification' content='vVcWCcbbgmnqv221hpAjPojb' />
+        <meta name="asg_verification" content="vVcWCcbbgmnqv221hpAjPojb" />
         <meta name="Trafficstars" content="48702" />
-        <meta name="exoclick-site-verification" content="6b1112fe173bdf782d96975e70bd4b95"></meta>
+        <meta name="exoclick-site-verification" content="6b1112fe173bdf782d96975e70bd4b95" />
+        <meta name="6a97888e-site-verification" content="80bd73765fca365d8238dc1ccbdd975f" />
+        
         <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+        
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="theme-color" content="#ffffff" />
 
-        {/* Ads Netword Verification  */}
-        <meta name="6a97888e-site-verification" content="80bd73765fca365d8238dc1ccbdd975f"></meta>
-
+        <meta property="og:image" content="/logo.png" />
+        <meta property="og:url" content="https://www.chutlunds.com" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="/logo.png" />
       </Head>
+
 
       <Script
         strategy="afterInteractive"
@@ -57,35 +57,22 @@ function MyApp({ Component, pageProps }) {
         {` window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-6JFQKLE3DK');`}
       </Script>
 
       <AuthContextProvider>
-
         <VideoState>
-
-          {/* <LoginForm />
-        <SignUpForm/>
-        <SignUpFormOTP/>
-        <PasswordReset/> */}
           <Navbar />
-          <Banner_for_chutlund2/>
-          <div className={`${currentRoute == "/membership" ? "" : "basicMargin"} `}>
+          <Banner_for_chutlund2 />
+          <div className={`${currentRoute == "/membership" ? "" : "basicMargin"}`}>
             <Component {...pageProps} />
           </div>
           <hr />
-
-          {currentRoute != "/membership" &&
-            <Footer />
-          }
+          {currentRoute != "/membership" && <Footer />}
         </VideoState>
       </AuthContextProvider>
-
     </>
-  )
+  );
 }
 
-export default MyApp
-
-
+export default MyApp;

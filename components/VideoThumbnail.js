@@ -77,9 +77,9 @@ function VideoThumbnail({ details, type }) {
                         <img src='/crown.png' className='absolute top-0 right-0 h-6 lg:h-8 m-2 bg-white bg-opacity-70 p-0.5 rounded-md' alt="Premium" />
                     )}
 
-                    <h2 className="font-inter font-semibold text-[14px] md:text-[16px] xl:text-[18px] px-1 lg:pl-2 py-1 text-gray-800 whitespace-nowrap">
+                    <span className="font-inter font-semibold text-[14px] md:text-[16px] xl:text-[18px] px-1 lg:pl-2 py-1 text-gray-800 whitespace-nowrap">
                         {video.title}
-                    </h2>
+                    </span>
 
                     <div className="flex items-center justify-start w-full pl-0.5 sm:pl-1 md:pb-2 lg:pl-2 font-arial -mt-1 lg:-mt-1.5">
                         <div className="flex items-center">

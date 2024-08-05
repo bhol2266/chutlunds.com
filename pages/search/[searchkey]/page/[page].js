@@ -16,7 +16,7 @@ function Category({ video_collection, pages }) {
     function capitalizeFirstLetter(string) {
         console.log(string.charAt(0).toUpperCase() + string.slice(1));
         return string.charAt(0).toUpperCase() + string.slice(1);
-      }
+    }
 
     return (
         <>
@@ -24,6 +24,18 @@ function Category({ video_collection, pages }) {
                 <title>{`${capitalizeFirstLetter(searchkey.replace('+', " ").replace("+", " "))} Porn Videos - ${currentPageNumberURL}`}</title>
                 <meta name="description"
                     content={`Watch ${capitalizeFirstLetter(searchkey.replace('+', " ").replace("+", " "))} porn videos for free, here on Chutlunds.com. Discover the growing collection of high quality Most Relevant XXX movies and clips. No other sex tube is more popular and features more ${capitalizeFirstLetter(searchkey.replace('+', " ").replace("+", " "))} scenes than Chutlunds! Browse through our impressive selection of porn videos in HD quality on any device you own.`} />
+
+
+                <meta property="og:title" content={`${capitalizeFirstLetter(searchkey.replace('+', " ").replace("+", " "))} Porn Videos - ${currentPageNumberURL}`} />
+                <meta property="og:description" content={`Watch ${capitalizeFirstLetter(searchkey.replace('+', " ").replace("+", " "))} porn videos for free, here on Chutlunds.com. Discover the growing collection of high quality Most Relevant XXX movies and clips. No other sex tube is more popular and features more ${capitalizeFirstLetter(searchkey.replace('+', " ").replace("+", " "))} scenes than Chutlunds! Browse through our impressive selection of porn videos in HD quality on any device you own.`} />
+                <meta name="twitter:title" content={`${capitalizeFirstLetter(searchkey.replace('+', " ").replace("+", " "))} Porn Videos - ${currentPageNumberURL}`} />
+                <meta name="twitter:description" content={`Watch ${capitalizeFirstLetter(searchkey.replace('+', " ").replace("+", " "))} porn videos for free, here on Chutlunds.com. Discover the growing collection of high quality Most Relevant XXX movies and clips. No other sex tube is more popular and features more ${capitalizeFirstLetter(searchkey.replace('+', " ").replace("+", " "))} scenes than Chutlunds! Browse through our impressive selection of porn videos in HD quality on any device you own.`} />
+                <link rel="canonical" href={`https://chutlunds.com/search/${searchkey}/page/${page}`} />
+
+
+
+
+
             </Head>
 
             <Header keyword={searchkey.replace("+", " ")} pageNumber={currentPageNumberURL} />
