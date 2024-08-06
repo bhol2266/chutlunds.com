@@ -33,7 +33,7 @@ module.exports = {
     PAYPAL_CLIENT_SECRET: 'EHdwoyfs3cRT6bFCDBgnwIQR67PW8C4AK5spurQoW7A92YBNUPodWG_vtz5XRfBhMouwisgZPVn5ltaV',
     PAYPAL_ENDPOINT: 'https://api-m.sandbox.paypal.com',
     JWT_SECRET: 'dsaljfhsaldkfsldaflksdf;afd',
-    NEXTAUTH_URL: 'dsaljfhsaldkfsldaflksdf;afd',
+    NEXTAUTH_SECRET: 'dsaljfhsaldkfsldaflksdf;afd',
     FIREBASE_SERVICE_ACCOUNT: JSON.stringify({
       type: "service_account",
       project_id: "chutlunds-bb715",
