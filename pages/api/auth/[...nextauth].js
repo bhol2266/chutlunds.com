@@ -1,53 +1,53 @@
+// pages/api/auth/[...nextauth].js
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
-const options = (req) => {
-  const host = req.headers.host;
-  const baseUrl = host.includes('chutlunds.com') ? 'https://chutlunds.com' : 'https://chutlunds2.com';
 
-  return {
+
+export default NextAuth({
     providers: [
-      GoogleProvider({
-        clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
     session: {
-      jwt: true,
+        jwt: true,
     },
     callbacks: {
-      async signIn({ user }) {
-        // Check if user exists
-        try {
-          await fetch(`${baseUrl}/api/auth/saveProfileFirestore`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              displayName: user.name,
-              email: user.email,
-              photoURL: user.image,
-            }),
-          });
-          return true; // Return true to allow sign-in
-        } catch (error) {
-          console.error('Failed to save user profile:', error);
-          return false; // Return false to deny sign-in
-        }
-      },
-      async session({ session, token }) {
-        // Attach user ID to session object
-        session.user.id = token.sub;
-        return session;
-      },
-      async redirect({ url, baseUrl }) {
-        // Redirect to the last page the user was on before signing in
-        return url.startsWith(baseUrl) ? url : baseUrl;
-      },
-    },
-  };
-};
+        async signIn({ user }) {
+            // Check if user exists
+            try {
+                await fetch(`${process.env.FRONTEND_URL}api/auth/saveProfileFirestore`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        displayName: user.name,
+                        email: user.email,
+                        photoURL: user.image,
+                    }),
+                });
+                return true; // Return true to allow sign-in
+            } catch (error) {
+                console.error('Failed to save user profile:', error);
+                return false; // Return false to deny sign-in
+            }
+        },
+        async session({ session, token }) {
+            // Attach user ID to session object
+            session.user.id = token.sub;
+            return session;
+        },
 
-export default (req, res) => NextAuth(req, res, options(req));
+        async redirect({ url, baseUrl }) {
+            // Redirect to the last page the user was on before signing in
+            console.log("url",url);
+            console.log("baseUrl",baseUrl);
+            
+            return url.startsWith(baseUrl) ? url : baseUrl;
+        },
+    },
+});
