@@ -62,7 +62,6 @@ function MyApp({ Component, pageProps }) {
         gtag('config', 'G-6JFQKLE3DK');`}
       </Script>
 
-      <SessionProvider session={pageProps.session}>
 
         <AuthContextProvider>
           <VideoState>
@@ -75,7 +74,6 @@ function MyApp({ Component, pageProps }) {
             {currentRoute != "/membership" && <Footer />}
           </VideoState>
         </AuthContextProvider>
-      </SessionProvider>
 
     </>
   );

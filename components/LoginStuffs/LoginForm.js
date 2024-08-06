@@ -4,7 +4,6 @@ import { useContext, useEffect, useState } from 'react';
 import { UserAuth } from "../../context/AuthContext";
 import videosContext from '../../context/videos/videosContext';
 import { signIn } from 'next-auth/react';
-import { useSession, signOut } from 'next-auth/react';
 
 
 
@@ -25,13 +24,12 @@ export const LoginForm = () => {
     const [message, setmessage] = useState('');
     const [Country, setCountry] = useState('');
 
-    const { data: session } = useSession();
 
-    useEffect(() => {
-        if (session) {
-            router.push("/");
-        } 
-    }, [session]);
+    // useEffect(() => {
+    //     if (session) {
+    //         router.push("/");
+    //     }
+    // }, [session]);
 
 
 
@@ -53,7 +51,29 @@ export const LoginForm = () => {
 
 
     const SignInButton = async (auth_provider) => {
-        signIn(auth_provider);
+        // signIn(auth_provider);
+        // router.push('/api/auth/google')
+        var authUrl = ""
+        const scope = 'profile email';
+
+        const currentHost = window.location.host;
+        if (currentHost == "localhost:3000") {
+            const REDIRECT_URI1 = "http://localhost:3000/api/auth/callback"
+            authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI1}&scope=${scope}`;
+
+        }
+        if (currentHost == "chutlunds.com") {
+            const REDIRECT_URI2 = "https://www.chutlunds.com/api/auth/chutlunds/callback"
+            authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI2}&scope=${scope}`;
+
+        }
+        if (currentHost == "chutlunds2.com") {
+            const REDIRECT_URI3 = "https://www.chutlunds2.com/api/auth/chutlunds2/callback"
+            authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI3}&scope=${scope}`;
+
+        }
+        window.location.href = authUrl;
+
     }
 
     const handleSignOut = async () => {

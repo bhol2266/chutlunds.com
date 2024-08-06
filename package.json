@@ -16,6 +16,7 @@
     "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
     "cheerio": "^1.0.0-rc.10",
+    "cookie": "^0.6.0",
     "cookies-next": "^4.1.0",
     "cors": "^2.8.5",
     "downloadjs": "^1.4.7",
