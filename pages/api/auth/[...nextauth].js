@@ -48,7 +48,7 @@ export default NextAuth({
                 return url;
             }
             // Default redirect to home page
-            return url;
+            return baseUrl;
         },
     },
 });
