@@ -7,6 +7,9 @@ import videosContext from '../context/videos/videosContext';
 
 import { Fragment } from 'react';
 
+import { useSession, signOut } from 'next-auth/react';
+
+
 import {
     MenuIcon,
     SearchIcon
@@ -36,7 +39,10 @@ function classNames(...classes) {
 
 function Navbar() {
 
-    const { user, logOut } = UserAuth();
+    const { user, setUser, logOut } = UserAuth();
+
+    const { data: session } = useSession();
+
 
     const router = useRouter();
     const currentPath = router.pathname;
@@ -57,6 +63,14 @@ function Navbar() {
 
     }, [])
 
+    useEffect(() => {
+        if (session) {
+            setUser(session.user);
+        } else {
+            setUser(null);
+        }
+    }, [session]);
+
 
     const signOut_method = async () => {
 
@@ -68,12 +82,8 @@ function Navbar() {
         deleteCookie('email');
 
         await updateloggedIn(Email, false)
-        try {
-            logOut();
-
-        } catch (error) {
-            // window.location.reload()
-        }
+        await signOut({ redirect: false }); // Do not redirect
+        window.location.reload(); // Manually refresh the page
     }
 
 
@@ -219,7 +229,7 @@ function Navbar() {
 
                                                 {!user &&
                                                     <Menu.Item>
-                                                        <button onClick={() => { router.push('/account/login') }} className='text-white w-[150px] h-[30px] text-[11px] font-inter px-[25px] py-[7px] bg-button hover:bg-button_hover rounded mt-[24px] mx-auto'>
+                                                        <button onClick={() =>router.push("/account/login")} className='text-white w-[150px] h-[30px] text-[11px] font-inter px-[25px] py-[7px] bg-button hover:bg-button_hover rounded mt-[24px] mx-auto'>
                                                             Sign In / Sign Up
                                                         </button>
                                                     </Menu.Item>
@@ -457,7 +467,7 @@ function Navbar() {
 
                             {!user &&
                                 <div className='flex items-center space-x-2 pr-12 font-inter'>
-                                    <p onClick={() => { router.push('/account/login') }} className=' m-2 rounded underline  pl-2 pr-2  cursor-pointer hover:text-white'>Login</p>
+                                    <p onClick={() =>router.push("/account/login")} className=' m-2 rounded underline  pl-2 pr-2  cursor-pointer hover:text-white'>Login</p>
                                     {/* <p onClick={() => { router.push('/account/register') }} className='m-1 underline rounded   pl-2 pr-2  cursor-pointer hover:text-white'>Register</p> */}
                                 </div>
                             }

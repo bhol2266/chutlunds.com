@@ -2,18 +2,20 @@ import { setCookie } from "cookies-next";
 import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import db from "../../firebase";
 
-async function saveUserProfile(firstName, lastName, email, hashpass, verified, country, loggedIn, membership, keywords) {
+async function saveUserProfile(firstName, lastName, email,profilePic, hashpass, verified, country, loggedIn, membership, keywords) {
     const data = {
         firstName,
         lastName,
         email,
+        profilePic,
         hashpass,
         verified,
         country,
         loggedIn,
         membership,
-        keywords
-    };
+        keywords,
+        timestamp: Date.now()   
+     };
 
     const documentId = email; // You can specify a custom document ID or let Firestore generate one
 

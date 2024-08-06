@@ -9,6 +9,8 @@ import VideoState from '../context/videos/VideoState';
 import '../styles/globals.css';
 import '../styles/nProgress.css';
 import Banner_for_chutlund2 from '../components/Banner_for_chutlund2';
+import { SessionProvider } from 'next-auth/react';
+
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -28,7 +30,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="Trafficstars" content="48702" />
         <meta name="exoclick-site-verification" content="6b1112fe173bdf782d96975e70bd4b95" />
         <meta name="6a97888e-site-verification" content="80bd73765fca365d8238dc1ccbdd975f" />
-        
+
         <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -36,7 +38,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-        
+
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -60,17 +62,21 @@ function MyApp({ Component, pageProps }) {
         gtag('config', 'G-6JFQKLE3DK');`}
       </Script>
 
-      <AuthContextProvider>
-        <VideoState>
-          <Navbar />
-          <Banner_for_chutlund2 />
-          <div className={`${currentRoute == "/membership" ? "" : "basicMargin"}`}>
-            <Component {...pageProps} />
-          </div>
-          <hr />
-          {currentRoute != "/membership" && <Footer />}
-        </VideoState>
-      </AuthContextProvider>
+      <SessionProvider session={pageProps.session}>
+
+        <AuthContextProvider>
+          <VideoState>
+            <Navbar />
+            <Banner_for_chutlund2 />
+            <div className={`${currentRoute == "/membership" ? "" : "basicMargin"}`}>
+              <Component {...pageProps} />
+            </div>
+            <hr />
+            {currentRoute != "/membership" && <Footer />}
+          </VideoState>
+        </AuthContextProvider>
+      </SessionProvider>
+
     </>
   );
 }
