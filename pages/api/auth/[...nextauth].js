@@ -41,15 +41,10 @@ export default NextAuth({
             session.user.id = token.sub;
             return session;
         },
-        // async redirect({ url, baseUrl }) {
-        //     // Redirect to a specific page after sign-in
-        //     // For example, redirect to the home page or a user-specific page
-        //     const envBaseUrl = process.env.FRONTEND_URL || baseUrl;
-        //     if (url.startsWith(envBaseUrl)) {
-        //         return url;
-        //     }
-        //     // Default redirect to home page
-        //     return envBaseUrl;
-        // },
+        
+        async redirect({ url, baseUrl }) {
+            // Redirect to the last page the user was on before signing in
+            return url.startsWith(baseUrl) ? url : baseUrl;
+        },
     },
 });
