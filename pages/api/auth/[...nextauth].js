@@ -41,9 +41,12 @@ export default NextAuth({
             session.user.id = token.sub;
             return session;
         },
-        
+
         async redirect({ url, baseUrl }) {
             // Redirect to the last page the user was on before signing in
+            console.log("url",url);
+            console.log("baseUrl",baseUrl);
+            
             return url.startsWith(baseUrl) ? url : baseUrl;
         },
     },
