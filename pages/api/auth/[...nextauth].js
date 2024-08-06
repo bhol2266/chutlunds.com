@@ -44,11 +44,12 @@ export default NextAuth({
         async redirect({ url, baseUrl }) {
             // Redirect to a specific page after sign-in
             // For example, redirect to the home page or a user-specific page
-            if (url.startsWith(baseUrl)) {
+            const envBaseUrl = process.env.FRONTEND_URL || baseUrl;
+            if (url.startsWith(envBaseUrl)) {
                 return url;
             }
             // Default redirect to home page
-            return baseUrl;
+            return envBaseUrl;
         },
     },
 });
