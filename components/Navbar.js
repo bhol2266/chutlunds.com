@@ -238,7 +238,7 @@ function Navbar() {
                                                 }
 
                                                 {user &&
-                                                    <h2 className='font-Opensans text-white  text-[14px] cursor-pointer text-center font-semibold my-2'>{user.email}</h2>
+                                                    <h2 className='font-Opensans text-semiblack  text-[12px] cursor-pointer text-center font-semibold my-2'>{user.email}</h2>
                                                 }
 
 
