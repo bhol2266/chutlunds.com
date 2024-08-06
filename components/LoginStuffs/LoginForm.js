@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserAuth } from "../../context/AuthContext";
 import videosContext from '../../context/videos/videosContext';
 import { signIn } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 
 
 
@@ -23,6 +24,14 @@ export const LoginForm = () => {
     const [password, setpassword] = useState('')
     const [message, setmessage] = useState('');
     const [Country, setCountry] = useState('');
+
+    const { data: session } = useSession();
+
+    useEffect(() => {
+        if (session) {
+            router.push("/");
+        } 
+    }, [session]);
 
 
 
