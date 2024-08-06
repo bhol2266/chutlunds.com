@@ -44,9 +44,7 @@ export const LoginForm = () => {
 
 
     const SignInButton = async (auth_provider) => {
-        signIn(auth_provider, {
-            callbackUrl:"/"// Pass your custom route
-        });
+        signIn(auth_provider);
     }
 
     const handleSignOut = async () => {
