@@ -6,6 +6,7 @@ import { BeatLoader } from 'react-spinners';
 import Pagination from '../../../../components/Pagination';
 import Header from '../../../../components/Pornstar/Header';
 import Videos from "../../../../components/Videos";
+import pornstarNameList from "../../../../JsonData/pornstarlist/alldata.json"
 
 import { Scrape_Video_Item_Pornstar } from '../../../../config/Scrape_Video_Item';
 
