@@ -10,6 +10,7 @@ import '../styles/globals.css';
 import '../styles/nProgress.css';
 import Banner_for_chutlund2 from '../components/Banner_for_chutlund2';
 import { SessionProvider } from 'next-auth/react';
+import { LoginModal } from '../components/ModalLogin';
 
 
 function MyApp({ Component, pageProps }) {
@@ -63,17 +64,18 @@ function MyApp({ Component, pageProps }) {
       </Script>
 
 
-        <AuthContextProvider>
-          <VideoState>
-            <Navbar />
-            <Banner_for_chutlund2 />
-            <div className={`${currentRoute == "/membership" ? "" : "basicMargin"}`}>
-              <Component {...pageProps} />
-            </div>
-            <hr />
-            {currentRoute != "/membership" && <Footer />}
-          </VideoState>
-        </AuthContextProvider>
+      <AuthContextProvider>
+        <VideoState>
+          <Navbar />
+          <Banner_for_chutlund2 />
+          <LoginModal />
+          <div className={`${currentRoute == "/membership" ? "" : "basicMargin"}`}>
+            <Component {...pageProps} />
+          </div>
+          <hr />
+          {currentRoute != "/membership" && <Footer />}
+        </VideoState>
+      </AuthContextProvider>
 
     </>
   );
