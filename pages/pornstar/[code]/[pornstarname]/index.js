@@ -15,14 +15,14 @@ function Index({ video_collection, pages, pornstarInformation }) {
     const [imageURL, setimage] = useState('');
 
 
-    // useEffect(() => {
-    //     // Assuming pornstarNameList is available
-    //     pornstarNameList.filter(pornstar => {
-    //         if (pornstarname.toLowerCase() === pornstar.Name.toLowerCase().replace(/ /g, "+")) {
-    //             setimage(pornstar.thumbnail);
-    //         }
-    //     });
-    // }, [pornstarname]);
+    useEffect(() => {
+        // Assuming pornstarNameList is available
+        pornstarNameList.filter(pornstar => {
+            if (pornstarname.toLowerCase() === pornstar.Name.toLowerCase().replace(/ /g, "+")) {
+                setimage(pornstar.thumbnail);
+            }
+        });
+    }, [pornstarname]);
 
     if (router.isFallback) {
         return (
