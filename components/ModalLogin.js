@@ -60,7 +60,7 @@ export const LoginModal = () => {
                 <div className="bg-white rounded-lg  w-full mx-4 sm:w-4/5 md:w-3/5 lg:w-2/5 xl:w-[450px] sm:mx-auto relative">
                     {/* Close Button */}
 
-                    <img src="/membership/membership_bg.png" className="-z-10 absolute top-0 left-0 object-cover w-screen h-full brightness-75 " alt="" />
+                    // <img src="/membership/membership_bg.png" className="-z-10 absolute top-0 left-0 object-cover w-screen h-full brightness-75 " alt="" />
 
                     <button
                         className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
