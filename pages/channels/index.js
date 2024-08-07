@@ -126,8 +126,18 @@ function Index({ video_collection, trendingChannels, newChannels }) {
 
         <div className="">
             <Head>
+    
                 <title>Hot Porn Channels and Exclusive Adult Videos - Chutlunds</title>
-                <meta name="description" content="Watch hot porn channels and sex videos for free only on Chutlunds." />
+                <meta name="description" content="The Hottest Japanese Porn Movies Divided By Channels! Discover on JAV HD the Best XXX JAV Channels & Free Sex Scenes: JAVHD, CARIBBEANCOM, JAVHUB, JAPANHDV" />
+                <meta name="keywords" content="porn, xxx, streaming porn, HD porn, HD adult videos, HD pussy videos, sex movies, chutlunds" />
+                <meta property="og:title" content="Hot Porn Channels and Exclusive Adult Videos - Chutlunds" />
+                <meta property="og:description" content="The Hottest Japanese Porn Movies Divided By Channels! Discover on JAV HD the Best XXX JAV Channels & Free Sex Scenes: JAVHD, CARIBBEANCOM, JAVHUB, JAPANHDV" />
+                <meta name="twitter:title" content="Hot Porn Channels and Exclusive Adult Videos - Chutlunds" />
+                <meta name="twitter:description" content="The Hottest Japanese Porn Movies Divided By Channels! Discover on JAV HD the Best XXX JAV Channels & Free Sex Scenes: JAVHD, CARIBBEANCOM, JAVHUB, JAPANHDV" />
+                <link rel="canonical" href={`https://chutlunds.com/channels`} />
+
+
+
 
             </Head>
 
@@ -159,7 +169,7 @@ function Index({ video_collection, trendingChannels, newChannels }) {
 
 
             <div className="mt-4 mb-2 lg:mb-4 2xl:my-6 flex justify-between items-center  rounded shadow-md shadow-blue-100 text-white  p-2 px-3  w-full">
-                <h2 className='text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium'>Trending Channels</h2>
+                <h1 className='text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium'>Trending Channels</h1>
             </div>
 
 
@@ -189,7 +199,7 @@ function Index({ video_collection, trendingChannels, newChannels }) {
             </div>
 
             <div className="mt-4 mb-2 lg:mb-4 2xl:my-6 flex justify-between items-center  rounded shadow-md shadow-blue-100 text-white  p-2 px-3  w-full">
-                <h2 className='text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium'>New Channels</h2>
+                <p className='text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium'>New Channels</p>
             </div>
             <div className={`grid grid-cols-4 py-3 sm:grid-cols-4 gap-3 md:gap-5 lg:gap-4  md:grid-cols-6 2xl:grid-cols-7`}>
                 {newChannels.map(channelName => {
@@ -214,7 +224,7 @@ function Index({ video_collection, trendingChannels, newChannels }) {
             </div>
 
             <div className="mt-4 mb-2 lg:mb-4 2xl:my-6 flex justify-between items-center  rounded shadow-md shadow-blue-100 text-white  p-2 px-3  w-full">
-                <h2 className='text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium'>All channels</h2>
+                <p className='text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium'>All channels</p>
             </div>
 
 
@@ -254,7 +264,7 @@ function Index({ video_collection, trendingChannels, newChannels }) {
             }
 
             <div className="my-4 mb-2 lg:mb-4 2xl:my-6 flex justify-between items-center  rounded shadow-md shadow-blue-100 text-white  p-2 px-3  w-full">
-                <h2 className='text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium'>🔥 Hot New Videos</h2>
+                <p className='text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium'>🔥 Hot New Videos</p>
             </div>
 
             <Videos data={video_collection} />

@@ -29,15 +29,6 @@ function PornstarQuery({ video_collection, pages, query, keyword, currentPage, f
     <>
 
 
-      <Head>
-        <title>{`${capitalizeFirstLetter(keyword.replace('+', " ").replace("+", " "))} Porn Videos - Chutlunds`}</title>
-        <meta name="description"
-          content={`Check out the best porn videos, images, gifs and playlists from pornstar ${capitalizeFirstLetter(keyword.replace('+', " ").replace("+", " "))}. Browse through the content she uploaded herself on her verified pornstar profile, only on Chutlunds.com. Subscribe to ${capitalizeFirstLetter(keyword.replace('+', " ").replace("+", " "))}'s feed and add her as a friend. See ${capitalizeFirstLetter(keyword.replace('+', " ").replace("+", " "))} naked in an incredible selection of hardcore FREE sex movies.`} />
-      </Head>
-
-
-
-
       <div>
 
         <Header keyword={keyword} pageNumber={currentPageNumberURL} filteredObjsArrayProps={filteredObjsArray} />

@@ -38,8 +38,14 @@ function Index({ video_collection, pages, channel_name, channel_subscriber, chan
 
             <Head>
                 <title>{`${capitalizeFirstLetter(channel_name.replace('+', " ").replace("+", " "))} Porn Videos - Chutlunds`}</title>
-                <meta name="description"
-                    content={`Check out the best porn videos, images, gifs and playlists from pornstar ${capitalizeFirstLetter(channel_name.replace('+', " ").replace("+", " "))}. Browse through the content she uploaded herself on her verified pornstar profile, only on Chutlunds.com. Subscribe to ${capitalizeFirstLetter(channel_name.replace('+', " ").replace("+", " "))}'s feed and add her as a friend. See ${capitalizeFirstLetter(channel_name.replace('+', " ").replace("+", " "))} naked in an incredible selection of hardcore FREE sex movies.`} />
+                <meta name="description" content={`Check out the best porn videos and playlists from channel ${capitalizeFirstLetter(channel_name.replace('+', " ").replace("+", " "))}`} />
+                <meta name="keywords" content="porn, xxx, streaming porn, HD porn, HD adult videos, HD pussy videos, sex movies, chutlunds" />
+                <meta property="og:title" content={`${capitalizeFirstLetter(channel_name.replace('+', " ").replace("+", " "))} Porn Videos - Chutlunds`} />
+                <meta property="og:description" content={`Check out the best porn videos and playlists from channel ${capitalizeFirstLetter(channel_name.replace('+', " ").replace("+", " "))}`} />
+                <meta name="twitter:title" content={`${capitalizeFirstLetter(channel_name.replace('+', " ").replace("+", " "))} Porn Videos - Chutlunds`} />
+                <meta name="twitter:description" content={`Check out the best porn videos and playlists from channel ${capitalizeFirstLetter(channel_name.replace('+', " ").replace("+", " "))}`} />
+                <link rel="canonical" href={`https://chutlunds.com/channels/${code}/${channelname}`} />
+
             </Head>
 
 
@@ -60,7 +66,7 @@ function Index({ video_collection, pages, channel_name, channel_subscriber, chan
                     ></img>
 
                     <div className=' mx-4 font-inter flex flex-col m-auto' >
-                        <h2 className='text-lg lg:text-xl 2xl:text-2xl font-poppins text-theme my-1'> {capitalizeFirstLetter(channel_name.replace(/\+/g, " "))}</h2>
+                        <h2 className='text-lg lg:text-xl 2xl:text-2xl font-poppins text-theme my-1'> {capitalizeFirstLetter(channel_name.replace(/\+/g, " "))} Channel</h2>
 
                         <div className='cursor-pointer flex items-center justify-center space-x-2 border-[1px] border-gray-300 text-theme px-3 lg:px-5  p-1.5 shadow-md rounded-md hover:bg-theme hover:text-white'>
                             <PlusIcon className='h-4 lg:h-5 text-red-500' />
@@ -68,7 +74,7 @@ function Index({ video_collection, pages, channel_name, channel_subscriber, chan
                             <p className='text-sm lg:text-md 2xl:text-lg font-poppins '>{channel_subscriber}</p>
                         </div>
 
-                        <h2 className=' text-xs lg:text-sm 2xl:text-md font-poppins  text-gray-700 my-2 pl-1'>Channel by : {channel_by}</h2>
+                        <p className=' text-xs lg:text-sm 2xl:text-md font-poppins  text-gray-700 my-2 pl-1'>Channel by : {channel_by}</p>
 
                     </div>
                 </div>

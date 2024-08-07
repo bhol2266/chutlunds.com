@@ -229,7 +229,9 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps, co
 
     }
 
-
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
 
     return (
@@ -238,7 +240,7 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps, co
 
             <div className='flex items-center md:pr-10 pt-2  sm:p-1 px-2 md:px-3 '>
                 <div className='flex  '>
-                    <h1 className='text-xl md:text-2xl pl-1 pr-1 font-semibold text-red-900 font-inter my-1  '>{keyword} sex videos</h1>
+                    <h1 className='text-xl md:text-2xl pl-1 pr-1 font-semibold text-semiblack font-inter my-1  '>{capitalizeFirstLetter(keyword)} sex videos</h1>
 
                 </div>
                 <p className='text-md md:text-xl  pl-1 pr-1  flex-grow font-inter  text-right text-gray-900 '>{`Page-${pageNumber}`}</p>

@@ -89,6 +89,14 @@ function Index() {
             <Head>
                 <title>Top Pornstars and Models In Full-Length Free Sex Videos | Chutlunds</title>
                 <meta name="description" content="Catch the most popular PORNSTARS and MODELS, right here on the biggest FREE PORN tube. Chutlunds.com has a bevy of luscious babes that are naked for you 24/7!" />
+
+                <meta name="keywords" content="porn, xxx, streaming porn, HD porn, HD adult videos, HD pussy videos, sex movies, chutlunds" />
+                <meta property="og:title" content="Top Pornstars and Models In Full-Length Free Sex Videos | Chutlunds" />
+                <meta property="og:description" content="Catch the most popular PORNSTARS and MODELS, right here on the biggest FREE PORN tube. Chutlunds.com has a bevy of luscious babes that are naked for you 24/7!" />
+                <meta name="twitter:title" content="Top Pornstars and Models In Full-Length Free Sex Videos | Chutlunds" />
+                <meta name="twitter:description" content="Catch the most popular PORNSTARS and MODELS, right here on the biggest FREE PORN tube. Chutlunds.com has a bevy of luscious babes that are naked for you 24/7!" />
+                <link rel="canonical" href={`https://chutlunds.com/pornstar`} />
+
             </Head>
 
 
@@ -103,7 +111,7 @@ function Index() {
             <Outstreams />
             <Popunder />
 
-            <h2 className='flex-grow text-lg  my-1 p-2 font-semibold font-inter'>Trending Pornstars</h2>
+            <h1 className='flex-grow text-lg  my-1 p-2 font-semibold font-inter'>Trending Pornstars</h1>
 
 
             <div className='flex my-1 pr-2 md:w-3/5 md:mx-auto'  >
@@ -117,17 +125,17 @@ function Index() {
                     return (
 
                         <Link key={pornstar.Name} href={`/pornstar/${posrnstar_Code}/${pornstar.Name.trim().toLowerCase().replace(/ /g, "+")}`}>
-                                <div className='  relative hover:scale-105 transform transition duration-150 ' >
-                                    <img
-                                        className={`object-cover w-full rounded  `}
-                                        src={pornstar.thumbnail}
-                                        alt={pornstar.Name}
-                                        loading='lazy'
-                                    ></img>
+                            <div className='  relative hover:scale-105 transform transition duration-150 ' >
+                                <img
+                                    className={`object-cover w-full rounded  `}
+                                    src={pornstar.thumbnail}
+                                    alt={pornstar.Name}
+                                    loading='lazy'
+                                ></img>
 
-                                    <h2 className='rounded-b absolute text-sm lg:text-lg font-inter p-1 bottom-0 w-full text-center  z-10 text-white bg-transparent bg-black bg-opacity-50'>{pornstar.Name}</h2>
+                                <h2 className='rounded-b absolute text-sm lg:text-lg font-inter p-1 bottom-0 w-full text-center  z-10 text-white bg-transparent bg-black bg-opacity-50'>{pornstar.Name}</h2>
 
-                                    {/* 
+                                {/* 
                                     <div className='p-0.5 lg:p-1 md:space-y-1 items-center text-sm md:text-lg absolute bottom-0 bg-transparent bg-black bg-opacity-50 text-white right-0 left-0' >
                                         <h2 className='font-semibold ml-0.5 lg:ml-2  lg:text-[22px]' > {pornstar.Name}</h2>
                                         <div className='flex flex-row items-center justify-start '>
@@ -139,7 +147,7 @@ function Index() {
                                             <h2 className='ml-0.5 text-xs lg:text-[16px]' > {pornstar.numberofVideos}</h2>
                                         </div>
                                     </div> */}
-                                </div>
+                            </div>
                         </Link>
                     )
                 })}
@@ -160,16 +168,16 @@ function Index() {
                             const posrnstar_Code = pornstar.href.substring(1, pornstar.href.indexOf('/pornstar'))
                             return (
                                 <Link key={pornstar.Name} href={`/pornstar/${posrnstar_Code}/${pornstar.Name.trim().toLowerCase().replace(/ /g, "+")}`}>
-                                        <div className='  relative hover:scale-105 transform transition duration-150 ' >
-                                            <img
-                                                className={`object-cover w-full rounded  `}
-                                                src={pornstar.thumbnail}
-                                                alt={pornstar.Name}
-                                                loading='lazy'
-                                            ></img>
+                                    <div className='  relative hover:scale-105 transform transition duration-150 ' >
+                                        <img
+                                            className={`object-cover w-full rounded  `}
+                                            src={pornstar.thumbnail}
+                                            alt={pornstar.Name}
+                                            loading='lazy'
+                                        ></img>
 
-                                            <h2 className='rounded-b absolute text-sm lg:text-lg font-inter p-1 bottom-0 w-full text-center  z-10 text-white bg-transparent bg-black bg-opacity-50'>{pornstar.Name}</h2>
-                                        </div>
+                                        <h2 className='rounded-b absolute text-sm lg:text-lg font-inter p-1 bottom-0 w-full text-center  z-10 text-white bg-transparent bg-black bg-opacity-50'>{pornstar.Name}</h2>
+                                    </div>
                                 </Link>
                                 // items[i].charAt(0).toUpperCase() + items[i].substring(1);
                             )
