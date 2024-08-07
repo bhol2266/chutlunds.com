@@ -28,7 +28,7 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
     });
 
 
-    const { user } = UserAuth();
+    const { user, setLoginModalVisible } = UserAuth();
 
     const videoPlayerRef = useRef(null)
     const [videoDuration, setVideoDuration] = useState(0);
@@ -98,7 +98,7 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
 
         if (!user) {
             setCookie('videoRoute', window.location.href);
-            router.push('/account/login')
+            setLoginModalVisible(true)
         } else {
             router.push(VideoSrc)
         }
@@ -199,7 +199,7 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
 
                     <div className='flex items-center space-x-1'>
                         <ClockIcon className='h-6 hover:scale-100 text-red-700 md:h-9' />
-                        <p className=' font-bold'>{video_details.duration.substring(0,5)}</p>
+                        <p className=' font-bold'>{video_details.duration.substring(0, 5)}</p>
                     </div>
                     <div className='flex items-center space-x-1'>
                         <EyeIcon className="h-6 text-blue-600  md:h-9" />
@@ -363,9 +363,9 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
                                 src={shot.url}
 
                             ></img>
-<strong className='absolute bottom-0 right-0 text-white m-2 bg-black bg-opacity-50 font-inter rounded text-sm px-1'>
-    {shot.seekTime}
-</strong>
+                            <strong className='absolute bottom-0 right-0 text-white m-2 bg-black bg-opacity-50 font-inter rounded text-sm px-1'>
+                                {shot.seekTime}
+                            </strong>
                         </div>
                     )
                 })}
