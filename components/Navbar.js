@@ -38,7 +38,7 @@ function classNames(...classes) {
 
 function Navbar() {
 
-    const { user, setUser, logOut } = UserAuth();
+    const { user, setUser } = UserAuth();
 
 
 
@@ -64,10 +64,11 @@ function Navbar() {
     useEffect(() => {
         // Check for the email cookie using cookies-next
         const email = getCookie('email');
+        
         if (email) {
-            setUser(true);
+            setUser(email);
         } else {
-            setUser(false);
+            setUser(null);
         }
     }, []);
 
@@ -237,7 +238,7 @@ function Navbar() {
                                                 }
 
                                                 {user &&
-                                                    <h2 className='font-Opensans text-semiblack  text-[12px] cursor-pointer text-center font-semibold my-2'>{user.email}</h2>
+                                                    <h2 className='font-Opensans text-semiblack  text-[12px] cursor-pointer text-center font-semibold my-2'>{user}</h2>
                                                 }
 
 
@@ -473,7 +474,7 @@ function Navbar() {
 
                             {user &&
                                 <div className='flex items-center space-x-2 pr-12 font-inter'>
-                                    <p className=' m-2 rounded underline   pl-2 pr-2 cursor-pointer '>{user.email}</p>
+                                    <p className=' m-2 rounded underline   pl-2 pr-2 cursor-pointer '>{user}</p>
                                     <button className='font-inter bg-green-500 px-3 py-1 rounded' onClick={signOut_method}>Logout</button>
                                 </div>
                             }
