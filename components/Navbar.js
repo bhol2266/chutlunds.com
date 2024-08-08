@@ -26,7 +26,7 @@ var navigation = [
     { name: 'Pornstars', href: '/pornstar', current: false },
     { name: 'Channels', href: '/channels', current: false },
     { name: 'Sex Chat', href: 'https://play.google.com/store/apps/details?id=com.bhola.livevideochat4&hl=en-IN', current: false },
-    // { name: 'Join Now', href: '/membership', current: false },
+    { name: 'ThePornDude', href: 'https://theporndude.com', current: false },
     // { name: 'Live Cams', href: "https://chaturbate.com/in/?tour=LQps&campaign=3v7pk&track=default&room=ukdevelopers", current: false },
     // { name: 'Meet & Fuck', href: "https://chaturbate.com/in/?tour=LQps&campaign=3v7pk&track=default&room=ukdevelopers", current: false },
 ]
@@ -290,7 +290,7 @@ function Navbar() {
                                         {navigation.map((item) => (
 
 
-                                            <a href={item.href} key={item.name} >
+                                            <a href={item.href} key={item.name} rel="nofollow">
                                                 <Disclosure.Button
                                                     as="a"
                                                     className={classNames(
@@ -498,7 +498,7 @@ function Navbar() {
 
                         return (
                             <Link href={item.href} legacyBehavior key={item.name}>
-                                <a
+                                <a rel="nofollow"
                                     className={`text-xl 2xl:text-2xl font-semibold text-white cursor-pointer p-1 border-b-4 
                     ${isActive ? 'border-[#FFBB00]' : 'border-transparent hover:border-[#FFBB00]'}
                     transition-colors duration-300`}

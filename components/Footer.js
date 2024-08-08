@@ -5,7 +5,7 @@ import videosContext from '../context/videos/videosContext';
 
 
 function Footer() {
-  
+
     //Use Context
     const context = useContext(videosContext);
     const { spinnerLoading } = context;
@@ -60,9 +60,15 @@ function Footer() {
                         href={'/dmca'}
                     >
                         <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   ">DMCA / Copyright Claims</p>
-
                     </Link>
+
+                    
+                <a className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   " href="https://theporndude.com/" rel="nofollow">ThePornDude
+                </a>
                 </div>
+
+
+
 
             </div>
 
