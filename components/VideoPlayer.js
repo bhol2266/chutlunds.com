@@ -96,12 +96,8 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
 
     const download = () => {
 
-        if (!user) {
-            setCookie('videoRoute', window.location.href);
-            setLoginModalVisible(true)
-        } else {
-            router.push(VideoSrc)
-        }
+router.push(VideoSrc)
+
     }
 
     const switchToScene = (obj) => {
