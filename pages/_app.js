@@ -12,7 +12,7 @@ import Banner_for_chutlund2 from '../components/Banner_for_chutlund2';
 import { SessionProvider } from 'next-auth/react';
 import { LoginModal } from '../components/ModalLogin';
 
-
+ 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const currentRoute = router.pathname;
