@@ -314,20 +314,39 @@ function Navbar() {
 
                     <form className=' w-full flex items-center' onSubmit={goSearch}>
 
-                        <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='flex-grow  outline-none text-inter text-sm border-gray-300 rounded pl-2  h-[35px] text-semiblack' type="text" placeholder='Search your favourite porn video...' />
+                        <form className="flex w-full items-center" onSubmit={goSearch}>
+                            <div className="flex-grow mr-4">
+                                <input
+                                    value={searchKey}
+                                    onChange={getSuggestedTags}
+                                    ref={searchInputref}
+                                    className="w-full h-[35px] px-4 text-sm text-white border-[0.8px] border-[#E5E5E5] rounded-[15px] bg-transparent outline-none"
+                                    type="text"
+                                    placeholder="Search your favourite videos"
+                                />
+                            </div>
+                            <div className="w-[18%]">
+                                <button
+                                    type="submit"
+                                    className="w-full p-2 text-sm text-white bg-button rounded-[15px] hover:bg-button_hover"
+                                >
+                                    Search
+                                </button>
+                            </div>
+                        </form>
 
-                        <button type="submit" className='bg-button  hover:bg-button_hover text-white text-sm p-2 pl-4 pr-4 m-1 rounded '>Search</button>
+
 
                     </form>
                     {showSuggested &&
-                        <div className='bg-white max-h-[300px] rounded z-50  overflow-scroll scrollbar-hide'>
+                        <div className='bg-semiblack max-h-[300px] mt-1.5 z-50  overflow-scroll scrollbar-hide'>
                             {tags.map(tag => {
                                 return (
                                     <div key={tag} onClick={() => {
                                         setsearchKey(tag); setshowSuggested(false); router.push(`/search/${tag.trim()}`)
-                                    }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-gray-200 pl-4'>
+                                    }} className='flex items-center space-x-2 p-2  cursor-pointer hover:bg-gray-200 pl-4 hover:rounded-[15px] hover:text-semiblack text-white'>
                                         {/* <img src='/login/history.png' className='h-[20px]' /> */}
-                                        <p className='text-[12px] fontinter text-semiblack'>{tag}</p>
+                                        <p className='text-[13px] fontinter  '>{tag}</p>
 
                                     </div>
                                 )
@@ -407,7 +426,7 @@ function Navbar() {
 
 
                         <a target="_blank" href={countryBlocked ? "https://go.xxxiijmp.com/?userId=9ea31ff27db3b7242eabcc2d26ac0eaf38f093c68528e70c2e7f5a72df55c42e" : "https://chaturbate.com/in/?tour=LQps&campaign=3v7pk&track=default&room=ukdevelopers"} rel="noopener noreferrer">
-                            <div className='pl-8  flex  items-center 
+                            <div className='pl-2  flex  items-center 
                              cursor-pointer hover:scale-105  transition-all space-x-2'>
                                 <img
                                     src='/livesex.png'
@@ -421,53 +440,56 @@ function Navbar() {
                     </div>
 
 
-                    <div className='flex space-x-4 items-center justify-end font-theme'>
-                        <form className=' flex items-center ' onSubmit={goSearch}>
+                    <form className=' flex items-center ' onSubmit={goSearch}>
 
 
 
-                            <div className='relative'>
-                                <input value={searchKey} onChange={getSuggestedTags} ref={searchInputref} className='w-[250px] flex-grow border-2 outline-none border-gray-300 rounded pl-2 h-10  text-sm text-semiblack' type="text" placeholder='Search your favourite porn video...' />
-
-                                {showSuggested &&
-
-                                    <div className='bg-white rounded absolute top-[44px] left-0 right-0 max-h-[300px] z-50 overflow-hidden overflow-scroll scrollbar-hide'>
-                                        {tags.map(tag => {
-                                            return (
-                                                <div key={tag} onClick={() => {
-                                                    setsearchKey(tag); setshowSuggested(false); router.push(`/search/${tag.trim()}`)
-                                                }} className='flex items-center space-x-2 p-2 border-[1px] border-gray-300 cursor-pointer hover:bg-gray-200 pl-4'>
-                                                    <p className='text-[12px] fontinter text-semiblack'>{tag}</p>
-
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                }
+                        <div className='relative select-none'>
+                            <div className="flex  bg-semiblack items-center w-[300px] 2xl:w-[700px]  border-[0.8px] border-[#E5E5E5] rounded-[30px] p-1 px-4">
+                                <SearchIcon className="h-6 text-[#E5E5E5]" />
+                                <input
+                                    value={searchKey}
+                                    onChange={getSuggestedTags}
+                                    ref={searchInputref}
+                                    className="flex-grow bg-transparent outline-none rounded-[15px] pl-2 h-10 text-[16px] text-white"
+                                    type="text"
+                                    placeholder="Search your favourite videos"
+                                />
                             </div>
-                            <button type="submit" className='ml-4 bg-button  hover:bg-button_hover text-white text-sm h-10  pl-4 pr-4 m-1 rounded '>Search</button>
+                            {showSuggested &&
+                                <div className=' rounded-[20px] absolute top-[55px] left-0 right-0 max-h-[300px] z-50 overflow-hidden overflow-scroll scrollbar-hide bg-semiblack'>
+                                    {tags.map(tag => {
+                                        return (
+                                            <div key={tag} onClick={() => {
+                                                setsearchKey(tag); setshowSuggested(false); router.push(`/search/${tag.trim()}`)
+                                            }} className='flex items-center space-x-2 py-2  px-[50px] cursor-pointer hover:bg-gray-200  text-white hover:text-semiblack'>
+                                                <p className='text-[15px] font-inter '>{tag}</p>
+
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            }
+                        </div>
+                        <button
+                            type="submit"
+                            className={`ml-4 bg-button hover:bg-button_hover text-white text-sm h-10 pl-4 pr-4 m-1 rounded transition-all duration-300 ease-in-out ${searchKey ? 'opacity-100 visible' : 'opacity-0 invisible'
+                                }`}
+                        >
+                            Search
+                        </button>
 
 
+                    </form>
+                    <div className='flex space-x-4 items-center justify-end font-theme '>
 
-                        </form>
-                        {/* <button className='bg-red-800  hover:bg-red-900 text-white text-sm h-10  pl-4 pr-4 m-1 rounded '>Upload</button> */}
-
-
-                        {/* <div >
-                            <button className='p-1 pl-2 pr-2 border-2 border-black  rounded-l'>
-                                <SunIcon onClick={enableLightMode} className='h-8 w-8 text-white' />
-                            </button>
-                            <button className='p-1 pl-2 pr-2 border-2 border-black  rounded-r'>
-                                <MoonIcon onClick={enableDarkMode} className='h-8 w-8' />
-                            </button>
-                        </div> */}
 
                         <div className='flex items-center '>
                             {/* <UserIcon className='h-8 w-8' /> */}
 
                             {!user &&
                                 <div className='flex items-center space-x-2 pr-12 font-inter'>
-                                    <p onClick={() => setLoginModalVisible(true)} className=' m-2 rounded underline  pl-2 pr-2  cursor-pointer hover:text-white block_popunder'>Login</p>
+                                    <p onClick={() => setLoginModalVisible(true)} className=' m-2 rounded hover:text-semiblack hover:bg-gray-200  px-8 rounded-[22px] py-[5px]  cursor-pointer hover:text-white block_popunder border-[0.8px] border-[#E5E5E5] '>Login</p>
                                     {/* <p onClick={() => { router.push('/account/register') }} className='m-1 underline rounded   pl-2 pr-2  cursor-pointer hover:text-white'>Register</p> */}
                                 </div>
                             }
