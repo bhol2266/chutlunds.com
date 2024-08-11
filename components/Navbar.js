@@ -494,7 +494,7 @@ function Navbar() {
                             {user &&
                                 <div className='flex items-center space-x-2  font-inter'>
                                     <p className='m-2 rounded underline pl-2 pr-2 cursor-pointer'>{user}</p>
-                                    <button className='font-inter bg-green-500 py-[5px] px-8  rounded-[22px]' onClick={signOut_method}>Logout</button>
+                                    <button className='font-inter bg-green-500 py-[5px] px-8  rounded-[22px] mr-3' onClick={signOut_method}>Logout</button>
                                 </div>
                             }
                             <Link href='/membership'>
