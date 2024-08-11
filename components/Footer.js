@@ -12,79 +12,105 @@ function Footer() {
 
     return (
 
-        <div className={`font-footer mx-auto bg-theme  ${spinnerLoading ? "hidden" : ""}  mt-10 text-white`}>
+        <div className={`xl:px-[150px] 2xl:px-[250px] font-footer p-8 sm:px-[70px] mx-auto bg-semiblack  ${spinnerLoading ? "hidden" : ""}  mt-10 text-white select-none`}>
 
-            < div className=" w-4/5 mx-auto p-1 mt-1 flex items-center justify-between  ">
-                <div className=" flex flex-wrap justify-between min-w-full">
-                    <Link
-                        passHref={true}
-                        href={'/contact'}
-                    >
-                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   ">Contact / support</p>
-                    </Link>
+            <p className='text-white font-bold text-[20px] text-center lg:hidden'>Get Access to Latest Videos  </p>
 
+            <Link href='/membership'>
+                <button className="lg:hidden bg-[#FFBB00] text-semiblack rounded-[22px] font-inter text-center mb-8 mt-4 px-[70px] p-3 m-1 text-sm block_popunder hover:scale-105 transition-transform duration-300 mx-auto block">
+                    GET MEMBERSHIP
+                </button>
+            </Link>
 
-                    <Link
-                        passHref={true}
-                        href={'/faq'}
-                    >
-                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   ">FAQ</p>
-
-                    </Link>
-                    <Link
-                        passHref={true}
-                        href={'/parentalcontrol'}
-                    >
-                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   ">Parental control</p>
-
-                    </Link>
-
-
-
-                    <Link
-                        passHref={true}
-                        href={'/terms'}
-                    >
-                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   ">Terms of use</p>
-
-                    </Link>
-                    <Link
-                        passHref={true}
-                        href={'/privacy'}
-                    >
-
-                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   ">2257 Statement & Privacy Policy</p>
-                    </Link>
-                    <Link
-                        passHref={true}
-                        href={'/dmca'}
-                    >
-                        <p className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   ">DMCA / Copyright Claims</p>
-                    </Link>
-
-                    
-                <a className="font-semibold  cursor-pointer text-sm sm:text-md md:text-lg hover:text-white   " href="https://theporndude.com/" rel="nofollow">ThePornDude
-                </a>
+            <div className='lg:flex justify-start '>
+                <div>
+                    <p className='text-white font-light text-[16px] text-left my-3 lg:text-[18px]'>Find your fetish among 40000 videos </p>
+                    <p className='text-white font-light text-[16px] text-left my-3 lg:text-[18px]'>Quality you deserve from Full HD - 4k </p>
+                    <p className='text-white font-light text-[16px] text-left my-3 lg:text-[18px]'>Discret your secure biling</p>
+                    <p className='text-white font-light text-[16px] text-left my-3 lg:text-[18px]'>Cancel your subscription anytime</p>
                 </div>
 
-
-
-
-            </div>
-
-            <div className='flex p-2 items-center justify-between  w-4/5 mx-auto'>
-                <p className='text-sm sm:text-md md:text-lg font-poppins font-bold'>© 2022 Chutlunds.com IS A FREE PORN VIDEOS</p>
-
-                <div className='p-2  rounded'>
-
-                    {/* <img
-                        src='./rta.png'
-                        height={80}
-                        width={80}
-                        alt='fdsg'
-                    ></img> */}
+                <div className='lg:ml-[120px] xl:ml-[200px]'>
+                    <p className='text-white font-light text-[16px] text-left my-3 lg:text-[18px]'>ChutLunds Originals exclusive content</p>
+                    <p className='text-white font-light text-[16px] text-left my-3 lg:text-[18px]'>Unlock 2708 channels in one subscription</p>
+                    <p className='text-white font-light text-[16px] text-left my-3 lg:text-[18px]'>Never get bored</p>
+                    <p className='text-white font-light text-[16px] text-left my-3 lg:text-[18px]'>Download thousands of videos</p>
                 </div>
             </div>
+
+
+
+            <Link href='/membership'>
+                <button className="lg:block bg-[#FFBB00] text-semiblack rounded-[22px] font-inter text-center mb-8 mt-4 px-[70px] p-3 m-1 text-md block_popunder hover:scale-105 transition-transform duration-300 hidden">
+                    GET MEMBERSHIP
+                </button>
+            </Link>
+
+
+            <hr className="border-t-[1px] border-[#AEABAB] my-4 lg:mb-8" />
+
+
+            <div className="flex flex-wrap  justify-between my-4">
+                <div className="w-1/2 lg:w-1/3  mb-4">
+                    <p className='font-semibold text-[#FFBB00] text-[17px] text-left mb-2 lg:text-[20px]'>General</p>
+                    <Link passHref={true} href={'/membership'}>
+                        <p className=' text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Join</p>
+                    </Link>
+                    <Link passHref={true} href={'/contact'}>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Member Sign in</p>
+                    </Link>
+                    <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Password Recovery</p>
+
+                    <a rel="nofollow" href='https://theporndude.com' >
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>ThePornDude</p>
+                    </a>
+
+                </div>
+
+                <div className="w-1/2 lg:w-1/3 mb-4">
+                    <p className='font-semibold text-[#FFBB00] text-[17px] text-left mb-2 lg:text-[20px]'>Legal</p>
+                    <Link passHref={true} href={'/terms'}>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Terms of use</p>
+                    </Link>
+                    <Link passHref={true} href={'/privacy'}>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Privacy Policy</p>
+                    </Link>
+                    <Link passHref={true} href={'/contact'}>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Cookies Policy</p>
+                    </Link>
+                    <Link passHref={true} href={'/parentalcontrol'}>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Parental Control</p>
+                    </Link>
+                </div>
+
+                <div className="w-1/2 lg:w-1/3">
+                    <p className='font-semibold text-[#FFBB00] text-[17px] text-left mb-2 lg:text-[20px]'>Help</p>
+                    <Link passHref={true} href={'/faq'}>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>FAQ</p>
+                    </Link>
+                    <Link passHref={true} href={'/contact'}>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Contact us</p>
+                    </Link>
+                    <Link passHref={true} href={'/contact'}>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Content removal</p>
+                    </Link>
+                    <Link passHref={true} href={'/parentalcontrol'}>
+                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Parental Control</p>
+                    </Link>
+                </div>
+            </div>
+
+            <hr className="hidden lg:block border-t-[1px] border-[#AEABAB] mb-4" />
+
+
+            <Link passHref={true} href={'/privacy'}>
+
+                <p className='text-white underline text-[16px] lg:hidden text-left my-3'>18 U.S.C 2257 Record-Keeping Requirement Compliance Statement</p>
+            </Link>
+
+
+            <p className='text-sm sm:text-md md:text-lg text-[#AEABAB] mt-8'>2021-2024 Chutlunds.com</p>
+
         </div>
 
     )
