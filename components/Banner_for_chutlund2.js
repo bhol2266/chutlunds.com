@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { getCookie, setCookie } from 'cookies-next';
+import { useEffect, useState } from 'react';
 import Flag from 'react-world-flags';
-import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 
 export default function Banner_for_chutlund2() {
   const [isVisible, setIsVisible] = useState(true);
