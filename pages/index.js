@@ -134,7 +134,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
       <div className="w-full overflow-x-auto whitespace-nowrap py-2  scrollbar-hide md:hidden select-none">
         {tags.map((tag, index) => (
-          <a key={tag.tag} href={`/search/${tag.tag.trim()}`} className="bg-[#DDE0E9] text-semiblack px-3 py-1.5 rounded-lg m-1 inline-block text-sm font-medium">
+          <a key={tag.tag} href={`/search/${tag.tag.trim()}`} className="bg-gray-200 text-semiblack px-3 py-1.5 rounded-lg m-1 inline-block text-sm hover:bg-gray-300">
             {tag.tag}
           </a>
         ))}

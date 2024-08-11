@@ -56,6 +56,7 @@ export const LoginModal = () => {
                 onClick={() => setLoginModalVisible(false)}
             ></div>
             {/* Modal content */}
+            
             <div className={`rounded-lg absolute flex justify-center items-center inset-0 ${LoginModalVisible ? "" : "hidden"}`}>
                 <div className="bg-white rounded-lg  w-full mx-4 sm:w-4/5 md:w-3/5 lg:w-2/5 xl:w-[450px] sm:mx-auto relative">
                     {/* Close Button */}

@@ -471,7 +471,7 @@ function Navbar() {
                         </div>
                         <button
                             type="submit"
-                            className={`ml-4 bg-button hover:bg-button_hover text-white text-sm h-10 pl-4 pr-4 m-1 rounded transition-all duration-300 ease-in-out ${searchKey ? 'opacity-100 visible' : 'opacity-0 invisible'
+                            className={`ml-4 bg-button hover:bg-button_hover text-white text-sm h-10 px-8 m-1.5 rounded-[20px] transition-all duration-300 ease-in-out ${searchKey ? 'opacity-100 visible' : 'opacity-0 invisible'
                                 }`}
                         >
                             Search
@@ -482,20 +482,19 @@ function Navbar() {
                     <div className='flex space-x-4 items-center justify-end font-theme '>
 
 
-                        <div className='flex items-center '>
+                        <div className='flex items-center pr-4'>
                             {/* <UserIcon className='h-8 w-8' /> */}
-
                             {!user &&
-                                <div className='flex items-center space-x-2 pr-12 font-inter'>
-                                    <p onClick={() => setLoginModalVisible(true)} className=' m-2 rounded hover:text-semiblack hover:bg-gray-200  px-8 rounded-[22px] py-[5px]  cursor-pointer hover:text-white block_popunder border-[0.8px] border-[#E5E5E5] '>Login</p>
+                                <div className='flex items-center space-x-2  font-inter'>
+                                    <p onClick={() => setLoginModalVisible(true)} className=' m-2 rounded hover:text-semiblack hover:bg-gray-200  px-8 rounded-[22px] py-[5px]  cursor-pointer block_popunder border-[0.8px] border-[#E5E5E5] '>Login</p>
                                     {/* <p onClick={() => { router.push('/account/register') }} className='m-1 underline rounded   pl-2 pr-2  cursor-pointer hover:text-white'>Register</p> */}
                                 </div>
                             }
 
                             {user &&
-                                <div className='flex items-center space-x-2 pr-12 font-inter'>
-                                    <p className=' m-2 rounded underline   pl-2 pr-2 cursor-pointer '>{user}</p>
-                                    <button className='font-inter bg-green-500 px-3 py-1 rounded' onClick={signOut_method}>Logout</button>
+                                <div className='flex items-center space-x-2  font-inter'>
+                                    <p className='m-2 rounded underline pl-2 pr-2 cursor-pointer'>{user}</p>
+                                    <button className='font-inter bg-green-500 py-[5px] px-8  rounded-[22px]' onClick={signOut_method}>Logout</button>
                                 </div>
                             }
                             <Link href='/membership'>
