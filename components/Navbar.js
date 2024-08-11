@@ -312,28 +312,26 @@ function Navbar() {
 
                 <div className={`flex flex-col relative p-1 ${searchBarVisibility}  transition ease-in-out delay-150 mt-2 `}>
 
-                    <form className=' w-full flex items-center' onSubmit={goSearch}>
 
-                        <form className="flex w-full items-center" onSubmit={goSearch}>
-                            <div className="flex-grow mr-4">
-                                <input
-                                    value={searchKey}
-                                    onChange={getSuggestedTags}
-                                    ref={searchInputref}
-                                    className="w-full h-[35px] px-4 text-sm text-white border-[0.8px] border-[#E5E5E5] rounded-[15px] bg-transparent outline-none"
-                                    type="text"
-                                    placeholder="Search your favourite videos"
-                                />
-                            </div>
-                            <div className="w-[18%]">
-                                <button
-                                    type="submit"
-                                    className="w-full p-2 text-sm text-white bg-button rounded-[15px] hover:bg-button_hover"
-                                >
-                                    Search
-                                </button>
-                            </div>
-                        </form>
+                    <form className="flex w-full items-center" onSubmit={goSearch}>
+                        <div className="flex-grow mr-4">
+                            <input
+                                value={searchKey}
+                                onChange={getSuggestedTags}
+                                ref={searchInputref}
+                                className="w-full h-[35px] px-4 text-sm text-white border-[0.8px] border-[#E5E5E5] rounded-[15px] bg-transparent outline-none"
+                                type="text"
+                                placeholder="Search your favourite videos"
+                            />
+                        </div>
+                        <div className="w-[18%]">
+                            <button
+                                type="submit"
+                                className="w-full p-2 text-sm text-white bg-button rounded-[15px] hover:bg-button_hover"
+                            >
+                                Search
+                            </button>
+                        </div>
 
 
 
