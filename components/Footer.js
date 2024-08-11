@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { useContext } from 'react';
 import videosContext from '../context/videos/videosContext';
+import { UserAuth } from "../context/AuthContext";
 
 
 function Footer() {
@@ -9,6 +10,8 @@ function Footer() {
     //Use Context
     const context = useContext(videosContext);
     const { spinnerLoading } = context;
+    const { user, setUser, setLoginModalVisible } = UserAuth();
+
 
     return (
 
@@ -56,9 +59,8 @@ function Footer() {
                     <Link passHref={true} href={'/membership'}>
                         <p className=' text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Join</p>
                     </Link>
-                    <Link passHref={true} href={'/contact'}>
-                        <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Member Sign in</p>
-                    </Link>
+                    <p onClick={() => { setLoginModalVisible(true) }} className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Member Sign in</p>
+
                     <p className='text-white text-[15px] text-left my-3 w-fit border-b-2 border-transparent hover:border-[#FFBB00] transition-colors lg:text-[18px]'>Password Recovery</p>
 
                     <a rel="nofollow" href='https://theporndude.com' >
