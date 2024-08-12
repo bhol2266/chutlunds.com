@@ -1,17 +1,15 @@
+import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link'
-import Head from 'next/head'
-import { listAll, ref, getDownloadURL } from "firebase/storage";
-import { BeatLoader } from 'react-spinners';
+import React, { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 // import pornstarNameList from '../../JsonData/pornstarlist/AllpornstarNames.json'
-import pornstarNameList from '../../JsonData/pornstarlist/alldata.json'
 import {
-    ThumbUpIcon, ClockIcon, FilmIcon, EyeIcon, PlusIcon, MinusIcon, CogIcon
+    SearchIcon
 } from '@heroicons/react/solid';
 import Outstreams from '../../components/Ads/Outstream';
 import Popunder from '../../components/Ads/Popunder';
+import pornstarNameList from '../../JsonData/pornstarlist/alldata.json';
 
 function Index() {
 
@@ -85,7 +83,7 @@ function Index() {
 
     return (
 
-        <div className="">
+        <div className="basicMargin mt-2">
             <Head>
                 <title>Top Pornstars and Models In Full-Length Free Sex Videos | Chutlunds</title>
                 <meta name="description" content="Catch the most popular PORNSTARS and MODELS, right here on the biggest FREE PORN tube. Chutlunds.com has a bevy of luscious babes that are naked for you 24/7!" />
@@ -111,15 +109,20 @@ function Index() {
             <Outstreams />
             <Popunder />
 
-            <h1 className='flex-grow text-lg  my-1 p-2 font-semibold font-inter'>Trending Pornstars</h1>
 
 
-            <div className='flex my-1 pr-2 md:w-3/5 md:mx-auto'  >
-                <input className='focus:outline-none flex-grow mr-1 font-inter rounded p-1 px-2  bg-slate-100' type='text' onChange={(event) => { onChangeHandler(event.target.value) }} placeholder='Search pornstar...'></input>
 
+            <div className={` mt-4  transition ease-in-out delay-150 `}>
+                <div className='flex my-1  md:w-3/5 md:mx-auto p-2 px-3  border-[1px] border-gray-200 space-x-2 md:space-x-4 xl:px-[50px] rounded-[15px]'  >
+                    <SearchIcon className='h-6 w-6 text-gray-400' />
+                    <input className='focus:outline-none flex-grow  font-inter rounded-lg ' type='text' onChange={(event) => { onChangeHandler(event.target.value) }} placeholder='Search pornstar...'></input>
+                </div>
             </div>
 
-            <div className='my-1 mt-6 grid grid-cols-3 p-1 sm:grid-cols-3 gap-2 md:gap-3 lg:gap-4  md:grid-cols-5 lg:grid-cols-6'>
+            <h1 className=' mt-6  ml-1 2xl:my-3 text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium w-fit border-b-[3px] border-[#FFBB00]'>Trending Pornstars</h1>
+
+
+            <div className='mt-1  grid grid-cols-3 p-1 sm:grid-cols-3 gap-2 md:gap-3 lg:gap-4  md:grid-cols-5 lg:grid-cols-6'>
                 {suggestedData.length != 0 && suggestedData.map(pornstar => {
                     const posrnstar_Code = pornstar.href.substring(1, pornstar.href.indexOf('/pornstar'))
                     return (
@@ -133,7 +136,7 @@ function Index() {
                                     loading='lazy'
                                 ></img>
 
-                                <h2 className='rounded-b absolute text-sm lg:text-lg font-inter p-1 bottom-0 w-full text-center  z-10 text-white bg-transparent bg-black bg-opacity-50'>{pornstar.Name}</h2>
+                                <h2 className='rounded-b absolute text-sm lg:text-lg font-inter p-1 bottom-0 w-full text-center  z-10 text-white bg-black bg-opacity-50'>{pornstar.Name}</h2>
 
                                 {/* 
                                     <div className='p-0.5 lg:p-1 md:space-y-1 items-center text-sm md:text-lg absolute bottom-0 bg-transparent bg-black bg-opacity-50 text-white right-0 left-0' >
@@ -154,8 +157,7 @@ function Index() {
             </div>
 
 
-            {
-                suggestedData.length == 0 &&
+            { suggestedData.length == 0 &&
                 <InfiniteScroll
                     dataLength={data.length}
                     next={fetchMoreData}
@@ -176,7 +178,7 @@ function Index() {
                                             loading='lazy'
                                         ></img>
 
-                                        <h2 className='rounded-b absolute text-sm lg:text-lg font-inter p-1 bottom-0 w-full text-center  z-10 text-white bg-transparent bg-black bg-opacity-50'>{pornstar.Name}</h2>
+                                        <h2 className='rounded-b absolute text-sm lg:text-lg font-inter p-1 bottom-0 w-full text-center  z-10 text-white bg-black bg-opacity-50'>{pornstar.Name}</h2>
                                     </div>
                                 </Link>
                                 // items[i].charAt(0).toUpperCase() + items[i].substring(1);
