@@ -76,7 +76,7 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
                                 <img
                                     src={thumbnail}
                                     alt={`Thumbnail ${index + 1}`}
-                                    className="w-full h-auto aspect-video"
+                                    className="w-full h-auto aspect-video object-contain"
                                 />
                                 <div className="absolute inset-0 bg-black bg-opacity-50 "></div>
                             </div>
