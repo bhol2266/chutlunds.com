@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useRouter } from "next/router";
 import { BeatLoader } from 'react-spinners';
 import Pagination from '../../../../../components/Pagination';
-import Header from '../../../../../components/Pornstar/Header';
+import Header from '../../../../../components/Pornstar_Channels/Header';
 import Sidebar from '../../../../../components/Sidebar';
 import Videos from "../../../../../components/Videos";
 import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';

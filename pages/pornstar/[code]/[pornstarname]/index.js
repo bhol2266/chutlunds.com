@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useState,useEffect } from 'react';
 import { BeatLoader } from 'react-spinners';
 import Pagination from '../../../../components/Pagination';
-import Header from '../../../../components/Pornstar/Header';
+import Header from '../../../../components/Pornstar_Channels/Header';
 import Videos from "../../../../components/Videos";
 import pornstarNameList from "../../../../JsonData/pornstarlist/alldata.json"
 
