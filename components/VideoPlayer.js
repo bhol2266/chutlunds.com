@@ -302,7 +302,7 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
 
                                 return (
                                     <a key={key} href={`/search/${key.trim()}`}>
-                                        <p className="border-[1px] border-[#9499A8] text-semiblack px-3 py-1.5 rounded-lg m-1 inline-block text-sm hover:bg-gray-300">{key}</p>
+                                        <p className="border-[1px] border-[#9499A8] text-semiblack px-2 py-1 rounded-lg m-1 inline-block text-sm hover:bg-gray-300">{key}</p>
                                     </a>
                                 )
                             }
