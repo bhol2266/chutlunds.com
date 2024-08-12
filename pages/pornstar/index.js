@@ -130,13 +130,13 @@ function Index() {
                         <Link key={pornstar.Name} href={`/pornstar/${posrnstar_Code}/${pornstar.Name.trim().toLowerCase().replace(/ /g, "+")}`}>
                             <div className='  relative hover:scale-105 transform transition duration-150 ' >
                                 <img
-                                    className={`object-cover w-full rounded  `}
+                                    className={`object-cover w-full rounded-lg  `}
                                     src={pornstar.thumbnail}
                                     alt={pornstar.Name}
                                     loading='lazy'
                                 ></img>
 
-                                <h2 className='rounded-b absolute text-sm lg:text-lg font-inter p-1 bottom-0 w-full text-center  z-10 text-white bg-black bg-opacity-50'>{pornstar.Name}</h2>
+                                <h2 className='rounded-b-lg absolute text-sm lg:text-lg font-inter p-1 bottom-0 w-full text-center  z-10 text-white bg-black bg-opacity-50'>{pornstar.Name}</h2>
 
                                 {/* 
                                     <div className='p-0.5 lg:p-1 md:space-y-1 items-center text-sm md:text-lg absolute bottom-0 bg-transparent bg-black bg-opacity-50 text-white right-0 left-0' >
@@ -172,13 +172,13 @@ function Index() {
                                 <Link key={pornstar.Name} href={`/pornstar/${posrnstar_Code}/${pornstar.Name.trim().toLowerCase().replace(/ /g, "+")}`}>
                                     <div className='  relative hover:scale-105 transform transition duration-150 ' >
                                         <img
-                                            className={`object-cover w-full rounded  `}
+                                            className={`object-cover w-full rounded-lg  `}
                                             src={pornstar.thumbnail}
                                             alt={pornstar.Name}
                                             loading='lazy'
                                         ></img>
 
-                                        <h2 className='rounded-b absolute text-sm lg:text-lg font-inter p-1 bottom-0 w-full text-center  z-10 text-white bg-black bg-opacity-50'>{pornstar.Name}</h2>
+                                        <h2 className='rounded-b-lg absolute text-sm lg:text-lg font-inter p-1 bottom-0 w-full text-center  z-10 text-white bg-black bg-opacity-50'>{pornstar.Name}</h2>
                                     </div>
                                 </Link>
                                 // items[i].charAt(0).toUpperCase() + items[i].substring(1);
