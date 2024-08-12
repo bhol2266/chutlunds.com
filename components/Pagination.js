@@ -10,7 +10,6 @@ const Pagination = ({ data }) => {
     const currentPageNumberURL = data.currentPageNumberURL;
     const pages = data.pages;
 
-    console.log(currentPageNumberURL);
 
 
     if (pages.length !== 2) {

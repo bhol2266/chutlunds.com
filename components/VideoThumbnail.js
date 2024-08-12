@@ -7,9 +7,7 @@ import videosContext from '../context/videos/videosContext';
 
 function VideoThumbnail({ details, type }) {
 
-    console.log('====================================');
-    console.log(details);
-    console.log('====================================');
+
     const [videoPage, setVideoPage] = useState(false);
     const [showPoster, setShowPoster] = useState(true);
     const [spinnerLoader, setSpinnerLoader] = useState(false);

@@ -43,7 +43,12 @@
     }
 
     .basicMargin {
-        @apply lg:w-11/12 lg:mx-auto mt-1 md:mt-3 mx-2 md:mx-4;
+        @apply   mx-2 sm:mx-4;
+    }
+
+  
+    .basicMargin_sidebar {
+        @apply   ml-6 px-[36px] 2xl:px-[50px] 3xl:px-[65px];
     }
 
     /* Example of specific styles for a component */

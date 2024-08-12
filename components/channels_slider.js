@@ -15,7 +15,7 @@ function Channels_slider({ trendingChannels, trendingDataType }) {
     );
 
     return (
-        <div className='flex items-start space-x-1 text-color overflow-x-scroll scrollbar-hide md:hidden my-4'>
+        <div className='flex items-start space-x-1 text-color overflow-x-scroll scrollbar-hide md:hidden my-4 '>
             {filteredChannels.map(channelObj => {
                 // Extract code and normalized channel name
                 const code = channelObj.channel_href.substring(channelObj.channel_href.indexOf('/channel') - 2, channelObj.channel_href.indexOf('/channel')).toLowerCase();

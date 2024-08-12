@@ -1,15 +1,8 @@
 import { useRouter } from "next/router";
+import PaginationQuery from '../../components/PaginationQuery';
+import Header from '../../components/Pornstar_Channels/Header';
 import Sidebar from "../../components/Sidebar";
 import Videos from "../../components/Videos";
-import Header from '../../components/Pornstar/Header'
-import Link from 'next/link'
-import { BeatLoader } from 'react-spinners'
-import { useContext, useState } from 'react';
-import videosContext from '../../context/videos/videosContext';
-import Router from 'next/router'
-import Head from 'next/head'
-import Pagination from '../../components/Pagination';
-import PaginationQuery from '../../components/PaginationQuery';
 import { scrapeVideos } from '../../config/spangbang';
 
 function ChannelsQuery({ video_collection, pages, query, keyword, currentPage, filteredObjsArray }) {
@@ -31,11 +24,8 @@ function ChannelsQuery({ video_collection, pages, query, keyword, currentPage, f
       <div>
 
         <Header keyword={keyword} pageNumber={currentPageNumberURL} filteredObjsArrayProps={filteredObjsArray} />
-        <div className="flex">
-          <Sidebar />
-          <Videos data={video_collection} />
+        <Videos data={video_collection} />
 
-        </div>
 
 
         {/* PAGINATION */}

@@ -172,7 +172,7 @@ const Videoplayer = () => {
 
                     </Head>
 
-                    <div className='flex text-sm md:text-lg '>
+                    <div className='flex text-sm md:text-lg basicMargin'>
                         <div className='flex items-center mt-2 space-x-1 lg:space-x-2'>
                             <FilmIcon className='h-[20px] md:h-9 hover:scale-100 text-red-600' />
                             {videolinkQualitiesScreenshots.video_qualities_available.map(quality => (
@@ -181,7 +181,7 @@ const Videoplayer = () => {
                         </div>
                     </div>
 
-                    <h1 className='text-md sm:text-lg font-semibold my-1 text-wrap text-gray-700 md:text-2xl font-inter'>{videoDetails.Title}</h1>
+                    <h1 className='text-md sm:text-lg font-semibold my-1 text-wrap text-gray-700 md:text-2xl font-inter basicMargin'>{videoDetails.Title}</h1>
 
                     <div className='py-1 rounded overflow-hidden sm:cursor-pointer md:w-4/5'>
                         <VideoPlayer
@@ -196,10 +196,8 @@ const Videoplayer = () => {
                         />
                     </div>
 
-                    <div className='flex flex-col p-1 px-3 space-x-2 items-center md:flex-row sm:justify-items-start'>
-                        <p className='font-semibold text-button text-[18px] lg:text-[24px] font-manrope'>Videos related to</p>
-                        <p className='font-semibold text-[15px] lg:text-[20px] pl-1 font-inter'>{videoDetails.Title}</p>
-                    </div>
+                    <p className='font-bold text-semiblack text-[18px] lg:text-[24px] font-manrope basicMargin mt-3'>More videos like this</p>
+
                     <Videos data={relatedVideos} />
 
                     <BannerAds />

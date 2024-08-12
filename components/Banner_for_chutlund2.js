@@ -9,7 +9,10 @@ export default function Banner_for_chutlund2() {
     const showRedirect = getCookie('show_redirect_chutlunds2');
 
     if (showRedirect === undefined) {
-      setCookie('show_redirect_chutlunds2', 'true');
+      setCookie('show_redirect_chutlunds2', 'true', {
+        maxAge: 60 * 60 * 24 * 30, // 30 days in seconds
+        path: '/',
+      });
       setIsVisible(true);
     } else if (showRedirect === 'true') {
       setIsVisible(true);
@@ -20,17 +23,20 @@ export default function Banner_for_chutlund2() {
 
   const handleClose = () => {
     setIsVisible(false);
-    setCookie('show_redirect_chutlunds2', 'false');
+    setCookie('show_redirect_chutlunds2', 'false', {
+      maxAge: 60 * 60 * 24 * 30, // 30 days in seconds
+      path: '/',
+    });
   };
 
   return (
-    <div className={`bg-gray-800 m-2 text-white p-4 flex justify-between items-center ${!isVisible ? 'hidden' : ''}`}>
+    <div className={`bg-gray-800 m-2 text-white p-4 flex justify-between items-center ${isVisible ? '' : 'hidden'}`}>
       <span className='flex-1 text-left md:text-center text-sm md:text-md'>
         If this website is blocked in your country (
         <Flag code="CN" style={{ width: '20px', height: '14px' }} className="inline-block mx-1" />
         <Flag code="RU" style={{ width: '20px', height: '14px' }} className="inline-block mx-1" />
         <Flag code="TR" style={{ width: '20px', height: '14px' }} className="inline-block mx-1" />
-        ) go to our alternate website   
+        ) go to our alternate website
         <a href="https://chutlunds2.com" className="underline text-yellow-500 font-inter">Chutlunds2.com</a>
       </span>
 

@@ -17,6 +17,7 @@ import { setViewTypeCookie } from '../config/utils';
 import { updateCountry } from '../config/firebase/lib';
 
 import videosContext from '../context/videos/videosContext';
+import Homepage_Title from '../components/Homepage_Title';
 
 export default function Home({ video_collection, trendingChannels, tags, trendingCategories, trendingPornstars }) {
   const { currentLocation, setcurrentLocation, viewType, setViewType } = useContext(videosContext);
@@ -121,8 +122,9 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
       </Head>
 
-      <div className='flex justify-between items-center my-4 md:hidden'>
-        <span className='text-[20px]  font-semibold  font-inter'>Trending Channels</span>
+
+      <div className='flex justify-between items-center my-4 md:hidden basicMargin'>
+        <span className='text-[20px]  font-semibold  font-inter '>Trending Channels</span>
         <img
           className='h-[20px] w-[20px] cursor-pointer sm:hidden'
           src={clientViewType === 'horizontal' ? './grid.png' : './horizontal.png'}
@@ -134,29 +136,28 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
       <div className="w-full overflow-x-auto whitespace-nowrap py-2  scrollbar-hide md:hidden select-none">
         {tags.map((tag, index) => (
-          <a key={tag.tag} href={`/search/${tag.tag.trim()}`} className="bg-gray-200 text-semiblack px-3 py-1.5 rounded-lg m-1 inline-block text-sm hover:bg-gray-300">
+          <a key={tag.tag} href={`/search/${tag.tag.trim()}`} className="bg-gray-200 text-semiblack px-3 py-1.5 rounded-lg m-1 ml-2inline-block text-sm hover:bg-gray-300">
             {tag.tag}
           </a>
         ))}
       </div>
 
-      <main className="flex-row flex  mt-1 md:mt-3 md:space-x-3 space-x-2">
+      <main className="flex-row flex  mt-1 md:mt-6 md:space-x-3">
         <Sidebar />
         <div className='w-full overflow-hidden'>
           <BannerAds />
           <Outstreams />
-          <h1 className="lg:text-2xl text-lg font-semibold text-gray-800  pb-2 font-inter">Trending Free Porn Videos</h1>
+          <h1 className="lg:text-2xl text-lg font-semibold text-gray-800 my-3 font-inter basicMargin w-fit border-b-[3px] border-[#FFBB00]">Trending Free Porn Videos</h1>
           <Videos data={video_collection[0].finalDataArray} />
           <a href={`/trending`}>
-            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-2 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Trending Videos" />
+            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Trending Videos" />
           </a>
 
           {countryVideos.length !== 0 && (
             <>
-              <div className="flex items-center space-x-2 items-center">
-                <span className="lg:text-2xl text-lg font-semibold text-gray-800 pb-2 font-inter mt-3">
-                  {`Popular Porn Videos in ${currentLocation.countryCode}`}
-                </span>
+              <div className="flex items-center space-x-2 items-center basicMargin ">
+                <Homepage_Title title={`Popular Porn Videos in ${currentLocation.countryCode}`} />
+
                 <ReactCountryFlag
                   svg
                   countryCode={currentLocation.countryCode}
@@ -174,40 +175,45 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
             </>
           )}
 
-          <span className='text-[20px] md:hidden font-semibold m-y4 font-inter'>Trending Pornstars</span>
-          <Pornstar_slider trendingPornstars={trendingPornstars} />
+          <div className='md:hidden'>
+            <Homepage_Title title="Trending Pornstars" />
+            <Pornstar_slider trendingPornstars={trendingPornstars} />
+          </div>
 
-          <span className="lg:text-2xl text-lg font-semibold text-gray-800  pb-2 font-inter">Upcoming</span>
+
+          <Homepage_Title title="Upcoming" />
           <Videos data={video_collection[1].finalDataArray} />
           <a href={`/upcoming`}>
-            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-2 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Upcoming Videos" />
+            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Upcoming Videos" />
           </a>
 
-          <span className='text-[20px] md:hidden font-semibold my-4 font-inter'>Trending Categories</span>
-          <Category_slider trendingCategories={trendingCategories.slice(1)} />
+          <div className='md:hidden'>
+            <Homepage_Title title="Trending Categories" />
+            <Category_slider trendingCategories={trendingCategories.slice(1)} />
+          </div>
 
-          <span className="lg:text-2xl text-lg font-semibold text-gray-800  pb-2 font-inter">Featured</span>
+          <Homepage_Title title="Featured" />
           <Videos data={video_collection[2].finalDataArray} />
           <a href={`/channels`}>
-            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-2 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Featured Videos" />
+            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Featured Videos" />
           </a>
 
-          <span className="lg:text-2xl text-lg font-semibold text-gray-800  pb-2 font-inter">Popular</span>
+          <Homepage_Title title="Popular" />
           <Videos data={video_collection[3].finalDataArray} />
           <a href={`/popular`}>
-            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-2 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Popular Videos" />
+            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Popular Videos" />
           </a>
 
-          <span className="lg:text-2xl text-lg font-semibold text-gray-800  pb-2 font-inter">New Videos</span>
+          <Homepage_Title title="New Videos" />
           <Videos data={video_collection[4].finalDataArray} />
           <a href={`/new_videos`}>
-            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-2 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More New Videos" />
+            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More New Videos" />
           </a>
 
-          <span className="lg:text-2xl text-lg font-semibold text-gray-800  pb-2 font-inter">Random</span>
+          <Homepage_Title title="Random" />
           <Videos data={video_collection[5].finalDataArray} />
           <a href={`/random`}>
-            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-2 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Random Videos" />
+            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Random Videos" />
           </a>
         </div>
       </main>
@@ -218,6 +224,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
         <a className='' href="https://www.desikahaniya.in/">.</a>
       </footer>
     </div>
+
   );
 }
 

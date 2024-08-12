@@ -1,13 +1,12 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useEffect, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import { SearchIcon, ArrowRightIcon, CogIcon, ClockIcon, XCircleIcon, CalendarIcon } from '@heroicons/react/solid'
 import { FilterIcon } from '@heroicons/react/outline'
-import Link from 'next/link'
+import { CalendarIcon, ClockIcon, CogIcon, XCircleIcon } from '@heroicons/react/solid'
+import { Fragment } from 'react'
 
+import Router from 'next/router'
 import { useContext } from 'react'
 import videosContext from '../../context/videos/videosContext'
-import Router from 'next/router'
 
 
 function classNames(...classes) {
@@ -236,24 +235,26 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps, co
 
     return (
 
-        <div>
+        <div className='basicMargin '>
 
-            <div className='flex items-center md:pr-10 pt-2  sm:p-1 px-2 md:px-3 '>
+            <div className='flex items-center md:pr-10 pt-2 my-1  md:my-2 '>
                 <div className='flex  '>
-                    <h1 className='text-xl md:text-2xl pl-1 pr-1 font-semibold text-semiblack font-inter my-1  '>{capitalizeFirstLetter(keyword)} sex videos</h1>
+                    <h1 className='text-xl md:text-2xl   font-semibold text-semiblack font-inter my-1  '>{capitalizeFirstLetter(keyword)} Porn videos</h1>
 
                 </div>
-                <p className='text-md md:text-xl  pl-1 pr-1  flex-grow font-inter  text-right text-gray-900 '>{`Page-${pageNumber}`}</p>
+                <p className='text-md md:text-xl  pr-1  flex-grow font-inter  text-right text-gray-900 '>{`Page-${pageNumber}`}</p>
             </div>
+
+
 
 
             <div className='w-fit   md:flex sm:py-1 '>
 
-                {/* This filtered applied bar */}
-                <div className='flex items-center flex-wrap justify-start space-x-1 md:space-x-2 pr-2 mb-2 md:mb-0   '>
+                {/* This filter applied bar */}
+                <div className='flex items-center flex-wrap justify-start space-x-1 md:space-x-2  mb-2 md:mb-0   '>
                     {Final_filteredArray.map(item => {
                         return (
-                            <div key={item} onClick={() => { removefilter(item) }} className=' text-xs md:text-sm hover:bg-red-800 cursor-pointer bg-red-500 rounded-lg px-2 py-1 flex items-center space-x-1'>
+                            <div key={item} onClick={() => { removefilter(item) }} className=' text-xs md:text-sm hover:bg-red-800 cursor-pointer bg-red-500 rounded-lg px-2 py-1 flex items-center space-x-1 mr-2'>
                                 <p className=' text-white font-inter ' >{item}</p>
                                 <XCircleIcon className='h-4 md:h-6 text-white' />
                             </div>

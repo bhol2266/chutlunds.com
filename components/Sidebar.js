@@ -21,13 +21,13 @@ function shuffle(array) {
     return array;
 }
 
-function Sidebar() {
+function  Sidebar() {
     const router = useRouter();
 
 
 
     return (
-        <div className='hidden md:flex md:flex-col mr-2 border-[2.5px] border-[rgba(187, 187, 187, 0.41)] rounded-[12px] px-[36px] 2xl:px-[50px] 3xl:px-[65px] h-fit pb-8'>
+        <div className='hidden md:flex md:flex-col border-[2.5px] border-[rgba(187, 187, 187, 0.41)] rounded-[12px]  h-fit pb-8 basicMargin_sidebar'>
 
             <p className='font-inter font-semibold text-[#777777] text-[18px] my-4'>
                 CATEGORIES
@@ -38,7 +38,7 @@ function Sidebar() {
                 return (
 
                     <Link key={category.name} href={`/category/${category.name.replaceAll('.png', "").toLowerCase().trim()}`}>
-                        <h2 className="text-[16px] 2xl:text-[18px] text-[#777777] p-2 cursor-pointer capitalize font-inter whitespace-nowrap">{category.name.replaceAll('.png', "")}</h2>
+                        <h2 className="w-fit hover:font-semibold hover:text-semiblack border-b-[3px] hover:border-[#FFBB00] border-transparent text-[16px] 2xl:text-[18px] text-[#777777] m-2 cursor-pointer capitalize font-inter whitespace-nowrap">{category.name.replaceAll('.png', "")}</h2>
                     </Link>
 
                 )

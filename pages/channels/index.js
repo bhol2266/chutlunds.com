@@ -11,6 +11,7 @@ import Videos from '../../components/Videos';
 import channels from "../../JsonData/Channels.json"
 import InfiniteScroll from 'react-infinite-scroll-component';
 import fs from 'fs';
+import { SearchIcon } from '@heroicons/react/outline';
 
 function shuffle(array) {
     let currentIndex = array.length, randomIndex;
@@ -125,62 +126,37 @@ function Index({ video_collection, trendingChannels, newChannels }) {
     return (
 
         <div className="">
-            <Head>
-    
-                <title>Hot Porn Channels and Exclusive Adult Videos - Chutlunds</title>
-                <meta name="description" content="The Hottest Japanese Porn Movies Divided By Channels! Discover on JAV HD the Best XXX JAV Channels & Free Sex Scenes: JAVHD, CARIBBEANCOM, JAVHUB, JAPANHDV" />
-                <meta name="keywords" content="porn, xxx, streaming porn, HD porn, HD adult videos, HD pussy videos, sex movies, chutlunds" />
-                <meta property="og:title" content="Hot Porn Channels and Exclusive Adult Videos - Chutlunds" />
-                <meta property="og:description" content="The Hottest Japanese Porn Movies Divided By Channels! Discover on JAV HD the Best XXX JAV Channels & Free Sex Scenes: JAVHD, CARIBBEANCOM, JAVHUB, JAPANHDV" />
-                <meta name="twitter:title" content="Hot Porn Channels and Exclusive Adult Videos - Chutlunds" />
-                <meta name="twitter:description" content="The Hottest Japanese Porn Movies Divided By Channels! Discover on JAV HD the Best XXX JAV Channels & Free Sex Scenes: JAVHD, CARIBBEANCOM, JAVHUB, JAPANHDV" />
-                <link rel="canonical" href={`https://chutlunds.com/channels`} />
+            <div className='basicMargin'>
+
+                <Head>
+
+                    <title>Hot Porn Channels and Exclusive Adult Videos - Chutlunds</title>
+                    <meta name="description" content="The Hottest Japanese Porn Movies Divided By Channels! Discover on JAV HD the Best XXX JAV Channels & Free Sex Scenes: JAVHD, CARIBBEANCOM, JAVHUB, JAPANHDV" />
+                    <meta name="keywords" content="porn, xxx, streaming porn, HD porn, HD adult videos, HD pussy videos, sex movies, chutlunds" />
+                    <meta property="og:title" content="Hot Porn Channels and Exclusive Adult Videos - Chutlunds" />
+                    <meta property="og:description" content="The Hottest Japanese Porn Movies Divided By Channels! Discover on JAV HD the Best XXX JAV Channels & Free Sex Scenes: JAVHD, CARIBBEANCOM, JAVHUB, JAPANHDV" />
+                    <meta name="twitter:title" content="Hot Porn Channels and Exclusive Adult Videos - Chutlunds" />
+                    <meta name="twitter:description" content="The Hottest Japanese Porn Movies Divided By Channels! Discover on JAV HD the Best XXX JAV Channels & Free Sex Scenes: JAVHD, CARIBBEANCOM, JAVHUB, JAPANHDV" />
+                    <link rel="canonical" href={`https://chutlunds.com/channels`} />
 
 
 
 
-            </Head>
+                </Head>
 
 
-            <div className={`mx-3 mt-4  transition ease-in-out delay-150 `}>
-                <div className='flex my-1 pr-2 md:w-3/5 md:mx-auto'  >
-                    <input className='focus:outline-none flex-grow mr-1 font-inter rounded-lg p-2 px-3  bg-slate-100' type='text' onChange={(event) => { onChangeHandler(event.target.value) }} placeholder='Search channel...'></input>
+                <div className={` mt-4  transition ease-in-out delay-150 `}>
+                    <div className='flex my-1  md:w-3/5 md:mx-auto p-2 px-3  border-[1px] border-gray-200 space-x-2 md:space-x-4 xl:px-[50px] rounded-[15px]'  >
+                        <SearchIcon className='h-6 w-6 text-gray-400' />
+                        <input className='focus:outline-none flex-grow  font-inter rounded-lg ' type='text' onChange={(event) => { onChangeHandler(event.target.value) }} placeholder='Search channel...'></input>
+                    </div>
                 </div>
-            </div>
 
-            <div className={`grid grid-cols-4  sm:grid-cols-4 gap-3 md:gap-5 lg:gap-4  md:grid-cols-6 2xl:grid-cols-7`}>
-                {suggestedData.length != 0 && suggestedData.map(channelName => {
-                    const href = customiseUrl(channelName)
-                    return (
-                        <Link key={channelName} href={href}>  <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
-                            <img
-                                className='object-cover w-full rounded-[15px] border-[1px] border-gray-200 '
-                                alt={channelName}
-                                src={`${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${channelName.replace(/ /g, "_").toLowerCase()}.jpg`}
-                                loading="lazy"
-                            ></img>
-                            <h2 className='mt-1 font-inter rounded-b font-medium  text-[12px]  sm:text-md lg:text-lg 2xl:text-2xl  px-1  pb-3 lg:pb-4 w-full text-center   text-theme '>{channelName}</h2>
-                        </div>
-                        </Link>
-                    )
-                })}
-
-            </div>
-
-
-            <div className="mt-4 mb-2 lg:mb-4 2xl:my-6 flex justify-between items-center  rounded shadow-md shadow-blue-100 text-white  p-2 px-3  w-full">
-                <h1 className='text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium'>Trending Channels</h1>
-            </div>
-
-
-            <Outstreams />
-            <PopunderAds />
-            <div className={`grid grid-cols-4 py-3 sm:grid-cols-4 gap-3 md:gap-5 lg:gap-4  md:grid-cols-6 2xl:grid-cols-7`}>
-                {trendingChannels.map(channelName => {
-                    const href = customiseUrl(channelName)
-                    return (
-                        <Link key={channelName} href={href}>
-                            <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
+                <div className={`grid grid-cols-4  sm:grid-cols-4 gap-3 md:gap-5 lg:gap-4  md:grid-cols-6 2xl:grid-cols-7 mt-4`}>
+                    {suggestedData.length != 0 && suggestedData.map(channelName => {
+                        const href = customiseUrl(channelName)
+                        return (
+                            <Link key={channelName} href={href}>  <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
                                 <img
                                     className='object-cover w-full rounded-[15px] border-[1px] border-gray-200 '
                                     alt={channelName}
@@ -189,82 +165,112 @@ function Index({ video_collection, trendingChannels, newChannels }) {
                                 ></img>
                                 <h2 className='mt-1 font-inter rounded-b font-medium  text-[12px]  sm:text-md lg:text-lg 2xl:text-2xl  px-1  pb-3 lg:pb-4 w-full text-center   text-theme '>{channelName}</h2>
                             </div>
-                        </Link>
-                        // items[i].charAt(0).toUpperCase() + items[i].substring(1);
+                            </Link>
+                        )
+                    })}
+
+                </div>
 
 
-                    )
-                })}
+                <h1 className=' mt-4 mb-2 lg:mb-4 2xl:my-6 text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium w-fit border-b-[3px] border-[#FFBB00]'>Trending Channels</h1>
 
-            </div>
 
-            <div className="mt-4 mb-2 lg:mb-4 2xl:my-6 flex justify-between items-center  rounded shadow-md shadow-blue-100 text-white  p-2 px-3  w-full">
-                <p className='text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium'>New Channels</p>
-            </div>
-            <div className={`grid grid-cols-4 py-3 sm:grid-cols-4 gap-3 md:gap-5 lg:gap-4  md:grid-cols-6 2xl:grid-cols-7`}>
-                {newChannels.map(channelName => {
-                    const href = customiseUrl(channelName)
-                    return (
-                        <Link key={channelName} href={href}>   <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
-                            <img
-                                className='object-cover w-full rounded-[15px] border-[1px] border-gray-200 '
-                                alt={channelName}
-                                src={`${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${channelName.replace(/ /g, "_").toLowerCase()}.jpg`}
-                                loading="lazy"
-                            ></img>
-                            <h2 className='mt-1 font-inter rounded-b font-medium  text-[12px]  sm:text-md lg:text-lg 2xl:text-2xl  px-1  pb-3 lg:pb-4 w-full text-center   text-theme '>{channelName}</h2>
+
+                <Outstreams />
+                <PopunderAds />
+                <div className={`grid grid-cols-4 py-3 sm:grid-cols-4 gap-3 md:gap-5 lg:gap-4  md:grid-cols-6 2xl:grid-cols-7`}>
+                    {trendingChannels.map(channelName => {
+                        const href = customiseUrl(channelName)
+                        return (
+                            <Link key={channelName} href={href}>
+                                <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
+                                    <img
+                                        className='object-cover w-full rounded-[15px] border-[1px] border-gray-200 '
+                                        alt={channelName}
+                                        src={`${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${channelName.replace(/ /g, "_").toLowerCase()}.jpg`}
+                                        loading="lazy"
+                                    ></img>
+                                    <h2 className='mt-1 font-inter rounded-b font-medium  text-[12px]  sm:text-md lg:text-lg 2xl:text-2xl  px-1  pb-3 lg:pb-4 w-full text-center   text-theme '>{channelName}</h2>
+                                </div>
+                            </Link>
+                            // items[i].charAt(0).toUpperCase() + items[i].substring(1);
+
+
+                        )
+                    })}
+
+                </div>
+
+                <p className=' mt-4 mb-2 lg:mb-4 2xl:my-6 text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium w-fit border-b-[3px] border-[#FFBB00]'>New Channels</p>
+
+
+
+                <div className={`grid grid-cols-4 py-3 sm:grid-cols-4 gap-3 md:gap-5 lg:gap-4  md:grid-cols-6 2xl:grid-cols-7`}>
+                    {newChannels.map(channelName => {
+                        const href = customiseUrl(channelName)
+                        return (
+                            <Link key={channelName} href={href}>   <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
+                                <img
+                                    className='object-cover w-full rounded-[15px] border-[1px] border-gray-200 '
+                                    alt={channelName}
+                                    src={`${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${channelName.replace(/ /g, "_").toLowerCase()}.jpg`}
+                                    loading="lazy"
+                                ></img>
+                                <h2 className='mt-1 font-inter rounded-b font-medium  text-[12px]  sm:text-md lg:text-lg 2xl:text-2xl  px-1  pb-3 lg:pb-4 w-full text-center   text-theme '>{channelName}</h2>
+                            </div>
+                            </Link>
+                            // items[i].charAt(0).toUpperCase() + items[i].substring(1);
+
+
+                        )
+                    })}
+
+                </div>
+
+
+                <p className=' mt-4 mb-2 lg:mb-4 2xl:my-6 text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium w-fit border-b-[3px] border-[#FFBB00]'>All Channels</p>
+
+
+
+
+                {
+                    suggestedData.length == 0 &&
+                    <InfiniteScroll
+                        dataLength={data.length}
+                        next={fetchMoreData}
+                        hasMore={data.length !== 760}
+
+                    >
+                        <div className={`grid grid-cols-4 py-3 sm:grid-cols-4 gap-3 md:gap-5 lg:gap-4  md:grid-cols-6 2xl:grid-cols-7`}>
+                            {data.map(obj => {
+
+                                const href = customiseUrl(obj.channel_name)
+                                return (
+                                    <Link key={obj.channel_name} href={href}>
+                                        <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
+                                            <img
+                                                className='object-cover w-full rounded-[15px] border-[1px] border-gray-200 '
+                                                alt={obj.image_url}
+                                                src={`${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${obj.channel_name.replace(/ /g, "_").toLowerCase()}.jpg`}
+                                                loading="lazy"
+                                            ></img>
+                                            <h2 className='mt-1 font-inter rounded-b font-medium  text-[12px]  sm:text-md lg:text-lg 2xl:text-2xl  px-1  pb-3 lg:pb-4 w-full text-center   text-theme '>{obj.channel_name}</h2>
+                                        </div>
+                                    </Link>
+
+
+                                )
+                            })}
+
                         </div>
-                        </Link>
-                        // items[i].charAt(0).toUpperCase() + items[i].substring(1);
+                    </InfiniteScroll>
+                }
+
+                <div className="my-4 mb-2 lg:mb-4 2xl:my-6 flex justify-between items-center  rounded  text-white  p-2 px-3  w-full">
+                    <p className='text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium'>🔥 Hot New Videos</p>
+                </div>
 
 
-                    )
-                })}
-
-            </div>
-
-            <div className="mt-4 mb-2 lg:mb-4 2xl:my-6 flex justify-between items-center  rounded shadow-md shadow-blue-100 text-white  p-2 px-3  w-full">
-                <p className='text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium'>All channels</p>
-            </div>
-
-
-
-
-            {
-                suggestedData.length == 0 &&
-                <InfiniteScroll
-                    dataLength={data.length}
-                    next={fetchMoreData}
-                    hasMore={data.length !== 760}
-
-                >
-                    <div className={`grid grid-cols-4 py-3 sm:grid-cols-4 gap-3 md:gap-5 lg:gap-4  md:grid-cols-6 2xl:grid-cols-7`}>
-                        {data.map(obj => {
-
-                            const href = customiseUrl(obj.channel_name)
-                            return (
-                                <Link key={obj.channel_name} href={href}>
-                                    <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
-                                        <img
-                                            className='object-cover w-full rounded-[15px] border-[1px] border-gray-200 '
-                                            alt={obj.image_url}
-                                            src={`${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${obj.channel_name.replace(/ /g, "_").toLowerCase()}.jpg`}
-                                            loading="lazy"
-                                        ></img>
-                                        <h2 className='mt-1 font-inter rounded-b font-medium  text-[12px]  sm:text-md lg:text-lg 2xl:text-2xl  px-1  pb-3 lg:pb-4 w-full text-center   text-theme '>{obj.channel_name}</h2>
-                                    </div>
-                                </Link>
-
-
-                            )
-                        })}
-
-                    </div>
-                </InfiniteScroll>
-            }
-
-            <div className="my-4 mb-2 lg:mb-4 2xl:my-6 flex justify-between items-center  rounded shadow-md shadow-blue-100 text-white  p-2 px-3  w-full">
-                <p className='text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium'>🔥 Hot New Videos</p>
             </div>
 
             <Videos data={video_collection} />

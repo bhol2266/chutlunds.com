@@ -17,7 +17,7 @@ function Pornstar_slider({ trendingPornstars }) {
 
 
     return (
-        <div className='flex items-start space-x-1 text-color overflow-x-scroll scrollbar-hide md:hidden my-4'>
+        <div className='flex items-start space-x-1 text-color overflow-x-scroll scrollbar-hide md:hidden mb-6'>
             {filteredPornstars.map(pornstarObj => {
 
                 const code = pornstarObj.href.substring(1, pornstarObj.href.indexOf('/pornstar'))

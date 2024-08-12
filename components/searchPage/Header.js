@@ -240,20 +240,14 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps }) 
 
     return (
 
-        <div>
-            <div className='flex items-center md:pr-10 pt-2  sm:py-1'>
+        <div className='basicMargin md:ml-6'>
+
+            <div className='flex items-center md:pr-10 pt-2 my-1  md:my-2 pl-1'>
                 <div className='flex  '>
-
-
-                    <h1 className='text-xl md:text-2xl xl:text-3xl font-semibold text-theme font-inter my-1'>
-                        {capitalizeFirstLetter(keyword)}
-                        <span className='absolute -z-[1] -inset-[100%]'>
-                            Porn Videos
-                        </span>
-                    </h1>
+                    <h1 className='text-xl md:text-2xl   font-semibold text-semiblack font-inter my-1  '>{capitalizeFirstLetter(keyword)} Porn videos</h1>
 
                 </div>
-                <p className='text-md md:text-xl flex-grow font-inter  text-right text-gray-900 '>{`Page-${pageNumber}`}</p>
+                <p className='text-md md:text-xl  pl-1 pr-1  flex-grow font-inter  text-right text-gray-900 '>{`Page-${pageNumber}`}</p>
             </div>
 
 

@@ -72,7 +72,7 @@ function Index() {
 
     return (
 
-        <div className="">
+        <div className="basicMargin">
             <Head>
                 <title>Chutlunds Categories: Find Your Favorite Free Hardcore Porn Videos</title>
                 <meta name="description" content="  Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
@@ -94,7 +94,7 @@ function Index() {
             <div className='flex items-center py-2 my-1 justify-between  rounded-lg'>
                 <span className='text-center lg:text-left  flex-grow text-3xl font-Dmsans'>Top Porn Categories</span>
             </div>
-            <h1 className="text-center lg:text-left text-sm md:text-lg shadow-xl py-2 my-1 font-inter">
+            <h1 className="text-center lg:text-left text-sm md:text-lg  pb-2 my-1 font-inter">
                 Explore a Variety of Free Videos: Japanese, Hentai, Russian, Chinese, Asian, Korean Porn, and More
             </h1>
 
