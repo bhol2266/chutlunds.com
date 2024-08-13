@@ -12,24 +12,13 @@ import { PlusIcon } from '@heroicons/react/outline';
 
 
 
-function Index({ video_collection, pages, pornstarInformation, collageImages, pornstarname }) {
+function Index({ video_collection, pages, pornstarInformation, collageImages, pornstar_image }) {
 
 
     const router = useRouter();
-    const { code, page } = router.query
+    const { code, page,pornstarname } = router.query
     const currentPageNumberURL = page
-    const [imageURL, setimage] = useState('');
-
-
-    useEffect(() => {
-        // Assuming pornstarNameList is available
-        pornstarNameList.filter(pornstar => {
-            if (pornstarname.toLowerCase() === pornstar.Name.toLowerCase().replace(/ /g, "+")) {
-                setimage(pornstar.thumbnail);
-            }
-        });
-    }, [pornstarname]);
-
+    const [imageURL, setimage] = useState(pornstar_image);
 
     if (router.isFallback) {
         return (
@@ -197,6 +186,7 @@ export async function getStaticProps(context) {
         weight: ''
     };
     var collageImages = []
+    var pornstar_image = ""
 
 
     const scrape = async (url) => {
@@ -275,7 +265,11 @@ export async function getStaticProps(context) {
 
     await scrape(`https://spankbang.party/${code}/pornstar/${pornstarname}/page/${page}/?o=all`)
 
-
+    pornstarNameList.filter(pornstar => {
+        if (pornstarname.toLowerCase() === pornstar.Name.toLowerCase().replace(/ /g, "+")) {
+            pornstar_image = pornstar.thumbnail;
+        }
+    });
 
     return {
         props: {
@@ -283,7 +277,7 @@ export async function getStaticProps(context) {
             pages: pages,
             pornstarInformation: pornstarInformation,
             collageImages: collageImages,
-            pornstarname: pornstarname
+            pornstar_image:pornstar_image
         }
     }
 

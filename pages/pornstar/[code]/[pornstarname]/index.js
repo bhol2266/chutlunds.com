@@ -10,20 +10,12 @@ import Videos from "../../../../components/Videos";
 import pornstarNameList from "../../../../JsonData/pornstarlist/alldata.json";
 import { Scrape_Video_Item_Pornstar } from '../../../../config/Scrape_Video_Item';
 
-function Index({ video_collection, pages, pornstarInformation, collageImages, pornstarname }) {
+function Index({ video_collection, pages, pornstarInformation, collageImages, pornstar_image }) {
     const router = useRouter();
-    const { code } = router.query;
-    const [imageURL, setimage] = useState('');
+    const { code, pornstarname } = router.query;
+    const [imageURL, setimage] = useState(pornstar_image);
 
 
-    useEffect(() => {
-        // Assuming pornstarNameList is available
-        pornstarNameList.filter(pornstar => {
-            if (pornstarname.toLowerCase() === pornstar.Name.toLowerCase().replace(/ /g, "+")) {
-                setimage(pornstar.thumbnail);
-            }
-        });
-    }, [pornstarname]);
 
     if (router.isFallback) {
         return (
@@ -180,7 +172,7 @@ export async function getStaticProps(context) {
         weight: ''
     };
     var collageImages = []
-
+    var pornstar_image = ""
 
 
     const scrape = async (url) => {
@@ -260,13 +252,22 @@ export async function getStaticProps(context) {
     await scrape(`https://spankbang.party/${code}/pornstar/${pornstarname}/?o=all`)
 
 
+    pornstarNameList.filter(pornstar => {
+        if (pornstarname.toLowerCase() === pornstar.Name.toLowerCase().replace(/ /g, "+")) {
+            pornstar_image = pornstar.thumbnail;
+        }
+    });
+
+
+
+
     return {
         props: {
             video_collection: finalDataArray,
             pages: pages,
             pornstarInformation: pornstarInformation,
             collageImages: collageImages,
-            pornstarname: pornstarname
+            pornstar_image: pornstar_image
 
         }
     }
