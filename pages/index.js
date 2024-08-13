@@ -103,6 +103,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
   const toggleViewType = () => {
     const newViewType = viewType === 'grid' ? 'horizontal' : 'grid';
     setViewType(newViewType);
+    
   };
 
   return (
