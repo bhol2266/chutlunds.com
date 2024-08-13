@@ -23,10 +23,7 @@ function Videos({ data, type }) {
     const [pageLoaded, setPageLoaded] = useState(false);
     const [isReady, setIsReady] = useState(false); // New state to track if ready to render
 
-    useEffect(() => {
-        setViewType(getViewTypeFromCookie());
-        setIsReady(true); // Set isReady to true after setting viewType
-    }, []);
+
 
     useEffect(() => {
         if (router.asPath === '/' || window.location.href.includes('/video')) {
@@ -35,9 +32,7 @@ function Videos({ data, type }) {
         setPageLoaded(true);
     }, [router.asPath]);
 
-    if (!isReady) {
-        return null; // Return null or a loader while the component is not ready
-    }
+  
 
     return (
         <div className="h-fit  basicMargin">

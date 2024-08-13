@@ -21,7 +21,6 @@ import Homepage_Title from '../components/Homepage_Title';
 
 export default function Home({ video_collection, trendingChannels, tags, trendingCategories, trendingPornstars }) {
   const { currentLocation, setcurrentLocation, viewType, setViewType } = useContext(videosContext);
-  const [clientViewType, setClientViewType] = useState(null);
   const [countryVideos, setcountryVideos] = useState([]);
   const [countryLanguage, setcountryLanguage] = useState('');
   const [lang, setLang] = useState('');
@@ -88,9 +87,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
     fetchLocation();
   }, []);
 
-  useEffect(() => {
-    setClientViewType(viewType);
-  }, [viewType]);
+
 
   function shuffle(array) {
     let currentIndex = array.length, randomIndex;
@@ -105,7 +102,6 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
   const toggleViewType = () => {
     const newViewType = viewType === 'grid' ? 'horizontal' : 'grid';
-    setViewTypeCookie(newViewType);
     setViewType(newViewType);
   };
 
@@ -127,7 +123,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
         <span className='text-[20px]  font-semibold  font-inter '>Trending Channels</span>
         <img
           className='h-[20px] w-[20px] cursor-pointer sm:hidden'
-          src={clientViewType === 'horizontal' ? './grid.png' : './horizontal.png'}
+          src={viewType === 'horizontal' ? './grid.png' : './horizontal.png'}
           onClick={toggleViewType}
           alt="Toggle View"
         />
