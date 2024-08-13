@@ -21,6 +21,16 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps }) 
     const { setSpinner, } = context;
 
     const [currentPage, setcurrentPage] = useState('')
+    const { currentLocation, setcurrentLocation, viewType, setViewType } = useContext(videosContext);
+
+
+    const toggleViewType = () => {
+        const newViewType = viewType === 'grid' ? 'horizontal' : 'grid';
+        setViewType(newViewType);
+
+    };
+
+
 
     useEffect(() => {
         setcurrentPage(window.location.href.includes('/search/') ? "searchPage" : "categoryPage")
@@ -251,7 +261,7 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps }) 
             </div>
 
 
-            <div className='w-fit   md:flex sm:py-1'>
+            <div className=' md:flex sm:py-1'>
 
                 {/* This filtered applied bar */}
                 <div className='flex items-center flex-wrap justify-start space-x-1 md:space-x-2 mb-2 md:mb-0 mr-1'>
@@ -264,182 +274,193 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps }) 
                         )
                     })}
                 </div>
-                <div className='flex items-center justify-start md:justify-center mb-1    space-x-1 sm:space-x-2 '>
+                <div className='flex items-center justify-between '>
 
-                    <Menu as="div" className={` relative  text-left`}>
-                        <div className='w-fit'>
-                            <Menu.Button className="inline-flex justify-center cursor-pointer  w-full rounded-md border border-gray-300 shadow-sm px-2 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ">
-                                Filter
-                                <FilterIcon className="-mr-1 ml-2 h-4 md:h-5  w-4 md:w-5  mt-[1.5px]" aria-hidden="true" />
-                            </Menu.Button>
+                    <div className='flex items-center justify-start md:justify-center mb-1    space-x-1 sm:space-x-2 '>
 
-                        </div>
+                        <Menu as="div" className={` relative  text-left`}>
+                            <div className='w-fit'>
+                                <Menu.Button className="inline-flex justify-center cursor-pointer  w-full rounded-md border border-gray-300 shadow-sm px-2 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ">
+                                    Filter
+                                    <FilterIcon className="-mr-1 ml-2 h-4 md:h-5  w-4 md:w-5  mt-[1.5px]" aria-hidden="true" />
+                                </Menu.Button>
 
-                        <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-100"
-                            enterFrom="transform opacity-0 scale-95"
-                            enterTo="transform opacity-100 scale-100"
-                            leave="transition ease-in duration-75"
-                            leaveFrom="transform opacity-100 scale-100"
-                            leaveTo="transform opacity-0 scale-95"
-                        >
-                            <Menu.Items className=" z-50 origin-top-right absolute left-0 mt-2 w-fit rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            </div>
 
-                                {filter.map(item => {
-                                    return (
-                                        <Menu.Item key={item.name}  >
-                                            {({ active }) => (
-                                                <p onClick={() => { clickHandler(item.query) }} className={classNames(
-                                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                    'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-button cursor-pointer'
-                                                )}
-                                                >
-                                                    <span className={`${item.name === filter_isPresent ? "text-green-500" : ""}`}>{item.name}</span>
-                                                </p>
-                                            )}
-                                        </Menu.Item>
+                            <Transition
+                                as={Fragment}
+                                enter="transition ease-out duration-100"
+                                enterFrom="transform opacity-0 scale-95"
+                                enterTo="transform opacity-100 scale-100"
+                                leave="transition ease-in duration-75"
+                                leaveFrom="transform opacity-100 scale-100"
+                                leaveTo="transform opacity-0 scale-95"
+                            >
+                                <Menu.Items className=" z-50 origin-top-right absolute left-0 mt-2 w-fit rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
 
-
-
-                                    )
-                                })}
-
-
-
-                            </Menu.Items>
-                        </Transition>
-                    </Menu>
-
-
-                    <Menu as="div" className="relative  text-left">
-                        <div className=' w-fit'>
-                            <Menu.Button className="inline-flex justify-center cursor-pointer  w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ">
-                                Quality
-                                <CogIcon className="-mr-1 ml-2 h-4 md:h-5  w-4 md:w-5  mt-[1.5px]" aria-hidden="true" />
-                            </Menu.Button>
-                        </div>
-
-                        <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-100"
-                            enterFrom="transform opacity-0 scale-95"
-                            enterTo="transform opacity-100 scale-100"
-                            leave="transition ease-in duration-75"
-                            leaveFrom="transform opacity-100 scale-100"
-                            leaveTo="transform opacity-0 scale-95"
-                        >
-                            <Menu.Items className=" z-50 origin-top-right absolute right-0 mt-2 w-fit rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                <div className="py-1">
-
-                                    {qualtiy.map(item => {
+                                    {filter.map(item => {
                                         return (
-                                            <Menu.Item key={item.name} >
+                                            <Menu.Item key={item.name}  >
                                                 {({ active }) => (
                                                     <p onClick={() => { clickHandler(item.query) }} className={classNames(
                                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                                         'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-button cursor-pointer'
                                                     )}
                                                     >
-                                                        <span className={`${item.name === quality_isPresent ? "text-green-500" : ""}`}>{item.name}</span>                                                    </p>
+                                                        <span className={`${item.name === filter_isPresent ? "text-green-500" : ""}`}>{item.name}</span>
+                                                    </p>
                                                 )}
                                             </Menu.Item>
+
+
+
                                         )
                                     })}
 
 
 
-                                </div>
-                            </Menu.Items>
-                        </Transition>
-                    </Menu>
+                                </Menu.Items>
+                            </Transition>
+                        </Menu>
 
 
-                    <Menu as="div" className="relative  text-left">
-                        <div className=' w-fit'>
-                            <Menu.Button className="inline-flex justify-center cursor-pointer  w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ">
-                                Duration
-                                <ClockIcon className="-mr-1 ml-2 h-4 md:h-5  w-4 md:w-5  mt-[1.5px]" aria-hidden="true" />
-                            </Menu.Button>
-                        </div>
+                        <Menu as="div" className="relative  text-left">
+                            <div className=' w-fit'>
+                                <Menu.Button className="inline-flex justify-center cursor-pointer  w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ">
+                                    Quality
+                                    <CogIcon className="-mr-1 ml-2 h-4 md:h-5  w-4 md:w-5  mt-[1.5px]" aria-hidden="true" />
+                                </Menu.Button>
+                            </div>
 
-                        <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-100"
-                            enterFrom="transform opacity-0 scale-95"
-                            enterTo="transform opacity-100 scale-100"
-                            leave="transition ease-in duration-75"
-                            leaveFrom="transform opacity-100 scale-100"
-                            leaveTo="transform opacity-0 scale-95"
-                        >
-                            <Menu.Items className=" z-50 origin-top-right absolute right-0 mt-2 w-fit rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                <div className="py-1">
+                            <Transition
+                                as={Fragment}
+                                enter="transition ease-out duration-100"
+                                enterFrom="transform opacity-0 scale-95"
+                                enterTo="transform opacity-100 scale-100"
+                                leave="transition ease-in duration-75"
+                                leaveFrom="transform opacity-100 scale-100"
+                                leaveTo="transform opacity-0 scale-95"
+                            >
+                                <Menu.Items className=" z-50 origin-top-right absolute right-0 mt-2 w-fit rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                    <div className="py-1">
 
-                                    {duration.map(item => {
-                                        return (
-                                            <Menu.Item key={item.name} >
-                                                {({ active }) => (
-                                                    <p onClick={() => { clickHandler(item.query) }} className={classNames(
-                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                        'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-button cursor-pointer'
+                                        {qualtiy.map(item => {
+                                            return (
+                                                <Menu.Item key={item.name} >
+                                                    {({ active }) => (
+                                                        <p onClick={() => { clickHandler(item.query) }} className={classNames(
+                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                            'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-button cursor-pointer'
+                                                        )}
+                                                        >
+                                                            <span className={`${item.name === quality_isPresent ? "text-green-500" : ""}`}>{item.name}</span>                                                    </p>
                                                     )}
-                                                    >
-                                                        <span className={`${item.name === duration_isPresent ? "text-green-500" : ""}`}>{item.name}</span>                                                    </p>
-                                                )}
-                                            </Menu.Item>
-                                        )
-                                    })}
+                                                </Menu.Item>
+                                            )
+                                        })}
 
 
 
-                                </div>
-                            </Menu.Items>
-                        </Transition>
-                    </Menu>
+                                    </div>
+                                </Menu.Items>
+                            </Transition>
+                        </Menu>
 
 
-                    <Menu as="div" className="relative  text-left">
-                        <div className=' w-fit'>
-                            <Menu.Button className="inline-flex justify-center cursor-pointer  w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ">
-                                Date
-                                <CalendarIcon className="-mr-1 ml-2 h-4 md:h-5  w-4 md:w-5  mt-[1.5px]" aria-hidden="true" />
-                            </Menu.Button>
-                        </div>
+                        <Menu as="div" className="relative  text-left">
+                            <div className=' w-fit'>
+                                <Menu.Button className="inline-flex justify-center cursor-pointer  w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ">
+                                    Duration
+                                    <ClockIcon className="-mr-1 ml-2 h-4 md:h-5  w-4 md:w-5  mt-[1.5px]" aria-hidden="true" />
+                                </Menu.Button>
+                            </div>
 
-                        <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-100"
-                            enterFrom="transform opacity-0 scale-95"
-                            enterTo="transform opacity-100 scale-100"
-                            leave="transition ease-in duration-75"
-                            leaveFrom="transform opacity-100 scale-100"
-                            leaveTo="transform opacity-0 scale-95"
-                        >
-                            <Menu.Items className=" z-50 origin-top-right absolute right-0 mt-2 w-28 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                <div className="py-1">
+                            <Transition
+                                as={Fragment}
+                                enter="transition ease-out duration-100"
+                                enterFrom="transform opacity-0 scale-95"
+                                enterTo="transform opacity-100 scale-100"
+                                leave="transition ease-in duration-75"
+                                leaveFrom="transform opacity-100 scale-100"
+                                leaveTo="transform opacity-0 scale-95"
+                            >
+                                <Menu.Items className=" z-50 origin-top-right absolute right-0 mt-2 w-fit rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                    <div className="py-1">
 
-                                    {date.map(item => {
-                                        return (
-                                            <Menu.Item key={item.name} >
-                                                {({ active }) => (
-                                                    <p onClick={() => { clickHandler(item.query) }} className={classNames(
-                                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                                        'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-button cursor-pointer'
+                                        {duration.map(item => {
+                                            return (
+                                                <Menu.Item key={item.name} >
+                                                    {({ active }) => (
+                                                        <p onClick={() => { clickHandler(item.query) }} className={classNames(
+                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                            'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-button cursor-pointer'
+                                                        )}
+                                                        >
+                                                            <span className={`${item.name === duration_isPresent ? "text-green-500" : ""}`}>{item.name}</span>                                                    </p>
                                                     )}
-                                                    >
-                                                        <span className={`${item.name === date_isPresent ? "text-green-500" : ""}`}>{item.name}</span>                                                    </p>
-                                                )}
-                                            </Menu.Item>
-                                        )
-                                    })}
+                                                </Menu.Item>
+                                            )
+                                        })}
 
 
 
-                                </div>
-                            </Menu.Items>
-                        </Transition>
-                    </Menu>
+                                    </div>
+                                </Menu.Items>
+                            </Transition>
+                        </Menu>
+
+
+                        <Menu as="div" className="relative  text-left">
+                            <div className=' w-fit'>
+                                <Menu.Button className="inline-flex justify-center cursor-pointer  w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 ">
+                                    Date
+                                    <CalendarIcon className="-mr-1 ml-2 h-4 md:h-5  w-4 md:w-5  mt-[1.5px]" aria-hidden="true" />
+                                </Menu.Button>
+                            </div>
+
+                            <Transition
+                                as={Fragment}
+                                enter="transition ease-out duration-100"
+                                enterFrom="transform opacity-0 scale-95"
+                                enterTo="transform opacity-100 scale-100"
+                                leave="transition ease-in duration-75"
+                                leaveFrom="transform opacity-100 scale-100"
+                                leaveTo="transform opacity-0 scale-95"
+                            >
+                                <Menu.Items className=" z-50 origin-top-right absolute right-0 mt-2 w-28 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                    <div className="py-1">
+
+                                        {date.map(item => {
+                                            return (
+                                                <Menu.Item key={item.name} >
+                                                    {({ active }) => (
+                                                        <p onClick={() => { clickHandler(item.query) }} className={classNames(
+                                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                                            'block px-4 py-2 text-sm font-semibold hover:text-white hover:bg-button cursor-pointer'
+                                                        )}
+                                                        >
+                                                            <span className={`${item.name === date_isPresent ? "text-green-500" : ""}`}>{item.name}</span>                                                    </p>
+                                                    )}
+                                                </Menu.Item>
+                                            )
+                                        })}
+
+
+
+                                    </div>
+                                </Menu.Items>
+                            </Transition>
+                        </Menu>
+                    </div>
+
+                    <img
+                        className='h-[20px] w-[20px] cursor-pointer sm:hidden mb-2 '
+                        src={viewType === 'horizontal' ? '/grid.png' : '/horizontal.png'}
+                        onClick={toggleViewType}
+                        alt="Toggle View"
+                    />
                 </div>
+
 
             </div>
         </div>
