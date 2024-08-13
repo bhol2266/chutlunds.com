@@ -12,11 +12,11 @@ import { PlusIcon } from '@heroicons/react/outline';
 
 
 
-function Index({ video_collection, pages, pornstarInformation, collageImages }) {
+function Index({ video_collection, pages, pornstarInformation, collageImages, pornstarname }) {
 
 
     const router = useRouter();
-    const { code, pornstarname, page } = router.query
+    const { code, page } = router.query
     const currentPageNumberURL = page
     const [imageURL, setimage] = useState('');
 
@@ -74,7 +74,7 @@ function Index({ video_collection, pages, pornstarInformation, collageImages }) 
 
             <div>
 
-                <div className="relative h-[240px] sm:h-[310px] md:h-[260px] lg:h-[290px] xl:h-[300px] 2xl:h-[350px] 3xl:h-[370px]">
+                <div className="relative h-[290px] sm:h-[300px] md:h-[310px] lg:h-[350px] xl:h-[360px] 3xl:h-[370px]">
                     <div className="grid grid-cols-6 md:grid-cols-9 ">
                         {collageImages.map((thumbnail, index) => (
                             <div
@@ -91,11 +91,10 @@ function Index({ video_collection, pages, pornstarInformation, collageImages }) 
                         ))}
                     </div>
 
-                    <div className=" absolute flex top-[30px] sm:top-[100px] md:top-[50px] lg:top-[40px] xl:top-[50px] 2xl:top-[100px] 3xl:top-[120px] left-[10px]  w-[calc(100%-20px)]">
+                    <div className=" absolute flex top-[30px] sm:top-[40px] md:top-[50px] lg:top-[40px] xl:top-[50px] 3xl:top-[60px] left-[10px]  w-[calc(100%-20px)]">
                         <div className=''>
                             <img
-                                className="object-cover w-36 h-36 lg:w-44 lg:h-44 rounded-[15px] border-[1px] border-gray-200"
-                                src={imageURL}
+                                className="object-cover w-36  lg:w-44 h-auto rounded-[15px] border-[1px] border-gray-200" src={imageURL}
                                 alt={pornstarname}
                                 loading="lazy"
                             />
@@ -112,7 +111,7 @@ function Index({ video_collection, pages, pornstarInformation, collageImages }) 
                         </div>
 
 
-                        <div className="font-inter flex-1 flex flex-wrap  mt-auto mb-6 ml-2 sm:ml-4 sm:mb-[40px] md:mb-0 text-xs md:text-sm md:space-x-4  space-x-1">
+                        <div className="font-inter flex-1 flex flex-wrap  mt-auto mb-[50px] ml-2 sm:ml-4 sm:mb-[40px] md:mb-0 text-xs md:text-sm md:space-x-4  space-x-1">
                             <span className={`p-0.5 font-light ${pornstarInformation.views ? '' : 'hidden'}`}>
                                 Views: <span className="font-semibold">{pornstarInformation.views}</span>
                             </span>
@@ -143,9 +142,6 @@ function Index({ video_collection, pages, pornstarInformation, collageImages }) 
                     </div>
 
                 </div>
-
-
-
 
                 <Header keyword={pornstarname.replace("+", " ")} pageNumber={currentPageNumberURL} code={code} />
                 <Videos data={video_collection} />
@@ -287,6 +283,7 @@ export async function getStaticProps(context) {
             pages: pages,
             pornstarInformation: pornstarInformation,
             collageImages: collageImages,
+            pornstarname: pornstarname
         }
     }
 
