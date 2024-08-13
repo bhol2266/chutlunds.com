@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head'
 import Outstreams from '../../components/Ads/Outstream';
 import Popunder from '../../components/Ads/Popunder';
+import { SearchIcon } from '@heroicons/react/outline';
 
 function Search({ tags }) {
 
@@ -79,7 +80,7 @@ function Search({ tags }) {
 
 
     return (
-        <div className=" ">
+        <div className="basicMargin mt-3">
 
             <Head>
                 <title>Most popular and trending porn searches- Chutlunds</title>
@@ -93,22 +94,18 @@ function Search({ tags }) {
                 <meta name="twitter:card" content="summary_large_image" />
                 <link rel="canonical" href={`https://chutlunds.com/search`} />
 
-            </Head> 
+            </Head>
 
             <Outstreams />
             <Popunder />
 
-
-            <div className={`my-2  transition ease-in-out delay-150 mt-2 `}>
-
-                <form className='w-full sm:w-[400px] lg:w-[600px] flex items-center' >
-
-                    <input onChange={searchTag} className='shadow-lg mr-3 flex-grow   outline-none text-inter text-sm sm:text-md  border-gray-300 rounded pl-2  h-[35px]' type="text" placeholder='Search your tag...' />
-                    {/* 
-                    <button type="submit" className='bg-red-800  hover:bg-red-900 text-white text-sm p-2 pl-4 pr-4 m-1 rounded '>Search</button> */}
-
-                </form>
+            <div className={` mt-4  transition ease-in-out delay-150 `}>
+                <div className='flex my-1  md:w-3/5 md:mx-auto p-2 px-3  border-[1px] border-gray-200 space-x-2 md:space-x-4 xl:px-[50px] rounded-[15px]'  >
+                    <SearchIcon className='h-6 w-6 text-gray-400' />
+                    <input className='focus:outline-none flex-grow  font-inter rounded-lg ' type='text' onChange={searchTag} placeholder='Search your keyword'></input>
+                </div>
             </div>
+
 
             <div className='flex items-center space-x-2 mt-4'>
                 <img src='/login/label.png' className='h-[25px] w-[25px]' />
@@ -119,7 +116,7 @@ function Search({ tags }) {
                 {tagsArray.map(keyword => {
                     return (
                         <Link key={keyword} href={`/search/${keyword.trim().replace(/ /g, "+")}`}>
-                            <div className='my-1 mr-1.5 lg:mr-3 p-1 px-2 text-xs text-black bg-gray-300 rounded font-semibold hover:bg-theme font-poppins hover:text-white md:text-lg'>
+                            <div className='text-sm border-[1px] border-[#9499A8] text-semiblack px-2 py-1 rounded-lg my-1 mx-1.5  hover:bg-semiblack font-poppins hover:text-white md:text-lg'>
                                 <h2 className='text-center'>{keyword}</h2>
                             </div>
                         </Link>
@@ -138,7 +135,7 @@ export default Search
 
 
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 
 
     var TrendingKeywords = []

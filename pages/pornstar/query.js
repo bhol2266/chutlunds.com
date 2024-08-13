@@ -1,18 +1,10 @@
 import { useRouter } from "next/router";
-import Sidebar from "../../components/Sidebar";
-import Videos from "../../components/Videos";
-import Header from '../../components/Pornstar_Channels/Header'
-import Link from 'next/link'
-import { BeatLoader } from 'react-spinners'
-import { useContext, useState } from 'react';
-import videosContext from '../../context/videos/videosContext';
-import Router from 'next/router'
-import Head from 'next/head'
-import Pagination from '../../components/Pagination';
 import PaginationQuery from '../../components/PaginationQuery';
+import Header from '../../components/Pornstar_Channels/Header';
+import Videos from "../../components/Videos";
 import { scrapeVideos } from '../../config/spangbang';
 
-function PornstarQuery({ video_collection, pages, query, keyword, currentPage, filteredObjsArray }) {
+function PornstarQuery({ video_collection, pages, code, keyword, currentPage, filteredObjsArray }) {
 
 
 
@@ -31,12 +23,9 @@ function PornstarQuery({ video_collection, pages, query, keyword, currentPage, f
 
       <div>
 
-        <Header keyword={keyword} pageNumber={currentPageNumberURL} filteredObjsArrayProps={filteredObjsArray} />
-        <div className="flex">
-          <Sidebar />
-          <Videos data={video_collection} />
+        <Header keyword={keyword} pageNumber={currentPageNumberURL} filteredObjsArrayProps={filteredObjsArray} code={code} />
+        <Videos data={video_collection} />
 
-        </div>
 
 
         {/* PAGINATION */}
@@ -66,9 +55,6 @@ export async function getServerSideProps(context) {
   var completeSearch = ''
   if (o) {
     filteredObjsArray.push(`o=${o}`)
-  } else {
-    // This is by default required if not any filter is present accoring to new spangbang update
-    filteredObjsArray.push(`o=all`)
   }
   if (q) {
     filteredObjsArray.push(`q=${q}`)
@@ -130,7 +116,8 @@ export async function getServerSideProps(context) {
       query: filteredObjsArray,
       keyword: pornstar,
       currentPage: page,
-      filteredObjsArray: filteredObjsArray
+      filteredObjsArray: filteredObjsArray,
+      code:code
     }
   }
 

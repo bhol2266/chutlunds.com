@@ -1,20 +1,36 @@
-import { useRouter } from "next/router";
-import Sidebar from '../../../../../components/Sidebar';
-import Videos from "../../../../../components/Videos";
-import Header from '../../../../../components/Pornstar_Channels/Header'
-import Head from 'next/head'
-import { BeatLoader } from 'react-spinners';
-import Link from 'next/link'
-import Pagination from '../../../../../components/Pagination';
-import { Scrape_Video_Item_Pornstar } from '../../../../../config/Scrape_Video_Item';
-
 import cheerio from 'cheerio';
+import Head from 'next/head';
+import { useRouter } from "next/router";
+import { useEffect, useState } from 'react';
+import { BeatLoader } from 'react-spinners';
+import Pagination from '../../../../../components/Pagination';
+import Header from '../../../../../components/Pornstar_Channels/Header';
+import Videos from "../../../../../components/Videos";
+import { Scrape_Video_Item_Pornstar } from '../../../../../config/Scrape_Video_Item';
+import pornstarNameList from "../../../../../JsonData/pornstarlist/alldata.json";
+import { PlusIcon } from '@heroicons/react/outline';
 
 
 
-function Index({ video_collection, pages }) {
+function Index({ video_collection, pages, pornstarInformation, collageImages }) {
+
 
     const router = useRouter();
+    const { code, pornstarname, page } = router.query
+    const currentPageNumberURL = page
+    const [imageURL, setimage] = useState('');
+
+
+    useEffect(() => {
+        // Assuming pornstarNameList is available
+        pornstarNameList.filter(pornstar => {
+            if (pornstarname.toLowerCase() === pornstar.Name.toLowerCase().replace(/ /g, "+")) {
+                setimage(pornstar.thumbnail);
+            }
+        });
+    }, [pornstarname]);
+
+
     if (router.isFallback) {
         return (
             <div className="flex justify-center mx-auto mt-10 ">
@@ -23,11 +39,15 @@ function Index({ video_collection, pages }) {
         )
     }
 
-    const { code, pornstarname, page } = router.query
-    const currentPageNumberURL = page
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function clickSubscribe() {
+        if (!user) {
+            setLoginModalVisible(true)
+        }
     }
 
     return (
@@ -52,11 +72,83 @@ function Index({ video_collection, pages }) {
             </Head>
 
 
-            <Header keyword={pornstarname.replace('+', ' ')} pageNumber={currentPageNumberURL} />
-            <div className="flex">
-                <Sidebar />
-                <Videos data={video_collection} />
+            <div>
 
+                <div className="relative h-[240px] sm:h-[310px] md:h-[260px] lg:h-[290px] xl:h-[300px] 2xl:h-[350px] 3xl:h-[370px]">
+                    <div className="grid grid-cols-6 md:grid-cols-9 ">
+                        {collageImages.map((thumbnail, index) => (
+                            <div
+                                key={index}
+                                className="relative w-full h-auto"
+                            >
+                                <img
+                                    src={thumbnail}
+                                    alt={`Thumbnail ${index + 1}`}
+                                    className="w-full h-auto aspect-video object-contain"
+                                />
+                                <div className="absolute inset-0 bg-black bg-opacity-50 "></div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className=" absolute flex top-[30px] sm:top-[100px] md:top-[50px] lg:top-[40px] xl:top-[50px] 2xl:top-[100px] 3xl:top-[120px] left-[10px]  w-[calc(100%-20px)]">
+                        <div className=''>
+                            <img
+                                className="object-cover w-36 h-36 lg:w-44 lg:h-44 rounded-[15px] border-[1px] border-gray-200"
+                                src={imageURL}
+                                alt={pornstarname}
+                                loading="lazy"
+                            />
+                            <h2 className="text-lg lg:text-xl 2xl:text-2xl font-poppins text-theme my-1 pl-1">
+                                {capitalizeFirstLetter(pornstarname.replace(/\+/g, " "))}
+                            </h2>
+
+                            <div className="w-36 lg:w-44 mt-auto cursor-pointer h-fit flex items-center justify-center space-x-2 shadow-md text-white  p-1.5 bg-red-500 rounded-[20px]">
+                                <PlusIcon className="h-4 lg:h-5 text-white" />
+                                <p onClick={clickSubscribe} className="text-xs lg:text-sm   font-poppins">
+                                    {pornstarInformation.subscribe}
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div className="font-inter flex-1 flex flex-wrap  mt-auto mb-6 ml-2 sm:ml-4 sm:mb-[40px] md:mb-0 text-xs md:text-sm md:space-x-4  space-x-1">
+                            <span className={`p-0.5 font-light ${pornstarInformation.views ? '' : 'hidden'}`}>
+                                Views: <span className="font-semibold">{pornstarInformation.views}</span>
+                            </span>
+                            <span className={`p-0.5 font-light ${pornstarInformation.videos ? '' : 'hidden'}`}>
+                                Videos: <span className="font-semibold">{pornstarInformation.videos}</span>
+                            </span>
+                            <span className={`p-0.5 font-light ${pornstarInformation.age ? '' : 'hidden'}`}>
+                                Age: <span className="font-semibold">{pornstarInformation.age}</span>
+                            </span>
+                            <span className={`p-0.5 font-light ${pornstarInformation.from ? '' : 'hidden'}`}>
+                                From: <span className="font-semibold">{pornstarInformation.from}</span>
+                            </span>
+                            <span className={`p-0.5 font-light ${pornstarInformation.ethnicity ? '' : 'hidden'}`}>
+                                Ethnicity: <span className="font-semibold">{pornstarInformation.ethnicity}</span>
+                            </span>
+                            <span className={`p-0.5 font-light ${pornstarInformation.hairColor ? '' : 'hidden'}`}>
+                                Hair Color: <span className="font-semibold">{pornstarInformation.hairColor}</span>
+                            </span>
+                            <span className={`p-0.5 font-light ${pornstarInformation.height ? '' : 'hidden'}`}>
+                                Height: <span className="font-semibold">{pornstarInformation.height}</span>
+                            </span>
+                            <span className={`p-0.5 font-light ${pornstarInformation.weight ? '' : 'hidden'}`}>
+                                Weight: <span className="font-semibold">{pornstarInformation.weight}</span>
+                            </span>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+
+                <Header keyword={pornstarname.replace("+", " ")} pageNumber={currentPageNumberURL} code={code} />
+                <Videos data={video_collection} />
             </div>
 
             <Pagination data={{ url: `/pornstar/${code}/${pornstarname}`, currentPageNumberURL: currentPageNumberURL, pages: pages, }} />
@@ -108,6 +200,7 @@ export async function getStaticProps(context) {
         height: '',
         weight: ''
     };
+    var collageImages = []
 
 
     const scrape = async (url) => {
@@ -165,7 +258,22 @@ export async function getStaticProps(context) {
             }
         });
 
+        if (finalDataArray.length > 0) {
+            const maxImages = Math.min(finalDataArray.length, 18);
 
+            // Add up to 18 images from finalDataArray to collageImages
+            for (let index = 0; index < maxImages; index++) {
+                const { thumbnail } = finalDataArray[index];
+                collageImages.push(thumbnail);
+            }
+
+            // If we have less than 18 images, randomly repeat to fill up to 18
+            while (collageImages.length < 18) {
+                const randomIndex = Math.floor(Math.random() * finalDataArray.length);
+                const { thumbnail } = finalDataArray[randomIndex];
+                collageImages.push(thumbnail);
+            }
+        }
     }
 
 
@@ -176,7 +284,9 @@ export async function getStaticProps(context) {
     return {
         props: {
             video_collection: finalDataArray,
-            pages: pages
+            pages: pages,
+            pornstarInformation: pornstarInformation,
+            collageImages: collageImages,
         }
     }
 

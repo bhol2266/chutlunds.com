@@ -105,8 +105,8 @@ function Index({ video_collection, trendingChannels, newChannels }) {
 
     const fetchMoreData = () => {
         setpage(page + 1)
-        let startIndex = page * 60
-        setdata(data.concat(channels.slice(startIndex, startIndex + 60)));
+        let startIndex = page * 100
+        setdata(data.concat(channels.slice(startIndex, startIndex + 100)));
     }
 
     const customiseUrl = (channel_name) => {

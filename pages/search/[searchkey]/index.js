@@ -76,11 +76,8 @@ function Search({ video_collection, pages }) {
 
 
       <Header keyword={searchkey.replace("+", " ")} pageNumber={currentPageNumberURL} />
-      <div className="flex">
-        <Sidebar />
-        <Videos data={video_collection} />
+      <Videos data={video_collection} />
 
-      </div>
 
 
       <Pagination data={{ url: `/search/${searchkey.toLowerCase().trim()}`, currentPageNumberURL: currentPageNumberURL, pages: pages, }} />

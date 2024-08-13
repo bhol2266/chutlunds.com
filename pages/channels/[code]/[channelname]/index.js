@@ -1,15 +1,15 @@
+import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';
+import { UserAuth } from "@/context/AuthContext";
+import { LinkIcon, PlusIcon } from '@heroicons/react/outline';
 import cheerio from 'cheerio';
-import { useRouter } from "next/router";
 import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from "next/router";
+import { useState } from 'react';
 import { BeatLoader } from 'react-spinners';
 import Pagination from '../../../../components/Pagination';
 import Header from '../../../../components/Pornstar_Channels/Header';
 import Videos from "../../../../components/Videos";
-import { PlusIcon, LinkIcon } from '@heroicons/react/outline';
-import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';
-import { UserAuth } from "@/context/AuthContext";
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
 
 
 
@@ -29,7 +29,6 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
         if (!user) {
             setLoginModalVisible(true)
         }
-
     }
 
     if (router.isFallback) {
@@ -125,7 +124,7 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
 
 
 
-                <Header keyword={channel_name.replace("+", " ")} pageNumber={currentPageNumberURL} code={code} />
+                <Header keyword={channelname} pageNumber={currentPageNumberURL} code={code} />
                 <Videos data={video_collection} type="premium" />
             </div>
 

@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Router from 'next/router'
 
 
 
@@ -10,14 +11,25 @@ const PaginationQuery = ({ data }) => {
     const filteredObjsArray = data.filteredObjsArray;
     const keyword = data.keyword;
     const pages = data.pages;
+    const code = data.code;
 
     const router = useRouter();
 
 
     const clickHandler = (pageNumber) => {
-        var queryObj = {
-            category: keyword,
-            page: pageNumber
+        if (Router.pathname.includes("/channels/")) {
+
+            var queryObj = {
+                channelname: keyword,
+                code:code,
+                page: pageNumber
+            }
+
+        } else {
+            var queryObj = {
+                category: keyword,
+                page: pageNumber
+            }
         }
         if (filteredObjsArray) {
             for (let index = 0; index < filteredObjsArray.length; index++) {

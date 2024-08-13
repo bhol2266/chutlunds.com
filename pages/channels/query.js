@@ -1,21 +1,11 @@
-import { useRouter } from "next/router";
 import PaginationQuery from '../../components/PaginationQuery';
 import Header from '../../components/Pornstar_Channels/Header';
-import Sidebar from "../../components/Sidebar";
 import Videos from "../../components/Videos";
 import { scrapeVideos } from '../../config/spangbang';
 
-function ChannelsQuery({ video_collection, pages, query, keyword, currentPage, filteredObjsArray }) {
+function ChannelsQuery({ video_collection, pages, query, keyword, currentPage, filteredObjsArray,code }) {
 
-
-
-  const router = useRouter();
   const currentPageNumberURL = currentPage
-
-  function capitalizeFirstLetter(string) {
-    console.log(string.charAt(0).toUpperCase() + string.slice(1));
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
 
   return (
 
@@ -23,13 +13,13 @@ function ChannelsQuery({ video_collection, pages, query, keyword, currentPage, f
 
       <div>
 
-        <Header keyword={keyword} pageNumber={currentPageNumberURL} filteredObjsArrayProps={filteredObjsArray} />
+        <Header keyword={keyword} pageNumber={currentPageNumberURL} filteredObjsArrayProps={filteredObjsArray} code={code} />
         <Videos data={video_collection} />
 
 
 
         {/* PAGINATION */}
-        <PaginationQuery data={{ keyword: keyword, pathname: `/channels/query/`, currentPageNumberURL: currentPageNumberURL, pages: pages, filteredObjsArray: filteredObjsArray }} />
+        <PaginationQuery data={{ keyword: keyword, pathname: `/channels/query/`, currentPageNumberURL: currentPageNumberURL, pages: pages, filteredObjsArray: filteredObjsArray,code:code }} />
 
       </div>
 
@@ -47,6 +37,7 @@ export async function getServerSideProps(context) {
   const { channelname, page, code } = context.query;
 
 
+
   var finalDataArray = []
   var pages = []
 
@@ -57,10 +48,7 @@ export async function getServerSideProps(context) {
   var completeSearch = ''
   if (o) {
     filteredObjsArray.push(`o=${o}`)
-  } else {
-    // This is by default required if not any filter is present accoring to new spangbang update
-    filteredObjsArray.push(`o=all`)
-  }
+  } 
   if (q) {
     filteredObjsArray.push(`q=${q}`)
 
@@ -121,7 +109,8 @@ export async function getServerSideProps(context) {
       query: filteredObjsArray,
       keyword: channelname,
       currentPage: page,
-      filteredObjsArray: filteredObjsArray
+      filteredObjsArray: filteredObjsArray,
+      code:code
     }
   }
 
