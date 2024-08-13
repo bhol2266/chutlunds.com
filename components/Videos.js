@@ -35,7 +35,7 @@ function Videos({ data, type }) {
   
 
     return (
-        <div className="h-fit w-full  basicMargin">
+        <div className="h-fit  basicMargin">
             <div className={`grid py-1 gap-2 md:gap-3 lg:gap-4 ${viewType === 'horizontal' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 4xl:grid-cols-5' : 'grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 4xl:grid-cols-5'}`}>
                 {
                     data.map(video => (
