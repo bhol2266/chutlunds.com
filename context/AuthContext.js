@@ -7,11 +7,24 @@ export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [LoginModalVisible, setLoginModalVisible] = useState(false);
 
+    const [SignUpFormVisible, setSignUpFormVisible] = useState(true);
+    const [LoginFormVisible, setLoginFormVisible] = useState(false);
+    const [PasswordResetVisible, setPasswordResetVisible] = useState(false);
+    const [OTPFormVisible, setOTPFormVisible] = useState(false);
+
+
 
     return (
-        <AuthContext.Provider value={{ user, setUser,LoginModalVisible, setLoginModalVisible }}>
+        <AuthContext.Provider value={{
+            user, setUser,
+            LoginModalVisible, setLoginModalVisible,
+            SignUpFormVisible, setSignUpFormVisible,
+            LoginFormVisible, setLoginFormVisible,
+            PasswordResetVisible, setPasswordResetVisible,
+            OTPFormVisible, setOTPFormVisible
+        }} >
             {children}
-        </AuthContext.Provider>
+        </AuthContext.Provider >
     )
 }
 

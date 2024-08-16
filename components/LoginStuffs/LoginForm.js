@@ -1,39 +1,38 @@
-import { setCookie } from "cookies-next";
-import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
-import { UserAuth } from "../../context/AuthContext";
-import videosContext from '../../context/videos/videosContext';
-import { signIn } from 'next-auth/react';
-
-
-
-
+import { UserAuth } from "../../context/AuthContext"
+import { setCookie } from "cookies-next"
+import Link from 'next/link'
+import Router, { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
+import { CiLogin } from "react-icons/ci"
+import { FaCheckCircle } from "react-icons/fa"
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 
 export const LoginForm = () => {
-
     const router = useRouter()
 
-    const { user, googleSignIn, logOut } = UserAuth();
-
-    const { OTPemail, setOTPemail, loggedIn, setloggedIn } = useContext(videosContext)
-
-    const [loading, setloading] = useState(false);
-    const [email, setemail] = useState('')
+    const [Email, setEmail] = useState('')
+    const [firstName, setfirstName] = useState('')
+    const [lastName, setlastName] = useState('')
+    const [phone, setphone] = useState('')
     const [password, setpassword] = useState('')
+    const [confirmPassword, setconfirmPassword] = useState('')
+    const [validateEmailState, setvalidateEmailState] = useState(null)
     const [message, setmessage] = useState('');
+    const [loading, setloading] = useState(false);
     const [Country, setCountry] = useState('');
 
 
-    // useEffect(() => {
-    //     if (session) {
-    //         router.push("/");
-    //     }
-    // }, [session]);
+    const { setSignUpFormVisible, setLoginFormVisible, setPasswordResetVisible, setLoginModalVisible } = UserAuth();
 
 
+
+    useEffect(() => {
+        getLocation();
+    }, [])
 
     async function getLocation() {
+
         try {
             const response = await fetch('https://api.db-ip.com/v2/free/self')
             const data = await response.json();
@@ -45,12 +44,24 @@ export const LoginForm = () => {
             const data = await response.json();
             setCountry(data.country_name)
             setCookie('country', data.country_name, { maxAge: 900000 })
-
         }
+
+    }
+    const validateEmail = (email) => {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            return (true)
+        }
+        return (false)
+    };
+
+
+
+    const gotoLogin = () => {
+        router.push('/account/login')
+
     }
 
-
-    const SignInButton = async (auth_provider) => {
+   const SignInButton = async (auth_provider) => {
         // signIn(auth_provider);
         // router.push('/api/auth/google')
         var authUrl = ""
@@ -76,123 +87,182 @@ export const LoginForm = () => {
 
     }
 
-    const handleSignOut = async () => {
-        try {
-            await logOut();
-        } catch (error) {
-            console.log(error);
+
+
+
+    const proceedLogin = () => {
+        
+    }
+
+    const forgotpassword = () => {
+        router.push('/account/login')
+
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        alert("under development, please use Google or Facebook")
+        return
+        setmessage('')
+
+        if (Email.length > 10 && !validateEmail(Email)) {
+            alert("Please Enter Email correctly")
+            return
         }
-    };
 
-    useEffect(() => {
-        getLocation()
+        if (password != confirmPassword) {
+            alert("Confirm Password Incorrect")
+            return
+        }
 
-        const checkAuthentication = async () => {
-            await new Promise((resolve) => setTimeout(resolve, 50));
-        };
-        checkAuthentication();
-    }, [user]);
+        setloading(true)
+
+        try {
+            const parcelData = { firstName: firstName.trim(), lastName: lastName.trim(), email: Email.trim(), password: password, country: Country }
+            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/login/register`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify(parcelData),
+            });
+
+            const res = await rawResponse.json();
+            console.log(res);
+
+            if (res.message === 'Already Resgistered') {
+                setmessage('Already Resgistered !')
+            }
+            if (res.message === 'OTP Sent') {
+                Router.push({
+                    pathname: `/account/verifyOTP`,
+                    query: { email: Email }
+                })
+            }
+
+            setloading(false)
+        } catch (error) {
+            setloading(false)
+            console.log(error);
+            alert(error);
+            return
+        }
+
+    }
+
 
 
 
 
     return (
-        <div className={`bg-no-repeat bg-cover	bg-opacity-80 w-full  sm:w-4/5 md:w-3/5 lg:w-2/5 xl:w-[450px] mx-auto`}>
 
 
-
-            <h2 className='mt-[20px] text-[#323232]  text-[18px] font-manrope mb-2'>
-                SIGN UP / SIGN IN
-            </h2>
-
-            {/* <form autoComplete="on" onSubmit={submitForm}>
-                <div className="px-5 pt-4 font-inter">
-
-                    <label className=" text-[#323232] pb-[1px] block ml-1">E-mail</label>
-                    <input onChange={e => { setemail(e.target.value) }} required type="text" id='email' name='email' className=" rounded-lg px-3 py-2 mt-1 mb-3 text-sm w-full outline-none  text-[#323232] placeholder:text-gray-400   border-[1px] border-gray-400" placeholder='E-mail' />
-
-                    <label className=" text-[#323232] pb-[1px] block ml-2">Password</label>
-                    <input onChange={e => { setpassword(e.target.value) }} required type="password" id='password' name='password' className=" rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full outline-none  text-[#323232] placeholder:text-gray-400  border-[1px] border-gray-400" placeholder='Password' />
-
-                    <div className='h-[40px]'>
-                        {!loading &&
-                            <button type="submit" className="transition duration-200 bg-red-500 hover:bg-red-600  text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block">
-                                {!loading && <span className="inline-block mr-2">Login</span>}
-                                {!loading && <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                </svg>}
+        <div className="relative bg-semiblack  rounded-lg  px-6 lg:px-0 py-10  ">
 
 
-                            </button>
-                        }
+            <IoIosCloseCircleOutline onClick={() => { setLoginModalVisible(false) }} className="cursor-pointer absolute text-white text-[32px] lg:text-[34px] right-4 top-4" />
 
-                        {loading &&
-                            <div className='block mx-auto w-fit '>
-                                <ClipLoader color={"#323232"} size={35} />
+            <div className="flex flex-col justify-center lg:flex-row lg:space-x-8">
 
+                <img src='/logo.png' alt="chutlunds" className='w-[200px] mx-auto  lg:w-[220px] mx-auto lg:-mt-2' />
+                <p className='mb-6 font-inter text-white text-center text font-dancing text-2xl'>Unleash your desires!   </p>
+
+
+                <div>
+                <form className="space-y-5" action="#" method="POST" onSubmit={handleSubmit}>
+                <div className=''>
+                            <label htmlFor="email" className="text-sm font-medium leading-6 text-white pl-1">Email address</label>
+                            <div className="mt-1">
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    autoComplete="email"
+                                    required
+                                    placeholder='Email'
+                                    className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                />
                             </div>
+                        </div>
 
-                        }
+                        <div className='  '>
+                            <label htmlFor="password" className="text-sm font-medium leading-6 text-white pl-1">Password</label>
+                            <div className="mt-1">
+                                <input
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    autoComplete="current-password"
+                                    required
+                                    placeholder='Password'
+                                    className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                />
+                            </div>
+                        </div>
+
+
+
+                        <button type="submit" onClick={() => { proceedLogin() }} className="select-none mt-[30px] space-x-2 items-center cursor-pointer hover:bg-gray-400 flex w-full justify-center rounded-md bg-gray-200 px-3 py-1.5 text-sm font-inter  leading-6  shadow-sm text-semiblack font-inter font-semibold ">
+                            <CiLogin className="text-semiblack text-xl" />
+                            <p className="flex  justify-center font-inter" >Login</p>
+                        </button>
+
+
+
+
+                    </form>
+
+
+                    <p onClick={() => { setPasswordResetVisible(true); setLoginFormVisible(flase) }} className="cursor-pointer mt-6 mb-2 text-center text-sm text-white">
+                        Forgot your password?
+                    </p>
+                    <p className="mb-2 text-center text-sm text-white">
+                        Don't have an account?
+                        <span onClick={() => { setSignUpFormVisible(true); setLoginFormVisible(false) }} className="underline cursor-pointer text-theme_yellow">Register here</span>
+                    </p>
+
+
+
+                    <div className="w-full flex items-center justify-center my-2">
+                        <hr className="flex-grow border-gray-300 my-2 " />
+
+                        <p className='my-4 w-fit mx-2 font-inter text-white text-xs'>  or continue with</p>
+
+                        <hr className="flex-grow border-gray-300 my-2" />
                     </div>
 
-                    <div className='h-[50px]'>
-                        <p className={` rounded text-center  text-md text-red-500 font-semobold mt-3 px-1 py-1 ${message.length > 0 ? "visible" : "invisible"}`}>{message}</p>
+                    <div className="w-full flex mb-5  mx-auto  space-x-4 ">
+                        <div onClick={() => SignInButton('google')} className="group hover:bg-slate-200 w-full  flex items-center justify-center space-x-2 cursor-pointer py-1.5  rounded-md border-[1px] border-gray-200">
+                            <img src='/login/google.png' className='lg:h-[38px] object-contain h-[22px] w-[22px] cursor-pointer ml-1' alt="Google" />
+                            <h2 className=' font-inter text-white text-[11px] lg:text-[14px] group-hover:text-semiblack'>Google</h2>
+                        </div>
+
+                        <div onClick={() => SignInButton('google')} className="group hover:bg-slate-200 w-full flex items-center justify-center space-x-2 cursor-pointer py-1.5  rounded-md border-[1px] border-gray-200">
+                            <img src='/login/facebook.png' className='lg:h-[40px] object-contain h-[24px] w-[24px] cursor-pointer ml-1' alt="Facebook" />
+                            <h2 className=' font-inter text-white text-[11px] lg:text-[14px] group-hover:text-semiblack'>Facebook</h2>
+                        </div>
                     </div>
 
 
+                    <div className=''>
+                        <p className='text-xs text-center text-white font-inter whitespace-nowrap overflow-hidden text-ellipsis'>
+                            By Registering, I certify that I am over 18 years old and I agree to
+                        </p>
+                        <Link href="/terms">
+                            <p className='text-xs text-center font-inter font-semibold text-theme_yellow hover:underline cursor-pointer'>
+                                Terms of Service.
+                            </p>
+                        </Link>
+                    </div>
+
                 </div>
-
-            </form>
-
-            <button className="transition duration-200  pb-1 cursor-pointer  text-sm rounded-lg text-[#323232] block mx-auto font-arial ">
-                <span className="inline-block ml-1">Don't have an account ?</span>
-
-                <span onClick={registerClick} className="inline-block ml-1 text-red-500">Register</span>
-            </button>
-
-            <button onClick={forgotPassword} className="transition duration-200  py-3 cursor-pointer  text-sm rounded-lg text-[#323232] block mx-auto font-inter hover:text-red-300">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block align-text-top">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
-                </svg>
-                <span className="inline-block ml-1">Forgot Password</span>
-            </button>
-
-
-            <div className='flex items-center justify-center space-x-1 mt-4'>
-
-                <span className='border-[1px] border-gray-300 w-full'></span>
-                <p className='text-[#323232] font-inter text-sm'>OR</p>
-                <span className='border-[1px] border-gray-300 w-full'></span>
-            </div> */}
-
-
-
-            <div className=' w-full  mt-[76px]  mx-auto  flex flex-col items-start  space-y-6 px-6'>
-
-                <div onClick={() => SignInButton('google')}
-                    className='hover:bg-slate-200 w-full rounded-xl  flex items-center justify-center space-x-4 cursor-pointer py-1.5  px-6 border-[1px] border-slate-300  '>
-                    <img src='/login/google.png' className='lg:h-[38px] object-contain h-[28px] w-[28px] cursor-pointer ml-1'></img>
-                    <h2 className=' font-semibold font-inter text-[#323232] text-[11px] lg:text-[14px]'>Continue with Google</h2>
-                </div>
-
-
-                <div onClick={() => SignInButton('google')}
-                    className='hover:bg-slate-200 w-full  flex items-center justify-center space-x-4 cursor-pointer py-1.5  px-6  rounded-xl border-[1px] border-slate-300 '>
-                    <img src='/login/facebook.png' className='lg:h-[40px] object-contain h-[28px] w-[28px] cursor-pointer ml-1'></img>
-                    <h2 className='font-semibold font-inter text-[#323232] text-[11px] lg:text-[14px]'>Continue with Facebook</h2>
-                </div>
-
-
-
-
-
-
-
 
             </div>
-
-
         </div>
 
     )
 }
+
+

@@ -171,7 +171,7 @@ function Navbar() {
                                 <div className='flex items-center space-x-1' >
 
                                     <Link href='/'>
-                                        <img src='/logo.png' alt="loading..." className='w-[200px]' />
+                                        <img src='/logo.png' alt="chutlunds" className='w-[200px]' />
                                     </Link>
                                     {location &&
                                         <div className='cursor-pointer' onClick={handleClickFlag}>
@@ -363,19 +363,19 @@ function Navbar() {
             <div className='flex justify-around items-center shadow-lg lg:hidden font-arial'>
                 <Link href='/'>
 
-                    <p className={`sm:text-xl xl:text-[28px] text-md text-white text-center p-1  border-b-[3px] ${currentPath === '/' ? 'border-[#FFBB00]' : 'hover:border-[#FFBB00] border-transparent'}`}>
+                    <p className={`sm:text-xl xl:text-[28px] text-md text-white text-center p-1  border-b-[3px] ${currentPath === '/' ? 'border-theme_yellow' : 'hover:border-theme_yellow border-transparent'}`}>
                         Home
                     </p>
                 </Link>
 
                 <Link href='/category'>
-                    <p className={`sm:text-xl xl:text-[28px] text-md text-white text-center p-1  border-b-[3px] ${currentPath === '/category' ? 'border-[#FFBB00]' : 'hover:border-[#FFBB00] border-transparent'}`}>
+                    <p className={`sm:text-xl xl:text-[28px] text-md text-white text-center p-1  border-b-[3px] ${currentPath === '/category' ? 'border-theme_yellow' : 'hover:border-theme_yellow border-transparent'}`}>
                         Categories
                     </p>
                 </Link>
 
                 <Link href='/channels'>
-                    <div className={`group flex items-center justify-center space-x-1 -mb-1 pb-1  border-b-[3px] ${currentPath === '/channels' ? 'border-[#FFBB00]' : 'hover:border-[#FFBB00] border-transparent'}`}>
+                    <div className={`group flex items-center justify-center space-x-1 -mb-1 pb-1  border-b-[3px] ${currentPath === '/channels' ? 'border-theme_yellow' : 'hover:border-theme_yellow border-transparent'}`}>
                         <img src="/channel.png" alt="" className='h-5 m' />
                         <p className={`sm:text-xl xl:text-[28px] text-md text-white text-center mb-0`}>
                             Channels
@@ -385,7 +385,7 @@ function Navbar() {
 
 
                 <Link href='/membership'>
-                    <p className='sm:text-md text-sm text-semiblack rounded-[22px] text-center px-3 p-1 m-1 bg-[#FFBB00] hover:scale-105 transition-transform duration-30'>
+                    <p className='sm:text-md text-sm text-semiblack rounded-[22px] text-center px-3 p-1 m-1 bg-theme_yellow hover:scale-105 transition-transform duration-30'>
                         Join Now
                     </p>
                 </Link>
@@ -404,7 +404,7 @@ function Navbar() {
                     <div className='flex items-center space-x-1 md:space-x-3  ml-2' >
 
                         <Link href='/'>
-                            <img src='/logo.png' alt="loading..." className='w-[250px]' />
+                            <img src='/logo.png' alt="chutlunds" className='w-[250px]' />
                         </Link>
                         {location &&
 
@@ -498,7 +498,7 @@ function Navbar() {
                                 </div>
                             }
                             <Link href='/membership'>
-                                <button className="bg-[#FFBB00] text-semiblack rounded-[22px] font-semibold text-center px-5 p-1.5 m-1 text-md block_popunder hover:scale-105 transition-transform duration-300">Join Now</button>
+                                <button className="bg-theme_yellow text-semiblack rounded-[22px] font-semibold text-center px-5 p-1.5 m-1 text-md block_popunder hover:scale-105 transition-transform duration-300">Join Now</button>
                             </Link>
 
                         </div>
@@ -519,7 +519,7 @@ function Navbar() {
                             <Link href={item.href} legacyBehavior key={item.name}>
                                 <a rel="nofollow"
                                     className={`text-xl 2xl:text-2xl font-semibold text-white cursor-pointer p-1 border-b-4 
-                    ${isActive ? 'border-[#FFBB00]' : 'border-transparent hover:border-[#FFBB00]'}
+                    ${isActive ? 'border-theme_yellow' : 'border-transparent hover:border-theme_yellow'}
                     transition-colors duration-300`}
                                 >
                                     {item.name}
