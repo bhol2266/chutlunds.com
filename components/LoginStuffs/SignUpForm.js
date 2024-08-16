@@ -87,7 +87,7 @@ export const SignUpForm = () => {
         setSignUpFormVisible(false)
     }
 
-   
+
 
     const handleSubmit = async (event) => {
 
@@ -149,7 +149,7 @@ export const SignUpForm = () => {
     return (
 
 
-        <div className="relative bg-semiblack  rounded-lg  px-6 lg:px-0 py-10  ">
+        <div className="relative bg-semiblack  rounded-lg  px-6 lg:px-0 py-8  ">
 
             <IoIosCloseCircleOutline onClick={() => { setLoginModalVisible(false) }} className="cursor-pointer absolute text-white text-[32px] lg:text-[34px] right-4 top-4" />
 
@@ -184,55 +184,53 @@ export const SignUpForm = () => {
                 </div>
 
                 <div>
-                <form className="space-y-5" action="#" method="POST" onSubmit={handleSubmit}>
-    <div className="flex space-x-3 w-full">
-        <div className='w-2/3'>
-            <label htmlFor="email" className="text-sm font-medium leading-6 text-white">Email address</label>
-            <div className="mt-2">
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    required
-                    placeholder='Email'
-                    className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                />
-            </div>
-        </div>
+                    <form className="space-y-5" action="#" method="POST" onSubmit={handleSubmit}>
+                        <div className="flex space-x-3 w-full">
+                            <div className='w-2/3'>
+                                <label htmlFor="email" className="text-sm font-medium leading-6 text-white">Email address</label>
+                                <div className="mt-2">
+                                    <input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        autoComplete="email"
+                                        required
+                                        placeholder='Email'
+                                        className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm leading-6"
+                                    />
+                                </div>
+                            </div>
 
-        <div className=''>
-            <label htmlFor="password" className="text-sm font-medium leading-6 text-white">Create Password</label>
-            <div className="mt-2">
-                <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                    placeholder='Password'
-                    className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                />
-            </div>
-        </div>
-    </div>
+                            <div className=''>
+                                <label htmlFor="password" className="text-sm font-medium leading-6 text-white">Create Password</label>
+                                <div className="mt-2">
+                                    <input
+                                        id="password"
+                                        name="password"
+                                        type="password"
+                                        autoComplete="current-password"
+                                        required
+                                        placeholder='Password'
+                                        className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm leading-6"
+                                    />
+                                </div>
+                            </div>
+                        </div>
 
-    <div>
-        <button type="submit" className="mt-[30px] flex w-full justify-center rounded-md bg-gray-200 px-3 py-1.5 text-sm font-inter leading-6 shadow-sm text-semiblack font-inter font-semibold">
-            Join Chutlunds!
-        </button>
-    </div>
-</form>
+                        <div>
+                            <button type="submit" className="mt-[30px] flex w-full justify-center rounded-md bg-gray-200 px-3 py-1.5 text-sm font-inter leading-6 shadow-sm text-semiblack font-inter font-semibold">
+                                Join Chutlunds!
+                            </button>
+                        </div>
+                    </form>
 
 
-                    <p className="mt-6 mb-2 text-center text-sm text-white">
+                    <p className="my-4 text-center text-sm text-white">
                         Already have an account?
+                        <span onClick={() => { loginHere() }} className="underline cursor-pointer text-theme_yellow"> Login here</span>
                     </p>
 
-                    <div onClick={() => { loginHere() }} className="cursor-pointer flex items-center justify-center space-x-4  rounded-md border-[1px] border-gray-200 px-3 py-1.5 text-sm  leading-6 shadow-sm text-white ">
-                        <CiLogin className="text-white text-xl" />
-                        <p className="flex  justify-center font-inter" >Login here!</p>
-                    </div>
+
 
                     <div className="w-full flex items-center justify-center my-2">
                         <hr className="flex-grow border-gray-300 my-2 " />
@@ -253,6 +251,8 @@ export const SignUpForm = () => {
                             <h2 className=' font-inter text-white text-[11px] lg:text-[14px] group-hover:text-semiblack'>Facebook</h2>
                         </div>
                     </div>
+
+
 
 
                     <div className=''>

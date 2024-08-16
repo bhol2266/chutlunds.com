@@ -5,11 +5,13 @@ import Link from 'next/link';
 import Script from 'next/script';
 import { LoginForm } from '../components/LoginStuffs/LoginForm';
 import { SignUpForm } from '../components/LoginStuffs/SignUpForm';
+import { SignUpFormOTP } from '../components/LoginStuffs/SignUpFormOTP';
 
 const MyComponent = () => (
     <>
 
     <SignUpForm/>
+    <SignUpFormOTP/>
 
         <div className='h-[500px] w-[500px] bg-red-300 m-auto flex items-center'>
 
