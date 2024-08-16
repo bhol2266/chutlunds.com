@@ -183,7 +183,7 @@ export const SignUpForm = () => {
                     </div>
                 </div>
 
-                <div>
+                <div className="lg:mt-4">
                     <form className="space-y-5" action="#" method="POST" onSubmit={handleSubmit}>
                         <div className="flex space-x-3 w-full">
                             <div className='w-2/3'>
