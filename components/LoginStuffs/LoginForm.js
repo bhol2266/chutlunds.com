@@ -1,11 +1,10 @@
-import { UserAuth } from "../../context/AuthContext"
 import { setCookie } from "cookies-next"
 import Link from 'next/link'
 import Router, { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { CiLogin } from "react-icons/ci"
-import { FaCheckCircle } from "react-icons/fa"
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { IoIosCloseCircleOutline } from "react-icons/io"
+import { UserAuth } from "../../context/AuthContext"
 
 
 export const LoginForm = () => {

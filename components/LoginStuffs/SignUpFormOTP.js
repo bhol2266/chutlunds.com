@@ -1,11 +1,8 @@
+import { getCookie, setCookie } from "cookies-next"
+import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
-import { CheckCircleIcon } from '@heroicons/react/solid'
-import { XCircleIcon } from '@heroicons/react/solid'
-import Link from 'next/link'
+import ClipLoader from "react-spinners/ClipLoader"
 import videosContext from '../../context/videos/videosContext'
-import Router, { useRouter } from 'next/router';
-import ClipLoader from "react-spinners/ClipLoader";
-import { setCookie, deleteCookie, getCookie } from "cookies-next";
 
 export const SignUpFormOTP = () => {
     const router = useRouter();

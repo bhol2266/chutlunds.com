@@ -1,11 +1,10 @@
 import { setCookie } from "cookies-next";
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
-import videosContext from '../context/videos/videosContext';
 import { UserAuth } from "../context/AuthContext";
-import { SignUpForm } from "./LoginStuffs/SignUpForm";
+import videosContext from '../context/videos/videosContext';
 import { LoginForm } from "./LoginStuffs/LoginForm";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { SignUpForm } from "./LoginStuffs/SignUpForm";
 export const LoginModal = () => {
     const router = useRouter();
     const { user, LoginModalVisible, setLoginModalVisible, SignUpFormVisible,
@@ -37,21 +36,7 @@ export const LoginModal = () => {
         getLocation();
     }, []);
 
-    const SignInButton = async () => {
-        let authUrl = "";
-        const scope = 'profile email';
-        const currentHost = window.location.host;
 
-        if (currentHost === "localhost:3000") {
-            authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=http://localhost:3000/api/auth/callback&scope=${scope}`;
-        } else if (currentHost === "chutlunds.com") {
-            authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=https://www.chutlunds.com/api/auth/chutlunds/callback&scope=${scope}`;
-        } else if (currentHost === "chutlunds2.com") {
-            authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=https://www.chutlunds2.com/api/auth/chutlunds2/callback&scope=${scope}`;
-        }
-
-        window.location.href = authUrl;
-    };
 
     return (
         <div className={`fixed inset-0 z-30 ${LoginModalVisible ? "" : "hidden"}`}>
@@ -65,17 +50,17 @@ export const LoginModal = () => {
 
             </div>
             {/* Modal content */}
-i
+            i
 
 
             {SignUpFormVisible &&
-                <div className={`rounded-lg absolute flex justify-center items-center inset-0 `}>
-                    <SignUpForm />
+                <div className={`rounded-lg absolute flex justify-center items-center inset-0 overflow-hidden w-[405px] sm:w-full mx-auto`}>
+                <SignUpForm />
                 </div>
             }
 
             {LoginFormVisible &&
-                <div className={`rounded-lg absolute flex justify-center items-center inset-0 `}>
+                <div className={`rounded-lg absolute flex justify-center items-center inset-0 overflow-hidden w-[405px] sm:w-full mx-auto`}>
                     <LoginForm />
                 </div>
             }
