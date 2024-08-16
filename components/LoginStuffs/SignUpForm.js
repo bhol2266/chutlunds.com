@@ -218,7 +218,7 @@ export const SignUpForm = () => {
                         </div>
 
                         <div>
-                            <button type="submit" className="mt-[30px] flex w-full justify-center rounded-md bg-gray-200 px-3 py-1.5 text-sm font-inter leading-6 shadow-sm text-semiblack font-inter font-semibold">
+                            <button type="submit" className="mt-[20px] flex w-full justify-center rounded-md bg-gray-200 px-3 py-1.5 text-sm font-inter leading-6 shadow-sm text-semiblack font-inter font-semibold">
                                 Join Chutlunds!
                             </button>
                         </div>
