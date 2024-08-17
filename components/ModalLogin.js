@@ -5,12 +5,14 @@ import { UserAuth } from "../context/AuthContext";
 import videosContext from '../context/videos/videosContext';
 import { LoginForm } from "./LoginStuffs/LoginForm";
 import { SignUpForm } from "./LoginStuffs/SignUpForm";
+import { SignUpFormOTP } from "./LoginStuffs/SignUpFormOTP";
+import { PasswordReset } from "./LoginStuffs/PasswordReset";
 export const LoginModal = () => {
     const router = useRouter();
     const { user, LoginModalVisible, setLoginModalVisible, SignUpFormVisible,
         setSignUpFormVisible,
         LoginFormVisible,
-        setLoginFormVisible } = UserAuth();
+        setLoginFormVisible, OTPFormVisible, PasswordResetVisible } = UserAuth();
     const { OTPemail, setOTPemail, loggedIn, setloggedIn } = useContext(videosContext);
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
@@ -55,7 +57,7 @@ export const LoginModal = () => {
 
             {SignUpFormVisible &&
                 <div className={`rounded-lg absolute flex justify-center items-center inset-0 overflow-hidden w-[405px] sm:w-full mx-auto`}>
-                <SignUpForm />
+                    <SignUpForm />
                 </div>
             }
 
@@ -64,6 +66,19 @@ export const LoginModal = () => {
                     <LoginForm />
                 </div>
             }
+
+            {OTPFormVisible &&
+                <div className={`rounded-lg absolute flex justify-center items-center inset-0 overflow-hidden w-[405px] sm:w-full mx-auto`}>
+                    <SignUpFormOTP />
+                </div>
+            }
+
+            {PasswordResetVisible &&
+                <div className={`rounded-lg absolute flex justify-center items-center inset-0 overflow-hidden w-[405px] sm:w-full mx-auto`}>
+                    <PasswordReset />
+                </div>
+            }
+
 
 
 

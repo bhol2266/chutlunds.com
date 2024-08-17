@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { CiLogin } from "react-icons/ci"
 import { IoIosCloseCircleOutline } from "react-icons/io"
 import { UserAuth } from "../../context/AuthContext"
+import ClipLoader from "react-spinners/ClipLoader"
 
 
 export const LoginForm = () => {
@@ -22,8 +23,7 @@ export const LoginForm = () => {
     const [Country, setCountry] = useState('');
 
 
-    const { setSignUpFormVisible, setLoginFormVisible, setPasswordResetVisible, setLoginModalVisible } = UserAuth();
-
+    const { setSignUpFormVisible, setLoginFormVisible, setPasswordResetVisible, setLoginModalVisible, setOTPFormVisible,setEmailOTP,setreceivedOTP } = UserAuth();
 
 
     useEffect(() => {
@@ -46,21 +46,9 @@ export const LoginForm = () => {
         }
 
     }
-    const validateEmail = (email) => {
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-            return (true)
-        }
-        return (false)
-    };
 
 
-
-    const gotoLogin = () => {
-        router.push('/account/login')
-
-    }
-
-   const SignInButton = async (auth_provider) => {
+    const SignInButton = async (auth_provider) => {
         // signIn(auth_provider);
         // router.push('/api/auth/google')
         var authUrl = ""
@@ -89,9 +77,6 @@ export const LoginForm = () => {
 
 
 
-    const proceedLogin = () => {
-        
-    }
 
     const forgotpassword = () => {
         router.push('/account/login')
@@ -101,25 +86,19 @@ export const LoginForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        alert("under development, please use Google or Facebook")
-        return
         setmessage('')
-
-        if (Email.length > 10 && !validateEmail(Email)) {
-            alert("Please Enter Email correctly")
-            return
-        }
-
-        if (password != confirmPassword) {
-            alert("Confirm Password Incorrect")
-            return
-        }
-
         setloading(true)
 
+        // Get form data
+        const formData = new FormData(event.target);
+        const email = formData.get('email');
+        const password = formData.get('password');
+
+
+
         try {
-            const parcelData = { firstName: firstName.trim(), lastName: lastName.trim(), email: Email.trim(), password: password, country: Country }
-            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/login/register`, {
+            const parcelData = { email: email.trim(), password: password }
+            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/auth/loginCredentials`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -131,15 +110,28 @@ export const LoginForm = () => {
             const res = await rawResponse.json();
             console.log(res);
 
-            if (res.message === 'Already Resgistered') {
-                setmessage('Already Resgistered !')
+            if (res.message === 'User not found') {
+                setmessage('Email not registered!!')
+            }
+            if (res.message === 'Password Incorrect') {
+                setmessage('Password wrong')
             }
             if (res.message === 'OTP Sent') {
-                Router.push({
-                    pathname: `/account/verifyOTP`,
-                    query: { email: Email }
-                })
+                setEmailOTP(email)
+                setreceivedOTP(res.data.otp)
+                setOTPFormVisible(true)
+                setLoginFormVisible(false)
+                return
             }
+
+
+            setCookie('email', EmailOTP.trim(), { maxAge: 900000 });
+            setCookie('membership', false, { maxAge: 900000 });
+            setCookie('countryUpdated_DB', false, { maxAge: 900000 });
+            setCookie('account', 'credential', { maxAge: 900000 });
+
+            setLoginModalVisible(false)
+            window.location.reload()
 
             setloading(false)
         } catch (error) {
@@ -158,20 +150,20 @@ export const LoginForm = () => {
     return (
 
 
-        <div className="relative bg-semiblack  rounded-lg  px-6 lg:px-0 py-10  ">
+        <div className="relative bg-semiblack  rounded-lg  px-6  py-10  ">
 
 
             <IoIosCloseCircleOutline onClick={() => { setLoginModalVisible(false) }} className="cursor-pointer absolute text-white text-[32px] lg:text-[34px] right-4 top-4" />
 
-            <div className="flex flex-col justify-center lg:flex-row lg:space-x-8">
+            <div className="flex flex-col justify-center">
 
                 <img src='/logo.png' alt="chutlunds" className='w-[200px] mx-auto  lg:w-[220px] mx-auto lg:-mt-2' />
                 <p className='mb-6 font-inter text-white text-center text font-dancing text-2xl'>Unleash your desires!   </p>
 
 
-                <div>
-                <form className="space-y-5" action="#" method="POST" onSubmit={handleSubmit}>
-                <div className=''>
+                <div className="">
+                    <form className="space-y-5" action="#" method="POST" onSubmit={handleSubmit}>
+                        <div className=''>
                             <label htmlFor="email" className="text-sm font-medium leading-6 text-white pl-1">Email address</label>
                             <div className="mt-1">
                                 <input
@@ -181,7 +173,7 @@ export const LoginForm = () => {
                                     autoComplete="email"
                                     required
                                     placeholder='Email'
-                                    className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                    className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm leading-6"
                                 />
                             </div>
                         </div>
@@ -196,16 +188,21 @@ export const LoginForm = () => {
                                     autoComplete="current-password"
                                     required
                                     placeholder='Password'
-                                    className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                    className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm leading-6"
                                 />
                             </div>
                         </div>
 
+                        <button type="submit" className="relative mt-[20px] flex w-full h-[40px] justify-center items-center space-x-1 rounded-md bg-gray-200 px-3 py-1.5 shadow-sm ">
 
+                            {loading &&
+                                <div className='w-fit absolute top-2'>
+                                    <ClipLoader color="#232b2b" size={25} />
+                                </div>
+                            }
+                            {!loading && <CiLogin className="text-semiblack text-xl mt-1" />}
 
-                        <button type="submit" onClick={() => { proceedLogin() }} className="select-none mt-[30px] space-x-2 items-center cursor-pointer hover:bg-gray-400 flex w-full justify-center rounded-md bg-gray-200 px-3 py-1.5 text-sm font-inter  leading-6  shadow-sm text-semiblack font-inter font-semibold ">
-                            <CiLogin className="text-semiblack text-xl" />
-                            <p className="flex  justify-center font-inter" >Login</p>
+                            {!loading && <p className=" text-sm font-inter leading-6 text-semiblack font-inter font-semibold mt-1">Login</p>}
                         </button>
 
 
@@ -214,7 +211,7 @@ export const LoginForm = () => {
                     </form>
 
 
-                    <p onClick={() => { setPasswordResetVisible(true); setLoginFormVisible(flase) }} className="cursor-pointer mt-6 mb-2 text-center text-sm text-white">
+                    <p onClick={() => { setPasswordResetVisible(true); setLoginFormVisible(false) }} className="cursor-pointer mt-6 mb-2 text-center text-sm text-white">
                         Forgot your password?
                     </p>
                     <p className="mb-2 text-center text-sm text-white">

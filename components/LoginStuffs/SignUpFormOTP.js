@@ -3,12 +3,18 @@ import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 import ClipLoader from "react-spinners/ClipLoader"
 import videosContext from '../../context/videos/videosContext'
+import { IoIosCloseCircleOutline } from "react-icons/io"
+import Link from "next/link"
+import { UserAuth } from "../../context/AuthContext"
+
 
 export const SignUpFormOTP = () => {
     const router = useRouter();
     const { email } = router.query
 
-    const { setloggedIn, } = useContext(videosContext)
+    const { setLoginModalVisible, setLoginFormVisible, setOTPFormVisible, EmailOTP, setEmailOTP,
+        receivedOTP, setreceivedOTP } = UserAuth();
+
 
     const [OTP, setOTP] = useState('')
     const [loading, setloading] = useState(false);
@@ -17,7 +23,7 @@ export const SignUpFormOTP = () => {
 
     useEffect(() => {
         if (typeof getCookie('email') !== 'undefined') {
-            router.push('/')
+            setLoginModalVisible(false)
         }
     }, []);
 
@@ -32,9 +38,26 @@ export const SignUpFormOTP = () => {
         e.preventDefault()
         setloading(true)
 
-        try {
-            const parcelData = { email: email.trim(), otp: OTP }
-            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/login/verifyOtp`, {
+        if (OTP == receivedOTP) {
+
+            setCookie('email', EmailOTP.trim(), { maxAge: 900000 });
+            setCookie('membership', false, { maxAge: 900000 });
+            setCookie('countryUpdated_DB', false, { maxAge: 900000 });
+            setCookie('account', 'credential', { maxAge: 900000 });
+
+
+            //Update loggedIn in DB
+            const parcelData = { email: EmailOTP.trim() }
+
+            await fetch(`${process.env.FRONTEND_URL}api/auth/updateLoggedIn`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify(parcelData),
+            });
+            await fetch(`${process.env.FRONTEND_URL}api/auth/updateVerify`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -43,49 +66,20 @@ export const SignUpFormOTP = () => {
                 body: JSON.stringify(parcelData),
             });
 
-            const res = await rawResponse.json();
-            console.log(res);
-            setloading(false)
+            window.location.reload()
 
-            if (res.message === 'OTP Incorrect') {
-                setmessage('OTP Incorrect')
-            }
-
-            if (res.message === 'OTP Verified') {
-                setCookie('email', email.trim(), { maxAge: 900000 });
-                setCookie('membership', false, { maxAge: 900000 });
-                setCookie('account','credential', { maxAge: 900000 });
-
-                //Update loggedIn in DB
-                const parcelData = { email: email.trim() }
-                const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/login/updateloggedIn`, {
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    method: 'POST',
-                    body: JSON.stringify(parcelData),
-                });
-                const res = await rawResponse.json();
-                console.log(res);
-                setloggedIn(true)
-                router.push('/')
-            }
-
-        } catch (error) {
-            setloading(false)
-            console.log(error);
-            alert(error);
-
+        } else {
+            setmessage('OTP Incorrect')
         }
+
     }
 
     const resendOTP = async (e) => {
         e.preventDefault()
         setloading(true)
         try {
-            const parcelData = { email: email.trim() }
-            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/login/resendOTP`, {
+            const parcelData = { email: EmailOTP.trim() }
+            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/auth/resendOTP`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -114,44 +108,53 @@ export const SignUpFormOTP = () => {
     return (
 
 
-        <div className={`bg-no-repeat bg-cover	bg-opacity-80 w-full mb-[300px] sm:w-4/5 md:w-3/5 lg:w-2/5 xl:w-[450px] mx-auto`}>
+
+        <div className="relative bg-semiblack  rounded-lg  px-6 lg:px-0 py-10  ">
 
 
+            <IoIosCloseCircleOutline onClick={() => {
+                setLoginModalVisible(false); window.location.reload();
+            }} className="cursor-pointer absolute text-white text-[32px] lg:text-[34px] right-4 top-4" />
 
 
             <div className='px-[28px]  w-full'>
 
 
-                <h2 className='mt-[20px] font-inter text-[18px] text-[#323232]'>
+                <h2 className='mt-[20px] font-inter text-[18px] text-white font-inter'>
                     Enter Verification Code
                 </h2>
 
 
 
-                <div className='flex flex-col items-center  shadow-red-500 rounded  shadow-lg mt-8 px-4 pb-4'>
-                    <h2 className=' text-center  font-inter text-[14px] xl:text-[16px] w-full h-[26px] mt-[21px] text-black font-medium'>
-                        {`Please enter the 4-digit code we sent to
-                        ${email}.`}
+                <div className='flex flex-col items-center   rounded-lg  shadow-lg mt-8 px-4 pb-4'>
+                    <h2 className=' text-center text-white font-inter text-[14px] xl:text-[16px] w-full h-[26px] mt-[21px] text-white font-medium'>
+                        {`Please enter the 4-digit code we sent to    ${EmailOTP}.`}
                     </h2>
-
-
-
 
 
                     <div className="divOuter mt-[30px]">
                         <div className="divInner">
-                            <input value={OTP.substring(0, 4)} onChange={e => { if (e.target.value.length < 5) { setOTP(e.target.value) } }} className="partitioned bg-transparent text-[#323232] font-bold" type="number" maxLength="4" />
+                            <input value={OTP.substring(0, 4)} onChange={e => { if (e.target.value.length < 5) { setOTP(e.target.value) } }} className="partitioned bg-transparent text-white font-inter font-bold" type="number" maxLength="4" />
                         </div>
                     </div>
 
                     <div className='mb-6 min-h-[30px] xl:min-h-[40px] mt-1'>
-                        <p className={` rounded text-center w-full  text-[14px] xl:text-[16px] text-red-500 font-semibold px-1 pb-1 mt-1 ${message.length > 0 ? "visible" : "invisible"}`}>{message}</p>
+                        <p className={` rounded text-center w-full  text-[14px] xl:text-[16px] text-white font-semibold px-1 pb-1 mt-1 ${message.length > 0 ? "visible" : "invisible"}`}>{message}</p>
                     </div>
 
 
-                    <h2 className='text-center w-full  font-inter text-[13px] lg:text-[15px] mt-[14px]'>By continuing, you agree to Chutlunds&apos;s
-                        Terms of Use and Privacy Policy.
+
+                    <h2 className='text-center w-full font-inter text-[13px] lg:text-[15px] mt-[14px] text-white'>
+                        By continuing, you agree to Chutlunds&apos;s{' '}
+                        <Link legacyBehavior href="/terms">
+                            <a className="text-theme_yellow hover:underline"> Terms of Use</a>
+                        </Link>{' '}
+                        and{' '}
+                        <Link legacyBehavior href="/privacy">
+                            <a className="text-theme_yellow hover:underline">Privacy Policy</a>
+                        </Link>.
                     </h2>
+
 
                 </div>
 
@@ -162,25 +165,25 @@ export const SignUpFormOTP = () => {
                 {/* Bottom */}
 
 
-                <div className='pt-4 mt-[58px]'>
+                <div className='pt-4 mt-[58px] relative'>
 
                     {!loading &&
                         <div className=' flex flex-col space-y-2'>
 
                             {resentOTP === 0 &&
-                                <button onClick={resendOTP} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto  text-white bg-red-500 hover:bg-red-600 rounded-[5px] block'>Re-send OTP</button>
+                                <button onClick={resendOTP} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto  text-white border-[1px] border-gray-200 rounded-lg hover:text-semiblack hover:bg-gray-200 block'>Re-send OTP</button>
                             }
 
 
-                            <button onClick={verifyOTP} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto text-white bg-red-500 hover:bg-red-600 rounded-[5px] block'>Continue</button>
+                            <button onClick={verifyOTP} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto  text-white border-[1px] border-gray-200 rounded-lg hover:text-semiblack hover:bg-gray-200 block'>Continue</button>
                         </div>
 
                     }
 
 
                     {loading &&
-                        <div className='block mx-auto w-fit '>
-                            <ClipLoader color="#323232" size={30} />
+                        <div className='absolute  inset-0 block mx-auto w-fit '>
+                            <ClipLoader color="#ffffff" size={30} />
 
                         </div>
 
@@ -190,8 +193,6 @@ export const SignUpFormOTP = () => {
 
 
             </div>
-
-
         </div>
     )
 }

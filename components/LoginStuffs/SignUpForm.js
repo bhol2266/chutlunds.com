@@ -6,24 +6,19 @@ import React, { useEffect, useState } from 'react'
 import { CiLogin } from "react-icons/ci"
 import { FaCheckCircle } from "react-icons/fa"
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import ClipLoader from "react-spinners/ClipLoader"
 
 
 export const SignUpForm = () => {
     const router = useRouter()
 
-    const [Email, setEmail] = useState('')
-    const [firstName, setfirstName] = useState('')
-    const [lastName, setlastName] = useState('')
-    const [phone, setphone] = useState('')
-    const [password, setpassword] = useState('')
-    const [confirmPassword, setconfirmPassword] = useState('')
-    const [validateEmailState, setvalidateEmailState] = useState(null)
     const [message, setmessage] = useState('');
     const [loading, setloading] = useState(false);
     const [Country, setCountry] = useState('');
 
 
-    const { setSignUpFormVisible, setLoginFormVisible, setLoginModalVisible } = UserAuth();
+    const { setSignUpFormVisible, setLoginFormVisible, setLoginModalVisible, setOTPFormVisible, EmailOTP, setEmailOTP,
+        receivedOTP, setreceivedOTP } = UserAuth();
 
 
 
@@ -47,13 +42,6 @@ export const SignUpForm = () => {
         }
 
     }
-    const validateEmail = (email) => {
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-            return (true)
-        }
-        return (false)
-    };
-
 
 
     const SignInButton = async (auth_provider) => {
@@ -91,26 +79,21 @@ export const SignUpForm = () => {
 
     const handleSubmit = async (event) => {
 
-        alert("under development, please use Google or Facebook")
-        return
-        event.preventDefault();
-        setmessage('')
-
-        if (Email.length > 10 && !validateEmail(Email)) {
-            alert("Please Enter Email correctly")
-            return
-        }
-
-        if (password != confirmPassword) {
-            alert("Confirm Password Incorrect")
-            return
-        }
-
+        event.preventDefault(); // Prevent the default form submission
         setloading(true)
+        setmessage('')
+        const formData = new FormData(event.target);
+
+        const firstName = formData.get('firstName');
+        const lastName = formData.get('lastName');
+        const email = formData.get('email');
+        const password = formData.get('password');
+
+
 
         try {
-            const parcelData = { firstName: firstName.trim(), lastName: lastName.trim(), email: Email.trim(), password: password, country: Country }
-            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/login/register`, {
+            const parcelData = { firstName: firstName.trim(), lastName: lastName.trim(), email: email.trim(), password: password, country: Country }
+            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/auth/register`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -122,14 +105,17 @@ export const SignUpForm = () => {
             const res = await rawResponse.json();
             console.log(res);
 
-            if (res.message === 'Already Resgistered') {
+            if (res.message === 'Already Resgistered !') {
                 setmessage('Already Resgistered !')
             }
             if (res.message === 'OTP Sent') {
-                Router.push({
-                    pathname: `/account/verifyOTP`,
-                    query: { email: Email }
-                })
+                console.log(res.data.otp);
+
+                setEmailOTP(email)
+                setreceivedOTP(res.data.otp)
+                setOTPFormVisible(true)
+                setSignUpFormVisible(false)
+                // show OTP modal
             }
 
             setloading(false)
@@ -184,8 +170,40 @@ export const SignUpForm = () => {
                 </div>
 
                 <div className="lg:mt-4">
-                    <form className="space-y-5" action="#" method="POST" onSubmit={handleSubmit}>
+                    <form className="space-y-3" action="#" method="POST" onSubmit={handleSubmit}>
                         <div className="flex space-x-3 w-full">
+                            <div className='w-1/2'>
+                                <label htmlFor="first-name" className="text-sm font-medium leading-6 text-white">First Name</label>
+                                <div className="mt-2">
+                                    <input
+                                        id="first-name"
+                                        name="firstName"
+                                        type="text"
+                                        autoComplete="given-name"
+                                        required
+                                        placeholder='First Name'
+                                        className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm leading-6"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className='w-1/2'>
+                                <label htmlFor="last-name" className="text-sm font-medium leading-6 text-white">Last Name</label>
+                                <div className="mt-2">
+                                    <input
+                                        id="last-name"
+                                        name="lastName"
+                                        type="text"
+                                        autoComplete="family-name"
+                                        required
+                                        placeholder='Last Name'
+                                        className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm leading-6"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="flex space-x-3 w-full ">
                             <div className='w-2/3'>
                                 <label htmlFor="email" className="text-sm font-medium leading-6 text-white">Email address</label>
                                 <div className="mt-2">
@@ -201,7 +219,7 @@ export const SignUpForm = () => {
                                 </div>
                             </div>
 
-                            <div className=''>
+                            <div className='w-1/3'>
                                 <label htmlFor="password" className="text-sm font-medium leading-6 text-white">Create Password</label>
                                 <div className="mt-2">
                                     <input
@@ -218,14 +236,23 @@ export const SignUpForm = () => {
                         </div>
 
                         <div>
-                            <button type="submit" className="mt-[20px] flex w-full justify-center rounded-md bg-gray-200 px-3 py-1.5 text-sm font-inter leading-6 shadow-sm text-semiblack font-inter font-semibold">
-                                Join Chutlunds!
+                            <button type="submit" className="relative mt-[20px] flex w-full h-[35px] justify-center rounded-md bg-gray-200 px-3 py-1.5 shadow-sm ">
+
+                                {loading &&
+                                    <div className='w-fit absolute'>
+                                        <ClipLoader color="#232b2b" size={25} />
+                                    </div>
+                                }
+                                {!loading && <p className=" text-sm font-inter leading-6 text-semiblack font-inter font-semibold"> Join Chutlunds!</p>}
                             </button>
                         </div>
                     </form>
 
+                    <p className="text-red-500 font-inter text-xs text-center mt-2 min-h-4">{message}</p>
 
-                    <p className="my-4 text-center text-sm text-white">
+
+
+                    <p className="my-3 text-center text-sm text-white">
                         Already have an account?
                         <span onClick={() => { loginHere() }} className="underline cursor-pointer text-theme_yellow"> Login here</span>
                     </p>

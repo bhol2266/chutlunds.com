@@ -27,7 +27,7 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
-async function saveUserProfile(firstName, lastName, email, profilePic, hashpass, verified, country, loggedIn, membership, keywords) {
+export async function saveUserProfile(firstName, lastName, email, profilePic, hashpass, verified, country, loggedIn, membership, keywords) {
     const data = {
         firstName,
         lastName,
@@ -50,6 +50,66 @@ async function saveUserProfile(firstName, lastName, email, profilePic, hashpass,
         console.log("Document successfully written!");
     } catch (error) {
         console.error("Error writing document: ", error);
+        throw error; // Propagate error to be handled by caller
+    }
+}
+
+export async function getUserByEmail(email) {
+    try {
+        const docRef = db.collection("Users").doc(email);
+        const doc = await docRef.get();
+
+        if (doc.exists) {
+            return doc.data(); // Return the user data if the document exists
+        } else {
+            return null; // Return null if the document does not exist
+        }
+    } catch (error) {
+        console.error("Error retrieving user data: ", error);
+        throw error; // Propagate error to be handled by caller
+    }
+}
+
+export async function checkUserExists(email) {
+    try {
+        const docRef = db.collection("Users").doc(email);
+        const doc = await docRef.get();
+        return doc.exists; // Returns true if the document exists, false otherwise
+    } catch (error) {
+        console.error("Error checking user existence: ", error);
+        throw error; // Propagate error to be handled by caller
+    }
+}
+
+export async function updateLoggedIn(email, loggedInStatus) {
+    try {
+        const docRef = db.collection("Users").doc(email);
+        await docRef.update({ loggedIn: loggedInStatus });
+        console.log("Document successfully updated!");
+    } catch (error) {
+        console.error("Error updating document: ", error);
+        throw error; // Propagate error to be handled by caller
+    }
+}
+
+export async function updateVerify(email, verifiedStatus) {
+    try {
+        const docRef = db.collection("Users").doc(email);
+        await docRef.update({ verified: verifiedStatus });
+        console.log("Document successfully updated!");
+    } catch (error) {
+        console.error("Error updating document: ", error);
+        throw error; // Propagate error to be handled by caller
+    }
+}
+
+export async function updatepassword(email, password) {
+    try {
+        const docRef = db.collection("Users").doc(email);
+        await docRef.update({ hashpass: password });
+        console.log("Document successfully updated!");
+    } catch (error) {
+        console.error("Error updating document: ", error);
         throw error; // Propagate error to be handled by caller
     }
 }

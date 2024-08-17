@@ -11,6 +11,9 @@ export const AuthContextProvider = ({ children }) => {
     const [LoginFormVisible, setLoginFormVisible] = useState(false);
     const [PasswordResetVisible, setPasswordResetVisible] = useState(false);
     const [OTPFormVisible, setOTPFormVisible] = useState(false);
+    const [EmailOTP, setEmailOTP] = useState('');
+    const [receivedOTP, setreceivedOTP] = useState('');
+
 
 
 
@@ -21,7 +24,9 @@ export const AuthContextProvider = ({ children }) => {
             SignUpFormVisible, setSignUpFormVisible,
             LoginFormVisible, setLoginFormVisible,
             PasswordResetVisible, setPasswordResetVisible,
-            OTPFormVisible, setOTPFormVisible
+            OTPFormVisible, setOTPFormVisible,
+            EmailOTP, setEmailOTP,
+            receivedOTP, setreceivedOTP
         }} >
             {children}
         </AuthContext.Provider >

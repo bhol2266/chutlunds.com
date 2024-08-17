@@ -6,15 +6,18 @@ import videosContext from '../../context/videos/videosContext'
 import Router, { useRouter } from 'next/router';
 import ClipLoader from "react-spinners/ClipLoader";
 import { setCookie, deleteCookie } from "cookies-next";
+import { UserAuth } from "@/context/AuthContext";
 
 export const PasswordReset = () => {
     const router = useRouter();
 
 
-    const { OTPemail } = useContext(videosContext)
+    const { setPasswordResetVisible, setLoginFormVisible } = UserAuth();
 
     const [Email, setEmail] = useState('')
     const [OTP, setOTP] = useState('')
+    const [receivedOTP, setreceivedOTP] = useState('')
+
     const [loading, setloading] = useState(false);
     const [message, setmessage] = useState('');
     const [OTP_Sent, setOTP_Sent] = useState(0);
@@ -25,51 +28,27 @@ export const PasswordReset = () => {
 
 
 
+    const resetForm = () => {
+        setEmail('');
+        setOTP('');
+        setloading(false);
+        setmessage('');
+        setOTP_Sent(0);
+        setpassword('');
+        setretypePassword('');
+        setpasswordUpdated(false);
+    };
 
 
-    const verifyOTP = async (e) => {
-
-
-        try {
-            const parcelData = { email: Email.trim(), otp: OTP }
-            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/login/verifyOtp`, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: 'POST',
-                body: JSON.stringify(parcelData),
-            });
-
-            const res = await rawResponse.json();
-            console.log(res);
-
-            if (res.message === 'OTP Verified') {
-                return { verified: true, message: res.message }
-            } else {
-                return { verified: false, message: res.message }
-            }
-
-        } catch (error) {
-            setloading(false)
-            console.log(error);
-            alert(error);
-
-        }
-    }
 
     const resendOTP = async (e) => {
-        e.preventDefault()
-        if (passwordUpdated) {
-            router.push('/account/login')
-            return
-        }
-        setmessage('')
+        e.preventDefault();
+        setloading(true);
+        setmessage("");
 
-        setloading(true)
         try {
-            const parcelData = { email: Email.trim() }
-            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/login/resendOTP`, {
+            const parcelData = { email: Email.trim() };
+            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/auth/resendOTP`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -80,90 +59,88 @@ export const PasswordReset = () => {
 
             const res = await rawResponse.json();
             console.log(res);
-            setloading(false)
 
-            if (res.message === 'OTP Sent Again!' && OTP_Sent === 0) {
-                setOTP_Sent(1)
-                setmessage('OTP Sent')
+            if (res.message === 'Email not registered') {
+                setmessage('Email not registered!');
+            } else if (res.message === 'OTP Sent Again!' && OTP_Sent === 0) {
+                setOTP_Sent(1);
+                setmessage('OTP Sent');
+                setreceivedOTP(res.data.otp)
 
-            }
-
-            if (res.message === 'OTP Sent Again!' && OTP_Sent === 1) {
-                setmessage('OTP Sent Again!')
-
-            }
-            if (res.message === 'User not found') {
-                setmessage('User not found!')
+            } else if (res.message === 'OTP Sent Again!' && OTP_Sent === 1) {
+                setmessage('OTP Sent Again!');
+                setreceivedOTP(res.data.otp)
+            } else {
+                setmessage('An unexpected error occurred');
             }
 
         } catch (error) {
-            alert(error);
-            setloading(false)
+            setmessage(`Error: ${error.message}`);
             console.log(error);
-
+            alert(error.message);
+        } finally {
+            setloading(false);
         }
     }
+
 
 
     const updatePassword = async (e) => {
         setmessage('')
+        setloading(true)
 
         if (OTP.length !== 4) {
             setmessage('Enter 4 digit OTP')
+            setloading(false)
+            return
+        }
+        if (OTP !== receivedOTP) {
+            setmessage('OTP not matched!')
+            setloading(false)
+            return
+        }
+
+        if (password.length < 4) {
+            setmessage('password too small!')
+            setloading(false)
             return
         }
 
         if (password !== retypePassword) {
-            alert('password not matched!')
+            setmessage('password not matched!')
+            setloading(false)
             return
         }
 
-        setloading(true)
 
+        const parcelData = { email: Email.trim(), password: password }
+        const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/auth/forgotPassword`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(parcelData),
+        });
 
-        const { verified, message } = await verifyOTP()
+        const res = await rawResponse.json();
+        console.log(res);
+        setloading(false)
 
-        if (!verified) {
-            setloading(false)
-            setmessage(message)
-            return
-        }
+        if (res.message === 'Password Updated') {
+            setmessage('Password updated!')
+            setOTP_Sent(0)
+            setpasswordUpdated(true)
 
-        try {
-            const parcelData = { email: Email.trim(), password: password }
-            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/login/forgotPassword`, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: 'POST',
-                body: JSON.stringify(parcelData),
-            });
+            setTimeout(() => {
+                setPasswordResetVisible(false)
+                setLoginFormVisible(true)
+            }, 2000);
 
-            const res = await rawResponse.json();
-            console.log(res);
-            setloading(false)
-
-            if (res.message === 'Password Updated') {
-                setmessage('Password updated')
-                setOTP_Sent(0)
-                setpasswordUpdated(true)
-                setTimeout(() => {
-                    router.push('/account/login')
-                }, 2000);
-
-            }
-            setloading(false)
-
-
-        } catch (error) {
-            alert(error);
-            setloading(false)
-            console.log(error);
 
         }
+        resetForm()
     }
-
 
 
 
@@ -171,7 +148,7 @@ export const PasswordReset = () => {
 
 
 
-        <div className={`bg-no-repeat bg-cover	bg-opacity-80 w-full mb-[400px] sm:w-4/5 md:w-3/5 lg:w-2/5 xl:w-[450px] mx-auto`}>
+        <div className="relative bg-semiblack  rounded-lg  px-6 lg:px-0 py-8">
 
 
 
@@ -180,25 +157,60 @@ export const PasswordReset = () => {
             <div className='px-[28px]  w-full'>
 
 
-                <h2 className='my-[20px]  mb-[30px] font-inter text-[18px] text-[#323232]'>
+                <h2 className='mb-[30px] font-inter text-[18px] text-white'>
                     Reset Password
                 </h2>
 
 
 
-                <div className='flex flex-col items-center justify-start  rounded shadow-gray-400 shadow-md p-4'>
+                <div className='flex flex-col items-center justify-start  rounded-lg shadow-lg p-4'>
 
-                    <h2 className='text-[#323232] font-inter text-[14px] xl:text-[16px] w-full h-[26px] mb-2'>
+                    <h2 className='text-white font-inter text-[14px] xl:text-[16px] w-full h-[26px] mb-2'>
                         Please enter your registered Email
                     </h2>
 
-                    <input onChange={e => { setEmail(e.target.value) }} required type="text" id='email' name='email' className=" rounded-lg w-full px-3 py-2  text-[13px] xl:text-[15px]  outline-none  text-[#323232] placeholder:text-gray-400  border-[1px] border-gray-400" placeholder='E-mail' />
+
+
+                    <form onSubmit={resendOTP} className="flex flex-col items-center">
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            autoComplete="email"
+                            required
+                            value={Email}
+                            disabled={OTP_Sent !== 0}
+                            onChange={e => setEmail(e.target.value)}
+                            placeholder='Email'
+                            className="w-[250px] text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm leading-6"
+                        />
+                        {OTP_Sent !== 0 && (
+                            <button
+                                type="button"
+                                onClick={resetForm}
+                                className='mt-4 font-normal text-[14px] text-center mx-auto text-semiblack rounded-md bg-gray-200 px-3 py-1.5 text-xs'
+                            >
+                                Change Email
+                            </button>
+                        )}
+                        {OTP_Sent === 0 && (
+                            <button
+                                type='submit'
+                                className='mt-4 font-normal text-[14px] text-center w-[154px] h-[33px] mx-auto text-semiblack rounded-md bg-gray-200 px-3 py-1.5 shadow-sm'
+                            >
+                                Confirm
+                            </button>
+                        )}
+                    </form>
+
+
+
 
                     <div className=' min-h-[30px] xl:min-h-[40px]'>
 
                         {OTP_Sent === 0 &&
                             <div className=' mt-[3px]'>
-                                <p className={` rounded text-center w-full  text-[16px] xl:text-[18px] text-theme font-semibold px-1 pb-1 ${message.length > 0 ? "block" : "hidden"}`}>{message}</p>
+                                <p className={`text-red-500 rounded text-center w-full  text-[14px] xl:text-[16px] text-red-500 px-2 py-1 ${message.length > 0 ? "block" : "hidden"}`}>{message}</p>
                             </div>
                         }
                     </div>
@@ -215,30 +227,27 @@ export const PasswordReset = () => {
 
                         <div className='flex flex-col items-center my-2'>
 
-                            <h2 className=' text-left text-[#323232] font-inter text-[12px] xl:text-[14px] w-full h-[26px] mt-[21px]'>
+                            <h2 className=' text-left text-white font-inter text-[12px] xl:text-[14px] w-full h-[26px] mt-[21px]'>
                                 {`Please enter the 4-digit code we sent to
                         ${Email}.`}
                             </h2>
 
                             <div className="divOuter my-[20px] mt-[30px]">
                                 <div className="divInner">
-                                    <input value={OTP.substring(0, 4)} onChange={e => { if (e.target.value.length < 5) { setOTP(e.target.value) } }} className="partitioned bg-transparent text-[#323232]" type="number" maxLength="4" />
+                                    <input value={OTP.substring(0, 4)} onChange={e => { if (e.target.value.length < 5) { setOTP(e.target.value) } }} className="partitioned bg-transparent text-white" type="number" maxLength="4" />
                                 </div>
                             </div>
 
                             <div className='mb-6 min-h-[30px] xl:min-h-[40px]'>
-                                <p className={` rounded text-center w-full  text-[16px] xl:text-[18px] text-theme font-semibold px-1 pb-1 ${message.length > 0 ? "visible" : "invisible"}`}>{message}</p>
+                                <p className={` rounded text-center w-full  text-[16px] xl:text-[18px] text-theme_yellow px-1 py-1 ${message.length > 0 ? "visible" : "invisible"}`}>{message}</p>
                             </div>
 
-                            <div className='flex flex-col items-center justify-start w-full'>
+                            <div className='flex flex-col items-center justify-start w-full space-y-3'>
 
-                                <label className=" text-[14px] xl:text-[16px] w-full  text-[#323232] pb-[1px] block  text-left  mt-2">Set New Password</label>
+                                <label className=" text-[14px] xl:text-[16px] w-full  text-white pb-[1px] block  text-left  mt-2">Set New Password</label>
 
-                                <input onChange={e => { setpassword(e.target.value) }} required type="password" id='email' name='email' className=" rounded-lg w-full px-3 py-2  text-[13px] xl:text-[15px]  outline-none  text-[#323232] placeholder:text-gray-400  border-[1px] border-gray-400 mb-2" placeholder='New Password' />
-
-
-
-                                <input onChange={e => { setretypePassword(e.target.value) }} required type="password" id='email' name='email' className=" rounded-lg w-full px-3 py-2  text-[13px] xl:text-[15px]  outline-none  text-[#323232] placeholder:text-gray-400  border-[1px] border-gray-400" placeholder='Retype New Password' />
+                                <input onChange={e => { setpassword(e.target.value) }} required type="password" id='email' name='email' className="w-full text-xs font-inter rounded-lg bg-transparent py-2 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm" placeholder='New Password' />
+                                <input onChange={e => { setretypePassword(e.target.value) }} required type="password" id='email' name='email' className="w-full text-xs font-inter rounded-lg bg-transparent py-2 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm" placeholder='Retype New Password' />
                             </div>
                         </div>
                     }
@@ -251,21 +260,20 @@ export const PasswordReset = () => {
                 {/* Bottom */}
 
 
-                <div className='mt-8'>
+                <div className='mt-8 h-[75px]'>
                     {!loading &&
                         <div className='flex flex-col space-y-3' >
 
                             {OTP_Sent === 1 &&
-                                <button onClick={resendOTP} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto  text-white  bg-theme hover:bg-red-600 rounded-[5px] block'>Re-send OTP</button>
+                                <button onClick={resendOTP} className='font-normal text-[14px] text-center w-[154px] h-[33px]  mx-auto  text-semiblack rounded-md bg-gray-200 px-3 py-1.5 shadow-sm'>Re-send OTP</button>
                             }
 
-                            {OTP_Sent === 0 &&
-
-                                <button onClick={resendOTP} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto text-white bg-theme hover:bg-red-600 rounded-[5px] block'>{passwordUpdated ?"Go to login":"Confirm" }</button>
+                            {passwordUpdated &&
+                                <button onClick={resendOTP} className='font-normal text-[14px] text-center w-[154px] h-[33px]  mx-auto  text-semiblack rounded-md bg-gray-200 px-3 py-1.5 shadow-sm'>Go to login</button>
                             }
 
                             {OTP_Sent === 1 &&
-                                <button onClick={updatePassword} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto  text-white  bg-theme hover:bg-red-600 rounded-[5px] block'>Update Password</button>
+                                <button onClick={updatePassword} className='font-normal text-[14px] text-center w-[154px] h-[33px]  mx-auto  text-semiblack rounded-md bg-gray-200 px-3 py-1.5 shadow-sm'>Update Password</button>
                             }
 
                         </div>
@@ -273,13 +281,10 @@ export const PasswordReset = () => {
 
                     {loading &&
                         <div className='block mx-auto w-fit'>
-                            <ClipLoader color={"#323232"} size={30} />
+                            <ClipLoader color={"#ffffff"} size={30} />
 
                         </div>
-
                     }
-
-
 
                 </div>
 
@@ -292,6 +297,6 @@ export const PasswordReset = () => {
             </div>
 
 
-        </div>
+        </div >
     )
 }
