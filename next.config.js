@@ -19,7 +19,7 @@ module.exports = {
       'cdni.pornpics.de',
       'static-sg-cdn.eporner.com'
     ],
-  },
+  }, 
   env: {
     CLOUDFLARE_STORAGE: 'https://pub-46cdeefeaf774247ab99232ab1ebaa66.r2.dev/',
     BACKEND_URL: 'https://my-worker.ukdevelopers007.workers.dev/',
