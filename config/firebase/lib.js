@@ -99,6 +99,35 @@ async function updatekeywords(searchkey) {
 
 }
 
+async function getFirstKeyword() {
+    const email = getCookie('email');
+
+    if (!email) {
+        console.log("No email found in cookies.");
+        return null;
+    }
+
+    try {
+        const reff = doc(db, "Users", email);
+        const userobj = await getDoc(reff);
+
+        const keywords = userobj.data().keywords;
+
+        if (keywords && keywords.length > 0) {
+            const firstKeyword = keywords[0];
+            console.log("First keyword:", firstKeyword);
+            return firstKeyword;
+        } else {
+            console.log("No keywords available.");
+            return null;
+        }
+    } catch (error) {
+        console.log("Error retrieving keywords:", error);
+        return null;
+    }
+}
+
+
 
 async function updateloggedIn(email, loginStatus) {
     try {
@@ -306,6 +335,6 @@ async function shuffleData(array) {
 
 export {
     checkUserExists_Firestore, readCards, saveUserProfile, updateCountry, getLocation, updateMembership, updatekeywords, updateloggedIn,
-    updateCardChecked, shuffleData, updateSubcribedPornstars, updateSubcribedChannels, checkSubcribedPornstar, checkSubscribedChannel
+    updateCardChecked, shuffleData, updateSubcribedPornstars, updateSubcribedChannels, checkSubcribedPornstar, checkSubscribedChannel,getFirstKeyword
 };
 

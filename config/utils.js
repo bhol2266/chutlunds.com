@@ -22,3 +22,31 @@ export const formatDuration = (duration) => {
     const remainingMinutes = minutes % 60;
     return `${String(hours).padStart(2, '0')}:${String(remainingMinutes).padStart(2, '0')}`;
 };
+
+
+export async function fetchVideos(key) {
+    // key is also langugae for country videos
+    let url = `https://spankbang.party/s/${key.toLowerCase().trim()}/?o=trending`;
+    const rawResponse = await fetch('/api/spangbang/getvideos', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url }),
+    });
+    const content = await rawResponse.json();
+    return (shuffle(content.finalDataArray));
+}
+
+
+export function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
+    while (currentIndex != 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+    return array;
+  }

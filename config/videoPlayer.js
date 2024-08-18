@@ -17,18 +17,8 @@ const scrape = async (body) => {
 
     //Related Videos
 
-  
-
     const $ = cheerio.load(body)
-
-
-
     finalDataArray= Scrape_Video_Item($)
-
-
-
-
-
 }
 
 
@@ -261,4 +251,11 @@ export const getVideoPageData = async (href) => {
     return returnObj;
     
 }
+
+
+
+
+
+
+
 

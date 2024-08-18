@@ -1,23 +1,22 @@
-import Head from 'next/head';
-import { useContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { deleteCookie, getCookie } from "cookies-next";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useContext, useEffect, useState } from 'react';
 import ReactCountryFlag from "react-country-flag";
 
 import BannerAds from '../components/Ads/BannerAds';
 import Outstreams from '../components/Ads/Outstream';
 import Sidebar from '../components/Sidebar';
 import Videos from '../components/Videos';
-import Pornstar_slider from '../components/pornstar_slider';
-import Channels_slider from '../components/channels_slider';
 import Category_slider from '../components/category_slider';
+import Channels_slider from '../components/channels_slider';
+import Pornstar_slider from '../components/pornstar_slider';
 
-import { getLanguge } from '../config/getLanguge';
-import { setViewTypeCookie } from '../config/utils';
-import { updateCountry } from '../config/firebase/lib';
-
-import videosContext from '../context/videos/videosContext';
 import Homepage_Title from '../components/Homepage_Title';
+import { getFirstKeyword, updateCountry } from '../config/firebase/lib';
+import { getLanguge } from '../config/getLanguge';
+import { fetchVideos, shuffle } from '../config/utils';
+import videosContext from '../context/videos/videosContext';
 
 export default function Home({ video_collection, trendingChannels, tags, trendingCategories, trendingPornstars }) {
   const { currentLocation, setcurrentLocation, viewType, setViewType } = useContext(videosContext);
@@ -25,25 +24,10 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
   const [countryLanguage, setcountryLanguage] = useState('');
   const [lang, setLang] = useState('');
 
+  const [recommendedVideos, setRecommendedVideos] = useState([]);
   const router = useRouter();
 
-  async function fetchVideos(data) {
-    setLang(getLanguge(data.countryName));
-    setcountryLanguage(lang);
 
-    let url = `https://spankbang.party/s/${lang.toLowerCase().trim()}/?o=trending`;
-
-    const rawResponse = await fetch('/api/spangbang/getvideos', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ url }),
-    });
-    const content = await rawResponse.json();
-    setcountryVideos(shuffle(content.finalDataArray));
-  }
 
   async function fetchLocation() {
     const location_localstorage = localStorage.getItem("location");
@@ -51,13 +35,24 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
       const parsedLocation = JSON.parse(location_localstorage);
       setcurrentLocation(parsedLocation);
       countryUpdated_DB(parsedLocation.countryName);
-      await fetchVideos(parsedLocation);
+
+      setLang(getLanguge(parsedLocation.countryName));
+      setcountryLanguage(lang);
+      const countryVideos = await fetchVideos(lang);
+
+      setcountryVideos(countryVideos)
     } else {
       try {
         const response = await fetch('https://api.db-ip.com/v2/free/self');
         const data = await response.json();
         setcurrentLocation(data);
-        await fetchVideos(data);
+
+        setLang(getLanguge(data.countryName));
+        setcountryLanguage(lang);
+        const countryVideos = await fetchVideos(lang);
+
+
+        setcountryVideos(countryVideos)
         await countryUpdated_DB(data.countryName);
         localStorage.setItem("location", JSON.stringify(data));
       } catch (error) {
@@ -78,6 +73,15 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
     }
   }
 
+  async function createRecommendedVideos() {
+    const keyword = await getFirstKeyword()
+    if (keyword) {
+      const videos = await fetchVideos(keyword.trim())
+      setRecommendedVideos(videos)
+    }
+
+  }
+
   useEffect(() => {
     let videoRoute = getCookie("videoRoute");
     if (typeof videoRoute !== 'undefined') {
@@ -85,25 +89,17 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
       router.push(videoRoute);
     }
     fetchLocation();
+    createRecommendedVideos()
   }, []);
 
 
 
-  function shuffle(array) {
-    let currentIndex = array.length, randomIndex;
-    while (currentIndex != 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-      [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-    return array;
-  }
+
 
   const toggleViewType = () => {
     const newViewType = viewType === 'grid' ? 'horizontal' : 'grid';
     setViewType(newViewType);
-    
+
   };
 
   return (
@@ -149,6 +145,18 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
           <a href={`/trending`}>
             <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Trending Videos" />
           </a>
+
+
+
+          {recommendedVideos.length >0  &&
+            <div>
+              <Homepage_Title title="Recommended Videos" />
+              <Videos data={recommendedVideos.slice(0, 20)} />
+              {/* <a href={`/upcoming`}>
+                <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Upcoming Videos" />
+              </a> */}
+            </div>
+          }
 
           {countryVideos.length !== 0 && (
             <>
