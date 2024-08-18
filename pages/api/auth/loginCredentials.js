@@ -23,7 +23,7 @@ export default async function handler(req, res) {
             if (!userExist.verified) {
                 sendOTPforVerification(res, email)
             } else {
-                return res.status(200).send({ sucess: true, data: { email: email }, message: 'Logged In' })
+                return res.status(200).send({ sucess: true, data:  userExist , message: 'Logged In' })
 
             }
 

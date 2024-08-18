@@ -81,6 +81,8 @@ function Navbar() {
         deleteCookie('countryUpdated_DB');
         deleteCookie('account');
         deleteCookie('email');
+        deleteCookie('Firstname');
+
 
         await updateloggedIn(email, false)
         window.location.reload(); // Manually refresh the page
@@ -238,7 +240,7 @@ function Navbar() {
                                                 }
 
                                                 {user &&
-                                                    <h2 className='font-Opensans text-semiblack  text-[12px] cursor-pointer text-center font-semibold my-2'>{user}</h2>
+                                                    <h2 className='font-Opensans text-semiblack  text-[12px] cursor-pointer text-center font-semibold my-2'>Hi, {getCookie("Firstname")}</h2>
                                                 }
 
 
@@ -385,7 +387,7 @@ function Navbar() {
 
 
                 <Link href='/membership'>
-                    <p className='sm:text-md text-sm text-semiblack rounded-[22px] text-center px-3 p-1 m-1 bg-theme_yellow hover:scale-105 transition-transform duration-30'>
+                    <p className='sm:text-md text-sm  text-semiblack rounded-[22px] text-center px-3 p-1 m-1 bg-theme_yellow hover:scale-105 transition-transform duration-30'>
                         Join Now
                     </p>
                 </Link>
@@ -443,7 +445,7 @@ function Navbar() {
 
 
                         <div className='relative select-none'>
-                            <div className="flex  bg-semiblack items-center w-[300px] 2xl:w-[700px]  border-[0.8px] border-[#E5E5E5] rounded-[30px] p-1 px-4">
+                            <div className="flex  bg-semiblack items-center w-[250px] lg:w-[300px] 2xl:w-[700px]  border-[0.8px] border-[#E5E5E5] rounded-[30px] p-1 px-4">
                                 <SearchIcon className="h-6 text-[#E5E5E5]" />
                                 <input
                                     value={searchKey}
@@ -469,11 +471,7 @@ function Navbar() {
                                 </div>
                             }
                         </div>
-                        <button
-                            type="submit"
-                            className={`ml-4 bg-button hover:bg-button_hover text-white text-sm h-10 px-8 m-1.5 rounded-[20px] transition-all duration-300 ease-in-out ${searchKey ? 'opacity-100 visible' : 'opacity-0 invisible'
-                                }`}
-                        >
+                        <button type="submit" className={`ml-2 bg-button hover:bg-button_hover text-white text-sm h-10 px-8 m-1.5 rounded-[20px] transition-all duration-300 ease-in-out ${searchKey ? 'opacity-100 visible' : 'opacity-0 invisible'}`}    >
                             Search
                         </button>
 
@@ -493,12 +491,12 @@ function Navbar() {
 
                             {user &&
                                 <div className='flex items-center space-x-2  font-inter'>
-                                    <p className='m-2 rounded underline pl-2 pr-2 cursor-pointer'>{user}</p>
+                                    <p className='m-2 rounded  pl-2 pr-2 cursor-pointer text-nowrap'>Hi, {getCookie("Firstname")}</p>
                                     <button className='font-inter bg-green-500 py-[5px] px-8  rounded-[22px] mr-3' onClick={signOut_method}>Logout</button>
                                 </div>
                             }
                             <Link href='/membership'>
-                                <button className="bg-theme_yellow text-semiblack rounded-[22px] font-semibold text-center px-5 p-1.5 m-1 text-md block_popunder hover:scale-105 transition-transform duration-300">Join Now</button>
+                                <button className="bg-theme_yellow text-semiblack rounded-[22px] font-semibold text-center px-5 p-1.5 m-1 text-md block_popunder hover:scale-105 transition-transform duration-300 text-nowrap	">Join Now</button>
                             </Link>
 
                         </div>

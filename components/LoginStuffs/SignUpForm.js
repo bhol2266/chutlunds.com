@@ -1,12 +1,11 @@
-import { UserAuth } from "../../context/AuthContext"
 import { setCookie } from "cookies-next"
 import Link from 'next/link'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import { CiLogin } from "react-icons/ci"
 import { FaCheckCircle } from "react-icons/fa"
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { IoIosCloseCircleOutline } from "react-icons/io"
 import ClipLoader from "react-spinners/ClipLoader"
+import { UserAuth } from "../../context/AuthContext"
 
 
 export const SignUpForm = () => {
@@ -104,13 +103,12 @@ export const SignUpForm = () => {
 
             const res = await rawResponse.json();
             console.log(res);
+            
 
             if (res.message === 'Already Resgistered !') {
                 setmessage('Already Resgistered !')
             }
             if (res.message === 'OTP Sent') {
-                console.log(res.data.otp);
-
                 setEmailOTP(email)
                 setreceivedOTP(res.data.otp)
                 setOTPFormVisible(true)
@@ -182,7 +180,7 @@ export const SignUpForm = () => {
                                         autoComplete="given-name"
                                         required
                                         placeholder='First Name'
-                                        className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm leading-6"
+                                        className="w-full text-xs font-inter rounded-lg bg-transparent py-2 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm"
                                     />
                                 </div>
                             </div>
@@ -197,7 +195,7 @@ export const SignUpForm = () => {
                                         autoComplete="family-name"
                                         required
                                         placeholder='Last Name'
-                                        className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm leading-6"
+                                        className="w-full text-xs font-inter rounded-lg bg-transparent py-2 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm"
                                     />
                                 </div>
                             </div>
@@ -214,7 +212,7 @@ export const SignUpForm = () => {
                                         autoComplete="email"
                                         required
                                         placeholder='Email'
-                                        className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm leading-6"
+                                        className="w-full text-xs font-inter rounded-lg bg-transparent py-2 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm"
                                     />
                                 </div>
                             </div>
@@ -228,8 +226,9 @@ export const SignUpForm = () => {
                                         type="password"
                                         autoComplete="current-password"
                                         required
+                                        minLength={6} // Set the minimum length here
                                         placeholder='Password'
-                                        className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm leading-6"
+                                        className="w-full text-xs font-inter rounded-lg bg-transparent py-2 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm"
                                     />
                                 </div>
                             </div>

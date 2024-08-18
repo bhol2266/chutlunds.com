@@ -1,51 +1,20 @@
 import { setCookie } from "cookies-next"
 import Link from 'next/link'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { CiLogin } from "react-icons/ci"
 import { IoIosCloseCircleOutline } from "react-icons/io"
-import { UserAuth } from "../../context/AuthContext"
 import ClipLoader from "react-spinners/ClipLoader"
+import { UserAuth } from "../../context/AuthContext"
 
 
 export const LoginForm = () => {
-    const router = useRouter()
 
-    const [Email, setEmail] = useState('')
-    const [firstName, setfirstName] = useState('')
-    const [lastName, setlastName] = useState('')
-    const [phone, setphone] = useState('')
-    const [password, setpassword] = useState('')
-    const [confirmPassword, setconfirmPassword] = useState('')
-    const [validateEmailState, setvalidateEmailState] = useState(null)
     const [message, setmessage] = useState('');
     const [loading, setloading] = useState(false);
-    const [Country, setCountry] = useState('');
 
 
-    const { setSignUpFormVisible, setLoginFormVisible, setPasswordResetVisible, setLoginModalVisible, setOTPFormVisible,setEmailOTP,setreceivedOTP } = UserAuth();
-
-
-    useEffect(() => {
-        getLocation();
-    }, [])
-
-    async function getLocation() {
-
-        try {
-            const response = await fetch('https://api.db-ip.com/v2/free/self')
-            const data = await response.json();
-            setCountry(data.countryName)
-            setCookie('country', data.countryName, { maxAge: 900000 })
-
-        } catch (error) {
-            const response = await fetch(' https://geolocation-db.com/json/8dd79c70-0801-11ec-a29f-e381a788c2c0')
-            const data = await response.json();
-            setCountry(data.country_name)
-            setCookie('country', data.country_name, { maxAge: 900000 })
-        }
-
-    }
+    const { setSignUpFormVisible, setLoginFormVisible, setPasswordResetVisible, setLoginModalVisible, setOTPFormVisible, setEmailOTP, setreceivedOTP } = UserAuth();
 
 
     const SignInButton = async (auth_provider) => {
@@ -76,16 +45,8 @@ export const LoginForm = () => {
 
 
 
-
-
-    const forgotpassword = () => {
-        router.push('/account/login')
-
-    }
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         setmessage('')
         setloading(true)
 
@@ -93,8 +54,6 @@ export const LoginForm = () => {
         const formData = new FormData(event.target);
         const email = formData.get('email');
         const password = formData.get('password');
-
-
 
         try {
             const parcelData = { email: email.trim(), password: password }
@@ -108,36 +67,41 @@ export const LoginForm = () => {
             });
 
             const res = await rawResponse.json();
-            console.log(res);
+    
 
             if (res.message === 'User not found') {
                 setmessage('Email not registered!!')
+                setloading(false)
+                return
+
             }
             if (res.message === 'Password Incorrect') {
                 setmessage('Password wrong')
+                setloading(false)
+                return
+
             }
             if (res.message === 'OTP Sent') {
                 setEmailOTP(email)
                 setreceivedOTP(res.data.otp)
                 setOTPFormVisible(true)
                 setLoginFormVisible(false)
+                setloading(false)
                 return
             }
 
 
-            setCookie('email', EmailOTP.trim(), { maxAge: 900000 });
+            setCookie('email', email.trim(), { maxAge: 900000 });
+            setCookie('Firstname', res.data.firstName.trim().split(' ')[0], { maxAge: 900000 });
             setCookie('membership', false, { maxAge: 900000 });
             setCookie('countryUpdated_DB', false, { maxAge: 900000 });
             setCookie('account', 'credential', { maxAge: 900000 });
 
-            setLoginModalVisible(false)
             window.location.reload()
 
-            setloading(false)
         } catch (error) {
             setloading(false)
             console.log(error);
-            alert(error);
             return
         }
 
@@ -173,7 +137,7 @@ export const LoginForm = () => {
                                     autoComplete="email"
                                     required
                                     placeholder='Email'
-                                    className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm leading-6"
+                                    className="w-full text-xs font-inter rounded-lg bg-transparent py-2 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm"
                                 />
                             </div>
                         </div>
@@ -188,7 +152,7 @@ export const LoginForm = () => {
                                     autoComplete="current-password"
                                     required
                                     placeholder='Password'
-                                    className="w-full text-xs font-inter rounded-lg bg-transparent py-1.5 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm leading-6"
+                                    className="w-full text-xs font-inter rounded-lg bg-transparent py-2 px-2 text-white border-[1px] border-gray-300 placeholder:text-gray-400 sm:text-sm"
                                 />
                             </div>
                         </div>
@@ -206,6 +170,7 @@ export const LoginForm = () => {
                         </button>
 
 
+                        <p className="text-red-500 font-inter text-xs text-center min-h-4">{message}</p>
 
 
                     </form>

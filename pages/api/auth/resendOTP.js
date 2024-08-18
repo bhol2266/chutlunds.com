@@ -8,7 +8,6 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         try {
             const { email } = req.body;
-            console.log("email",email);
             
             const userExist = await checkUserExists(email)
             if (!userExist) {

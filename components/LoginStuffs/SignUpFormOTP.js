@@ -12,7 +12,7 @@ export const SignUpFormOTP = () => {
     const router = useRouter();
     const { email } = router.query
 
-    const { setLoginModalVisible, setLoginFormVisible, setOTPFormVisible, EmailOTP, setEmailOTP,
+    const { setLoginModalVisible, setLoginFormVisible, setOTPFormVisible, EmailOTP, setSignUpFormVisible,
         receivedOTP, setreceivedOTP } = UserAuth();
 
 
@@ -21,13 +21,15 @@ export const SignUpFormOTP = () => {
     const [resentOTP, setresentOTP] = useState(0);
     const [message, setmessage] = useState('');
 
-    useEffect(() => {
-        if (typeof getCookie('email') !== 'undefined') {
-            setLoginModalVisible(false)
-        }
-    }, []);
 
 
+
+    const resetStates = () => {
+        setOTP('');
+        setloading(false);
+        setresentOTP(0);
+        setmessage('');
+    };
 
     const verifyOTP = async (e) => {
 
@@ -38,9 +40,25 @@ export const SignUpFormOTP = () => {
         e.preventDefault()
         setloading(true)
 
+
+
         if (OTP == receivedOTP) {
 
+            // this is just for getting first name from the use data
+            const parcelData1 = { email: EmailOTP.trim() }
+            const rawResponse1 = await fetch(`${process.env.FRONTEND_URL}api/auth/getUserByEmail`, {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify(parcelData1),
+            });
+
+            const res1 = await rawResponse1.json();            
+
             setCookie('email', EmailOTP.trim(), { maxAge: 900000 });
+            setCookie('Firstname', res1.data.firstName.trim().split(' ')[0], { maxAge: 900000 });
             setCookie('membership', false, { maxAge: 900000 });
             setCookie('countryUpdated_DB', false, { maxAge: 900000 });
             setCookie('account', 'credential', { maxAge: 900000 });
@@ -70,6 +88,8 @@ export const SignUpFormOTP = () => {
 
         } else {
             setmessage('OTP Incorrect')
+            setloading(false)
+
         }
 
     }
@@ -89,11 +109,11 @@ export const SignUpFormOTP = () => {
             });
 
             const res = await rawResponse.json();
-            console.log(res);
             setloading(false)
 
             if (res.message === 'OTP Sent Again!') {
                 setresentOTP(1)
+                setreceivedOTP(res.data.otp)
                 setmessage('OTP Sent Again!')
             }
 
@@ -112,9 +132,7 @@ export const SignUpFormOTP = () => {
         <div className="relative bg-semiblack  rounded-lg  px-6 lg:px-0 py-10  ">
 
 
-            <IoIosCloseCircleOutline onClick={() => {
-                setLoginModalVisible(false); window.location.reload();
-            }} className="cursor-pointer absolute text-white text-[32px] lg:text-[34px] right-4 top-4" />
+            <IoIosCloseCircleOutline onClick={() => { setLoginFormVisible(true); setOTPFormVisible(false); setLoginModalVisible(false); resetStates() }} className="cursor-pointer absolute text-white text-[32px] lg:text-[34px] right-4 top-4" />
 
 
             <div className='px-[28px]  w-full'>
@@ -138,8 +156,8 @@ export const SignUpFormOTP = () => {
                         </div>
                     </div>
 
-                    <div className='mb-6 min-h-[30px] xl:min-h-[40px] mt-1'>
-                        <p className={` rounded text-center w-full  text-[14px] xl:text-[16px] text-white font-semibold px-1 pb-1 mt-1 ${message.length > 0 ? "visible" : "invisible"}`}>{message}</p>
+                    <div className='mb-6 min-h-[30px] xl:min-h-[40px] mt-3'>
+                        <p className={` rounded text-center w-full  text-[14px] xl:text-[16px] ${message == "OTP Sent Again!" ? "text-theme_yellow" : "text-red-500"}  font-semibold px-1 pb-1 mt-1 ${message.length > 0 ? "visible" : "invisible"}`}>{message}</p>
                     </div>
 
 
@@ -165,17 +183,17 @@ export const SignUpFormOTP = () => {
                 {/* Bottom */}
 
 
-                <div className='pt-4 mt-[58px] relative'>
+                <div className='pt-4 mt-[38px] relative h-[100px]'>
 
                     {!loading &&
                         <div className=' flex flex-col space-y-2'>
 
                             {resentOTP === 0 &&
-                                <button onClick={resendOTP} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto  text-white border-[1px] border-gray-200 rounded-lg hover:text-semiblack hover:bg-gray-200 block'>Re-send OTP</button>
+                                <button onClick={resendOTP} className='font-normal text-[14px] text-center w-[154px] py-2  mx-auto  text-white border-[1px] border-gray-200 rounded-lg hover:text-semiblack hover:bg-gray-200 block'>Re-send OTP</button>
                             }
 
 
-                            <button onClick={verifyOTP} className='font-normal text-[14px] text-center w-[154px] h-[30px]  mx-auto  text-white border-[1px] border-gray-200 rounded-lg hover:text-semiblack hover:bg-gray-200 block'>Continue</button>
+                            <button onClick={verifyOTP} className='font-normal text-[14px] text-center w-[154px] py-2 mt-2  mx-auto  text-white border-[1px] border-gray-200 rounded-lg hover:text-semiblack hover:bg-gray-200 block'>Continue</button>
                         </div>
 
                     }

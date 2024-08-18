@@ -12,8 +12,6 @@ export default async function handler(req, res) {
 
             const userExists = await checkUserExists(email);
             if (userExists) {
-                console.log(userExists);
-
                 res.status(200).json({ message: "Already Resgistered !" });
             } else {
                 await saveUserProfile(firstName, lastName, email, "", password, false, country, false, false, [])

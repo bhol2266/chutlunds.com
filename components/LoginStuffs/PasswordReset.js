@@ -1,18 +1,14 @@
-import React, { useContext, useState } from 'react'
-import { CheckCircleIcon } from '@heroicons/react/solid'
-import { XCircleIcon } from '@heroicons/react/solid'
-import Link from 'next/link'
-import videosContext from '../../context/videos/videosContext'
-import Router, { useRouter } from 'next/router';
-import ClipLoader from "react-spinners/ClipLoader";
-import { setCookie, deleteCookie } from "cookies-next";
-import { UserAuth } from "@/context/AuthContext";
+import { UserAuth } from "@/context/AuthContext"
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
+import { IoIosCloseCircleOutline } from "react-icons/io"
+import ClipLoader from "react-spinners/ClipLoader"
 
 export const PasswordReset = () => {
     const router = useRouter();
 
 
-    const { setPasswordResetVisible, setLoginFormVisible } = UserAuth();
+    const { setPasswordResetVisible, setLoginFormVisible, setLoginModalVisible } = UserAuth();
 
     const [Email, setEmail] = useState('')
     const [OTP, setOTP] = useState('')
@@ -58,7 +54,6 @@ export const PasswordReset = () => {
             });
 
             const res = await rawResponse.json();
-            console.log(res);
 
             if (res.message === 'Email not registered') {
                 setmessage('Email not registered!');
@@ -86,6 +81,7 @@ export const PasswordReset = () => {
 
 
     const updatePassword = async (e) => {
+        e.preventDefault();
         setmessage('')
         setloading(true)
 
@@ -94,13 +90,13 @@ export const PasswordReset = () => {
             setloading(false)
             return
         }
-        if (OTP !== receivedOTP) {
+        if (OTP != receivedOTP) {
             setmessage('OTP not matched!')
             setloading(false)
             return
         }
 
-        if (password.length < 4) {
+        if (password.length < 6) {
             setmessage('password too small!')
             setloading(false)
             return
@@ -124,22 +120,19 @@ export const PasswordReset = () => {
         });
 
         const res = await rawResponse.json();
-        console.log(res);
         setloading(false)
 
         if (res.message === 'Password Updated') {
-            setmessage('Password updated!')
+            setmessage('Password Updated!')
             setOTP_Sent(0)
             setpasswordUpdated(true)
 
             setTimeout(() => {
                 setPasswordResetVisible(false)
                 setLoginFormVisible(true)
+                resetForm()
             }, 2000);
-
-
         }
-        resetForm()
     }
 
 
@@ -151,6 +144,7 @@ export const PasswordReset = () => {
         <div className="relative bg-semiblack  rounded-lg  px-6 lg:px-0 py-8">
 
 
+            <IoIosCloseCircleOutline onClick={() => { setLoginFormVisible(true); setPasswordResetVisible(false); setLoginModalVisible(false); resetForm() }} className="cursor-pointer absolute text-white text-[32px] lg:text-[34px] right-4 top-4" />
 
 
 
@@ -210,7 +204,7 @@ export const PasswordReset = () => {
 
                         {OTP_Sent === 0 &&
                             <div className=' mt-[3px]'>
-                                <p className={`text-red-500 rounded text-center w-full  text-[14px] xl:text-[16px] text-red-500 px-2 py-1 ${message.length > 0 ? "block" : "hidden"}`}>{message}</p>
+                                <p className={`${message == "Password Updated!" ? "text-theme_yellow" : "text-red-500"} rounded text-center w-full  text-[14px] xl:text-[16px] text-red-500 px-2 py-1 ${message.length > 0 ? "block" : "hidden"}`}>{message}</p>
                             </div>
                         }
                     </div>
@@ -269,7 +263,11 @@ export const PasswordReset = () => {
                             }
 
                             {passwordUpdated &&
-                                <button onClick={resendOTP} className='font-normal text-[14px] text-center w-[154px] h-[33px]  mx-auto  text-semiblack rounded-md bg-gray-200 px-3 py-1.5 shadow-sm'>Go to login</button>
+                                <button onClick={() => {
+                                    setPasswordResetVisible(false)
+                                    setLoginFormVisible(true)
+                                    resetForm()
+                                }} className='font-normal text-[14px] text-center w-[154px] h-[33px]  mx-auto  text-semiblack rounded-md bg-gray-200 px-3 py-1.5 shadow-sm'>Go to login</button>
                             }
 
                             {OTP_Sent === 1 &&

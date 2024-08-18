@@ -54,19 +54,20 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        displayName: userData.displayName,
+        displayName: userData.name,
         email: userData.email,
-        photoURL: userData.profileUrl,
+        photoURL: userData.picture,
       }),
     });
 
-    // Set cookies
-    res.setHeader('Set-Cookie', [
-      serialize('email', userData.email, { maxAge: 900000, path: '/' }),
-      serialize('membership', userData.membership || '', { maxAge: 900000, path: '/' }),
-      serialize('countryUpdated_DB', 'false', { maxAge: 900000, path: '/' }),
-      serialize('account', 'google', { maxAge: 900000, path: '/' }),
-    ]);
+      // Set cookies
+      res.setHeader('Set-Cookie', [
+        serialize('email', userData.email, { maxAge: 900000, path: '/' }),
+        serialize('membership', false, { maxAge: 900000, path: '/' }),
+        serialize('Firstname', userData.name.trim().split(' ')[0], { maxAge: 900000, path: '/' }),
+        serialize('countryUpdated_DB', 'false', { maxAge: 900000, path: '/' }),
+        serialize('account', 'google', { maxAge: 900000, path: '/' }),
+      ]);
 
     // Redirect to homepage
     res.redirect('/');
