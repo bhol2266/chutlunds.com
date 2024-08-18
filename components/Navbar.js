@@ -427,7 +427,7 @@ function Navbar() {
 
                         <a target="_blank" href={countryBlocked ? "https://go.xxxiijmp.com/?userId=9ea31ff27db3b7242eabcc2d26ac0eaf38f093c68528e70c2e7f5a72df55c42e" : "https://chaturbate.com/in/?tour=LQps&campaign=3v7pk&track=default&room=ukdevelopers"} rel="noopener noreferrer">
                             <div className='pl-2  flex  items-center 
-                             cursor-pointer hover:scale-105  transition-all space-x-2'>
+                             cursor-pointer hover:scale-105  transition-all space-x-2 hidden xl:flex'>
                                 <img
                                     src='/livesex.png'
                                     height={35}
@@ -445,8 +445,8 @@ function Navbar() {
 
 
                         <div className='relative select-none'>
-                            <div className="flex  bg-semiblack items-center w-[250px] lg:w-[300px] 2xl:w-[700px]  border-[0.8px] border-[#E5E5E5] rounded-[30px] p-1 px-4">
-                                <SearchIcon className="h-6 text-[#E5E5E5]" />
+                            <div className="flex  bg-semiblack items-center w-[250px] lg:w-[300px] 2xl:w-[700px]  border-[0.8px] border-[#E5E5E5] rounded-[30px] p-0.5 2xl:p-1 2xl:px-4 px-4">
+                                <SearchIcon className="h-5 2xl:h-6 text-[#E5E5E5]" />
                                 <input
                                     value={searchKey}
                                     onChange={getSuggestedTags}
@@ -471,7 +471,7 @@ function Navbar() {
                                 </div>
                             }
                         </div>
-                        <button type="submit" className={`ml-2 bg-button hover:bg-button_hover text-white text-sm h-10 px-8 m-1.5 rounded-[20px] transition-all duration-300 ease-in-out ${searchKey ? 'opacity-100 visible' : 'opacity-0 invisible'}`}    >
+                        <button type="submit" className={`ml-2 bg-button hover:bg-button_hover text-white text-sm h-10 px-8 m-1.5 rounded-[20px] transition-all duration-300 ease-in-out ${searchKey ? 'opacity-100 visible' : 'opacity-0 hidden'}`}    >
                             Search
                         </button>
 
