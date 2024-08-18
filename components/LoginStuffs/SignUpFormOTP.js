@@ -46,7 +46,7 @@ export const SignUpFormOTP = () => {
 
             // this is just for getting first name from the use data
             const parcelData1 = { email: EmailOTP.trim() }
-            const rawResponse1 = await fetch(`${process.env.FRONTEND_URL}api/auth/getUserByEmail`, {
+            const rawResponse1 = await fetch(`/api/auth/getUserByEmail`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -67,7 +67,7 @@ export const SignUpFormOTP = () => {
             //Update loggedIn in DB
             const parcelData = { email: EmailOTP.trim() }
 
-            await fetch(`${process.env.FRONTEND_URL}api/auth/updateLoggedIn`, {
+            await fetch(`/api/auth/updateLoggedIn`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ export const SignUpFormOTP = () => {
                 method: 'POST',
                 body: JSON.stringify(parcelData),
             });
-            await fetch(`${process.env.FRONTEND_URL}api/auth/updateVerify`, {
+            await fetch(`/api/auth/updateVerify`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -99,7 +99,7 @@ export const SignUpFormOTP = () => {
         setloading(true)
         try {
             const parcelData = { email: EmailOTP.trim() }
-            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/auth/resendOTP`, {
+            const rawResponse = await fetch(`/api/auth/resendOTP`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'

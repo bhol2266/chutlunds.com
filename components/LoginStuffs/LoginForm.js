@@ -57,7 +57,7 @@ export const LoginForm = () => {
 
         try {
             const parcelData = { email: email.trim(), password: password }
-            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/auth/loginCredentials`, {
+            const rawResponse = await fetch(`/api/auth/loginCredentials`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'

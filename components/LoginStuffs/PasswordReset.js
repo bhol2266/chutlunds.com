@@ -44,7 +44,7 @@ export const PasswordReset = () => {
 
         try {
             const parcelData = { email: Email.trim() };
-            const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/auth/resendOTP`, {
+            const rawResponse = await fetch(`/api/auth/resendOTP`, {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -110,7 +110,7 @@ export const PasswordReset = () => {
 
 
         const parcelData = { email: Email.trim(), password: password }
-        const rawResponse = await fetch(`${process.env.FRONTEND_URL}api/auth/forgotPassword`, {
+        const rawResponse = await fetch(`/api/auth/forgotPassword`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
