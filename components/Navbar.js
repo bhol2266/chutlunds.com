@@ -1,4 +1,4 @@
-import { updateloggedIn } from "../config/firebase/lib";
+import { updatekeywords, updateloggedIn } from "../config/firebase/lib";
 import { deleteCookie, getCookie } from "cookies-next";
 import { useContext, useEffect, useRef, useState, } from 'react';
 import ReactCountryFlag from "react-country-flag";
@@ -93,6 +93,8 @@ function Navbar() {
     const [searchBarVisibility, setsearchBarVisibility] = useState('hidden');
     const [tags, settags] = useState([])
     const searchInputref = useRef('')
+
+
     const handleSearchIconClick = () => {
         if (searchBarVisibility === 'hidden') {
             setsearchBarVisibility('flex')
@@ -102,15 +104,14 @@ function Navbar() {
         }
         router.push('/search')
     }
+
     const goSearch = (e) => {
         e.preventDefault();
-
         setshowSuggested(false);
-
+        //updatekeywords :this is beacuse when user serach anything ,/search/key page, the useEffect doent trigger again, so updating from here also
+        updatekeywords(e.target[0].value.trim());
         if (e.target[0].value) {
-            router.push(`/search/${e.target[0].value.trim()
-                }`)
-
+            router.push(`/search/${e.target[0].value.trim()}`)
         }
 
     }

@@ -1,34 +1,57 @@
 import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';
-import { UserAuth } from "@/context/AuthContext";
 import { LinkIcon, PlusIcon } from '@heroicons/react/outline';
 import cheerio from 'cheerio';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from "next/router";
-import { useState } from 'react';
+import { useState,useEffect  } from 'react';
 import { BeatLoader } from 'react-spinners';
 import Pagination from '../../../../components/Pagination';
 import Header from '../../../../components/Pornstar_Channels/Header';
 import Videos from "../../../../components/Videos";
+import { UserAuth } from "@/context/AuthContext";
+import { checkSubscribedChannel, updateSubcribedChannels } from '../../../../config/firebase/lib';
+import { getCookie } from 'cookies-next';
 
 
 
 function Index({ video_collection, pages, channel_name, channel_link, collageImages, channel_subscriber, channel_by }) {
 
 
+    const { setLoginModalVisible } = UserAuth();
+
     const router = useRouter();
     const { code, channelname } = router.query
     const currentPageNumberURL = '1'
 
-    const { user, setUser, setLoginModalVisible } = UserAuth();
-    const [isSubscribed, setisSubscribed] = useState(false)
+    const [isSubscribed, setIsSubscribed] = useState(false);
 
 
+    useEffect(() => {
+        const fetchSubscriptionStatus = async () => {
+            const subscribed = await checkSubscribedChannel(channelname);
+            setIsSubscribed(subscribed);
+        };
+        fetchSubscriptionStatus();
+    }, [code, channelname]);
 
-    function clickSubscribe() {
-        if (!user) {
+
+    async function clickSubscribe() {
+
+        if (!getCookie("email")) {
             setLoginModalVisible(true)
+            return
         }
+        if (isSubscribed) {
+            // Remove subscription
+            await updateSubcribedChannels(code, channelname, "remove");
+            setIsSubscribed(false); // Update state to reflect removal
+        } else {
+            // Add subscription
+            await updateSubcribedChannels(code, channelname, "add");
+            setIsSubscribed(true); // Update state to reflect addition
+        }
+
     }
 
     if (router.isFallback) {
@@ -108,15 +131,19 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
                                 </div>
                             </Link>
 
-                            <div className="cursor-pointer h-fit flex items-center justify-center space-x-2 shadow-md text-white px-3 lg:px-5 p-1.5 bg-red-500 rounded-[20px]">
-                                <PlusIcon className="h-4 lg:h-5 text-white" />
-                                <p onClick={clickSubscribe} className="text-sm lg:text-md 2xl:text-lg font-poppins">
-                                    Subscribe
+
+                            <div onClick={() => { clickSubscribe() }} className={` ${isSubscribed ? "bg-green-500  hover:bg-green-600" : "bg-red-500  hover:bg-red-600"} w-36 lg:w-44 mt-auto cursor-pointer h-fit flex items-center justify-center space-x-2 shadow-md text-white  p-1.5 rounded-[20px]`}>
+                                {!isSubscribed &&
+                                    <PlusIcon className="h-4 lg:h-5 text-white" />
+                                }
+                                <p  className="text-sm lg:text-md 2xl:text-lg font-poppins">
+                                    {isSubscribed ? "Subscribed" : "Subscribe"}
                                 </p>
                                 <p className="text-sm lg:text-md 2xl:text-lg font-poppins">
                                     {channel_subscriber}
                                 </p>
                             </div>
+
                         </div>
                     </div>
                 </div>

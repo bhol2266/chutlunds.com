@@ -1,8 +1,8 @@
-import { setCookie } from "cookies-next";
+import { setCookie, getCookie } from "cookies-next";
 import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import db from "../../firebase";
 
-async function saveUserProfile(firstName, lastName, email,profilePic, hashpass, verified, country, loggedIn, membership, keywords) {
+async function saveUserProfile(firstName, lastName, email, profilePic, hashpass, verified, country, loggedIn, membership, keywords) {
     const data = {
         firstName,
         lastName,
@@ -14,8 +14,8 @@ async function saveUserProfile(firstName, lastName, email,profilePic, hashpass, 
         loggedIn,
         membership,
         keywords,
-        timestamp: Date.now()   
-     };
+        timestamp: Date.now()
+    };
 
     const documentId = email; // You can specify a custom document ID or let Firestore generate one
 
@@ -57,7 +57,9 @@ async function updateCountry(email, country) {
     }
 }
 
-async function updatekeywords(searchkey, email) {
+async function updatekeywords(searchkey) {
+
+    const email = getCookie('email');
 
     try {
         const userExist = await checkUserExists_Firestore(email)
@@ -81,9 +83,7 @@ async function updatekeywords(searchkey, email) {
                         newArray.push(key)
                     }
                 })
-
             }
-
 
             const docRef = doc(db, "Users", email);
             await updateDoc(docRef, { keywords: newArray });
@@ -100,7 +100,7 @@ async function updatekeywords(searchkey, email) {
 }
 
 
-async function updateloggedIn(email,loginStatus) {
+async function updateloggedIn(email, loginStatus) {
     try {
         const userExist = await checkUserExists_Firestore(email)
         console.log(userExist)
@@ -113,6 +113,150 @@ async function updateloggedIn(email,loginStatus) {
         console.log("Error updating loginStatus: ", error);
     }
 }
+
+async function updateSubcribedPornstars(code, pornstarname, action) {
+    const email = getCookie('email');
+
+    try {
+        const docRef = doc(db, "Users", email);
+        const docSnap = await getDoc(docRef);
+
+        let updatedPornstars = [];
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            updatedPornstars = userData.Pornstars || [];
+        }
+
+        if (action === "add") {
+            // Check if the pornstar object with the same code already exists
+            const isDuplicate = updatedPornstars.some(p => p.code === code);
+
+            if (!isDuplicate) {
+                // Add the new pornstar object to the array
+                updatedPornstars = [...updatedPornstars, { code, pornstarname }];
+
+                // Update the document in Firestore
+                await updateDoc(docRef, { Pornstars: updatedPornstars });
+                console.log("Pornstars successfully updated in Firestore!");
+
+
+            } else {
+                console.log("Pornstar already exists in the array.");
+            }
+        } else if (action === "remove") {
+            // Remove the pornstar object from the array
+            updatedPornstars = updatedPornstars.filter(p => p.code !== code);
+
+            // Update the document in Firestore
+            await updateDoc(docRef, { Pornstars: updatedPornstars });
+            console.log("Pornstars successfully updated in Firestore!");
+
+        } else {
+            console.log("Invalid action. Use 'add' or 'remove'.");
+        }
+
+    } catch (error) {
+        console.log("Error updating Pornstars: ", error);
+    }
+}
+
+async function checkSubcribedPornstar(pornstarname) {
+    const email = getCookie('email');
+
+    try {
+        const docRef = doc(db, "Users", email);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            const pornstars = userData.Pornstars || [];
+            // Check if any entry in the array has the same pornstarname
+            return pornstars.some(p => p.pornstarname === pornstarname);
+        } else {
+            console.log("No such document!");
+            return false;
+        }
+    } catch (error) {
+        console.error("Error checking pornstar subscription: ", error);
+        return false;
+    }
+}
+
+
+
+
+
+async function updateSubcribedChannels(code, channelname, action) {
+    const email = getCookie('email');
+
+    try {
+        const docRef = doc(db, "Users", email);
+        const docSnap = await getDoc(docRef);
+
+        let updatedChannels = [];
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            updatedChannels = userData.Channels || [];
+        }
+
+        if (action === "add") {
+            // Check if the channel object with the same code already exists
+            const isDuplicate = updatedChannels.some(p => p.channelname === channelname);
+
+            if (!isDuplicate) {
+                // Add the new channel object to the array
+                updatedChannels = [...updatedChannels, { code, channelname }];
+
+                // Update the document in Firestore
+                await updateDoc(docRef, { Channels: updatedChannels });
+                console.log("Channel successfully updated in Firestore!");
+
+            } else {
+                console.log("Channel already exists in the array.");
+            }
+        } else if (action === "remove") {
+            // Remove the channel object from the array
+            updatedChannels = updatedChannels.filter(p => p.channelname !== channelname);
+
+            // Update the document in Firestore
+            await updateDoc(docRef, { Channels: updatedChannels });
+            console.log("Channel successfully updated in Firestore!");
+
+        } else {
+            console.log("Invalid action. Use 'add' or 'remove'.");
+        }
+
+    } catch (error) {
+        console.log("Error updating Pornstars: ", error);
+    }
+}
+
+async function checkSubscribedChannel(channelname) {
+    const email = getCookie('email');
+
+    try {
+        const docRef = doc(db, "Users", email);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            const channels = userData.Channels || [];
+            // Check if any entry in the array has the same pornstarname
+            return channels.some(p => p.channelname === channelname);
+        } else {
+            console.log("No such document!");
+            return false;
+        }
+    } catch (error) {
+        console.error("Error checking pornstar subscription: ", error);
+        return false;
+    }
+}
+
+
+
+
+
 
 async function updateMembership(email) {
     const existingDoc = await getDoc(doc(db, "Users", email));
@@ -160,5 +304,8 @@ async function shuffleData(array) {
 }
 
 
-export { checkUserExists_Firestore, readCards, saveUserProfile, updateCountry, getLocation, updateMembership, updatekeywords, updateloggedIn, updateCardChecked, shuffleData };
+export {
+    checkUserExists_Firestore, readCards, saveUserProfile, updateCountry, getLocation, updateMembership, updatekeywords, updateloggedIn,
+    updateCardChecked, shuffleData, updateSubcribedPornstars, updateSubcribedChannels, checkSubcribedPornstar, checkSubscribedChannel
+};
 

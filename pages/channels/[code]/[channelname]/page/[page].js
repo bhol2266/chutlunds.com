@@ -1,5 +1,5 @@
 import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';
-import { PlusIcon ,LinkIcon} from '@heroicons/react/outline';
+import { PlusIcon, LinkIcon } from '@heroicons/react/outline';
 import cheerio from 'cheerio';
 import Head from 'next/head';
 import { useRouter } from "next/router";
@@ -9,21 +9,49 @@ import Header from '../../../../../components/Pornstar_Channels/Header';
 import Videos from "../../../../../components/Videos";
 import Link from 'next/link';
 import { UserAuth } from "@/context/AuthContext";
+import { getCookie } from 'cookies-next';
+import { useState, useEffect } from 'react';
 
+import { checkSubscribedChannel, updateSubcribedChannels } from '@/config/firebase/lib';
 
 
 
 function Index({ video_collection, pages, channel_name, channel_link, collageImages, channel_subscriber, channel_by }) {
 
     const router = useRouter();
-    const { user, setUser, setLoginModalVisible } = UserAuth();
+    const { setLoginModalVisible } = UserAuth();
+    const [isSubscribed, setIsSubscribed] = useState(false);
 
+    const { code, channelname, page } = router.query
+    const currentPageNumberURL = page
 
-    function clickSubscribe() {
-        if (!user) {
+    useEffect(() => {
+        const fetchSubscriptionStatus = async () => {
+            const subscribed = await checkSubscribedChannel(channelname);
+            setIsSubscribed(subscribed);
+        };
+        fetchSubscriptionStatus();
+    }, [code, channelname]);
+
+    async function clickSubscribe() {
+
+        if (!getCookie("email")) {
             setLoginModalVisible(true)
+            return
         }
+        if (isSubscribed) {
+            // Remove subscription
+            await updateSubcribedChannels(code, channelname, "remove");
+            setIsSubscribed(false); // Update state to reflect removal
+        } else {
+            // Add subscription
+            await updateSubcribedChannels(code, channelname, "add");
+            setIsSubscribed(true); // Update state to reflect addition
+        }
+
     }
+
+
 
     if (router.isFallback) {
         return (
@@ -33,8 +61,7 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
         )
     }
 
-    const { code, channelname, page } = router.query
-    const currentPageNumberURL = page
+    
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -62,7 +89,7 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
             </Head>
 
 
-          
+
             <div>
 
                 <div className="relative h-[240px] sm:h-[290px] md:h-[260px] lg:h-[290px] xl:h-[300px] 2xl:h-[350px] 3xl:h-[370px]">
@@ -108,10 +135,12 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
                                 </div>
                             </Link>
 
-                            <div className="cursor-pointer h-fit flex items-center justify-center space-x-2 shadow-md text-white px-3 lg:px-5 p-1.5 bg-red-500 rounded-[20px]">
-                                <PlusIcon className="h-4 lg:h-5 text-white" />
-                                <p onClick={clickSubscribe} className="text-sm lg:text-md 2xl:text-lg font-poppins">
-                                    Subscribe
+                            <div onClick={() => { clickSubscribe() }} className={` ${isSubscribed ? "bg-green-500  hover:bg-green-600" : "bg-red-500  hover:bg-red-600"} w-36 lg:w-44 mt-auto cursor-pointer h-fit flex items-center justify-center space-x-2 shadow-md text-white  p-1.5 rounded-[20px]`}>
+                                {!isSubscribed &&
+                                    <PlusIcon className="h-4 lg:h-5 text-white" />
+                                }
+                                <p className="text-sm lg:text-md 2xl:text-lg font-poppins">
+                                    {isSubscribed ? "Subscribed" : "Subscribe"}
                                 </p>
                                 <p className="text-sm lg:text-md 2xl:text-lg font-poppins">
                                     {channel_subscriber}
@@ -232,7 +261,7 @@ export async function getStaticProps(context) {
 
     }
 
-    
+
     await scrape(`https://spankbang.party/${code}/channel/${channelname}/${page}/`)
 
 

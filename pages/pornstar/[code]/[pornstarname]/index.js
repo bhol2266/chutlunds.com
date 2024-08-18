@@ -1,4 +1,4 @@
-import { PlusIcon } from '@heroicons/react/outline';
+import { MinusIcon, PlusIcon } from '@heroicons/react/outline';
 import cheerio from 'cheerio';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -9,12 +9,30 @@ import Header from '../../../../components/Pornstar_Channels/Header';
 import Videos from "../../../../components/Videos";
 import pornstarNameList from "../../../../JsonData/pornstarlist/alldata.json";
 import { Scrape_Video_Item_Pornstar } from '../../../../config/Scrape_Video_Item';
+import { checkSubcribedPornstar, updateSubcribedPornstars } from '../../../../config/firebase/lib';
+import { getCookie } from 'cookies-next';
+import { UserAuth } from "@/context/AuthContext";
 
 function Index({ video_collection, pages, pornstarInformation, collageImages, pornstar_image }) {
+ 
+    const {  setLoginModalVisible } = UserAuth();
+
+ 
     const router = useRouter();
     const { code, pornstarname } = router.query;
     const [imageURL, setimage] = useState(pornstar_image);
 
+    const [isSubscribed, setIsSubscribed] = useState(false);
+
+
+
+    useEffect(() => {
+        const fetchSubscriptionStatus = async () => {
+            const subscribed = await checkSubcribedPornstar(pornstarname);
+            setIsSubscribed(subscribed);
+        };
+        fetchSubscriptionStatus();
+    }, [code, pornstarname]);
 
 
     if (router.isFallback) {
@@ -28,11 +46,25 @@ function Index({ video_collection, pages, pornstarInformation, collageImages, po
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-    function clickSubscribe() {
-        if (!user) {
+    async function clickSubscribe() {
+
+        if (!getCookie("email")) {
             setLoginModalVisible(true)
+            return
         }
+        if (isSubscribed) {
+            // Remove subscription
+            await updateSubcribedPornstars(code, pornstarname, "remove");
+            setIsSubscribed(false); // Update state to reflect removal
+        } else {
+            // Add subscription
+            await updateSubcribedPornstars(code, pornstarname, "add");
+            setIsSubscribed(true); // Update state to reflect addition
+        }
+
     }
+
+
 
     return (
         <>
@@ -78,10 +110,12 @@ function Index({ video_collection, pages, pornstarInformation, collageImages, po
                                 {capitalizeFirstLetter(pornstarname.replace(/\+/g, " "))}
                             </h2>
 
-                            <div className="w-36 lg:w-44 mt-auto cursor-pointer h-fit flex items-center justify-center space-x-2 shadow-md text-white  p-1.5 bg-red-500 rounded-[20px]">
-                                <PlusIcon className="h-4 lg:h-5 text-white" />
-                                <p onClick={clickSubscribe} className="text-xs lg:text-sm   font-poppins">
-                                    {pornstarInformation.subscribe}
+                            <div onClick={() => { clickSubscribe() }} className={` ${isSubscribed ? "bg-green-500  hover:bg-green-600" : "bg-red-500  hover:bg-red-600"} w-36 lg:w-44 mt-auto cursor-pointer h-fit flex items-center justify-center space-x-2 shadow-md text-white  p-1.5 rounded-[20px]`}>
+                                {!isSubscribed &&
+                                    <PlusIcon className="h-4 lg:h-5 text-white" />
+                                }
+                                <p className="text-xs lg:text-sm   font-poppins">
+                                    {pornstarInformation.subscribe.replace("Subscribe", "Subscribed")}
                                 </p>
                             </div>
                         </div>

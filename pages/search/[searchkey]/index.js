@@ -16,39 +16,13 @@ function Search({ video_collection, pages }) {
   const { searchkey } = router.query
   const currentPageNumberURL = '1'
 
-  async function updateKeywords_DB() {
-    if (video_collection.length !== 0 && typeof getCookie('email') !== 'undefined') {
-      await updatekeywords(searchkey.trim(), getCookie('email'))
-
-    } else {
-      const keywordsCookie = getCookie('keywords')
-      if (typeof keywordsCookie !== 'undefined') {
-        const parsedArray = JSON.parse(keywordsCookie)
-        let newArray = []
-        newArray.push(searchkey)
-        parsedArray.forEach(key => {
-          if (key !== searchkey) {
-            newArray.push(key)
-          }
-        })
-        setCookie('keywords', JSON.stringify(newArray), { maxAge: 900000 });
-
-      } else {
-        if (video_collection.length !== 0) {
-          var json_str = JSON.stringify([searchkey]);
-          setCookie('keywords', json_str, { maxAge: 900000 });
-        }
-      }
-    }
-  }
-
   useEffect(() => {
-    updateKeywords_DB();
+    updatekeywords(searchkey.trim());
   }, []);
 
 
+
   function capitalizeFirstLetter(string) {
-    console.log(string.charAt(0).toUpperCase() + string.slice(1));
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
