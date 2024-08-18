@@ -161,7 +161,7 @@ function Navbar() {
 
     return (
 
-        <div className='font-inter bg-semiblack'>
+        <div className='font-inter bg-semiblack block_popunder'>
 
             <div className=" text-white p-2  lg:hidden">
 
@@ -387,7 +387,7 @@ function Navbar() {
 
 
                 <Link href='/membership'>
-                    <p className='sm:text-md text-sm  text-semiblack rounded-[22px] text-center px-3 p-1 m-1 bg-theme_yellow hover:scale-105 transition-transform duration-30'>
+                    <p className='sm:text-md text-sm  text-semiblack rounded-[22px] text-center px-3 p-1 m-1 bg-theme_yellow hover:scale-105 transition-transform duration-30 block_popunder'>
                         Join Now
                     </p>
                 </Link>
