@@ -471,7 +471,7 @@ function Navbar() {
                                 </div>
                             }
                         </div>
-                        <button type="submit" className={`ml-2 bg-button hover:bg-button_hover text-white text-sm h-10 px-8 m-1.5 rounded-[20px] transition-all duration-300 ease-in-out ${searchKey ? 'opacity-100 visible' : 'opacity-0 hidden'}`}    >
+                        <button type="submit" className={`ml-2 bg-button hover:bg-button_hover text-white text-sm h-10 px-8 m-1.5 rounded-[20px] transition-all duration-300 ease-in-out ${searchKey ? 'opacity-100 visible' : 'opacity-0 hidden 2xl:flex'}`}    >
                             Search
                         </button>
 
