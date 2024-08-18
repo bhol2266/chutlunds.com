@@ -58,46 +58,68 @@ async function updateCountry(email, country) {
 }
 
 async function updatekeywords(searchkey) {
-
     const email = getCookie('email');
 
-    try {
-        const userExist = await checkUserExists_Firestore(email)
-
-        if (userExist) {
+    // Check if email is valid
+    if (!email || typeof email == undefined) {
 
 
-            // This is because we need the previously stored keyword, and the checkUserExists_Firestore function only returns true or false, not the full object.          
-            const reff = doc(db, "Users", email);
-            const userobj = await getDoc(reff);
 
+        const keywordsCookie = getCookie('keywords')
+        if (keywordsCookie) {
+            const parsedArray = JSON.parse(keywordsCookie)
             let newArray = []
-            const previousKeywords = userobj.data().keywords
+            newArray.push(searchkey)
+            parsedArray.forEach(key => {
+                if (key !== searchkey) {
+                    newArray.push(key)
+                }
+            })
+            setCookie('keywords', JSON.stringify(newArray), { maxAge: 900000 });
+        }
+        else {
+            setCookie('keywords', JSON.stringify([searchkey]), { maxAge: 900000 });
+        }
+        return; // Exit the function if email is not valid
+    }
+
+    try {
+        // Get the user document directly
+        const docRef = doc(db, "Users", email);
+        const userObj = await getDoc(docRef);
+
+        if (userObj.exists()) {
+            let newArray = [];
+            const previousKeywords = userObj.data().keywords || [];
 
             if (previousKeywords.length === 0) {
-                newArray.push(searchkey)
+                newArray.push(searchkey);
             } else {
-                newArray.push(searchkey)
+                newArray.push(searchkey);
                 previousKeywords.forEach(key => {
                     if (key !== searchkey) {
-                        newArray.push(key)
+                        newArray.push(key);
                     }
-                })
+                });
             }
 
-            const docRef = doc(db, "Users", email);
+            // Update the document with the new keywords array
             await updateDoc(docRef, { keywords: newArray });
-            console.log("keywords successfully updated!", newArray);
+            console.log("Keywords successfully updated!", newArray);
 
-            var json_str = JSON.stringify(newArray);
-            setCookie('keywords', json_str, { maxAge: 900000 });
+            // Update cookies
+            const jsonStr = JSON.stringify(newArray);
+            setCookie('keywords', jsonStr, { maxAge: 900000 });
 
+        } else {
+            console.log("User document does not exist.");
+            // Handle case where document does not exist, if needed
         }
     } catch (error) {
         console.log(error);
     }
-
 }
+
 
 async function getFirstKeyword() {
     const email = getCookie('email');
@@ -335,6 +357,6 @@ async function shuffleData(array) {
 
 export {
     checkUserExists_Firestore, readCards, saveUserProfile, updateCountry, getLocation, updateMembership, updatekeywords, updateloggedIn,
-    updateCardChecked, shuffleData, updateSubcribedPornstars, updateSubcribedChannels, checkSubcribedPornstar, checkSubscribedChannel,getFirstKeyword
+    updateCardChecked, shuffleData, updateSubcribedPornstars, updateSubcribedChannels, checkSubcribedPornstar, checkSubscribedChannel, getFirstKeyword
 };
 

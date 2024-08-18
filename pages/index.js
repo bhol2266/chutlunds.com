@@ -78,6 +78,18 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
     if (keyword) {
       const videos = await fetchVideos(keyword.trim())
       setRecommendedVideos(videos)
+    } else {
+      const cookiesKeywords = getCookie('keywords');
+      const keywordsArray = JSON.parse(cookiesKeywords);
+      if (Array.isArray(keywordsArray) && keywordsArray.length > 0) {
+      let  finalKeyword = keywordsArray[0];
+        const videos = await fetchVideos(finalKeyword.trim())
+        setRecommendedVideos(videos)
+
+      } else {
+        console.log("No keywords available in cookies.");
+        finalKeyword = null;
+      }
     }
 
   }
@@ -148,7 +160,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
 
 
-          {recommendedVideos.length >0  &&
+          {recommendedVideos.length > 0 &&
             <div>
               <Homepage_Title title="Recommended Videos" />
               <Videos data={recommendedVideos.slice(0, 20)} />

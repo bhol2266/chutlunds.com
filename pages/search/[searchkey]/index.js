@@ -16,6 +16,8 @@ function Search({ video_collection, pages }) {
   const { searchkey } = router.query
   const currentPageNumberURL = '1'
 
+  
+
   useEffect(() => {
     updatekeywords(searchkey.trim());
   }, []);
