@@ -11,6 +11,7 @@ import '../styles/nProgress.css';
 import Banner_for_chutlund2 from '../components/Banner_for_chutlund2';
 import { SessionProvider } from 'next-auth/react';
 import { LoginModal } from '../components/ModalLogin';
+import BannerAds from '../components/Ads/BannerAds';
 
 
 function MyApp({ Component, pageProps }) {
@@ -72,6 +73,8 @@ function MyApp({ Component, pageProps }) {
           </div>
           <hr />
           {currentRoute != "/membership" && <Footer />}
+          <BannerAds/>
+          <BannerAds/>
         </VideoState>
       </AuthContextProvider>
 
