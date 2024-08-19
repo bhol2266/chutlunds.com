@@ -11,8 +11,8 @@ import '../styles/nProgress.css';
 import Banner_for_chutlund2 from '../components/Banner_for_chutlund2';
 import { SessionProvider } from 'next-auth/react';
 import { LoginModal } from '../components/ModalLogin';
- 
- 
+
+
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const currentRoute = router.pathname;
@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <meta name="asg_verification" content="vVcWCcbbgmnqv221hpAjPojb" />
         <meta name="Trafficstars" content="48702" />
-<meta name="6a97888e-site-verification" content="16cdfe6e8685f083041f5af956d45bae"/>
+        <meta name="6a97888e-site-verification" content="16cdfe6e8685f083041f5af956d45bae"/>
         <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
