@@ -154,7 +154,6 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
       <main className="flex-row flex  mt-1 md:mt-6 md:space-x-3">
         <Sidebar />
         <div className='w-full overflow-hidden'>
-          <BannerAds />
           <Outstreams />
           <h1 className="lg:text-2xl text-lg font-semibold text-gray-800 my-3 font-inter basicMargin w-fit border-b-[3px] border-[#FFBB00]">Trending Free Porn Videos</h1>
           <Videos data={video_collection[0].finalDataArray} />
@@ -243,6 +242,8 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
         <a className='' href="https://www.fuckvideo.live/">.</a>
         <a className='' href="https://www.chutlunds.com/">.</a>
         <a className='' href="https://www.desikahaniya.in/">.</a>
+        <BannerAds />
+
       </footer>
     </div>
 
