@@ -8,7 +8,7 @@ const InterstitialAds = () => {
             <Head>
                 <link rel="stylesheet" href="//cdn.tsyndicate.com/sdk/v1/interstitial.ts.css" />
             </Head>
-            <Script
+            {/* <Script
                 src="//cdn.tsyndicate.com/sdk/v1/interstitial.ts.js"
                 strategy="afterInteractive"
                 onLoad={() => {
@@ -19,7 +19,7 @@ const InterstitialAds = () => {
                         
                     });
                 }}
-            />
+            /> */}
             <div id="interstitial-ad"></div>
         </>
     );

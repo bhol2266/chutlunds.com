@@ -149,7 +149,7 @@ function autoplayChecksResolved() {
 
   // Request video ads.
   const adsRequest = new google.ima.AdsRequest();
-  adsRequest.adTagUrl = 'https://tsyndicate.com/do2/b6ffbde36fb14472b1f802ccbb02bc3b/vast?extid={extid}';
+  adsRequest.adTagUrl = 'https://s.magsrv.com/splash.php?idzone=5390744';
 
   // Specify the linear and nonlinear slot sizes. This helps the SDK to
   // select the correct creative if multiple are returned.
@@ -321,4 +321,3 @@ function changeVideoPlayerProperty() {
 
 //Start the process
 // initDesktopAutoplayExample()
-

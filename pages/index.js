@@ -80,9 +80,13 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
       setRecommendedVideos(videos)
     } else {
       const cookiesKeywords = getCookie('keywords');
+      if (!cookiesKeywords) {
+        return
+      }
       const keywordsArray = JSON.parse(cookiesKeywords);
+
       if (Array.isArray(keywordsArray) && keywordsArray.length > 0) {
-      let  finalKeyword = keywordsArray[0];
+        let finalKeyword = keywordsArray[0];
         const videos = await fetchVideos(finalKeyword.trim())
         setRecommendedVideos(videos)
 
