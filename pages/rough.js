@@ -10,13 +10,7 @@ import { SignUpFormOTP } from '../components/LoginStuffs/SignUpFormOTP';
 const MyComponent = () => (
     <>
 
-    <SignUpForm/>
-    <SignUpFormOTP/>
-
-        <div className='h-[500px] w-[500px] bg-red-300 m-auto flex items-center'>
-
-            <Link className='mx-auto' href="/">Click me InterstitialAds</Link>
-        </div>
+        <InterstitialAds />
     </>
 );
 

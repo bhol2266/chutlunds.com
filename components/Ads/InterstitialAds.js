@@ -19,8 +19,30 @@ const InterstitialAds = () => {
                         
                     });
                 }}
-            /> */}
+            /> 
             <div id="interstitial-ad"></div>
+
+*/}
+
+
+            {/* Exoclick Interstitial ads  */}
+
+            <Script
+                async
+                type="application/javascript"
+                src="https://a.pemsrv.com/ad-provider.js"
+                strategy="afterInteractive" // Ensures the script runs after the page is interactive
+            />
+            <Script
+                id="ad-provider-init"
+                strategy="afterInteractive" // Ensures this script runs after the external script
+            >
+                {`
+        (window.AdProvider = window.AdProvider || []).push({ "serve": {} });
+      `}
+            </Script>
+            <ins className="eas6a97888e35" data-zoneid="5390762"></ins>
+
         </>
     );
 };
