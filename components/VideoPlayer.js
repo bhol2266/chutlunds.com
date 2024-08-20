@@ -155,7 +155,6 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
 
             <Script
                 src="//imasdk.googleapis.com/js/sdkloader/ima3.js"
-                strategy="afterInteractive"
                 onLoad={() => {
                     const script = document.createElement("script");
                     script.src = "/vastAd.js";
