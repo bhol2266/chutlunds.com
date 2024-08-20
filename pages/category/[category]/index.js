@@ -84,15 +84,21 @@ export async function getStaticProps(context) {
   const { category } = context.params;
 
 
-  var finalDataArray = []
-  var pages = []
 
+  const parcelData = { url: `https://spankbang.party/s/${category}/?o=all` };
 
+  const API_URL = `${process.env.BACKEND_URL}getvideos`;
 
-  console.log(`https://spankbang.party/s/${category}/?o=all`)
-  const obj = await scrapeVideos(`https://spankbang.party/s/${category}/?o=all`)
-  finalDataArray = obj.finalDataArray
-  pages = obj.pages
+  const rawResponse = await fetch(API_URL, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify(parcelData),
+  });
+
+  const { finalDataArray, pages } = await rawResponse.json();
 
 
 

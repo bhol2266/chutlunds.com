@@ -57,7 +57,7 @@ function Videos({ data, type }) {
                 <>
                     {currentPath !== "blocked" &&
                         <>
-                            <BannerAds />
+                            {/* <BannerAds /> */}
                             <PopunderAds_2 />
                             <PopunderAds />
                             <Outstream />

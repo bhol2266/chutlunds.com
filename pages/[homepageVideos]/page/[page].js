@@ -25,7 +25,6 @@ function Category({ video_collection, pages }) {
     const currentPageNumberURL = page
 
     function capitalizeFirstLetter(string) {
-        console.log(string.charAt(0).toUpperCase() + string.slice(1));
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
@@ -33,7 +32,7 @@ function Category({ video_collection, pages }) {
     return (
         <>
             <Head>
-    
+
                 <title>{`${capitalizeFirstLetter(homepageVideos)} Porn Videos | Page -${page}`}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <meta name="description" content={`${capitalizeFirstLetter(homepageVideos)} Porn Videos! - blowjob, japanese, big ass Porn - SpankBang`} />
@@ -79,60 +78,47 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-
-
-
     const { homepageVideos, page } = context.params;
-    var finalDataArray = []
-    var pages = []
+    let href = "";
 
-
-
-    if (homepageVideos === 'trending') {
-
-        const obj = await scrapeVideos(`https://spankbang.party/trending_videos/${page}/`)
-        finalDataArray = obj.finalDataArray
-        pages = obj.pages
-
-    }
-    else if (homepageVideos === 'upcoming') {
-        const obj = await scrapeVideos(`https://spankbang.party/upcoming/${page}/`)
-        finalDataArray = obj.finalDataArray
-        pages = obj.pages
-
-    }
-    else if (homepageVideos === 'featured') {
-        //this will goto channels page from HomepageTitle component
-    }
-    else if (homepageVideos === 'popular') {
-        const obj = await scrapeVideos(`https://spankbang.party/most_popular/${page}/`)
-        finalDataArray = obj.finalDataArray
-        pages = obj.pages
-
-    }
-    else if (homepageVideos === 'random') {
-        const obj = await scrapeVideos(`https://spankbang.party/trending_videos/${page}/`)
-        finalDataArray = obj.finalDataArray
-        pages = obj.pages
-
-    }
-    else {
-        const obj = await scrapeVideos(`https://spankbang.party/new_videos/${page}/`)
-        finalDataArray = obj.finalDataArray
-        pages = obj.pages
-
+    switch (homepageVideos) {
+        case 'trending':
+            href = `https://spankbang.party/trending_videos/${page}/`;
+            break;
+        case 'upcoming':
+            href = `https://spankbang.party/upcoming/${page}/`;
+            break;
+        case 'popular':
+            href = `https://spankbang.party/most_popular/${page}/`;
+            break;
+        case 'random':
+            href = `https://spankbang.party/trending_videos/${page}/`;
+            break;
+        default:
+            href = `https://spankbang.party/new_videos/${page}/`;
+            break;
     }
 
+    const parcelData = { url: href };
+    const API_URL = `${process.env.BACKEND_URL}getvideos`;
 
+    const rawResponse = await fetch(API_URL, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(parcelData),
+    });
 
+    const { finalDataArray, pages } = await rawResponse.json();
 
     return {
         props: {
             video_collection: finalDataArray,
             pages: pages
         }
-    }
-
-
+    };
 }
+
 

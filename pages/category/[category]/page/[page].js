@@ -79,17 +79,20 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
 
     const { category, page } = context.params;
-    var finalDataArray = []
-    var pages = []
 
 
+    const parcelData = { url: `https://spankbang.party/s/${category}/${page}/?o=all` };
+    const API_URL = `${process.env.BACKEND_URL}getvideos`;
+    const rawResponse = await fetch(API_URL, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(parcelData),
+    });
 
-
-    const obj = await scrapeVideos(`https://spankbang.party/s/${category}/${page}/?o=all`)
-    finalDataArray = obj.finalDataArray
-    pages = obj.pages
-    console.log(`https://spankbang.party/s/${category}/${page}/?o=all`)
-
+    const { finalDataArray, pages } = await rawResponse.json();
 
 
 
