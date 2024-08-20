@@ -14,10 +14,10 @@ import { getCookie } from 'cookies-next';
 import { UserAuth } from "@/context/AuthContext";
 
 function Index({ video_collection, pages, pornstarInformation, collageImages, pornstar_image }) {
- 
-    const {  setLoginModalVisible } = UserAuth();
 
- 
+    const { setLoginModalVisible } = UserAuth();
+
+
     const router = useRouter();
     const { code, pornstarname } = router.query;
     const [imageURL, setimage] = useState(pornstar_image);
@@ -189,6 +189,41 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
 
     const { code, pornstarname } = context.params;
+    var pornstar_image = ""
+
+    pornstarNameList.filter(pornstar => {
+        if (pornstarname.toLowerCase() === pornstar.Name.toLowerCase().replace(/ /g, "+")) {
+            pornstar_image = pornstar.thumbnail;
+        }
+    });
+
+    if (pornstarname == "mercedes+ashley") {
+
+        const parcelData = { url: `https://spankbang.party/${code}/pornstar/${pornstarname}/?o=all` };
+        const API_URL = `${process.env.BACKEND_URL}getPornstarVideos`;
+        const rawResponse = await fetch(API_URL, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+            body: JSON.stringify(parcelData),
+        });
+
+        const { finalDataArray, pages, pornstarInformation, collageImages } = await rawResponse.json();
+
+        return {
+            props: {
+                video_collection: finalDataArray,
+                pages: pages,
+                pornstarInformation: pornstarInformation,
+                collageImages: collageImages,
+                pornstar_image: pornstar_image
+
+            }
+        }
+    }
+
 
     var finalDataArray = []
     var pages = []
@@ -206,7 +241,6 @@ export async function getStaticProps(context) {
         weight: ''
     };
     var collageImages = []
-    var pornstar_image = ""
 
 
     const scrape = async (url) => {
@@ -282,15 +316,10 @@ export async function getStaticProps(context) {
         }
 
     }
-
     await scrape(`https://spankbang.party/${code}/pornstar/${pornstarname}/?o=all`)
 
 
-    pornstarNameList.filter(pornstar => {
-        if (pornstarname.toLowerCase() === pornstar.Name.toLowerCase().replace(/ /g, "+")) {
-            pornstar_image = pornstar.thumbnail;
-        }
-    });
+
 
 
 

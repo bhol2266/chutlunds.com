@@ -4,7 +4,7 @@ import cheerio from 'cheerio';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from "next/router";
-import { useState,useEffect  } from 'react';
+import { useState, useEffect } from 'react';
 import { BeatLoader } from 'react-spinners';
 import Pagination from '../../../../components/Pagination';
 import Header from '../../../../components/Pornstar_Channels/Header';
@@ -136,7 +136,7 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
                                 {!isSubscribed &&
                                     <PlusIcon className="h-4 lg:h-5 text-white" />
                                 }
-                                <p  className="text-sm lg:text-md 2xl:text-lg font-poppins">
+                                <p className="text-sm lg:text-md 2xl:text-lg font-poppins">
                                     {isSubscribed ? "Subscribed" : "Subscribe"}
                                 </p>
                                 <p className="text-sm lg:text-md 2xl:text-lg font-poppins">
@@ -193,6 +193,43 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
 
     const { code, channelname } = context.params;
+
+    console.log(`https://spankbang.party/${code}/channel/${channelname}/?o=all`);
+    
+
+    if (channelname == "kink+com") {
+
+        const parcelData = { url: `https://spankbang.party/${code}/channel/${channelname}/` };
+        const API_URL = `${process.env.BACKEND_URL}getChannelVideos`;
+        const rawResponse = await fetch(API_URL, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+            body: JSON.stringify(parcelData),
+        });
+
+        const { finalDataArray, pages, channel_name, channel_subscriber, channel_by, channel_link, collageImages } = await rawResponse.json();
+
+        console.log(pages);
+        
+        return {
+            props: {
+                video_collection: finalDataArray,
+                pages: pages,
+                channel_name: channel_name,
+                channel_subscriber: channel_subscriber,
+                channel_by: channel_by,
+                channel_link: channel_link,
+                collageImages: collageImages,
+                channel_image: channelname
+
+            }
+        }
+    }
+
+
 
     var finalDataArray = []
     var pages = []
@@ -261,7 +298,7 @@ export async function getStaticProps(context) {
 
     }
 
-    await scrape(`https://spankbang.party/${code}/channel/${channelname}/?o=long`)
+    await scrape(`https://spankbang.party/${code}/channel/${channelname}/`)
 
     return {
         props: {

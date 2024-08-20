@@ -61,7 +61,7 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
         )
     }
 
-    
+
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -192,6 +192,43 @@ export async function getStaticProps(context) {
 
 
     const { code, channelname, page } = context.params;
+
+
+
+    if (channelname == "kink+com" && page == "1") {
+
+        const parcelData = { url: `https://spankbang.party/${code}/channel/${channelname}/${page}/` };
+        const API_URL = `${process.env.BACKEND_URL}getChannelVideos`;
+        const rawResponse = await fetch(API_URL, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+            body: JSON.stringify(parcelData),
+        });
+
+        const { finalDataArray, pages, channel_name, channel_subscriber, channel_by, channel_link, collageImages } = await rawResponse.json();
+
+        return {
+            props: {
+                video_collection: finalDataArray,
+                pages: pages,
+                channel_name: channel_name,
+                channel_subscriber: channel_subscriber,
+                channel_by: channel_by,
+                channel_link: channel_link,
+                collageImages: collageImages,
+                channel_image: channelname
+
+            }
+        }
+    }
+
+
+
+
+
 
     var finalDataArray = []
     var pages = []
