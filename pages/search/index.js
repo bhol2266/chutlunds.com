@@ -138,46 +138,24 @@ export default Search
 export async function getStaticProps() {
 
 
-    var TrendingKeywords = []
-    var PopularKeywords = []
-    var tags = []
+    const parcelData = { url: `https://spankbang.party/tags` };
+    const API_URL = `${process.env.BACKEND_URL}getTrendingSearchTags`;
+    const rawResponse = await fetch(API_URL, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(parcelData),
+    });
 
-
-
-
-
-    const scrape = async (url) => {
-
-
-
-        const response = await fetch(url)
-        const body = await response.text();
-        const $ = cheerio.load(body)
-
-
-
-
-
-        $('.list li a').each((i, el) => {
-
-            const data = $(el).text()
-            tags.push(data)
-
-        })
-
-    }
-
-
-    await scrape(`https://spankbang.party/tags`)
-
+    const { tags } = await rawResponse.json();
 
 
 
 
     return {
         props: {
-            TrendingKeywords: TrendingKeywords,
-            PopularKeywords: PopularKeywords,
             tags: tags
         }
     }

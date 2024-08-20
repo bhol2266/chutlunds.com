@@ -285,16 +285,24 @@ export default Index
 export async function getStaticProps({ req, res }) {
 
 
-    var finalDataArray = []
-    var trendingChannels = []
-    var newChannels = []
-    var pages = []
+    const parcelData = { url: `https://spankbang.party/channels` };
+    const API_URL = `${process.env.BACKEND_URL}getTrendingChannels`;
+    const rawResponse = await fetch(API_URL, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(parcelData),
+    });
 
-    const obj = await scrapeChannelpage(`https://spankbang.party/channels`)
-    finalDataArray = obj.finalDataArray
-    trendingChannels = obj.trendingChannels
-    newChannels = obj.newChannels
-    pages = obj.pages
+
+
+    const { finalDataArray, pages, trendingChannels, newChannels } = await rawResponse.json();
+
+
+
+
 
 
     const jsonData = JSON.parse(fs.readFileSync('JsonData/Channels.json', 'utf8'));
