@@ -320,4 +320,4 @@ function changeVideoPlayerProperty() {
 
 
 //Start the process
-// initDesktopAutoplayExample()
+initDesktopAutoplayExample()
