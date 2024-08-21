@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Script from 'next/script';
 
 const MyComponent = () => (
@@ -15,13 +14,48 @@ const MyComponent = () => (
         />
 
 
-        <div id="mainContainer" className="relative w-full aspect-video object-contain group shadow-2xl">
-            <video className="w-full h-full cursor-pointer" id="contentElement" controls>
-                <source src={"https://vdownload-50.sb-cd.com/1/5/15197789-720p.mp4?secure=7V25hWxfw1HXtgPyYGBPUw,1724305104&m=50&d=1&_tid=15197789"} type="video/mp4" />
-            </video>
-            <div className="absolute top-0 left-0 w-full h-full" id="adContainer"></div>
-            <button className="hidden" id="playButton">Play</button>
+        <div id="mainContainer" className='relative  w-full aspect-video object-contain  group  shadow-2xl'>
+            <div id="content">
+                <video id="contentElement" className={`w-full h-full cursor-pointer`} onContextMenu={(e) => e.preventDefault()} playsinline muted  width="852" height="480" controls controlsList="nodownload">
+                    <source src="https://storage.googleapis.com/gvabox/media/samples/stock.mp4"></source>
+                </video>
+            </div>
+            <div className={`absolute top-0 left-0 `} id="adContainer"></div>
+
         </div>
+
+
+
+
+
+
+
+
+        {/* 
+
+        <div id="mainContainer" className={`relative w-full aspect-video object-contain  group  shadow-2xl`}>
+            <video className={`w-full h-full cursor-pointer`} id="contentElement" onContextMenu={(e) => e.preventDefault()}    >
+                <source src="https://storage.googleapis.com/gvabox/media/samples/stock.mp4" type="video/mp4" />
+            </video>
+            <div className={`absolute top-0 left-0 `} id="adContainer"></div>
+            <button className="hidden" id="playButton">Play</button>
+
+
+        </div> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </>
 );

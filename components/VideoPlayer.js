@@ -158,7 +158,6 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
                 onLoad={() => {
                     const script = document.createElement("script");
                     script.src = "/vastAd.js";
-                    script.onload = () => { initDesktopAutoplayExample(); };
                     document.body.appendChild(script);
                 }}
             />
