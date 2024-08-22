@@ -22,7 +22,7 @@ function PopunderAds_2() {
 
             {/* exolickPopunder */}
 
-            {/* <Script
+            <Script
                 id="ad-config"
                 type="application/javascript"
                 strategy="beforeInteractive"
@@ -43,18 +43,18 @@ function PopunderAds_2() {
             <Script
                 src="https://a.pemsrv.com/popunder1000.js"
                 strategy="beforeInteractive"
-            /> */}
+            />
 
 
 
 
             {/* exolickPopunder with bypass adblock*/}
 
-            <Script
+            {/* <Script
                 src="/PopunderCode.js"
                 strategy="beforeInteractive"
             />
-
+ */}
 
 
 
