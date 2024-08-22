@@ -12,6 +12,7 @@ import { Scrape_Video_Item_Pornstar } from '../../../../config/Scrape_Video_Item
 import { checkSubcribedPornstar, updateSubcribedPornstars } from '../../../../config/firebase/lib';
 import { getCookie } from 'cookies-next';
 import { UserAuth } from "@/context/AuthContext";
+import { updateViewPornstars_Cookie } from '../../../../config/utils';
 
 function Index({ video_collection, pages, pornstarInformation, collageImages, pornstar_image }) {
 
@@ -32,6 +33,15 @@ function Index({ video_collection, pages, pornstarInformation, collageImages, po
             setIsSubscribed(subscribed);
         };
         fetchSubscriptionStatus();
+
+        const obj = {
+            pornstarName: capitalizeFirstLetter(pornstarname.replace(/\+/g, " ")),
+            href: `/${code}/pornstar/${pornstarname}/`,
+            imageUrl: pornstar_image
+
+        }
+
+        updateViewPornstars_Cookie(obj)
     }, [code, pornstarname]);
 
 

@@ -15,7 +15,7 @@ import Pornstar_slider from '../components/pornstar_slider';
 import Homepage_Title from '../components/Homepage_Title';
 import { getFirstKeyword, getSubscribedChannels, getSubscribedPornstars, updateCountry } from '../config/firebase/lib';
 import { getLanguge } from '../config/getLanguge';
-import { fetchVideos, shuffle } from '../config/utils';
+import { fetchVideos, getViewChannels, getViewPornstars, shuffle } from '../config/utils';
 import videosContext from '../context/videos/videosContext';
 
 export default function Home({ video_collection, trendingChannels, tags, trendingCategories, trendingPornstars }) {
@@ -29,6 +29,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
   const [recommendedVideos, setRecommendedVideos] = useState([]);
   const router = useRouter();
+
 
 
 
@@ -102,39 +103,54 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
   }
 
   async function checkSubscribed_Channels_Pornstars() {
-    const email = getCookie('email');
-    if (email) {
-      // const SubscribedPornstars = await getSubscribedPornstars()
-      const SubscribedChannels = await getSubscribedChannels()
-
-      if (SubscribedChannels) {
-
-        let temp_array = [...SubscribedChannels];
 
 
-        trendingChannels.forEach(trendingChannel => {
 
-          var channelExist = false
-          var existIndex = -1
-          SubscribedChannels.forEach((subsChannel, index) => {
-            if (subsChannel.channelName == trendingChannel.channelName) {
-              channelExist = true
-              existIndex = index
-            }
-          })
-          if (!channelExist) {
-            temp_array.push(trendingChannel)
-          }
-        })
+    const viewchannels = getViewChannels();
+    const viewPornstars = getViewPornstars();
 
+    if (viewchannels) {
+      const combinedChannels = [...viewchannels, ...trendingChannels];
 
-        setTrendingChannels(temp_array)
+      const seen = new Set();
 
+      // Filter out duplicates, keeping the first occurrence
+      const uniqueChannels = combinedChannels.filter(channel => {
+        if (seen.has(channel.channelName)) {
+          return false; // Skip this channel if it's already seen
+        } else {
+          seen.add(channel.channelName); // Add to seen Set
+          return true; // Keep this channel
+        }
+      });
 
-      }
-
+      setTrendingChannels(uniqueChannels);
     }
+
+
+    if (viewPornstars) {
+      const combinedPornstars = [...viewPornstars, ...trendingPornstars];
+      const seen = new Set();
+
+      // Filter out duplicates, keeping the first occurrence
+      const uniquePornstars = combinedPornstars.filter(pornstar => {
+        if (seen.has(pornstar.pornstarName)) {
+          return false; // Skip this channel if it's already seen
+        } else {
+          seen.add(pornstar.pornstarName); // Add to seen Set
+          return true; // Keep this channel
+        }
+      });
+
+      
+
+      setTrendingPornstars(uniquePornstars);
+    }
+
   }
+
+
+
 
   useEffect(() => {
     let videoRoute = getCookie("videoRoute");
@@ -181,9 +197,8 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
           alt="Toggle View"
         />
       </div>
-      {TrendingChannels &&
-        <Channels_slider trendingChannels={TrendingChannels} />
-      }
+      <Channels_slider trendingChannels={TrendingChannels} />
+
 
       <div className="w-full overflow-x-auto whitespace-nowrap py-2  scrollbar-hide md:hidden select-none">
         {tags.map((tag, index) => (
@@ -239,7 +254,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
           <div className='md:hidden'>
             <Homepage_Title title="Trending Pornstars" />
-            <Pornstar_slider trendingPornstars={trendingPornstars} />
+            <Pornstar_slider trendingPornstars={TrendingPornstars} />
           </div>
 
 

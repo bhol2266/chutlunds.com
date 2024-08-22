@@ -338,7 +338,7 @@ async function getSubscribedChannels() {
             const userData = docSnap.data();
             const channels = userData.Channels || [];
             // Return the full Pornstars array, or an empty array if it doesn't exist
-            return channels;
+            return channels.reverse();  // this is to put latest object at top
         } else {
             console.log("No such document!");
             return [];

@@ -12,6 +12,7 @@ import Videos from "../../../../components/Videos";
 import { UserAuth } from "@/context/AuthContext";
 import { checkSubscribedChannel, updateSubcribedChannels } from '../../../../config/firebase/lib';
 import { getCookie } from 'cookies-next';
+import { updateViewChannels_Cookie } from '../../../../config/utils';
 
 
 
@@ -33,6 +34,17 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
             setIsSubscribed(subscribed);
         };
         fetchSubscriptionStatus();
+
+        
+        const obj = {
+            channelName: channel_name,
+            href: `/${code}/channel/${channelname}/`,
+            imageUrl: `${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${channel_name.trim().toLowerCase().replace(/ /g, "_").replace(/\+/g, "_")}.jpg`
+
+        }
+
+        updateViewChannels_Cookie(obj)
+
     }, [code, channelname]);
 
 
@@ -52,8 +64,6 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
 
 
         if (isSubscribed) {
-
-
             // Remove subscription
             await updateSubcribedChannels(obj, "remove");
             setIsSubscribed(false); // Update state to reflect removal

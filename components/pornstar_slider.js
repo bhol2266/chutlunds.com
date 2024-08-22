@@ -10,10 +10,14 @@ function Pornstar_slider({ trendingPornstars }) {
     // Get normalized channel names from trendingPornstars
     const trendingPornstarsNames = trendingPornstars.map(pornstarObj => normalizeName(pornstarObj.pornstarName));
 
-    // Filter pornstarsJSON based on normalized trendingChannelNames
-    const filteredPornstars = pornstarsJSON.filter(pornstar =>
-        trendingPornstarsNames.includes(normalizeName(pornstar.Name))
-    );
+    // Filter pornstarsJSON based on normalized trendingPornstarsNames
+    const filteredPornstars = pornstarsJSON
+        .filter(pornstar => trendingPornstarsNames.includes(normalizeName(pornstar.Name)))
+        .sort((a, b) =>
+            trendingPornstarsNames.indexOf(normalizeName(a.Name)) -
+            trendingPornstarsNames.indexOf(normalizeName(b.Name))
+        );
+
 
 
     return (
@@ -25,7 +29,7 @@ function Pornstar_slider({ trendingPornstars }) {
                 return (
                     <Link href={`/pornstar/${code}/${normalizedPornstarName}`} key={pornstarObj.thumbnail}>
                         <div className='flex flex-col justify-center items-center mx-1'>
-                        <div className='w-[90px]'>
+                            <div className='w-[90px]'>
                                 <img
                                     className='shadow-md rounded-full object-cover aspect-square'
                                     src={pornstarObj.thumbnail}
