@@ -201,8 +201,7 @@ function playAds() {
     adsManager.start();
   } catch (adError) {
     changeVideoPlayerProperty()
-    // An error may be thrown if there was a problem with the VAST response.
-    videoContent.play();
+
   }
 }
 
@@ -287,7 +286,6 @@ function onAdError(adErrorEvent) {
   console.log(adErrorEvent.getError());
   adsManager.destroy();
   // Fall back to playing content.
-  videoContent.play();
 }
 
 /**
@@ -311,6 +309,7 @@ function changeVideoPlayerProperty() {
 
   videoContent.volume = 0.5
   videoContent.muted = false
+  videoContent.currentTime = 1; // Seek the video to 2 seconds
   videoContent.play();
   document.getElementById("adContainer").style["visibility"] = "hidden"
   document.getElementById("playButton").style["visibility"] = "hidden"
