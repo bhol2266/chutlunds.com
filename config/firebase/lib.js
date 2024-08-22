@@ -233,11 +233,33 @@ async function checkSubcribedPornstar(pornstarname) {
     }
 }
 
+async function getSubscribedPornstars() {
+    const email = getCookie('email');
+
+    try {
+        const docRef = doc(db, "Users", email);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            const pornstars = userData.Pornstars || [];
+            // Return the full Pornstars array, or an empty array if it doesn't exist
+            return pornstars;
+        } else {
+            console.log("No such document!");
+            return [];
+        }
+    } catch (error) {
+        console.error("Error retrieving pornstar subscriptions: ", error);
+        return [];
+    }
+}
 
 
 
 
-async function updateSubcribedChannels(code, channelname, action) {
+
+async function updateSubcribedChannels(obj, action) {
     const email = getCookie('email');
 
     try {
@@ -252,11 +274,11 @@ async function updateSubcribedChannels(code, channelname, action) {
 
         if (action === "add") {
             // Check if the channel object with the same code already exists
-            const isDuplicate = updatedChannels.some(p => p.channelname === channelname);
+            const isDuplicate = updatedChannels.some(p => p.channelName === obj.channelName);
 
             if (!isDuplicate) {
                 // Add the new channel object to the array
-                updatedChannels = [...updatedChannels, { code, channelname }];
+                updatedChannels = [...updatedChannels, obj];
 
                 // Update the document in Firestore
                 await updateDoc(docRef, { Channels: updatedChannels });
@@ -267,7 +289,7 @@ async function updateSubcribedChannels(code, channelname, action) {
             }
         } else if (action === "remove") {
             // Remove the channel object from the array
-            updatedChannels = updatedChannels.filter(p => p.channelname !== channelname);
+            updatedChannels = updatedChannels.filter(p => p.channelName !== obj.channelName);
 
             // Update the document in Firestore
             await updateDoc(docRef, { Channels: updatedChannels });
@@ -282,7 +304,7 @@ async function updateSubcribedChannels(code, channelname, action) {
     }
 }
 
-async function checkSubscribedChannel(channelname) {
+async function checkSubscribedChannel(channelName) {
     const email = getCookie('email');
 
     try {
@@ -293,7 +315,7 @@ async function checkSubscribedChannel(channelname) {
             const userData = docSnap.data();
             const channels = userData.Channels || [];
             // Check if any entry in the array has the same pornstarname
-            return channels.some(p => p.channelname === channelname);
+            return channels.some(p => p.channelName === channelName);
         } else {
             console.log("No such document!");
             return false;
@@ -301,6 +323,29 @@ async function checkSubscribedChannel(channelname) {
     } catch (error) {
         console.error("Error checking pornstar subscription: ", error);
         return false;
+    }
+}
+
+
+async function getSubscribedChannels() {
+    const email = getCookie('email');
+
+    try {
+        const docRef = doc(db, "Users", email);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            const channels = userData.Channels || [];
+            // Return the full Pornstars array, or an empty array if it doesn't exist
+            return channels;
+        } else {
+            console.log("No such document!");
+            return [];
+        }
+    } catch (error) {
+        console.error("Error retrieving channel subscriptions: ", error);
+        return [];
     }
 }
 
@@ -357,6 +402,7 @@ async function shuffleData(array) {
 
 export {
     checkUserExists_Firestore, readCards, saveUserProfile, updateCountry, getLocation, updateMembership, updatekeywords, updateloggedIn,
-    updateCardChecked, shuffleData, updateSubcribedPornstars, updateSubcribedChannels, checkSubcribedPornstar, checkSubscribedChannel, getFirstKeyword
+    updateCardChecked, shuffleData, updateSubcribedPornstars, updateSubcribedChannels, checkSubcribedPornstar, checkSubscribedChannel, getFirstKeyword,
+    getSubscribedPornstars,getSubscribedChannels
 };
 

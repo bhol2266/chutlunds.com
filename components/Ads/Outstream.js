@@ -43,7 +43,7 @@ function Outstreams() {
             {/* Exoclick Outstream (named as video slider ads in Exoclick) */}
 
 
-            <ins class="eas6a97888e31" data-zoneid="5393888"></ins>
+            <ins className="eas6a97888e31" data-zoneid="5393888"></ins>
             <Script src="https://a.magsrv.com/ad-provider.js" strategy="beforeInteractive" />
             <Script
                 id={uniqid}

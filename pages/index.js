@@ -13,7 +13,7 @@ import Channels_slider from '../components/channels_slider';
 import Pornstar_slider from '../components/pornstar_slider';
 
 import Homepage_Title from '../components/Homepage_Title';
-import { getFirstKeyword, updateCountry } from '../config/firebase/lib';
+import { getFirstKeyword, getSubscribedChannels, getSubscribedPornstars, updateCountry } from '../config/firebase/lib';
 import { getLanguge } from '../config/getLanguge';
 import { fetchVideos, shuffle } from '../config/utils';
 import videosContext from '../context/videos/videosContext';
@@ -23,6 +23,9 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
   const [countryVideos, setcountryVideos] = useState([]);
   const [countryLanguage, setcountryLanguage] = useState('');
   const [lang, setLang] = useState('');
+  const [TrendingChannels, setTrendingChannels] = useState(trendingChannels);
+  const [TrendingPornstars, setTrendingPornstars] = useState(trendingPornstars);
+
 
   const [recommendedVideos, setRecommendedVideos] = useState([]);
   const router = useRouter();
@@ -98,6 +101,41 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
   }
 
+  async function checkSubscribed_Channels_Pornstars() {
+    const email = getCookie('email');
+    if (email) {
+      // const SubscribedPornstars = await getSubscribedPornstars()
+      const SubscribedChannels = await getSubscribedChannels()
+
+      if (SubscribedChannels) {
+
+        let temp_array = [...SubscribedChannels];
+
+
+        trendingChannels.forEach(trendingChannel => {
+
+          var channelExist = false
+          var existIndex = -1
+          SubscribedChannels.forEach((subsChannel, index) => {
+            if (subsChannel.channelName == trendingChannel.channelName) {
+              channelExist = true
+              existIndex = index
+            }
+          })
+          if (!channelExist) {
+            temp_array.push(trendingChannel)
+          }
+        })
+
+
+        setTrendingChannels(temp_array)
+
+
+      }
+
+    }
+  }
+
   useEffect(() => {
     let videoRoute = getCookie("videoRoute");
     if (typeof videoRoute !== 'undefined') {
@@ -106,6 +144,8 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
     }
     fetchLocation();
     createRecommendedVideos()
+
+    checkSubscribed_Channels_Pornstars()
   }, []);
 
 
@@ -141,7 +181,9 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
           alt="Toggle View"
         />
       </div>
-      <Channels_slider trendingChannels={trendingChannels} />
+      {TrendingChannels &&
+        <Channels_slider trendingChannels={TrendingChannels} />
+      }
 
       <div className="w-full overflow-x-auto whitespace-nowrap py-2  scrollbar-hide md:hidden select-none">
         {tags.map((tag, index) => (

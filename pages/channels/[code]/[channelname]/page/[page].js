@@ -27,25 +27,37 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
 
     useEffect(() => {
         const fetchSubscriptionStatus = async () => {
-            const subscribed = await checkSubscribedChannel(channelname);
+            const subscribed = await checkSubscribedChannel(channel_name);
             setIsSubscribed(subscribed);
         };
         fetchSubscriptionStatus();
     }, [code, channelname]);
 
+
+
+
+ 
     async function clickSubscribe() {
 
         if (!getCookie("email")) {
             setLoginModalVisible(true)
             return
         }
+
+        const obj = {
+            channelName: channel_name,
+            href: `/${code}/channel/${channelname}/`,
+            imageUrl: `${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${channel_name.trim().toLowerCase().replace(/ /g, "_").replace(/\+/g, "_")}.jpg`
+
+        }
+
         if (isSubscribed) {
             // Remove subscription
-            await updateSubcribedChannels(code, channelname, "remove");
+            await updateSubcribedChannels(obj, "remove");
             setIsSubscribed(false); // Update state to reflect removal
         } else {
             // Add subscription
-            await updateSubcribedChannels(code, channelname, "add");
+            await updateSubcribedChannels(obj, "add");
             setIsSubscribed(true); // Update state to reflect addition
         }
 

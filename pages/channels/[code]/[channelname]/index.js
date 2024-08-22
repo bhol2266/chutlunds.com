@@ -29,7 +29,7 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
 
     useEffect(() => {
         const fetchSubscriptionStatus = async () => {
-            const subscribed = await checkSubscribedChannel(channelname);
+            const subscribed = await checkSubscribedChannel(channel_name);
             setIsSubscribed(subscribed);
         };
         fetchSubscriptionStatus();
@@ -42,13 +42,24 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
             setLoginModalVisible(true)
             return
         }
+
+        const obj = {
+            channelName: channel_name,
+            href: `/${code}/channel/${channelname}/`,
+            imageUrl: `${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${channel_name.trim().toLowerCase().replace(/ /g, "_").replace(/\+/g, "_")}.jpg`
+
+        }
+
+
         if (isSubscribed) {
+
+
             // Remove subscription
-            await updateSubcribedChannels(code, channelname, "remove");
+            await updateSubcribedChannels(obj, "remove");
             setIsSubscribed(false); // Update state to reflect removal
         } else {
             // Add subscription
-            await updateSubcribedChannels(code, channelname, "add");
+            await updateSubcribedChannels(obj, "add");
             setIsSubscribed(true); // Update state to reflect addition
         }
 
@@ -195,7 +206,7 @@ export async function getStaticProps(context) {
     const { code, channelname } = context.params;
 
     console.log(`https://spankbang.party/${code}/channel/${channelname}/?o=all`);
-    
+
 
     if (channelname == "kink+com") {
 
@@ -213,7 +224,7 @@ export async function getStaticProps(context) {
         const { finalDataArray, pages, channel_name, channel_subscriber, channel_by, channel_link, collageImages } = await rawResponse.json();
 
         console.log(pages);
-        
+
         return {
             props: {
                 video_collection: finalDataArray,
@@ -304,7 +315,7 @@ export async function getStaticProps(context) {
         props: {
             video_collection: finalDataArray,
             pages: pages,
-            channel_name: channel_name,
+            channel_name: channel_name.trim(),
             channel_subscriber: channel_subscriber,
             channel_by: channel_by,
             channel_link: channel_link,
