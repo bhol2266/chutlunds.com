@@ -10,7 +10,7 @@ function PopunderAds() {
     return (
         <div className="flex items-center justify-center">
 
-{/* 
+            {/* 
             {currentHost === "chutlunds.com" && (
 
 
@@ -30,34 +30,23 @@ function PopunderAds() {
 
             {/* exolickPopunder */}
 
-            {/* {currentHost === "chutlunds2.com" && ( */}
 
-            <>
-                <Script
-                    id="ad-config"
-                    type="application/javascript"
-                    strategy="beforeInteractive"
-                >
-                    {`
-        var ad_idzone = "5391286";
-        var ad_popup_fallback = false;
-        var ad_popup_force = false;
-        var ad_chrome_enabled = true;
-        var ad_new_tab = false;
-        var ad_frequency_period = 1;
-        var ad_frequency_count = 3;
-        var ad_trigger_method = 3;
-        var ad_trigger_delay = 0;
-        var ad_capping_enabled = false;
-      `}
-                </Script>
-                <Script
-                    src="https://a.pemsrv.com/popunder1000.js"
-                    strategy="beforeInteractive"
-                />
-            </>
+            <Script id="ad-config" type="application/javascript" strategy="beforeInteractive">
+                {`
+                       var ad_idzone = "5391286";
+                       var ad_popup_fallback = false;
+                       var ad_popup_force = false;
+                       var ad_chrome_enabled = true;
+                       var ad_new_tab = false;
+                       var ad_frequency_period = 1;
+                       var ad_frequency_count = 3;
+                       var ad_trigger_method = 3;
+                       var ad_trigger_delay = 0;
+                       var ad_capping_enabled = false;
+               `}
+            </Script>
+            <Script src="https://a.pemsrv.com/popunder1000.js" strategy="beforeInteractive" />
 
-            {/* )  } */}
 
 
 

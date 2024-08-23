@@ -20,7 +20,7 @@ function Index({ video_collection, pages, pornstarInformation, collageImages, po
 
 
     const router = useRouter();
-    const { code, pornstarname } = router.query;
+    const { code, pornstarname, isReady } = router.query;
     const [imageURL, setimage] = useState(pornstar_image);
 
     const [isSubscribed, setIsSubscribed] = useState(false);
@@ -28,6 +28,9 @@ function Index({ video_collection, pages, pornstarInformation, collageImages, po
 
 
     useEffect(() => {
+        if (!isReady) return;
+
+    
         const fetchSubscriptionStatus = async () => {
             const subscribed = await checkSubcribedPornstar(pornstarname);
             setIsSubscribed(subscribed);

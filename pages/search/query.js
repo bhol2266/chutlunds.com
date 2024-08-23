@@ -18,7 +18,7 @@ function Category({ video_collection, pages, query, keyword, currentPage, filter
   const currentPageNumberURL = currentPage
 
   function capitalizeFirstLetter(string) {
-    console.log(string.charAt(0).toUpperCase() + string.slice(1));
+    
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 

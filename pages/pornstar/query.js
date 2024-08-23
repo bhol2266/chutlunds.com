@@ -12,7 +12,7 @@ function PornstarQuery({ video_collection, pages, code, keyword, currentPage, fi
   const currentPageNumberURL = currentPage
 
   function capitalizeFirstLetter(string) {
-    console.log(string.charAt(0).toUpperCase() + string.slice(1));
+    
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 

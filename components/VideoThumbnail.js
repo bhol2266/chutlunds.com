@@ -1,6 +1,5 @@
 import { ClockIcon } from '@heroicons/react/outline';
-import { useEffect, useState, useContext } from "react";
-import PopunderAds from './Ads/Popunder';
+import { useContext, useEffect, useState } from "react";
 
 import videosContext from '../context/videos/videosContext';
 
@@ -98,7 +97,6 @@ function VideoThumbnail({ details, type }) {
                     </div>
                 </div>
             </a>
-            {!videoPage && <PopunderAds />}
         </div>
     );
 }

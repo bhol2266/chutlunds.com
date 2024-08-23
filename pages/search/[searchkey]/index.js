@@ -18,7 +18,8 @@ function Search({ video_collection, pages }) {
   const currentPageNumberURL = '1';
 
   useEffect(() => {
-    if (searchkey) {
+  
+    if (searchkey ) {
       updatekeywords(searchkey.trim());
     }
   }, [searchkey]);
