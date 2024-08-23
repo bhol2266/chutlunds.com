@@ -17,6 +17,7 @@ import { getFirstKeyword, getSubscribedChannels, getSubscribedPornstars, updateC
 import { getLanguge } from '../config/getLanguge';
 import { fetchVideos, getViewChannels, getViewPornstars, shuffle } from '../config/utils';
 import videosContext from '../context/videos/videosContext';
+import Link from "next/link";
 
 export default function Home({ video_collection, trendingChannels, tags, trendingCategories, trendingPornstars }) {
   const { currentLocation, setcurrentLocation, viewType, setViewType } = useContext(videosContext);
@@ -56,7 +57,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
         const countryVideos = await fetchVideos(lang);
 
         console.log(countryVideos);
-        
+
 
 
         setcountryVideos(countryVideos)
@@ -145,7 +146,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
         }
       });
 
-      
+
 
       setTrendingPornstars(uniquePornstars);
     }
@@ -203,11 +204,13 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
       <Channels_slider trendingChannels={TrendingChannels} />
 
 
-      <div className="w-full overflow-x-auto whitespace-nowrap py-2  scrollbar-hide md:hidden select-none">
+      <div className="w-full overflow-x-auto whitespace-nowrap py-2 scrollbar-hide md:hidden select-none">
         {tags.map((tag, index) => (
-          <a key={tag.tag} href={`/search/${tag.tag.trim()}`} className="bg-gray-200 text-semiblack px-3 py-1.5 rounded-lg m-1 ml-2inline-block text-sm hover:bg-gray-300">
-            {tag.tag}
-          </a>
+          <Link legacyBehavior key={tag.tag} href={`/search/${tag.tag.trim()}`} passHref>
+            <a className="bg-gray-200 text-semiblack px-3 py-1.5 rounded-lg m-1 ml-2 inline-block text-sm hover:bg-gray-300">
+              {tag.tag}
+            </a>
+          </Link>
         ))}
       </div>
 

@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import Script from "next/script";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { UserAuth } from "../context/AuthContext";
+import Link from 'next/link';
 
 
 function classNames(...classes) {
@@ -306,9 +307,11 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
                             if (key.length >= 1) {
 
                                 return (
-                                    <a key={key} href={`/search/${key.trim()}`}>
-                                        <p className="text-xs border-[1px] border-[#9499A8] text-semiblack px-2 py-1 rounded-lg m-1 inline-block lg:text-sm hover:bg-gray-300">{key}</p>
-                                    </a>
+                                    <Link key={key} href={`/search/${key.trim()}`} passHref>
+                                        <p className="text-xs border-[1px] border-[#9499A8] text-semiblack px-2 py-1 rounded-lg m-1 inline-block lg:text-sm hover:bg-gray-300">
+                                            {key}
+                                        </p>
+                                    </Link>
                                 )
                             }
                         })

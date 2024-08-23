@@ -6,7 +6,6 @@ function PopunderAds() {
     if (typeof window !== "undefined") {
         currentHost = window.location.host;
     }
-    console.log(currentHost);
 
     return (
         <div className="flex items-center justify-center">
