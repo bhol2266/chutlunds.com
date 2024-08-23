@@ -55,6 +55,9 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
         setcountryLanguage(lang);
         const countryVideos = await fetchVideos(lang);
 
+        console.log(countryVideos);
+        
+
 
         setcountryVideos(countryVideos)
         await countryUpdated_DB(data.countryName);

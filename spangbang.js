@@ -1,5 +1,5 @@
 import fetchdata from 'node-fetch';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import extractUrls from "extract-urls";
 import fs from 'fs';
 

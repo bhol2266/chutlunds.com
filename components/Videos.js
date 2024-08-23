@@ -8,7 +8,6 @@ import {
 } from '@heroicons/react/solid';
 import BannerAds from "./Ads/BannerAds";
 import Outstream from './Ads/Outstream';
-import PopunderAds_2 from "./Ads/Popunder2";
 import PopunderAds from "./Ads/Popunder";
 import InterstitialAds from "./Ads/InterstitialAds";
 import { getViewTypeFromCookie } from "../config/utils";
@@ -58,7 +57,6 @@ function Videos({ data, type }) {
                     {currentPath !== "blocked" &&
                         <>
                             {/* <BannerAds /> */}
-                            <PopunderAds_2 />
                             <PopunderAds />
                             <Outstream />
                         </>

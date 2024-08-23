@@ -1,5 +1,5 @@
 import React from 'react'
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import { useState, useRef, } from 'react';
 import Link from 'next/link'
 import { useRouter } from 'next/router';

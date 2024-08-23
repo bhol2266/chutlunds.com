@@ -1,6 +1,6 @@
 import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';
 import { LinkIcon, PlusIcon } from '@heroicons/react/outline';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from "next/router";

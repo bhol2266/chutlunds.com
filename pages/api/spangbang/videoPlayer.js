@@ -1,4 +1,4 @@
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 // Import fetch for Node.js environment
 import extractUrls from "extract-urls";
 import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';

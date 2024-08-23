@@ -1,6 +1,6 @@
 import fetchdata from 'node-fetch';
 import fs from "fs"
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 
 
 var tags = []

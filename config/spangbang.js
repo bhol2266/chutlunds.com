@@ -1,4 +1,4 @@
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import { Scrape_Video_Item } from './Scrape_Video_Item';
 
 
@@ -13,6 +13,7 @@ export const scrapeVideos = async (url) => {
 
 
     const response = await fetch(url)
+    
     const body = await response.text();
     const $ = cheerio.load(body)
 

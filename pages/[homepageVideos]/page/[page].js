@@ -10,7 +10,7 @@ import { scrapeVideos } from '../../../config/spangbang';
 
 
 
-function Category({ video_collection, pages }) {
+function HomepageVideos({ video_collection, pages }) {
 
     const router = useRouter();
     if (router.isFallback) {
@@ -63,7 +63,7 @@ function Category({ video_collection, pages }) {
     )
 }
 
-export default Category
+export default HomepageVideos
 
 export async function getStaticPaths() {
 
@@ -99,26 +99,46 @@ export async function getStaticProps(context) {
             break;
     }
 
-    const parcelData = { url: href };
-    const API_URL = `${process.env.BACKEND_URL}getvideos`;
 
-    const rawResponse = await fetch(API_URL, {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify(parcelData),
-    });
+    if (homepageVideos == "trending" && page == "1") {
 
-    const { finalDataArray, pages } = await rawResponse.json();
 
-    return {
-        props: {
-            video_collection: finalDataArray,
-            pages: pages
+        const parcelData = { url: href };
+        const API_URL = `${process.env.BACKEND_URL}getvideos`;
+
+        const rawResponse = await fetch(API_URL, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+            body: JSON.stringify(parcelData),
+        });
+
+        const { finalDataArray, pages } = await rawResponse.json();
+
+        return {
+            props: {
+                video_collection: finalDataArray,
+                pages: pages
+            }
+        };
+    } else {
+
+
+        const obj = await scrapeVideos(href)
+        const finalDataArray = obj.finalDataArray
+        const pages = obj.pages
+
+        return {
+            props: {
+                video_collection: finalDataArray,
+                pages: pages
+            }
         }
-    };
+
+    }
+
 }
 
 

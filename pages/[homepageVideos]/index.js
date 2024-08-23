@@ -7,14 +7,14 @@ import { BeatLoader } from 'react-spinners';
 import Pagination from '../../components/Pagination';
 import { scrapeVideos } from '../../config/spangbang';
 
-function Category({ video_collection, pages }) {
+function HomepageVideos({ video_collection, pages }) {
     const router = useRouter();
     if (router.isFallback) {
         return (
             <div className="flex justify-center mx-auto mt-10 ">
                 <BeatLoader loading size={25} color={'#232b2b'} />
             </div>
-        );
+        )
     }
 
 
@@ -53,42 +53,80 @@ function Category({ video_collection, pages }) {
     );
 }
 
-export default Category;
+export default HomepageVideos;
 
-export async function getServerSideProps(context) {
+
+export async function getStaticPaths() {
+    return {
+
+        paths: [
+            { params: { homepageVideos: 'trending' } },
+        ],
+        fallback: true // false or 'blocking'
+    };
+}
+
+export async function getStaticProps(context) {
     const { homepageVideos } = context.params;
 
-    var finalDataArray = [];
-    var pages = [];
+    let href = "";
 
-    if (homepageVideos === 'trending') {
-        const obj = await scrapeVideos(`https://spankbang.party/trending_videos/`);
-        finalDataArray = obj.finalDataArray;
-        pages = obj.pages;
-    } else if (homepageVideos === 'upcoming') {
-        const obj = await scrapeVideos(`https://spankbang.party/upcoming/`);
-        finalDataArray = obj.finalDataArray;
-        pages = obj.pages;
-    } else if (homepageVideos === 'featured') {
-        // This will go to channels page from HomepageTitle component
-    } else if (homepageVideos === 'popular') {
-        const obj = await scrapeVideos(`https://spankbang.party/most_popular/?period=week`);
-        finalDataArray = obj.finalDataArray;
-        pages = obj.pages;
-    } else if (homepageVideos === 'random') {
-        const obj = await scrapeVideos(`https://spankbang.party/trending_videos/`);
-        finalDataArray = obj.finalDataArray;
-        pages = obj.pages;
-    } else {
-        const obj = await scrapeVideos(`https://spankbang.party/new_videos/`);
-        finalDataArray = obj.finalDataArray;
-        pages = obj.pages;
+    // for  "featured"  will go to channels page from HomepageTitle component
+
+    switch (homepageVideos) {
+        case 'trending':
+            href = `https://spankbang.party/trending_videos/`;
+            break;
+        case 'upcoming':
+            href = `https://spankbang.party/upcoming/`;
+            break;
+        case 'popular':
+            href = `https://spankbang.party/most_popular/?period=week`;
+            break;
+        case 'random':
+            href = `https://spankbang.party/trending_videos/`;
+            break;
+        default:
+            href = `https://spankbang.party/new_videos/`;
+            break;
     }
 
-    return {
-        props: {
-            video_collection: finalDataArray,
-            pages: pages
+    if (homepageVideos == "trending") {
+
+
+        const parcelData = { url: href };
+        const API_URL = `${process.env.BACKEND_URL}getvideos`;
+
+        const rawResponse = await fetch(API_URL, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            method: 'POST',
+            body: JSON.stringify(parcelData),
+        });
+
+        const { finalDataArray, pages } = await rawResponse.json();
+
+        return {
+            props: {
+                video_collection: finalDataArray,
+                pages: pages
+            }
+        };
+    } else {
+
+
+        const obj = await scrapeVideos(href)
+        const finalDataArray = obj.finalDataArray
+        const pages = obj.pages
+
+        return {
+            props: {
+                video_collection: finalDataArray,
+                pages: pages
+            }
         }
-    };
+
+    }
 }

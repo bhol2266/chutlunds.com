@@ -1,4 +1,4 @@
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';
 
 export const scrapeVideos = async (url) => {

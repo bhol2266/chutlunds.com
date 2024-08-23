@@ -1,17 +1,16 @@
-import { AuthContextProvider } from '../context/AuthContext';
 import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
 import Script from 'next/script';
 import NProgress from 'nprogress';
+import BannerAds from '../components/Ads/BannerAds';
+import Banner_for_chutlund2 from '../components/Banner_for_chutlund2';
 import Footer from '../components/Footer';
+import { LoginModal } from '../components/ModalLogin';
 import Navbar from '../components/Navbar';
+import { AuthContextProvider } from '../context/AuthContext';
 import VideoState from '../context/videos/VideoState';
 import '../styles/globals.css';
 import '../styles/nProgress.css';
-import Banner_for_chutlund2 from '../components/Banner_for_chutlund2';
-import { SessionProvider } from 'next-auth/react';
-import { LoginModal } from '../components/ModalLogin';
-import BannerAds from '../components/Ads/BannerAds';
 
 
 function MyApp({ Component, pageProps }) {

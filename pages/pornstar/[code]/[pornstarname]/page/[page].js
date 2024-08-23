@@ -1,4 +1,4 @@
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import Head from 'next/head';
 import { useRouter } from "next/router";
 import { useEffect, useState } from 'react';
