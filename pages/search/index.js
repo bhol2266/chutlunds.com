@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router';
 import Head from 'next/head'
 import Outstreams from '../../components/Ads/Outstream';
-import Popunder from '../../components/Ads/Popunder';
+import PopunderAds from '../../components/Ads/Popunder';
 import { SearchIcon } from '@heroicons/react/outline';
 
 function Search({ tags }) {
@@ -97,7 +97,7 @@ function Search({ tags }) {
             </Head>
 
             <Outstreams />
-            <Popunder />
+            <PopunderAds />
 
             <div className={` mt-4  transition ease-in-out delay-150 `}>
                 <div className='flex my-1  md:w-3/5 md:mx-auto p-2 px-3  border-[1px] border-gray-200 space-x-2 md:space-x-4 xl:px-[50px] rounded-[15px]'  >

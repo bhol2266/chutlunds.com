@@ -8,7 +8,7 @@ import {
     SearchIcon
 } from '@heroicons/react/solid';
 import Outstreams from '../../components/Ads/Outstream';
-import Popunder from '../../components/Ads/Popunder';
+import PopunderAds from '../../components/Ads/Popunder';
 import pornstarNameList from '../../JsonData/pornstarlist/alldata.json';
 
 function Index() {
@@ -107,7 +107,7 @@ function Index() {
             </div> */}
 
             <Outstreams />
-            <Popunder />
+            <PopunderAds />
 
 
 
