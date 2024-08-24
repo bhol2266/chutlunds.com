@@ -28,8 +28,7 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
 
 
     useEffect(() => {
-        if (!isReady) return;
-
+  
         const fetchSubscriptionStatus = async () => {
             const subscribed = await checkSubscribedChannel(channel_name);
             setIsSubscribed(subscribed);

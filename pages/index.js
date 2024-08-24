@@ -113,6 +113,9 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
     const viewchannels = getViewChannels();
     const viewPornstars = getViewPornstars();
 
+    console.log(viewchannels);
+    
+
     if (viewchannels) {
       const combinedChannels = [...viewchannels, ...trendingChannels];
 

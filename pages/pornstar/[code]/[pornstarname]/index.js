@@ -28,8 +28,6 @@ function Index({ video_collection, pages, pornstarInformation, collageImages, po
 
 
     useEffect(() => {
-        if (!isReady) return;
-
     
         const fetchSubscriptionStatus = async () => {
             const subscribed = await checkSubcribedPornstar(pornstarname);
