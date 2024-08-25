@@ -31,7 +31,7 @@ function Videos({ data, type }) {
         setPageLoaded(true);
     }, [router.asPath]);
 
-  
+
 
     return (
         <div className="h-fit  basicMargin">
@@ -54,13 +54,9 @@ function Videos({ data, type }) {
 
             {pageLoaded &&
                 <>
-                    {currentPath !== "blocked" &&
-                        <>
-                            {/* <BannerAds /> */}
-                            <PopunderAds />
-                            <Outstream />
-                        </>
-                    }
+                    <PopunderAds />
+                    <Outstream />
+                  
                 </>
             }
 
