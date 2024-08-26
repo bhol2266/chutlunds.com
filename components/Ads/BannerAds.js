@@ -8,7 +8,7 @@ function BannerAds() {
     return (
         <div className="">
 
-            {/* <Script
+            <Script
                 type="text/javascript"
                 src="//cdn.tsyndicate.com/sdk/v1/bi.js"
                 data-ts-spot="9d2353bb144e44528acb154218a20ded"
@@ -17,12 +17,12 @@ function BannerAds() {
                 data-ts-extid="{extid}"
                 async
                 defer
-            /> */}
+            />
 
 
             {/* Exoclick Multiformat  */}
 
-            <Script
+            {/* <Script
                 async
                 type="application/javascript"
                 src="https://a.magsrv.com/ad-provider.js"
@@ -36,7 +36,7 @@ function BannerAds() {
         (window.AdProvider = window.AdProvider || []).push({ "serve": {} });
       `}
             </Script>
-            <ins className="eas6a97888e38" data-zoneid="5390772"></ins>
+            <ins className="eas6a97888e38" data-zoneid="5390772"></ins> */}
 
 
 

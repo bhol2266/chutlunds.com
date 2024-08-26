@@ -8,7 +8,7 @@ const InterstitialAds = () => {
             <Head>
                 <link rel="stylesheet" href="//cdn.tsyndicate.com/sdk/v1/interstitial.ts.css" />
             </Head>
-            {/* <Script
+            <Script
                 src="//cdn.tsyndicate.com/sdk/v1/interstitial.ts.js"
                 strategy="afterInteractive"
                 onLoad={() => {
@@ -16,13 +16,12 @@ const InterstitialAds = () => {
                         spot: "ee9ab24036174503b1debe6c3ccc7fdf",
                         extid: "{extid}",
                         cookieExpires: 1
-                        
+
                     });
                 }}
-            /> 
+            />
             <div id="interstitial-ad"></div>
 
-*/}
 
 
             {/* Exoclick Interstitial ads  */}
