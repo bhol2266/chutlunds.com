@@ -54,9 +54,12 @@ function Videos({ data, type }) {
 
             {pageLoaded &&
                 <>
-                    <PopunderAds />
-                    <Outstream />
-                  
+                    {currentPath !== "blocked" &&
+                        <>
+                            <PopunderAds />
+                            <Outstream />
+                        </>
+                    }
                 </>
             }
 
