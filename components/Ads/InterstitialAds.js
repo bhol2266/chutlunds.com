@@ -27,7 +27,7 @@ const InterstitialAds = () => {
 
             {/* Exoclick Interstitial ads  */}
 
-            <Script
+            {/* <Script
                 async
                 type="application/javascript"
                 src="https://a.pemsrv.com/ad-provider.js"
@@ -41,7 +41,7 @@ const InterstitialAds = () => {
         (window.AdProvider = window.AdProvider || []).push({ "serve": {} });
       `}
             </Script>
-            <ins className="eas6a97888e35" data-zoneid="5390762"></ins>
+            <ins className="eas6a97888e35" data-zoneid="5390762"></ins> */}
 
         </>
     );

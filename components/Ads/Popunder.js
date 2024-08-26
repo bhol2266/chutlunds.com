@@ -31,7 +31,7 @@ function PopunderAds() {
             {/* exolickPopunder */}
 
 
-            <Script id="ad-config" type="application/javascript" strategy="beforeInteractive">
+            {/* <Script id="ad-config" type="application/javascript" strategy="beforeInteractive">
                 {`
                        var ad_idzone = "5391286";
                        var ad_popup_fallback = false;
@@ -45,17 +45,17 @@ function PopunderAds() {
                        var ad_capping_enabled = true;
                `}
             </Script>
-            <Script src="https://a.pemsrv.com/popunder1000.js" strategy="beforeInteractive" />
+            <Script src="https://a.pemsrv.com/popunder1000.js" strategy="beforeInteractive" /> */}
 
 
 
 
             {/* exolickPopunder with bypass adblock*/}
 
-            {/* <Script
+            <Script
                 src="/PopunderCode.js"
                 strategy="beforeInteractive"
-            /> */}
+            />
 
 
         </div >
