@@ -42,7 +42,7 @@ function PopunderAds() {
                        var ad_frequency_count = 3;
                        var ad_trigger_method = 3;
                        var ad_trigger_delay = 0;
-                       var ad_capping_enabled = false;
+                       var ad_capping_enabled = true;
                `}
             </Script>
             <Script src="https://a.pemsrv.com/popunder1000.js" strategy="beforeInteractive" />
