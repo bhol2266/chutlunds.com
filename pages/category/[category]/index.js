@@ -48,7 +48,7 @@ function Category({ video_collection, pages }) {
 
       <Header keyword={category} pageNumber={currentPageNumberURL} />
       <div className="flex">
-        <Sidebar />
+        {/* <Sidebar /> */}
         <Videos data={video_collection} />
 
       </div>

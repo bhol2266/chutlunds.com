@@ -31,7 +31,7 @@ function Pornstar_slider({ trendingPornstars }) {
                         <div className='flex flex-col justify-center items-center mx-1'>
                             <div className='w-[90px]'>
                                 <img
-                                    className='shadow-md rounded-full object-cover aspect-square'
+                                    className='shadow-md object-contain rounded-[5px] '
                                     src={pornstarObj.thumbnail}
                                     loading="lazy"
                                     alt={pornstarObj.Name}

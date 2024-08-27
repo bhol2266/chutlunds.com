@@ -26,7 +26,7 @@ function Category({ video_collection, pages, query, keyword, currentPage, filter
 
         <Header keyword={keyword} pageNumber={currentPageNumberURL} filteredObjsArrayProps={filteredObjsArray} />
         <div className="flex">
-          <Sidebar />
+          {/* <Sidebar /> */}
           <Videos data={video_collection} />
 
 

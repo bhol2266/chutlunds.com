@@ -43,7 +43,7 @@
     }
 
     .basicMargin {
-        @apply mx-2 sm:mx-4;
+        @apply mx-2 lg:mx-4;
     }
 
 

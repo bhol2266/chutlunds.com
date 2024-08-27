@@ -49,7 +49,7 @@ function HomepageVideos({ video_collection, pages }) {
             </Head>
             <Header keyword={homepageVideos} pageNumber={currentPageNumberURL} />
             <div className="flex">
-                <Sidebar />
+                {/* <Sidebar /> */}
                 <Videos data={video_collection} />
 
             </div>

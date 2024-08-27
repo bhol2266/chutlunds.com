@@ -52,7 +52,7 @@ function Search({ video_collection, pages }) {
 
             <Header keyword={searchkey.replace("+", " ")} pageNumber={currentPageNumberURL} />
             <div className="flex">
-                <Sidebar />
+                {/* <Sidebar /> */}
                 <Videos data={video_collection} />
 
             </div>

@@ -78,27 +78,27 @@ function VideoThumbnail({ details, type }) {
                         <img src='/crown.png' className='absolute top-0 right-0 h-6 lg:h-8 m-2 bg-white bg-opacity-70 p-0.5 rounded-md' alt="Premium" />
                     )}
 
-                    <span className="font-inter font-semibold text-[14px] md:text-[16px] xl:text-[18px] px-1 lg:pl-2 py-1 text-gray-800 whitespace-nowrap">
+                    <span className="font-inter text-[14px] md:text-[16px] xl:text-[18px] px-1 lg:pl-2 py-1 text-semiblack whitespace-nowrap">
                         {video.title}
                     </span>
 
                     <div className="flex items-center justify-start w-full pl-0.5 sm:pl-1 md:pb-2 lg:pl-2 font-arial -mt-1 lg:-mt-1.5">
                         <div className="flex items-center">
-                            <p className='text-[14px] md:text-[16px] xl:text-[17px] text-[#777777] font-inter'>{video.views} Views</p>
+                            <p className='text-[13px] md:text-[15px] xl:text-[16px] text-gray-400  font-inter'>{video.views} Views</p>
                         </div>
                         <div className="flex items-center ml-3">
                             <img className="w-[15px] h-[15px]  xl:w-[22px] xl:h-[22px]" src='/icons/thumb.png' alt="Likes" />
-                            <p className='text-[14px] md:text-[16px] xl:text-[17px] text-[#777777] font-inter sm:ml-1 xl:ml-2'>{video.likePercentage}</p>
+                            <p className='text-[13px] md:text-[15px] xl:text-[16px]  font-inter sm:ml-1 xl:ml-2 text-gray-400'>{video.likePercentage}</p>
                         </div>
                         <div className="hidden sm:flex items-center ml-2">
-                            <ClockIcon className="icon text-[#777777] w-[15px] h-[15px] xl:w-[25px] xl:h-[25px]" />
-                            <p className='text-[14px] md:text-[16px] xl:text-[17px] text-[#777777] font-inter'>{video.uploadedTime}</p>
+                            <ClockIcon className="icon  w-[15px] h-[15px] xl:w-[25px] xl:h-[25px] text-gray-400" />
+                            <p className='text-[13px] md:text-[15px] xl:text-[16px]  font-inter text-gray-400'>{video.uploadedTime}</p>
                         </div>
                     </div>
                 </div>
             </a>
 
-            <PopunderAds/>
+            <PopunderAds />
 
         </div>
     );

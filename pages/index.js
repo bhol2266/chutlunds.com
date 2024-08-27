@@ -114,7 +114,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
     const viewPornstars = getViewPornstars();
 
     console.log(viewchannels);
-    
+
 
     if (viewchannels) {
       const combinedChannels = [...viewchannels, ...trendingChannels];
@@ -217,8 +217,8 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
         ))}
       </div>
 
-      <main className="flex-row flex  mt-1 md:mt-6 md:space-x-3">
-        <Sidebar />
+      <main className="flex-row flex  mt-1 md:mt-2 md:space-x-3">
+        {/* <Sidebar /> */}
         <div className='w-full overflow-hidden'>
           <Outstreams />
           <h1 className="lg:text-2xl text-lg font-semibold text-gray-800 my-3 font-inter basicMargin w-fit border-b-[3px] border-[#FFBB00]">Trending Free Porn Videos</h1>
