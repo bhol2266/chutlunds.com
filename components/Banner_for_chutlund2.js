@@ -36,13 +36,18 @@ export default function Banner_for_chutlund2() {
 
   return (
     <div className={`bg-gray-800 m-2 text-white p-4 flex justify-between items-center ${isVisible ? '' : 'hidden'}`}>
-      <span className="flex-1 text-left md:text-center text-sm md:text-md">
+      <span className="flex-1 text-left md:text-center text-sm md:text-md ">
         If this website is blocked in your country (
         <Flag code="CN" style={{ width: '20px', height: '14px' }} className="inline-block mx-1" />
         <Flag code="RU" style={{ width: '20px', height: '14px' }} className="inline-block mx-1" />
         <Flag code="TR" style={{ width: '20px', height: '14px' }} className="inline-block mx-1" />
         ) go to our alternate website{' '}
-        <a href="https://chutlunds2.com" className="underline text-yellow-500 font-inter">Chutlunds2.com</a>
+
+
+          <a href="https://chutlunds2.com" className="underline text-yellow-500 font-inter">Chutlunds2.com </a>
+          ,
+          <a href="https://chutlunds2.com" className="ml-1 underline text-yellow-500 font-inter">Fuckvideo.live</a>
+
       </span>
 
       <button onClick={handleClose} className="text-white">
