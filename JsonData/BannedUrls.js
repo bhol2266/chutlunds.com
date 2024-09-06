@@ -1,4 +1,4 @@
-// this is to remove stories that contains following keys for exoclick ads
+// this is to remove urls that contains dmca notice in google search consile
 export const BannedUrls = [
   "https://chutlunds.com/video/7pjtq*popsytopsy+01",
   "https://chutlunds.com/video/7pojn*popsytopsy+03",
