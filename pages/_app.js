@@ -11,25 +11,44 @@ import { AuthContextProvider } from '../context/AuthContext';
 import VideoState from '../context/videos/VideoState';
 import '../styles/globals.css';
 import '../styles/nProgress.css';
-
+import { BannedUrls } from '../JsonData/BannedUrls';
+import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const currentRoute = router.pathname;
 
-  Router.events.on('routeChangeStart', () => {
-    NProgress.start();
-  });
-  Router.events.on('routeChangeComplete', () => {
-    NProgress.done();
-  });
+  useEffect(() => {
+
+    const currentUrl = window.location.href;
+    if (BannedUrls.includes(currentUrl)) {
+      router.push('/not-found'); // Redirect to a different page or a 404 page
+    }
+
+    const handleRouteChangeStart = (url) => {
+      NProgress.start();
+    };
+
+    const handleRouteChangeComplete = () => {
+      NProgress.done();
+    };
+
+    Router.events.on('routeChangeStart', handleRouteChangeStart);
+    Router.events.on('routeChangeComplete', handleRouteChangeComplete);
+
+    // Cleanup function to remove event listeners
+    return () => {
+      Router.events.off('routeChangeStart', handleRouteChangeStart);
+      Router.events.off('routeChangeComplete', handleRouteChangeComplete);
+    };
+  }, [router]);
 
   return (
     <>
       <Head>
         <meta name="asg_verification" content="vVcWCcbbgmnqv221hpAjPojb" />
         <meta name="Trafficstars" content="48702" />
-        <meta name="6a97888e-site-verification" content="fd04cef42cda2174ca5eaeb4b942dcae"/>
+        <meta name="6a97888e-site-verification" content="fd04cef42cda2174ca5eaeb4b942dcae" />
         <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -37,17 +56,14 @@ function MyApp({ Component, pageProps }) {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-
         <meta property="og:image" content="/logo.png" />
         <meta property="og:url" content="https://www.chutlunds.com" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content="/logo.png" />
       </Head>
-
 
       <Script
         strategy="afterInteractive"
@@ -61,7 +77,6 @@ function MyApp({ Component, pageProps }) {
         gtag('config', 'G-6JFQKLE3DK');`}
       </Script>
 
-
       <AuthContextProvider>
         <VideoState>
           <Navbar />
@@ -72,11 +87,10 @@ function MyApp({ Component, pageProps }) {
           </div>
           <hr />
           {currentRoute != "/membership" && <Footer />}
-          <BannerAds/>
-          <BannerAds/>
+          <BannerAds />
+          <BannerAds />
         </VideoState>
       </AuthContextProvider>
-
     </>
   );
 }

@@ -3,7 +3,7 @@
 import nodemailer from 'nodemailer'; // ES module style
 import { checkUserExists, getUserByEmail } from './saveProfileFirestore';
 
-getUserByEmail
+
 export default async function handler(req, res) {
     if (req.method === 'POST') {
         try {
