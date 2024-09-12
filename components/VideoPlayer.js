@@ -154,14 +154,14 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
 
         <div >
 
-            <Script
+            {/* <Script
                 src="//imasdk.googleapis.com/js/sdkloader/ima3.js"
                 onLoad={() => {
                     const script = document.createElement("script");
                     script.src = "/vastAd.js";
                     document.body.appendChild(script);
                 }}
-            />
+            /> */}
 
             <div id="mainContainer" className={`relative w-full aspect-video object-contain  group  shadow-2xl sm:ml-2 lg:ml-4`}>
                 <video className={`w-full h-full cursor-pointer`} id="contentElement" onContextMenu={(e) => e.preventDefault()} ref={videoPlayerRef} poster={video_details.thumbnail} width="852" height="480" controls controlsList="nodownload"
@@ -172,13 +172,13 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
                 <button className="hidden" id="playButton">Play</button>
 
 
-                <div className="absolute bottom-[50px] left-0 right-0 flex justify-between hidden xl:flex ">
+                <div className="absolute bottom-[55px] left-0 right-0 flex justify-between hidden xl:flex ">
                     {/* Scene icons */}
                     {positionsArray.map(obj => (
                         <img
                             key={obj.timestamp}
                             src={`/kamasutra_icons/${obj.positionName.toLowerCase()}.png`}
-                            className="scale-50 lg:scale-100 absolute w-[50px] h-[50px] bg-black bg-opacity-50 hover:bg-pink-500 hover:bg-opacity-100 transition-colors rounded-[7px] cursor-pointer"
+                            className="scale-50 lg:scale-100 absolute w-[30px] h-[30px] bg-black bg-opacity-50 hover:bg-pink-500 hover:bg-opacity-100 transition-colors rounded-[7px] cursor-pointer"
                             style={{
                                 left: calculateLeftPosition(obj.timestamp),
                             }}

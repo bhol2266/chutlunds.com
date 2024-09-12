@@ -183,7 +183,7 @@ const Videoplayer = () => {
 
                     <h1 className='text-md sm:text-lg font-semibold my-1 text-wrap text-gray-700 md:text-2xl font-inter basicMargin'>{videoDetails.Title}</h1>
 
-                    <div className='py-1 rounded overflow-hidden sm:cursor-pointer md:w-4/5'>
+                    <div className='py-1 rounded overflow-hidden sm:cursor-pointer 2xl:w-4/5'>
                         <VideoPlayer
                             video_details={videoDetails}
                             VideoSrc={VideoSrc}
