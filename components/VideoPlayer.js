@@ -178,7 +178,7 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
                         <img
                             key={obj.timestamp}
                             src={`/kamasutra_icons/${obj.positionName.toLowerCase()}.png`}
-                            className="scale-50 lg:scale-100 absolute w-[30px] h-[30px] bg-black bg-opacity-50 hover:bg-pink-500 hover:bg-opacity-100 transition-colors rounded-[7px] cursor-pointer"
+                            className="scale-50 lg:scale-100 absolute w-[35px] h-[35px] bg-black bg-opacity-50 hover:bg-pink-500 hover:bg-opacity-100 transition-colors rounded-[7px] cursor-pointer"
                             style={{
                                 left: calculateLeftPosition(obj.timestamp),
                             }}
