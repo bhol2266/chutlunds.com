@@ -87,7 +87,6 @@ function MyApp({ Component, pageProps }) {
             <Component {...pageProps} />
           </div>
           <hr />
-          {currentRoute != "/membership" && <Footer />}
 
 
           <div className='sm:flex items-center justify-center sm:w-1/2 lg:w-1/4 mx-auto mt-4'>
@@ -97,6 +96,7 @@ function MyApp({ Component, pageProps }) {
             <Outstreams />
             <BannerAds />
           </div>
+          {currentRoute != "/membership" && <Footer />}
 
 
         </VideoState>
