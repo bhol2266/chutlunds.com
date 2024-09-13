@@ -5,7 +5,6 @@ import { useContext, useEffect, useState } from 'react';
 import ReactCountryFlag from "react-country-flag";
 
 import BannerAds from '../components/Ads/BannerAds';
-import Outstreams from '../components/Ads/Outstream';
 import Sidebar from '../components/Sidebar';
 import Videos from '../components/Videos';
 import Category_slider from '../components/category_slider';
@@ -220,7 +219,6 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
       <main className="flex-row flex  mt-1 md:mt-2 md:space-x-3">
         {/* <Sidebar /> */}
         <div className='w-full overflow-hidden'>
-          <Outstreams />
           <h1 className="lg:text-2xl text-lg font-semibold text-gray-800 my-3 font-inter basicMargin w-fit border-b-[3px] border-[#FFBB00]">Trending Free Porn Videos</h1>
           <Videos data={video_collection[0].finalDataArray} />
           <a href={`/trending`}>

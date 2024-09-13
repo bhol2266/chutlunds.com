@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 import jsonData from "../../JsonData/categoryImages/data.json";
 
 import Head from 'next/head';
-import Outstreams from '../../components/Ads/Outstream';
 import PopunderAds from '../../components/Ads/Popunder';
 
 
@@ -82,7 +81,6 @@ function Index() {
             </h1>
 
 
-            <Outstreams />
             <PopunderAds />
 
             <div className={`grid grid-cols-3 py-3 sm:grid-cols-3 gap-2 md:gap-3 lg:gap-4  md:grid-cols-4 lg:grid-cols-5`}>

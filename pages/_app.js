@@ -13,6 +13,7 @@ import '../styles/globals.css';
 import '../styles/nProgress.css';
 import { BannedUrls } from '../JsonData/BannedUrls';
 import { useEffect } from 'react';
+import Outstreams from '../components/Ads/Outstream';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -87,8 +88,17 @@ function MyApp({ Component, pageProps }) {
           </div>
           <hr />
           {currentRoute != "/membership" && <Footer />}
-          <BannerAds />
-          <BannerAds />
+
+
+          <div className='sm:flex items-center justify-center sm:w-1/2 lg:w-1/4 mx-auto mt-4'>
+            <BannerAds />
+            <Outstreams />
+            <Outstreams />
+            <Outstreams />
+            <BannerAds />
+          </div>
+
+
         </VideoState>
       </AuthContextProvider>
     </>

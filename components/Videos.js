@@ -1,16 +1,13 @@
 import { useRouter } from "next/router";
-import { useEffect, useState, useContext } from "react";
-import VideoThumbnail from "./VideoThumbnail";
+import { useContext, useEffect, useState } from "react";
 import videosContext from '../context/videos/videosContext';
+import VideoThumbnail from "./VideoThumbnail";
 
 import {
     LightningBoltIcon,
 } from '@heroicons/react/solid';
-import BannerAds from "./Ads/BannerAds";
-import Outstream from './Ads/Outstream';
-import PopunderAds from "./Ads/Popunder";
 import InterstitialAds from "./Ads/InterstitialAds";
-import { getViewTypeFromCookie } from "../config/utils";
+import PopunderAds from "./Ads/Popunder";
 
 function Videos({ data, type }) {
 
@@ -36,7 +33,7 @@ function Videos({ data, type }) {
     return (
         <div className="h-fit  basicMargin">
             <div className={`grid py-1 gap-2  3xl:gap-4   ${viewType === 'horizontal' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  3xl:grid-cols-5' : 'grid-cols-2 lg:grid-cols-4  3xl:grid-cols-5'}`}>
-            {
+                {
                     data.map(video => (
                         <VideoThumbnail key={video.thumbnail} details={video} type={type} />
                     ))
@@ -57,7 +54,6 @@ function Videos({ data, type }) {
                     {currentPath !== "blocked" &&
                         <>
                             <PopunderAds />
-                            <Outstream />
                         </>
                     }
                 </>

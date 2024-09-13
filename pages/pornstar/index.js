@@ -7,7 +7,6 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import {
     SearchIcon
 } from '@heroicons/react/solid';
-import Outstreams from '../../components/Ads/Outstream';
 import PopunderAds from '../../components/Ads/Popunder';
 import pornstarNameList from '../../JsonData/pornstarlist/alldata.json';
 
@@ -106,7 +105,6 @@ function Index() {
 
             </div> */}
 
-            <Outstreams />
             <PopunderAds />
 
 

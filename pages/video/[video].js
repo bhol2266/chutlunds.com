@@ -7,7 +7,6 @@ import Head from 'next/head';
 import { useRouter } from "next/router";
 import { useEffect, useState } from 'react';
 import BannerAds from '../../components/Ads/BannerAds';
-import Outstreams from '../../components/Ads/Outstream';
 import VideoPlayer from '../../components/VideoPlayer';
 import Videos from '../../components/Videos';
 import { BeatLoader } from 'react-spinners';
@@ -202,7 +201,6 @@ const Videoplayer = () => {
                     {latestVideo.length !== 0 && <Videos data={latestVideo} />}
 
                     <BannerAds />
-                    <Outstreams />
                 </>
             ) : (
 

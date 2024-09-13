@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import jsonData from "../../JsonData/categoryImages/data.json"
 import Link from 'next/link'
 
-import Outstreams from '../../components/Ads/Outstream';
 import Head from 'next/head'
 import PopunderAds from '@/components/Ads/Popunder';
 import { scrapeChannelpage } from '../../config/channels';
@@ -176,7 +175,6 @@ function Index({ video_collection, trendingChannels, newChannels }) {
 
 
 
-                <Outstreams />
                 <PopunderAds />
                 <div className={`grid grid-cols-4 py-3 sm:grid-cols-4 gap-3 md:gap-5 lg:gap-4  md:grid-cols-6 2xl:grid-cols-7`}>
                     {trendingChannels.map(channelName => {
