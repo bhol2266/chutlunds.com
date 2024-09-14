@@ -6,6 +6,7 @@ import Pagination from '../../../components/Pagination';
 import Videos from "../../../components/Videos";
 import Header from '../../../components/searchPage/Header';
 import { updatekeywords } from "../../../config/firebase/lib";
+import { scrapeVideos } from '../../../config/spangbang';
 
 
 function Search({ video_collection, pages }) {
@@ -18,8 +19,8 @@ function Search({ video_collection, pages }) {
   const currentPageNumberURL = '1';
 
   useEffect(() => {
-  
-    if (searchkey ) {
+
+    if (searchkey) {
       updatekeywords(searchkey.trim());
     }
   }, [searchkey]);
@@ -58,36 +59,53 @@ function Search({ video_collection, pages }) {
 export default Search;
 
 
-export async function getStaticPaths() {
-  return {
-    paths: [
-      { params: { searchkey: 'bbc' } },
-    ],
-    fallback: true // 'blocking' or 'true'
-  };
-}
+// export async function getStaticPaths() {
+//   return {
+//     paths: [
+//       { params: { searchkey: 'bbc' } },
+//     ],
+//     fallback: true // 'blocking' or 'true'
+//   };
+// }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const { searchkey } = context.params;
 
-  const parcelData = { url: `https://spankbang.party/s/${searchkey.toLowerCase().trim()}/?o=all` };
-  const API_URL = `${process.env.BACKEND_URL}getvideos`;
+  if (searchkey == "bbc") {
 
-  const rawResponse = await fetch(API_URL, {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    method: 'POST',
-    body: JSON.stringify(parcelData),
-  });
+    const parcelData = { url: `https://spankbang.party/s/${searchkey.toLowerCase().trim()}/?o=all` };
+    const API_URL = `${process.env.BACKEND_URL}getvideos`;
 
-  const { finalDataArray, pages } = await rawResponse.json();
+    const rawResponse = await fetch(API_URL, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(parcelData),
+    });
 
-  return {
-    props: {
-      video_collection: finalDataArray,
-      pages: pages,
+    const { finalDataArray, pages } = await rawResponse.json();
+
+    return {
+      props: {
+        video_collection: finalDataArray,
+        pages: pages,
+      }
+    };
+  } else {
+
+    const obj = await scrapeVideos(`https://spankbang.party/s/${searchkey.toLowerCase().trim()}/?o=all`)
+    var finalDataArray = obj.finalDataArray
+    var pages = obj.pages
+
+    return {
+      props: {
+        video_collection: finalDataArray,
+        pages: pages
+      }
     }
-  };
+  }
+
+
 }
