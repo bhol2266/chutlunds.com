@@ -208,7 +208,7 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
                 <div className='basicMargin'>
 
 
-                    <div className="flex justify-between pt-2 text-sm md:text-lg   ">
+                    <div className="flex justify-between lg:pt-2 text-sm md:text-lg   ">
                         <div className="flex justify-around items-center space-x-2 md:space-x-4 md:text-lg ">
 
                             <div className='flex items-center space-x-1'>
@@ -311,7 +311,7 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
 
 
                     {/* Tags */}
-                    <div className="flex flex-wrap mb-2" >
+                    <div className="flex flex-wrap mb-1.5" >
                         {
                             tags.map(key => {
                                 if (key.length >= 1) {
