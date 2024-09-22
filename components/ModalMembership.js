@@ -193,7 +193,7 @@ const ModalMembership = () => {
                                 checked={card_paypal === 'card'}
                                 onChange={() => radioBtn('card')}
                             />
-                            <img src="https://leadershipmemphis.org/wp-content/uploads/2020/08/780370.png" className="h-8 ml-3" />
+                            <img alt='credit-cards' src="https://leadershipmemphis.org/wp-content/uploads/2020/08/780370.png" className="h-8 ml-3" />
                         </label>
                         <label className="inline-flex items-center mt-2 lg:mt-0 lg:ml-6 hidden">
                             <input
@@ -202,7 +202,7 @@ const ModalMembership = () => {
                                 checked={card_paypal === 'paypal'}
                                 onChange={() => radioBtn('paypal')}
                             />
-                            <img src="https://www.sketchappsources.com/resources/source-image/PayPalCard.png" className="h-[45px] ml-3" />
+                            <img alt='paypal-logo' src="https://www.sketchappsources.com/resources/source-image/PayPalCard.png" className="h-[45px] ml-3" />
                         </label>
                     </div>
 

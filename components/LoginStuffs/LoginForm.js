@@ -121,7 +121,7 @@ export const LoginForm = () => {
 
             <div className="flex flex-col justify-center">
 
-                <img src='/logo.png' alt="chutlunds" className='w-[200px] mx-auto  lg:w-[220px] mx-auto lg:-mt-2' />
+                <img src='/logo.png' alt="chutlunds-logo" className='w-[200px] mx-auto  lg:w-[220px] mx-auto lg:-mt-2' />
                 <p className='mb-6 font-inter text-white text-center text font-dancing text-2xl'>Unleash your desires!   </p>
 
 

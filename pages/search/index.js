@@ -106,7 +106,7 @@ function Search({ tags }) {
 
 
             <div className='flex items-center space-x-2 mt-4'>
-                <img src='/login/label.png' className='h-[25px] w-[25px]' />
+                <img alt='tag' src='/login/label.png' className='h-[25px] w-[25px]' />
                 <h1 className='text-lg font-bold md:text-2xl font-poppins'> Popular Search Tags</h1>
             </div>
 

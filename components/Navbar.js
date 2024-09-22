@@ -162,7 +162,7 @@ function Navbar() {
 
     return (
 
-        <div className='font-inter bg-semiblack '>
+        <div className='font-inter bg-semiblack  shadow'>
 
             <div className=" text-white p-2  lg:hidden">
 
@@ -174,7 +174,7 @@ function Navbar() {
                                 <div className='flex items-center space-x-1' >
 
                                     <Link href='/'>
-                                        <img src='/logo.png' alt="chutlunds" className='w-[200px]' />
+                                        <img src='/logo.png' alt="logo" className='w-[200px]' />
                                     </Link>
                                     {location &&
                                         <div className='cursor-pointer' onClick={handleClickFlag}>
@@ -208,11 +208,11 @@ function Navbar() {
                                             <Menu.Button className=" ">
 
                                                 {!user &&
-                                                    <img src='/login/user.png' className='cursor-pointer h-5 w-5 mt-1.5'></img>
+                                                    <img alt="user-logo" src='/login/user.png' className='cursor-pointer h-5 w-5 mt-1.5'></img>
                                                 }
 
                                                 {user &&
-                                                    <img src='/login/userOnline.png' className='cursor-pointer h-5 w-5 mt-1.5'></img>
+                                                    <img alt="user-logo" src='/login/userOnline.png' className='cursor-pointer h-5 w-5 mt-1.5'></img>
                                                 }
                                             </Menu.Button>
                                         </div>
@@ -226,7 +226,7 @@ function Navbar() {
                                             leaveFrom="transform opacity-100 scale-100"
                                             leaveTo="transform opacity-0 scale-95"
                                         >
-                                            <Menu.Items className="flex flex-col justify-start origin-top-right absolute -right-[50px] lg:-right-[125px] mt-3  w-[200px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-20 pb-4">
+                                            <Menu.Items className="flex flex-col justify-start bg-neutral-600 origin-top-right absolute -right-[50px] lg:-right-[125px] mt-3  w-[200px] rounded-md shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none z-20 pb-4">
 
 
 
@@ -241,7 +241,7 @@ function Navbar() {
                                                 }
 
                                                 {user &&
-                                                    <h2 className='font-Opensans text-semiblack  text-[12px] cursor-pointer text-center font-semibold my-2'>Hi, {getCookie("Firstname")}</h2>
+                                                    <h2 className='font-Opensans  text-[12px] cursor-pointer text-center font-semibold my-2'>Hi, {getCookie("Firstname")}</h2>
                                                 }
 
 
@@ -254,7 +254,7 @@ function Navbar() {
                                                 }
 
                                                 <Menu.Item>
-                                                    <h2 className='cursor-pointer text-[11px] font-DMsans text-[#001857] w-fit mx-auto mb-28px mt-[14px]'>Need Help ?</h2>
+                                                    <h2 className='cursor-pointer text-[11px] font-DMsans  w-fit mx-auto mb-28px mt-[14px]'>Need Help ?</h2>
                                                 </Menu.Item>
 
                                             </Menu.Items>
@@ -293,7 +293,7 @@ function Navbar() {
                                         {navigation.map((item) => (
 
 
-                                            <a href={item.href} key={item.name} rel="nofollow">
+                                            <a href={item.href} key={item.name} rel="dofollow">
                                                 <Disclosure.Button
                                                     as="a"
                                                     className={classNames(
@@ -363,38 +363,46 @@ function Navbar() {
 
             </div>
 
-            <div className='flex justify-around items-center shadow-lg lg:hidden font-arial'>
-                <Link href='/'>
-
-                    <p className={`sm:text-xl xl:text-[28px] text-md text-white text-center p-1  border-b-[3px] ${currentPath === '/' ? 'border-theme_yellow' : 'hover:border-theme_yellow border-transparent'}`}>
+            <div className='flex justify-around items-center lg:hidden font-arial shadow-lg mb-2'>
+                <Link href='/' legacyBehavior>
+                    <a
+                        className={`sm:text-xl xl:text-[28px] text-md text-white text-center p-1 border-b-[3px] ${currentPath === '/' ? 'border-theme_yellow' : 'hover:border-theme_yellow border-transparent'}`}
+                        rel="dofollow"
+                    >
                         Home
-                    </p>
+                    </a>
                 </Link>
 
-                <Link href='/category'>
-                    <p className={`sm:text-xl xl:text-[28px] text-md text-white text-center p-1  border-b-[3px] ${currentPath === '/category' ? 'border-theme_yellow' : 'hover:border-theme_yellow border-transparent'}`}>
+                <Link href='/category' legacyBehavior>
+                    <a
+                        className={`sm:text-xl xl:text-[28px] text-md text-white text-center p-1 border-b-[3px] ${currentPath === '/category' ? 'border-theme_yellow' : 'hover:border-theme_yellow border-transparent'}`}
+                        rel="dofollow"
+                    >
                         Categories
-                    </p>
+                    </a>
                 </Link>
 
-                <Link href='/channels'>
-                    <div className={`group flex items-center justify-center space-x-1 -mb-1 pb-1  border-b-[3px] ${currentPath === '/channels' ? 'border-theme_yellow' : 'hover:border-theme_yellow border-transparent'}`}>
-                        <img src="/channel.png" alt="" className='h-5 m' />
-                        <p className={`sm:text-xl xl:text-[28px] text-md text-white text-center mb-0`}>
+                <Link href='/channels' legacyBehavior>
+                    <a
+                        className={`group flex items-center justify-center space-x-1 -mb-1 pb-1 border-b-[3px] ${currentPath === '/channels' ? 'border-theme_yellow' : 'hover:border-theme_yellow border-transparent'}`}
+                        rel="dofollow"
+                    >
+                        <img src="/channel.png" alt="channel-icon" className='h-5 m' />
+                        <span className={`sm:text-xl xl:text-[28px] text-md text-white text-center mb-0`}>
                             Channels
-                        </p>
-                    </div>
+                        </span>
+                    </a>
                 </Link>
 
-
-                <Link href='/membership'>
-                    <p className='sm:text-md text-sm  text-semiblack rounded-[22px] text-center px-3 p-1 m-1 bg-theme_yellow hover:scale-105 transition-transform duration-30 block_popunder'>
+                <Link href='/membership' legacyBehavior>
+                    <a
+                        className='sm:text-md text-sm text-semiblack rounded-[22px] text-center px-3 p-1 m-1 bg-theme_yellow hover:scale-105 transition-transform duration-30 block_popunder'
+                        rel="dofollow"
+                    >
                         Join Now
-                    </p>
+                    </a>
                 </Link>
             </div>
-
-
 
             {/* Large Sreeen NavBar  */}
 
@@ -407,7 +415,7 @@ function Navbar() {
                     <div className='flex items-center space-x-1 md:space-x-3  ml-2' >
 
                         <Link href='/'>
-                            <img src='/logo.png' alt="chutlunds" className='w-[250px]' />
+                            <img src='/logo.png' alt="logo" className='w-[250px]' />
                         </Link>
                         {location &&
 
@@ -433,7 +441,7 @@ function Navbar() {
                                     src='/livesex.png'
                                     height={35}
                                     width={35}
-                                    alt='loading'
+                                    alt='livesex'
                                 ></img>
                                 <p className='font-bold '>Live Sex</p>
                             </div>
@@ -496,9 +504,19 @@ function Navbar() {
                                     <button className='font-inter bg-green-500 py-[5px] px-8  rounded-[22px] mr-3' onClick={signOut_method}>Logout</button>
                                 </div>
                             }
-                            <Link href='/membership'>
-                                <button className="bg-theme_yellow text-semiblack rounded-[22px] font-semibold text-center px-5 p-1.5 m-1 text-md block_popunder hover:scale-105 transition-transform duration-300 text-nowrap	">Join Now</button>
+                            <Link href='/membership' legacyBehavior>
+                                <a
+                                    rel="dofollow" 
+                                >
+                                    <button className="bg-theme_yellow text-semiblack rounded-[22px] font-semibold text-center px-5 p-1.5 m-1 text-md block_popunder hover:scale-105 transition-transform duration-300 text-nowrap">
+                                        Join Now
+                                    </button>
+                                </a>
                             </Link>
+
+
+
+
 
                         </div>
                     </div>
@@ -516,7 +534,7 @@ function Navbar() {
 
                         return (
                             <Link href={item.href} legacyBehavior key={item.name}>
-                                <a rel="nofollow"
+                                <a rel="dofollow"
                                     className={`text-xl 2xl:text-2xl font-semibold text-white cursor-pointer p-1 border-b-4 
                     ${isActive ? 'border-theme_yellow' : 'border-transparent hover:border-theme_yellow'}
                     transition-colors duration-300`}

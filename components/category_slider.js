@@ -26,6 +26,7 @@ function Category_slider({ trendingCategories }) {
                         <div className='flex flex-col justify-center items-center mx-1'>
                             <div className='w-[90px]'>
                                 <img className='shadow-md rounded-full object-cover aspect-square'
+                                    alt={category.name.substring(0, category.name.indexOf('.png')).toLowerCase()}
                                     src={`${process.env.CLOUDFLARE_STORAGE}category_images/${category.name.toLowerCase().substring(0, category.name.indexOf('.png'))}.png`}
 
                                 />
