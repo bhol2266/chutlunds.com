@@ -92,7 +92,7 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
                 <meta property="og:description" content={`Check out the best porn videos and playlists from channel ${capitalizeFirstLetter(channelname.replace('+', " ").replace("+", " "))}`} />
                 <meta name="twitter:title" content={`${capitalizeFirstLetter(channelname.replace('+', " ").replace("+", " "))} Porn Videos - ${currentPageNumberURL}`} />
                 <meta name="twitter:description" content={`Check out the best porn videos and playlists from channel ${capitalizeFirstLetter(channelname.replace('+', " ").replace("+", " "))}`} />
-                <link rel="canonical" href={`https://chutlunds.com/channels/${code}/${channelname}/page/${page}`} />
+                <link rel="canonical" href={`https://www.chutlunds.com/channels/${code}/${channelname}/page/${page}`} />
 
 
 

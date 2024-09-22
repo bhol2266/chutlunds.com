@@ -167,7 +167,7 @@ const Videoplayer = () => {
                         <meta property="og:description" content={`${capitalizeFirstLetter(noVideo ? videoTitleBackup : videoDetails.Title)} sex video`} />
                         <meta name="twitter:title" content={`${noVideo ? videoTitleBackup : videoDetails.Title} - ${noVideo ? "720p" : videolinkQualitiesScreenshots.video_qualities_available[videolinkQualitiesScreenshots.video_qualities_available.length - 1].toUpperCase()}`} />
                         <meta name="twitter:description" content={`${capitalizeFirstLetter(noVideo ? videoTitleBackup : videoDetails.Title)} sex video`} />
-                        <link rel="canonical" href={`https://chutlunds.com/video/${video}`} />
+                        <link rel="canonical" href={`https://www.chutlunds.com/video/${video}`} />
 
                     </Head>
 

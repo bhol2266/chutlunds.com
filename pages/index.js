@@ -183,13 +183,13 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
   return (
     <div className=" ">
       <Head>
-        <title>Chutlunds: Free Porn Videos and 4K Sex Movies</title>
+        <title>Free Porn Videos and 4K Sex Movies - Chutlunds</title>
         <meta name="description" content="Chutlunds is the hottest free porn site in the world! Cum like never before and explore millions of fresh and free porn videos! Get lit on Chutlunds!" />
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="msvalidate.01" content="8A6530C78E46DD0011117B2ECB618480" />
-        <meta property="og:title" content="Chutlunds: Free Porn Videos and 4K Sex Movies" />
+        <meta property="og:title" content="Free Porn Videos and 4K Sex Movies - Chutlunds" />
         <meta property="og:description" content="Chutlunds is the hottest free porn site in the world! Cum like never before and explore millions of fresh and free porn videos! Get lit on Chutlunds!" />
-        <link rel="canonical" href={`https://chutlunds.com/`} />
+        <link rel="canonical" href={`https://www.chutlunds.com/`} />
 
       </Head>
 

@@ -92,7 +92,7 @@ function Index() {
                 <meta property="og:description" content="Catch the most popular PORNSTARS and MODELS, right here on the biggest FREE PORN tube. Chutlunds.com has a bevy of luscious babes that are naked for you 24/7!" />
                 <meta name="twitter:title" content="Top Pornstars and Models In Full-Length Free Sex Videos | Chutlunds" />
                 <meta name="twitter:description" content="Catch the most popular PORNSTARS and MODELS, right here on the biggest FREE PORN tube. Chutlunds.com has a bevy of luscious babes that are naked for you 24/7!" />
-                <link rel="canonical" href={`https://chutlunds.com/pornstar`} />
+                <link rel="canonical" href={`https://www.chutlunds.com/pornstar`} />
 
             </Head>
 

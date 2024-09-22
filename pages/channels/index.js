@@ -136,7 +136,7 @@ function Index({ video_collection, trendingChannels, newChannels }) {
                     <meta property="og:description" content="The Hottest Japanese Porn Movies Divided By Channels! Discover on JAV HD the Best XXX JAV Channels & Free Sex Scenes: JAVHD, CARIBBEANCOM, JAVHUB, JAPANHDV" />
                     <meta name="twitter:title" content="Hot Porn Channels and Exclusive Adult Videos - Chutlunds" />
                     <meta name="twitter:description" content="The Hottest Japanese Porn Movies Divided By Channels! Discover on JAV HD the Best XXX JAV Channels & Free Sex Scenes: JAVHD, CARIBBEANCOM, JAVHUB, JAPANHDV" />
-                    <link rel="canonical" href={`https://chutlunds.com/channels`} />
+                    <link rel="canonical" href={`https://www.chutlunds.com/channels`} />
 
 
 

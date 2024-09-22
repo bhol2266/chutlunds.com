@@ -91,7 +91,7 @@ function Search({ tags }) {
                 <meta name="twitter:title" content="Most popular and trending porn searches- Chutlunds" />
                 <meta name="twitter:description" content="Most popular and trending porn searches - HD porn videos and adult movies- Chutlunds" />
                 <meta name="twitter:card" content="summary_large_image" />
-                <link rel="canonical" href={`https://chutlunds.com/search`} />
+                <link rel="canonical" href={`https://www.chutlunds.com/search`} />
 
             </Head>
 

@@ -65,7 +65,7 @@ function Index() {
                 <meta property="og:description" content="  Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
                 <meta name="twitter:title" content="Chutlunds Categories: Find Your Favorite Free Hardcore Porn Videos" />
                 <meta name="twitter:description" content=" Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
-                <link rel="canonical" href={`https://chutlunds.com/category`} />
+                <link rel="canonical" href={`https://www.chutlunds.com/category`} />
 
 
 

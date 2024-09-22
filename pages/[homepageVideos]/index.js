@@ -38,7 +38,7 @@ function HomepageVideos({ video_collection, pages }) {
                 <meta name="twitter:title" content={`${capitalizeFirstLetter(homepageVideos)} Porn Videos`} />
                 <meta name="twitter:description" content={`${capitalizeFirstLetter(homepageVideos)} Porn Videos! - blowjob, japanese, big ass Porn - SpankBang`} />
                 <meta name="twitter:card" content="summary_large_image" />
-                <link rel="canonical" href={`https://chutlunds.com/${homepageVideos}/`} />
+                <link rel="canonical" href={`https://www.chutlunds.com/${homepageVideos}/`} />
 
             </Head>
             <Header keyword={homepageVideos} pageNumber={currentPageNumberURL} />

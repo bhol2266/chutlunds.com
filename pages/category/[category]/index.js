@@ -41,7 +41,7 @@ function Category({ video_collection, pages }) {
         <meta property="og:description" content={`Watch free collection of ${capitalizeFirstLetter(category)} sex videos, ${category} porn videos, latest ${category} videos in high quality only on Chutlunds.`} />
         <meta name="twitter:title" content={`${capitalizeFirstLetter(category)} sex videos | Chutlunds`} />
         <meta name="twitter:description" content={`Watch free collection of ${capitalizeFirstLetter(category)} sex videos, ${category} porn videos, latest ${category} videos in high quality only on Chutlunds.`} />
-        <link rel="canonical" href={`https://chutlunds.com/category/${category}`} />
+        <link rel="canonical" href={`https://www.chutlunds.com/category/${category}`} />
       </Head>
 
 
