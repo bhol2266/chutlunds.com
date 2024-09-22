@@ -208,7 +208,7 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
                 <div className='basicMargin'>
 
 
-                    <div className="flex justify-between py-2 text-sm md:text-lg   ">
+                    <div className="flex justify-between pt-2 text-sm md:text-lg   ">
                         <div className="flex justify-around items-center space-x-2 md:space-x-4 md:text-lg ">
 
                             <div className='flex items-center space-x-1'>
@@ -353,7 +353,7 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
 
                     {/* ScreenShots  */}
 
-                    <div onClick={openScreenShotLayout} className='2xl:w-1/4 lg:w-1/3 sm:w-1/2 my-1 flex items-center rounded-[15px] hover:bg-gray-300 text-white border-gray-400 border-[1px]  justify-between py-0.5 px-2 pr-3   rounded cursor-pointer    md:space-x-4'>
+                    <div onClick={openScreenShotLayout} className='2xl:w-1/4 lg:w-1/3 sm:w-1/2  flex items-center rounded-[15px] hover:bg-gray-300 text-white border-gray-400 border-[1px]  justify-between py-0.5 px-2 pr-3   rounded cursor-pointer    md:space-x-4'>
 
                         <div className='flex items-center'>
 
