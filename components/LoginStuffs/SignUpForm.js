@@ -44,23 +44,22 @@ export const SignUpForm = () => {
 
 
     const SignInButton = async (auth_provider) => {
-        // signIn(auth_provider);
-        // router.push('/api/auth/google')
+     
         var authUrl = ""
         const scope = 'profile email';
 
         const currentHost = window.location.host;
-        if (currentHost == "localhost:3000") {
+        if (currentHost.includes("localhost:3000")) {
             const REDIRECT_URI1 = "http://localhost:3000/api/auth/callback"
             authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI1}&scope=${scope}`;
 
         }
-        if (currentHost == "chutlunds.com") {
+        if (currentHost.includes("chutlunds.com")) {
             const REDIRECT_URI2 = "https://www.chutlunds.com/api/auth/chutlunds/callback"
             authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI2}&scope=${scope}`;
 
         }
-        if (currentHost == "chutlunds2.com") {
+        if (currentHost.includes("chutlunds2.com")) {
             const REDIRECT_URI3 = "https://www.chutlunds2.com/api/auth/chutlunds2/callback"
             authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI3}&scope=${scope}`;
 
