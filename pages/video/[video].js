@@ -11,10 +11,14 @@ import VideoPlayer from '../../components/VideoPlayer';
 import Videos from '../../components/Videos';
 import { BeatLoader } from 'react-spinners';
 import bannedUrls from '../../bannedUrls';
+import { useMediaQuery } from 'react-responsive';
 
 const Videoplayer = () => {
     const router = useRouter();
     const { video } = router.query;
+
+    const is3xl = useMediaQuery({ minWidth: 1000 }); // Adjust according to your breakpoint
+    const numberOfSide_VideosToShow = is3xl ? 4 : 3;
 
     const [spinnerLoading, setSpinnerLoading] = useState(true);
     const [serverError, setServerError] = useState(false);
@@ -192,14 +196,16 @@ const Videoplayer = () => {
                             pornstar={pornstar}
                             positionsArray={positionsArray}
                             loggedIn={loggedIn}
-                            relatedVideos={relatedVideos.slice(relatedVideos.length - 5, relatedVideos.length - 1)}
+                            relatedVideos={relatedVideos.slice(0, 4)}
 
                         />
                     </div>
 
                     <p className='font-bold text-semiblack text-[18px] lg:text-[24px] font-manrope basicMargin mt-3'>More videos like this</p>
 
-                    <Videos data={relatedVideos} />
+                    {is3xl && <Videos data={relatedVideos.slice(4, relatedVideos.length)} />}
+                    {!is3xl && <Videos data={relatedVideos} />}
+
                     {latestVideo.length !== 0 && <Videos data={latestVideo} />}
 
                     <BannerAds />

@@ -172,7 +172,7 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
                     }}
                 />
 
-                <div id="mainContainer" className={`w-fullrelative aspect-video object-contain  group  shadow-2xl  lg:ml-4`}>
+                <div id="mainContainer" className={`max-w-full relative aspect-video object-contain  group  shadow-2xl  lg:ml-4`}>
                     <video className={`rounded w-full h-full cursor-pointer`} id="contentElement" onContextMenu={(e) => e.preventDefault()} ref={videoPlayerRef} poster={video_details.thumbnail} width="852" height="480" controls controlsList="nodownload"
                     >
                         <source src={VideoSrc} type="video/mp4" />
