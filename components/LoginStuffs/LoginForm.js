@@ -7,12 +7,11 @@ import { IoIosCloseCircleOutline } from "react-icons/io"
 import ClipLoader from "react-spinners/ClipLoader"
 import { UserAuth } from "../../context/AuthContext"
 
-
 export const LoginForm = () => {
 
     const [message, setmessage] = useState('');
     const [loading, setloading] = useState(false);
-
+    const router = useRouter()
 
     const { setSignUpFormVisible, setLoginFormVisible, setPasswordResetVisible, setLoginModalVisible, setOTPFormVisible, setEmailOTP, setreceivedOTP } = UserAuth();
 
@@ -39,7 +38,9 @@ export const LoginForm = () => {
             authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI3}&scope=${scope}`;
 
         }
-        window.location.href = authUrl;
+
+
+        router.push(authUrl)
 
     }
 
@@ -67,7 +68,7 @@ export const LoginForm = () => {
             });
 
             const res = await rawResponse.json();
-    
+
 
             if (res.message === 'User not found') {
                 setmessage('Email not registered!!')
