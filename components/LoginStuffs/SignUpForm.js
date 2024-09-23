@@ -65,7 +65,7 @@ export const SignUpForm = () => {
             authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI3}&scope=${scope}`;
 
         }
-        router.push(authUrl)
+        window.location.href = authUrl;
 
     }
 
@@ -103,7 +103,7 @@ export const SignUpForm = () => {
 
             const res = await rawResponse.json();
             console.log(res);
-            
+
 
             if (res.message === 'Already Resgistered !') {
                 setmessage('Already Resgistered !')
