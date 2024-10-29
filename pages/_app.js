@@ -14,7 +14,7 @@ import '../styles/nProgress.css';
 import { BannedUrls } from '../JsonData/BannedUrls';
 import { useEffect } from 'react';
 import Outstreams from '../components/Ads/Outstream';
-
+ 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const currentRoute = router.pathname;
