@@ -35,7 +35,6 @@ export default function Home() {
 
     const handleCopy = (text) => {
         navigator.clipboard.writeText(text);
-        alert('Copied to clipboard!');
     };
 
     const handleReset = () => {
