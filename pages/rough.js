@@ -1,18 +1,16 @@
-import Script from "next/script";
+import Script from 'next/script';
+import ClickAduBannerAds from '../components/Ads/ClickAduBannerAds';
 
 function rough() {
     return (
 
-        <div className="m-2 border-2 border-gray-400 p-2">
-            {/* <a href="/rough">
-                <button>click me</button>
-            </a> */}
+        <div className="w-screen h-screen m-auto">
+
+            <ClickAduBannerAds />
 
 
-            {/* <Script
-                src="/PopunderCode.js"
-                strategy="beforeInteractive"
-            /> */}
+
+
         </div>
 
     )

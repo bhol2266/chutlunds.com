@@ -14,7 +14,8 @@ import '../styles/nProgress.css';
 import { BannedUrls } from '../JsonData/BannedUrls';
 import { useEffect } from 'react';
 import Outstreams from '../components/Ads/Outstream';
- 
+import ClickAduBannerAds from '../components/Ads/ClickAduBannerAds';
+
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const currentRoute = router.pathname;
@@ -96,6 +97,8 @@ function MyApp({ Component, pageProps }) {
             <Outstreams />
             <Outstreams />
             <BannerAds />
+            <ClickAduBannerAds />
+            <ClickAduBannerAds />
           </div>
           {currentRoute != "/membership" && <Footer />}
 
