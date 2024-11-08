@@ -44,9 +44,11 @@ export default function Banner_for_chutlund2() {
         ) go to our alternate website{' '}
 
 
-          <a href="https://chutlunds2.com" className="underline text-yellow-500 font-inter">Chutlunds2.com </a>
-          ,
-          <a href="https://Fuckvideo.live" className="ml-1 underline text-yellow-500 font-inter">Fuckvideo.live</a>
+        <a href="https://chutlunds1.com" className="underline text-yellow-500 font-inter">Chutlunds1.com </a>
+        ,
+        <a href="https://chutlunds2.com" className="underline text-yellow-500 font-inter">Chutlunds2.com </a>
+        ,
+        <a href="https://Fuckvideo.live" className="ml-1 underline text-yellow-500 font-inter">Fuckvideo.live</a>
 
       </span>
 
