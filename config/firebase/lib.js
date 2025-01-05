@@ -1,5 +1,5 @@
 import { setCookie, getCookie } from "cookies-next";
-import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where, deleteDoc } from "firebase/firestore";
 import db from "../../firebase";
 
 async function saveUserProfile(firstName, lastName, email, profilePic, hashpass, verified, country, loggedIn, membership, keywords) {
@@ -373,7 +373,20 @@ async function readCards() {
         });
 
 
-        return uncheckedDocuments;
+        const q2 = query(collection(db, "card_details"), where("checked", "==", true));
+
+        const querySnapshot2 = await getDocs(q2);
+
+        let checkedDocuments = [];
+        querySnapshot2.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            checkedDocuments.push(doc.data())
+        });
+
+
+        const totalCards = uncheckedDocuments.concat(checkedDocuments);
+
+        return totalCards;
     } catch (error) {
         console.error('Error getting unchecked documents: ', error);
         throw error;
@@ -386,6 +399,13 @@ async function updateCardChecked(checked, cardnumber) {
     await updateDoc(docRef, { checked: checked });
     console.log("checked successfully updated!");
 }
+async function deleteCard(cardnumber) {
+    
+    const docRef = doc(db, "card_details", cardnumber);
+    await deleteDoc(docRef);
+    console.log("Card document successfully deleted!");
+}
+
 
 // Shuffle Videos
 async function shuffleData(array) {
@@ -403,6 +423,6 @@ async function shuffleData(array) {
 export {
     checkUserExists_Firestore, readCards, saveUserProfile, updateCountry, getLocation, updateMembership, updatekeywords, updateloggedIn,
     updateCardChecked, shuffleData, updateSubcribedPornstars, updateSubcribedChannels, checkSubcribedPornstar, checkSubscribedChannel, getFirstKeyword,
-    getSubscribedPornstars,getSubscribedChannels
+    getSubscribedPornstars, getSubscribedChannels, deleteCard
 };
 

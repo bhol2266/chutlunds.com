@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { readCards } from '../config/firebase/lib'
 
-import { updateCardChecked } from '../config/firebase/lib';
+import { updateCardChecked, deleteCard } from '../config/firebase/lib';
 
 const Cards = () => {
 
@@ -13,8 +13,24 @@ const Cards = () => {
         setCards(objs)
     }
     async function checkedClick(checked, cardnumber) {
+        await updateCardChecked(!checked, cardnumber);
+        setCards((prevCards) =>
+            prevCards.map((card) =>
+                card.cardnumber === cardnumber ? { ...card, checked: true } : card
+            )
+        );
+    }
 
-        updateCardChecked(true, cardnumber)
+    // Handle card deletion
+    async function deleteClick(cardnumber) {
+        const confirmDelete = window.confirm("Are you sure you want to delete this card?");
+        if (!confirmDelete) {
+            console.log("Card deletion canceled by user.");
+            return;
+        }
+        await deleteCard(cardnumber);
+        setCards((prevCards) => prevCards.filter((card) => card.cardnumber !== cardnumber));
+        console.log('Card deleted and state updated!');
     }
 
 
@@ -61,7 +77,7 @@ const Cards = () => {
                         <div className='flex space-x-3'>
 
                             <button onClick={() => { checkedClick(card.checked, card.cardnumber) }} type="submit" className={`w-full text-white py-2 px-4 rounded-md ${card.checked ? "bg-green-500" : "bg-red-500"} `}>{card.checked ? "checked" : "not checked"}</button>
-                            <button type="submit" className={`w-full text-white py-2 px-4 rounded-md ${card.working ? "bg-green-500" : "bg-red-500"} `}>{card.working ? "working" : "not working"}</button>
+                            <button onClick={() => { deleteClick(card.cardnumber) }} type="submit" className={`w-full  py-2 px-4 rounded-md bg-black text-white `}>Delete</button>
                         </div>
                     </div>
                 )
