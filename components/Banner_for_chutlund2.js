@@ -46,7 +46,7 @@ export default function Banner_for_chutlund2() {
 
         <a href="https://MilfyMadness.com" className="underline text-yellow-500 font-inter">MilfyMadness.com </a>
         ,
-        <a href="https://chutlunds3.com" className="ml-1 underline text-yellow-500 font-inter">Fuckvideo.live</a>
+        <a href="https://chutlunds3.com" className="ml-1 underline text-yellow-500 font-inter">chutlunds3.com</a>
 
       </span>
 
