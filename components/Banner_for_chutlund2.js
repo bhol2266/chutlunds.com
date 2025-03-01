@@ -44,7 +44,7 @@ export default function Banner_for_chutlund2() {
         ) go to our alternate website{' '}
 
 
-        <a href="https://chutlunds3.com" className="underline text-yellow-500 font-inter">explicitgalore.com </a>
+        <a href="https://explicitgalore.com" className="underline text-yellow-500 font-inter">explicitgalore.com </a>
         ,
         <a href="https://chutlunds4.com" className="ml-1 underline text-yellow-500 font-inter">chutlunds4.com</a>
 
