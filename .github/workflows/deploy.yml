@@ -28,7 +28,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSHKEY }}
 
-      - name: Deploy to DigitalOcean
+      - name: Deploy to Hostinger VPS
         env:
           HOST: 151.106.120.21
           USERNAME: root
