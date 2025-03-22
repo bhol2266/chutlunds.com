@@ -26,7 +26,7 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.1
         with:
-          ssh-private-key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBI5/qjStAPwsmQvVraSi/7+LEGFVNeLd6h2ARVkpzRd bhola2266@gmail.com
+          ssh-private-key: ${{secret.SSHKEY}}
 
       - name: Deploy to Hostinger VPS
         env:
