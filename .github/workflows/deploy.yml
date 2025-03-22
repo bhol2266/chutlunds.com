@@ -27,7 +27,7 @@ jobs:
 
       - name: Deploy to Hostinger VPS
         env:
-          HOST: 151.106.120.21
+          HOST: ${{ secrets.HOST }}
           USERNAME: root
           TARGET_DIR: /home/nextjs/chutlunds.com
           APP_NAME: chutlunds.com
