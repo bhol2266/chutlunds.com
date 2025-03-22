@@ -1,4 +1,4 @@
-name: Deploy Next.js App
+name:  Deploy Next.js App
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.1
         with:
-          ssh-private-key: ${{ secrets.SSHKEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Deploy to Hostinger VPS
         env:
