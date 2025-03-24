@@ -216,7 +216,7 @@ export async function getStaticProps(context) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            method: 'POST',
+            method: 'GET',
             body: JSON.stringify(parcelData),
         });
 

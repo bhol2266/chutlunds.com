@@ -27,25 +27,25 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
     const [isSubscribed, setIsSubscribed] = useState(false);
 
 
-    useEffect(() => {
+    // useEffect(() => {
   
-        const fetchSubscriptionStatus = async () => {
-            const subscribed = await checkSubscribedChannel(channel_name);
-            setIsSubscribed(subscribed);
-        };
-        fetchSubscriptionStatus();
+    //     const fetchSubscriptionStatus = async () => {
+    //         const subscribed = await checkSubscribedChannel(channel_name);
+    //         setIsSubscribed(subscribed);
+    //     };
+    //     fetchSubscriptionStatus();
 
 
-        const obj = {
-            channelName: channel_name,
-            href: `/${code}/channel/${channelname}/`,
-            imageUrl: `${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${channel_name.trim().toLowerCase().replace(/ /g, "_").replace(/\+/g, "_")}.jpg`
+    //     const obj = {
+    //         channelName: channel_name,
+    //         href: `/${code}/channel/${channelname}/`,
+    //         imageUrl: `${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${channel_name.trim().toLowerCase().replace(/ /g, "_").replace(/\+/g, "_")}.jpg`
 
-        }
+    //     }
 
-        updateViewChannels_Cookie(obj)
+    //     updateViewChannels_Cookie(obj)
 
-    }, [code, channelname]);
+    // }, [code, channelname]);
 
 
     async function clickSubscribe() {
@@ -218,9 +218,7 @@ export async function getStaticProps(context) {
     console.log(`https://spankbang.party/${code}/channel/${channelname}/?o=all`);
 
 
-    if (channelname == "kink+com") {
-
-        const parcelData = { url: `https://spankbang.party/${code}/channel/${channelname}/` };
+    const parcelData = { url: `https://spankbang.party/${code}/channel/${channelname}/` };
         const API_URL = `${process.env.BACKEND_URL}getChannelVideos`;
         const rawResponse = await fetch(API_URL, {
             headers: {
@@ -233,7 +231,9 @@ export async function getStaticProps(context) {
 
         const { finalDataArray, pages, channel_name, channel_subscriber, channel_by, channel_link, collageImages } = await rawResponse.json();
 
-        console.log(pages);
+        console.log("====================================");
+        console.log(API_URL);
+        console.log("====================================");
 
         return {
             props: {
@@ -248,93 +248,6 @@ export async function getStaticProps(context) {
 
             }
         }
-    } else {
-
-
-
-        var finalDataArray = []
-        var pages = []
-        var channel_name = ""
-        var channel_subscriber = ""
-        var channel_by = ""
-        var channel_link = ""
-        var collageImages = []
-
-        const scrape = async (url) => {
-
-
-
-            const response = await fetch(url)
-            const body = await response.text();
-            const $ = cheerio.load(body)
-
-            finalDataArray = Scrape_Video_Item($)
-
-
-            let tempArray = []
-            $('.pagination ul li').each((i, el) => {
-                const data = $(el).text()
-                tempArray.push(data)
-
-            })
-            if (tempArray.length !== 0) {
-                pages.push('1')
-                pages.push(tempArray[tempArray.length - 2])
-            }
-
-
-            channel_link = $('.cta_container a').attr('href');
-
-
-
-
-            $('.channel-info h1').each((i, el) => {
-                channel_name = $(el).text().replace("Channel", "")
-            })
-            $('span em').each((i, el) => {
-                channel_subscriber = $(el).text()
-            })
-
-            const secondSpan = $('.i span').eq(1);
-            channel_by = secondSpan.find("a").text()
-
-
-
-            if (finalDataArray.length > 0) {
-                const maxImages = Math.min(finalDataArray.length, 18);
-
-                // Add up to 18 images from finalDataArray to collageImages
-                for (let index = 0; index < maxImages; index++) {
-                    const { thumbnail } = finalDataArray[index];
-                    collageImages.push(thumbnail);
-                }
-
-                // If we have less than 18 images, randomly repeat to fill up to 18
-                while (collageImages.length < 18) {
-                    const randomIndex = Math.floor(Math.random() * finalDataArray.length);
-                    const { thumbnail } = finalDataArray[randomIndex];
-                    collageImages.push(thumbnail);
-                }
-            }
-
-        }
-
-        await scrape(`https://spankbang.party/${code}/channel/${channelname}/`)
-
-        return {
-            props: {
-                video_collection: finalDataArray,
-                pages: pages,
-                channel_name: channel_name.trim(),
-                channel_subscriber: channel_subscriber,
-                channel_by: channel_by,
-                channel_link: channel_link,
-                collageImages: collageImages,
-                channel_image: channelname
-            }
-        }
-    }
 }
-
 
 
