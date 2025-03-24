@@ -53,13 +53,8 @@ jobs:
             yarn build
 
             # Restart PM2 process
-            if pm2 list | grep -wq "$APP_NAME"; then
-              echo "Restarting application: $APP_NAME"
-              pm2 restart $APP_NAME
-            else
-              echo "Starting application: $APP_NAME"
-              pm2 start yarn --name "$APP_NAME" -- start -p "$PORT"
-            fi
-
+            # Restart PM2 process
+            pm2 restart "$APP_NAME"
+            pm2 start yarn --name "$APP_NAME" -- start -p "$PORT"
             pm2 save
           EOF
