@@ -55,6 +55,5 @@ jobs:
             # Restart PM2 process
             # Restart PM2 process
             pm2 restart "$APP_NAME"
-            pm2 start yarn --name "$APP_NAME" -- start -p "$PORT"
             pm2 save
           EOF
