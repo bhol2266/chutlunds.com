@@ -44,7 +44,8 @@ jobs:
               pm2 restart $APP_NAME
             else
               echo "Starting application: $APP_NAME"
-              pm2 start yarn --name $APP_NAME -- start --port=$PORT
+              pm2 start "yarn start -p 3001" --name chutlunds.com
+
             fi
             pm2 save
           EOF
