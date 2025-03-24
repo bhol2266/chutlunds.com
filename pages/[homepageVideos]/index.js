@@ -95,7 +95,7 @@ export async function getStaticProps(context) {
 
 
         const parcelData = { url: href };
-        const API_URL = `${process.env.BACKEND_URL}getvideos`;
+        const API_URL = `${process.env.BACKEND_URL}getVideos`;
 
         const rawResponse = await fetch(API_URL, {
             headers: {

@@ -85,7 +85,7 @@ export async function getStaticProps(context) {
     if (category == "creampie" && page == "1") {
 
         const parcelData = { url: `https://spankbang.party/s/${category}/${page}/?o=all` };
-        const API_URL = `${process.env.BACKEND_URL}getvideos`;
+        const API_URL = `${process.env.BACKEND_URL}getVideos`;
         const rawResponse = await fetch(API_URL, {
             headers: {
                 'Accept': 'application/json',

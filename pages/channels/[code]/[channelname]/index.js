@@ -215,9 +215,6 @@ export async function getStaticProps(context) {
 
     const { code, channelname } = context.params;
 
-    console.log(`https://spankbang.party/${code}/channel/${channelname}/?o=all`);
-
-
     const parcelData = { url: `https://spankbang.party/${code}/channel/${channelname}/` };
         const API_URL = `${process.env.BACKEND_URL}getChannelVideos`;
         const rawResponse = await fetch(API_URL, {
@@ -230,11 +227,6 @@ export async function getStaticProps(context) {
         });
 
         const { finalDataArray, pages, channel_name, channel_subscriber, channel_by, channel_link, collageImages } = await rawResponse.json();
-
-        console.log("====================================");
-        console.log(API_URL);
-        console.log("====================================");
-
         return {
             props: {
                 video_collection: finalDataArray,
