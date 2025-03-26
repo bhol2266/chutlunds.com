@@ -34,7 +34,7 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps, co
     //by default
     var filter_isPresent = 'Trending'
     var quality_isPresent = 'All'
-    
+
     if (filteredObjsArrayProps) {
 
         for (let index = 0; index < filteredObjsArrayProps.length; index++) {
@@ -97,15 +97,17 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps, co
 
     const clickHandler = (query) => {
 
-      
 
         if (Router.pathname.includes("/query") && filteredObjsArrayProps.length == 0) {
             //when there is no filter go back to index page instead of query page. 
             if (Router.pathname.includes("/channels/")) {
-                router.push(`/channels/${code}/${keyword.toLowerCase()}`)
+                router.push(`/channels/${code}/${keyword.toLowerCase()}`);
+            } else if (Router.pathname.includes("/creators/")) {
+                router.push(`/creators/${code}/${keyword.toLowerCase()}`);
             } else {
-                router.push(`/pornstar/${code}/${keyword.toLowerCase()}`)
+                router.push(`/pornstar/${code}/${keyword.toLowerCase()}`);
             }
+
             return
         }
         setSpinner(true)
@@ -118,8 +120,14 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps, co
                 page: 1,
                 code: code
             }
-        } else {
-
+        } else if (Router.pathname.includes("/creators/")) {
+            var queryObj = {
+                creatorName: keyword.trim(),
+                page: 1,
+                creatorCode: code
+            }
+        }
+        else {
             var queryObj = {
                 pornstar: keyword.trim(),
                 page: 1,
@@ -140,7 +148,11 @@ export default function Header({ keyword, pageNumber, filteredObjsArrayProps, co
         var pathname = ""
         if (Router.pathname.includes("/channels/")) {
             pathname = "/channels/query/"
-        } else {
+        }
+        else if (Router.pathname.includes("/creators/")) {
+            pathname = "/creators/query/"
+        }
+        else {
             pathname = "/pornstar/query/"
         }
 

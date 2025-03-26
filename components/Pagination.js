@@ -4,12 +4,11 @@ import { useEffect, useState } from "react";
 
 
 const Pagination = ({ data }) => {
-
-
+    
     const url = data.url;
     const currentPageNumberURL = data.currentPageNumberURL;
     const pages = data.pages;
-
+    
 
 
     if (pages.length !== 2) {

@@ -27,25 +27,24 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
     const [isSubscribed, setIsSubscribed] = useState(false);
 
 
-    // useEffect(() => {
-  
-    //     const fetchSubscriptionStatus = async () => {
-    //         const subscribed = await checkSubscribedChannel(channel_name);
-    //         setIsSubscribed(subscribed);
-    //     };
-    //     fetchSubscriptionStatus();
+    useEffect(() => {
+        const fetchSubscriptionStatus = async () => {
+            const subscribed = await checkSubscribedChannel(channel_name);
+            setIsSubscribed(subscribed);
+        };
+        fetchSubscriptionStatus();
 
 
-    //     const obj = {
-    //         channelName: channel_name,
-    //         href: `/${code}/channel/${channelname}/`,
-    //         imageUrl: `${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${channel_name.trim().toLowerCase().replace(/ /g, "_").replace(/\+/g, "_")}.jpg`
+        const obj = {
+            channelName: channel_name,
+            href: `/${code}/channel/${channelname}/`,
+            imageUrl: `${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${channel_name.trim().toLowerCase().replace(/ /g, "_").replace(/\+/g, "_")}.jpg`
 
-    //     }
+        }
 
-    //     updateViewChannels_Cookie(obj)
+        updateViewChannels_Cookie(obj)
 
-    // }, [code, channelname]);
+    }, [code, channelname]);
 
 
     async function clickSubscribe() {
@@ -143,13 +142,13 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
                         </div>
 
                         <div className="mt-auto flex flex-col space-y-4">
-                            <Link href={channel_link} rel="nofollow">
-                                <div className="cursor-pointer h-fit flex items-center justify-center space-x-2 border-[1px] border-gray-300 text-semiblack px-3 lg:px-5 p-1.5 rounded-[20px] hover:bg-semiblack hover:text-white group">
+                            <Link legacyBehavior href={channel_link} rel="nofollow">
+                                <a className="cursor-pointer h-fit flex items-center justify-center space-x-2 border-[1px] border-gray-300 text-semiblack px-3 lg:px-5 p-1.5 rounded-[20px] hover:bg-semiblack hover:text-white group">
                                     <LinkIcon className="h-4 lg:h-5 text-semiblack group-hover:text-white" />
                                     <p className="text-sm lg:text-md 2xl:text-lg font-poppins">
                                         Visit
                                     </p>
-                                </div>
+                                </a>
                             </Link>
 
 

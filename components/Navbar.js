@@ -23,6 +23,7 @@ import Link from 'next/link';
 var navigation = [
     { name: 'Home', href: '/', current: true },
     { name: 'Category', href: '/category', current: false },
+    { name: 'Creators', href: '/creators', current: false },
     { name: 'Pornstars', href: '/pornstar', current: false },
     { name: 'Channels', href: '/channels', current: false },
     { name: 'Sex Chat', href: 'https://play.google.com/store/apps/details?id=com.bhola.livevideochat4&hl=en-IN', current: false },

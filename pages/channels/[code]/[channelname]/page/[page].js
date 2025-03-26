@@ -25,13 +25,13 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
     const { code, channelname, page } = router.query
     const currentPageNumberURL = page
 
-    // useEffect(() => {
-    //     const fetchSubscriptionStatus = async () => {
-    //         const subscribed = await checkSubscribedChannel(channel_name);
-    //         setIsSubscribed(subscribed);
-    //     };
-    //     fetchSubscriptionStatus();
-    // }, [code, channelname]);
+    useEffect(() => {
+        const fetchSubscriptionStatus = async () => {
+            const subscribed = await checkSubscribedChannel(channel_name);
+            setIsSubscribed(subscribed);
+        };
+        fetchSubscriptionStatus();
+    }, [code, channelname]);
 
 
 

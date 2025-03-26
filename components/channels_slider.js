@@ -3,7 +3,7 @@ import Link from 'next/link';
 import channelsJSON from "@/JsonData/Channels.json";
 
 function Channels_slider({ trendingChannels, trendingDataType }) {
-
+    
     // Function to normalize channel names
     const normalizeName = (channelName) => channelName.toLowerCase().replace(/ /g, "_");
 

@@ -14,17 +14,19 @@ import Pornstar_slider from '../components/pornstar_slider';
 import Homepage_Title from '../components/Homepage_Title';
 import { getFirstKeyword, getSubscribedChannels, getSubscribedPornstars, updateCountry } from '../config/firebase/lib';
 import { getLanguge } from '../config/getLanguge';
-import { fetchVideos, getViewChannels, getViewPornstars, shuffle } from '../config/utils';
+import { fetchVideos, getViewChannels, getViewCreators, getViewPornstars, shuffle } from '../config/utils';
 import videosContext from '../context/videos/videosContext';
 import Link from "next/link";
+import Creators_slider from "../components/creators_slider";
 
-export default function Home({ video_collection, trendingChannels, tags, trendingCategories, trendingPornstars }) {
+export default function Home({ video_collection, trendingChannels, tags, trendingCategories, trendingPornstars, trendingCreators }) {
   const { currentLocation, setcurrentLocation, viewType, setViewType } = useContext(videosContext);
   const [countryVideos, setcountryVideos] = useState([]);
   const [countryLanguage, setcountryLanguage] = useState('');
   const [lang, setLang] = useState('');
   const [TrendingChannels, setTrendingChannels] = useState(trendingChannels);
   const [TrendingPornstars, setTrendingPornstars] = useState(trendingPornstars);
+  const [TrendingCreators, setTrendingCreators] = useState(trendingCreators);
 
 
   const [recommendedVideos, setRecommendedVideos] = useState([]);
@@ -105,14 +107,14 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
   }
 
-  async function checkSubscribed_Channels_Pornstars() {
+  async function checkSubscribed_Channels_Pornstars_Creators() {
 
 
 
     const viewchannels = getViewChannels();
     const viewPornstars = getViewPornstars();
+    const viewCreators = getViewCreators();
 
-    console.log(viewchannels);
 
 
     if (viewchannels) {
@@ -147,10 +149,23 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
           return true; // Keep this channel
         }
       });
-
-
-
       setTrendingPornstars(uniquePornstars);
+    }
+
+    if (viewCreators) {
+      const combinedCreators = [...viewCreators, ...trendingCreators];
+      const seen = new Set();
+
+      // Filter out duplicates, keeping the first occurrence
+      const uniqueCreators = combinedCreators.filter(creator => {
+        if (seen.has(creator.creatorName)) {
+          return false; // Skip this channel if it's already seen
+        } else {
+          seen.add(creator.creatorName); // Add to seen Set
+          return true; // Keep this channel
+        }
+      });
+      setTrendingCreators(uniqueCreators);
     }
 
   }
@@ -167,7 +182,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
     fetchLocation();
     createRecommendedVideos()
 
-    checkSubscribed_Channels_Pornstars()
+    checkSubscribed_Channels_Pornstars_Creators()
   }, []);
 
 
@@ -209,7 +224,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
       <div className="w-full overflow-x-auto whitespace-nowrap py-2 scrollbar-hide md:hidden select-none">
         {tags.map((tag, index) => (
           <Link legacyBehavior key={tag.tag} href={`/search/${tag.tag.trim()}`} passHref>
-            <a className="bg-gray-200 text-semiblack px-3 py-1.5 rounded-lg m-1 ml-2 inline-block text-sm hover:bg-gray-300">
+            <a className="bg-gray-200  text-semiblack px-3 py-1.5 rounded-lg m-1 ml-2 text-sm hover:bg-gray-300">
               {tag.tag}
             </a>
           </Link>
@@ -239,7 +254,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
           {countryVideos.length !== 0 && (
             <>
-              <div className="flex items-center space-x-2 items-center basicMargin ">
+              <div className="flex items-center space-x-2  basicMargin ">
                 <Homepage_Title title={`Popular Porn Videos in ${currentLocation.countryCode}`} />
 
                 <ReactCountryFlag
@@ -288,6 +303,11 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
             <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Popular Videos" />
           </a>
 
+          <div className='md:hidden'>
+            <Homepage_Title title="Trending Creators" />
+            <Creators_slider trendingCreators={TrendingCreators} />
+          </div>
+
           <Homepage_Title title="New Videos" />
           <Videos data={video_collection[4].finalDataArray} />
           <a href={`/new_videos`}>
@@ -302,10 +322,12 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
         </div>
       </main>
 
+
+
       <footer>
-        <a className='' href="https://www.fuckvideo.live/">.</a>
-        <a className='' href="https://www.chutlunds.com/">.</a>
-        <a className='' href="https://www.desikahaniya.in/">.</a>
+        <a href="https://www.fuckvideo.live/">.</a>
+        <a href="https://www.chutlunds.com/">.</a>
+        <a href="https://www.desikahaniya.in/">.</a>
         <BannerAds />
 
       </footer>
@@ -328,11 +350,13 @@ export async function getStaticProps({ req, res }) {
     body: JSON.stringify(parcelData),
   });
   const ress = await rawResponse.json();
+  var trendingCreators =[]
 
   return {
     props: {
       video_collection: ress.result.finalDataArray_Array,
       trendingChannels: ress.result.trendingChannels,
+      trendingCreators: trendingCreators,
       tags: ress.result.tags,
       trendingCategories: ress.result.trendingCategories,
       trendingPornstars: ress.result.trendingPornstars,
