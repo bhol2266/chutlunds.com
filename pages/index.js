@@ -305,7 +305,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
 
           <div className='md:hidden'>
             <Homepage_Title title="Trending Creators" />
-            <Creators_slider trendingCreators={TrendingCreators} />
+            {/* <Creators_slider trendingCreators={TrendingCreators} /> */}
           </div>
 
           <Homepage_Title title="New Videos" />
