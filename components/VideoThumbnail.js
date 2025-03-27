@@ -96,7 +96,7 @@ function VideoThumbnail({ details, type }) {
                     <div className={`relative w-full overflow-hidden ${viewType === "grid" ? "aspect-custom md:aspect-video" : "aspect-video"}`}>
                         <img
                             className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ease-in-out"
-                            src={video.thumbnail}
+                            src={video.thumbnail+"dsafa"}
                             alt="Video Thumbnail"
                         />
 

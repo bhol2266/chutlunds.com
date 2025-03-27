@@ -28,78 +28,8 @@ function shuffle(array) {
 
 function Index({ finalDataArray, pages }) {
 
-
-
     const router = useRouter();
     const { page } = router.query;
-
-    const [data, setdata] = useState(channels.slice(0, 60))
-
-
-    // useEffect(() => {
-    //     let index = 0
-
-    //     async function downloadImage(url, name) {
-    //         await fetch(url, {
-    //             method: "GET",
-    //             headers: {}
-    //         })
-    //             .then(response => {
-    //                 response.arrayBuffer().then(function (buffer) {
-    //                     const url = window.URL.createObjectURL(new Blob([buffer]));
-    //                     const link = document.createElement("a");
-    //                     link.href = url;
-    //                     link.setAttribute("download", name); //or any other extension
-    //                     document.body.appendChild(link);
-    //                     link.click();
-
-
-    //                 });
-    //             })
-    //             .catch(err => {
-    //                 console.log(err);
-    //             });
-    //     }
-
-
-    //     // const myInterval = setInterval(() => {
-    //     //     console.log(index);
-    //     //     downloadImage(jsonData[index].url, jsonData[index].name)
-    //     //     if (index === jsonData.length - 1) {
-    //     //         clearInterval(myInterval);
-    //     //     }
-    //     //     index = index + 1
-    //     // }, 1000);
-
-    // }, []);
-
-    const onChangeHandler = (key) => {
-
-
-        if (key.length === 0) {
-            setsuggestedData([])
-
-        }
-        if (key.length > 1) {
-
-            var array = []
-            channels.filter(obj => {
-                if (obj.channel_name.toLowerCase().includes(key.trim().toLowerCase())) {
-                    array.push(obj.channel_name)
-                }
-            })
-            if (array) {
-                if (array.length > 10) {
-                    setsuggestedData(array.slice(0, 9))
-                }
-                else {
-                    setsuggestedData(array)
-                }
-            }
-        }
-
-    }
-
 
 
     const customiseUrl = (channel_href) => {
@@ -140,7 +70,7 @@ function Index({ finalDataArray, pages }) {
                     <p className='text-md md:text-xl  pl-1 pr-1  flex-grow font-inter  text-right text-gray-900 '>{`Page-${page}`}</p>
                 </div>
 
-          
+
 
 
                 <div className={`grid grid-cols-2 sm:grid-cols-3  lg:grid-cols-5  2xl:grid-cols-6 py-3  gap-3 md:gap-5 lg:gap-4`}>
@@ -184,7 +114,7 @@ function Index({ finalDataArray, pages }) {
 
             </div>
 
-            <Pagination data={{ url: `/creators`, currentPageNumberURL: page.toString(), pages: pages }} />
+            <Pagination data={{ url: `/creators`, currentPageNumberURL: page, pages: pages }} />
 
         </div>
     )
@@ -192,6 +122,16 @@ function Index({ finalDataArray, pages }) {
 
 
 export default Index
+
+// export async function getStaticPaths() {
+
+
+//     return {
+//         paths: [{ params: { page: '2' } }],
+//         fallback: true // false or 'blocking'
+//     };
+// }
+
 
 export async function getServerSideProps(context) {
 

@@ -21,14 +21,15 @@ function Index({ video_collection, pages, creatorData, collageImages }) {
 
     const router = useRouter();
 
-    const { creatorCode, creatorName,page } = router.query
+    const { creatorCode, creatorName, page } = router.query
 
     const { setLoginModalVisible } = UserAuth();
-    const currentPageNumberURL = page.toString()
+    const currentPageNumberURL = page
     const [isSubscribed, setIsSubscribed] = useState(false);
 
 
     useEffect(() => {
+        if (!creatorData) return; 
 
         const fetchSubscriptionStatus = async () => {
             const subscribed = await checkSubscribedCreators(creatorData.creatorName);
@@ -217,24 +218,24 @@ function Index({ video_collection, pages, creatorData, collageImages }) {
 export default Index
 
 
-// export async function getStaticPaths() {
-//     return {
-//         paths: [
-//             {
-//                 params: {
-//                     code: 'l3',
-//                     channelname: 'kink+com',
-//                     page: '1'
-//                 }
-//             }
-//         ],
-//         fallback: true // false or 'blocking'
-//     };
-// }
+export async function getStaticPaths() {
+    return {
+        paths: [
+            {
+                params: {
+                    creatorCode: 'e7we',
+                    creatorName: 'kinky+milf',
+                    page: '2'
+                }
+            }
+        ],
+        fallback: true // false or 'blocking'
+    };
+}
 
 
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
 
     const { creatorCode, creatorName, page } = context.params;
 

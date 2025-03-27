@@ -29,6 +29,7 @@ function Index({ video_collection, pages, creatorData, collageImages }) {
 
 
     useEffect(() => {
+        if (!creatorData) return; 
 
         const fetchSubscriptionStatus = async () => {
             const subscribed = await checkSubscribedCreators(creatorData.creatorName);
@@ -46,7 +47,7 @@ function Index({ video_collection, pages, creatorData, collageImages }) {
 
         updateViewCreators_Cookie(obj)
 
-    }, [creatorCode, creatorName]);
+    }, [creatorCode, creatorName, creatorData]);
 
 
     async function clickSubscribe() {
@@ -217,25 +218,25 @@ function Index({ video_collection, pages, creatorData, collageImages }) {
 export default Index
 
 
-// export async function getStaticPaths() {
-//     return {
-//         paths: [
-//             {
-//                 params: {
-//                     code: 'l3',
-//                     channelname: 'kink+com'
-//                 }
-//             }
-//         ],
-//         fallback: true // false or 'blocking'
-//     };
-// }
+export async function getStaticPaths() {
+    return {
+        paths: [
+            {
+                params: {
+                    creatorCode: 'e7we',
+                    creatorName: 'kinky+milf'
+                }
+            }
+        ],
+        fallback: true // false or 'blocking'
+    };
+}
 
 
 
 
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
 
     const { creatorCode, creatorName } = context.params;
 
@@ -251,6 +252,7 @@ export async function getServerSideProps(context) {
     });
 
     const { finalDataArray, pages, collageImages, creatorData } = await rawResponse.json();
+
 
 
     return {

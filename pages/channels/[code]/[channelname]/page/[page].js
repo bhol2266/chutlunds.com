@@ -182,24 +182,24 @@ function Index({ video_collection, pages, channel_name, channel_link, collageIma
 export default Index
 
 
-// export async function getStaticPaths() {
-//     return {
-//         paths: [
-//             {
-//                 params: {
-//                     code: 'l3',
-//                     channelname: 'kink+com',
-//                     page: '1'
-//                 }
-//             }
-//         ],
-//         fallback: true // false or 'blocking'
-//     };
-// }
+export async function getStaticPaths() {
+    return {
+        paths: [
+            {
+                params: {
+                    code: 'l3',
+                    channelname: 'kink+com',
+                    page: '1'
+                }
+            }
+        ],
+        fallback: true // false or 'blocking'
+    };
+}
 
 
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
 
 
 
