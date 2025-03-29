@@ -32,13 +32,13 @@ function Videos({ data, type }) {
 
     return (
         <div className="h-fit  basicMargin">
-            <div className={`grid py-1 gap-2  3xl:gap-4   ${viewType === 'horizontal' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  3xl:grid-cols-5' : 'grid-cols-2 lg:grid-cols-4  3xl:grid-cols-5'}`}>
+            {/* <div className={`grid py-1 gap-2  3xl:gap-4   ${viewType === 'horizontal' ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  3xl:grid-cols-5' : 'grid-cols-2 lg:grid-cols-4  3xl:grid-cols-5'}`}>
                 {
                     data.map(video => (
                         <VideoThumbnail key={video.thumbnail} details={video} type={type} />
                     ))
                 }
-            </div>
+            </div> */}
 
             {data.length === 0 &&
                 <div className="flex flex-col justify-center items-center space-y-2 w-full my-20">

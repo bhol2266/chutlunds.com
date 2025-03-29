@@ -3,21 +3,25 @@ import Link from 'next/link';
 
 function Creators_slider({ trendingCreators }) {
 
+
+
     return (
         <div className='flex items-start space-x-1 text-color overflow-x-scroll scrollbar-hide md:hidden my-4 '>
             {trendingCreators.map(creatorObj => {
-             
-                const creatorCode = creatorObj.creatorHref.substring(1, creatorObj.creatorHref.indexOf("/creator"))
-                const creatorName_href = creatorObj.creatorHref.substring(creatorObj.creatorHref.indexOf("/creator/") + 9, creatorObj.creatorHref.length - 1)
-                
-                
+
+
+                const creatorCode = creatorObj.href.substring(1, creatorObj.href.indexOf("/creators"))
+                const creatorName = creatorObj.href.substring(creatorObj.href.indexOf("/creators/") + 10, creatorObj.href.length - 1)
+
+
+
                 return (
-                    <Link href={`/creators/${creatorCode}/${creatorName_href}`} key={creatorObj.creatorImage}>
+                    <Link href={`/creators/${creatorCode}/${creatorName}`} key={creatorObj.imageUrl}>
                         <div className='flex flex-col justify-center items-center mx-1'>
                             <div className='w-[90px]'>
                                 <img
                                     className='shadow-md rounded-full object-cover aspect-square'
-                                    src={creatorObj.creatorImage}
+                                    src={creatorObj.imageUrl}
                                     loading="lazy"
                                     alt={creatorObj.creatorName}
                                 />

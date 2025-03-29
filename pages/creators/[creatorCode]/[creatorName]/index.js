@@ -1,6 +1,4 @@
-import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';
 import { LinkIcon, PlusIcon } from '@heroicons/react/outline';
-import * as cheerio from 'cheerio';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from "next/router";
@@ -29,7 +27,7 @@ function Index({ video_collection, pages, creatorData, collageImages }) {
 
 
     useEffect(() => {
-        if (!creatorData) return; 
+        if (!creatorData) return;
 
         const fetchSubscriptionStatus = async () => {
             const subscribed = await checkSubscribedCreators(creatorData.creatorName);
@@ -112,7 +110,7 @@ function Index({ video_collection, pages, creatorData, collageImages }) {
 
             <div>
 
-                <div className="relative h-[240px] sm:h-[290px] md:h-[260px] lg:h-[290px] xl:h-[300px] 2xl:h-[350px] 3xl:h-[370px]">
+                <div className="-mt-2 relative h-[240px] sm:h-[290px] md:h-[260px] lg:h-[290px] xl:h-[300px] 2xl:h-[350px] 3xl:h-[370px]">
                     <div>
 
                         <div className="grid grid-cols-6 md:grid-cols-9 ">
@@ -155,7 +153,7 @@ function Index({ video_collection, pages, creatorData, collageImages }) {
                     <div className=" absolute flex top-[60px] sm:top-[130px] md:top-[50px] lg:top-[50px] xl:top-[80px] 2xl:top-[120px] 3xl:top-[120px]  left-[10px] items-b justify-between w-[calc(100%-20px)]">
                         <div>
                             <img
-                                className="object-cover w-36 aspect-[9/10] lg:w-44  rounded-[15px] border-[1px] border-gray-200"
+                                className=" w-36 aspect-[9/10] lg:w-44  rounded-[15px] border-[1px] border-gray-200"
                                 src={creatorData.creatorImage}
                                 alt={creatorData.creatorName}
                                 loading="lazy"
@@ -169,14 +167,16 @@ function Index({ video_collection, pages, creatorData, collageImages }) {
 
 
                         <div className="mt-auto flex flex-col space-y-4 ">
-                            <Link href={creatorData.creatorHref} rel="nofollow">
-                                <div className="cursor-pointer h-fit flex items-center justify-center space-x-2 border-[1px] border-gray-300 text-semiblack px-3 lg:px-5 p-1.5 rounded-[20px] hover:bg-semiblack hover:text-white group">
-                                    <LinkIcon className="h-4 lg:h-5 text-semiblack group-hover:text-white" />
-                                    <p className="text-sm lg:text-md 2xl:text-lg font-poppins">
-                                        Visit
-                                    </p>
-                                </div>
-                            </Link>
+                            {creatorData.creatorHref &&
+                                <Link href={creatorData.creatorHref} rel="nofollow">
+                                    <div className="cursor-pointer h-fit flex items-center justify-center space-x-2 border-[1px] border-gray-300 text-semiblack px-3 lg:px-5 p-1.5 rounded-[20px] hover:bg-semiblack hover:text-white group">
+                                        <LinkIcon className="h-4 lg:h-5 text-semiblack group-hover:text-white" />
+                                        <p className="text-sm lg:text-md 2xl:text-lg font-poppins">
+                                            Visit
+                                        </p>
+                                    </div>
+                                </Link>
+                            }
 
 
                             <div onClick={() => { clickSubscribe() }} className={` ${isSubscribed ? "bg-green-500  hover:bg-green-600" : "bg-red-500  hover:bg-red-600"} w-36 lg:w-44 mt-auto cursor-pointer h-fit flex items-center justify-center space-x-2 shadow-md text-white  p-1.5 rounded-[20px]`}>

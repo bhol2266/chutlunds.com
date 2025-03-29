@@ -26,7 +26,7 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
   const [lang, setLang] = useState('');
   const [TrendingChannels, setTrendingChannels] = useState(trendingChannels);
   const [TrendingPornstars, setTrendingPornstars] = useState(trendingPornstars);
-  const [TrendingCreators, setTrendingCreators] = useState(trendingCreators);
+  const [TrendingCreators, setTrendingCreators] = useState([]);
 
 
   const [recommendedVideos, setRecommendedVideos] = useState([]);
@@ -303,10 +303,12 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
             <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Popular Videos" />
           </a>
 
-          <div className='md:hidden'>
-            <Homepage_Title title="Trending Creators" />
-            {/* <Creators_slider trendingCreators={TrendingCreators} /> */}
-          </div>
+          {TrendingCreators &&
+            <div className='md:hidden'>
+              <Homepage_Title title="Trending Creators" />
+              <Creators_slider trendingCreators={TrendingCreators} />
+            </div>
+          }
 
           <Homepage_Title title="New Videos" />
           <Videos data={video_collection[4].finalDataArray} />
@@ -350,7 +352,7 @@ export async function getStaticProps({ req, res }) {
     body: JSON.stringify(parcelData),
   });
   const ress = await rawResponse.json();
-  var trendingCreators =[]
+  var trendingCreators = []
 
   return {
     props: {

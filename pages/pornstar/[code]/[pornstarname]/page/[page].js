@@ -26,7 +26,7 @@ function Index({ video_collection, pages, pornstarInformation, collageImages }) 
     const [isSubscribed, setIsSubscribed] = useState(false);
 
     useEffect(() => {
-        if (!isReady) return;
+        if (!pornstarname) return;
 
         const fetchSubscriptionStatus = async () => {
             const subscribed = await checkSubcribedPornstar(pornstarname);
@@ -93,7 +93,7 @@ function Index({ video_collection, pages, pornstarInformation, collageImages }) 
 
             <div>
 
-                <div className="relative h-[240px] sm:h-[290px] md:h-[260px] lg:h-[290px] xl:h-[300px] 2xl:h-[350px] 3xl:h-[370px]">
+                <div className="-mt-2 mb-6 relative h-[240px] sm:h-[290px] md:h-[260px] lg:h-[290px] xl:h-[300px] 2xl:h-[350px] 3xl:h-[370px]">
                     <div>
 
                         <div className="grid grid-cols-6 md:grid-cols-9 ">
