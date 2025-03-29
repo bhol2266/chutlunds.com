@@ -121,7 +121,7 @@ function VideoThumbnail({ details, type }) {
                         {video.title}
                     </span>
 
-                    <div className="flex items-center justify-start w-full pl-0.5 sm:pl-1 md:pb-2 lg:pl-2 font-arial -mt-1 lg:-mt-1.5">
+                    <div className="flex items-center justify-start w-full pl-0.5 sm:pl-1 md:pb-2 lg:pl-2 font-arial -mt-[6px] lg:-mt-1.5">
                         <div className="flex items-center">
                             <p className="text-[13px] md:text-[15px] xl:text-[16px] text-gray-400 font-inter">{video.views} Views</p>
                         </div>
@@ -131,7 +131,7 @@ function VideoThumbnail({ details, type }) {
                         </div>
 
                         {video.channelName !== "" && (
-                            <div className="hidden sm:flex items-center ml-2">
+                            <div className="hidden md:flex items-center ml-2">
                                 {video.refrenceLinkType === "channel" && <PiTelevisionSimple className="icon w-[15px] h-[15px] xl:w-[25px] xl:h-[25px] text-blue-600" />}
                                 {video.refrenceLinkType === "pornstar" && <GiFemaleLegs className="icon w-[15px] h-[15px] xl:w-[25px] xl:h-[25px] text-pink-600" />}
                                 {video.refrenceLinkType === "creator" && <FaUserCheck className="icon w-[16px] h-[16px] text-gray-600" />}
@@ -144,6 +144,20 @@ function VideoThumbnail({ details, type }) {
                             </div>
                         )}
                     </div>
+                    
+                    {video.channelName !== "" && (
+                            <div className="md:hidden flex items-center -mt-[5px]">
+                                {video.refrenceLinkType === "channel" && <PiTelevisionSimple className="icon w-[15px] h-[15px] xl:w-[25px] xl:h-[25px] text-blue-600 mt-[1px]" />}
+                                {video.refrenceLinkType === "pornstar" && <GiFemaleLegs className="icon w-[15px] h-[15px] xl:w-[25px] xl:h-[25px] text-pink-600" />}
+                                {video.refrenceLinkType === "creator" && <FaUserCheck className="icon w-[16px] h-[16px] text-gray-600" />}
+
+                                <a href={customiseUrl(video.channelHref)} onClick={onClickHandler} data-title={video.title}>
+                                    <span className={`${video.refrenceLinkType === "pornstar" ? "text-pink-600" : video.refrenceLinkType === "channel" ? "text-blue-600" : "text-gray-600"} text-[13px] font-inter underline`}>
+                                        {video.refrenceLinkType === "search" ? `#${video.channelName}` : video.channelName}
+                                    </span>
+                                </a>
+                            </div>
+                        )}
                 </div>
 
                 <PopunderAds />
