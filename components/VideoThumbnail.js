@@ -136,11 +136,11 @@ function VideoThumbnail({ details, type }) {
                                 {video.refrenceLinkType === "pornstar" && <GiFemaleLegs className="icon w-[15px] h-[15px] xl:w-[25px] xl:h-[25px] text-pink-600" />}
                                 {video.refrenceLinkType === "creator" && <FaUserCheck className="icon w-[16px] h-[16px] text-gray-600" />}
 
-                                <a href={customiseUrl(video.channelHref)} onClick={onClickHandler} data-title={video.title}>
+                                <Link href={customiseUrl(video.channelHref)} onClick={onClickHandler} data-title={video.title}>
                                     <span className={`${video.refrenceLinkType === "pornstar" ? "text-pink-600" : video.refrenceLinkType === "channel" ? "text-blue-600" : "text-gray-600"} text-[13px] font-inter underline`}>
                                         {video.refrenceLinkType === "search" ? `#${video.channelName}` : video.channelName}
                                     </span>
-                                </a>
+                                </Link>
                             </div>
                         )}
                     </div>
@@ -151,11 +151,11 @@ function VideoThumbnail({ details, type }) {
                                 {video.refrenceLinkType === "pornstar" && <GiFemaleLegs className="icon w-[15px] h-[15px] xl:w-[25px] xl:h-[25px] text-pink-600" />}
                                 {video.refrenceLinkType === "creator" && <FaUserCheck className="icon w-[16px] h-[16px] text-gray-600" />}
 
-                                <a href={customiseUrl(video.channelHref)} onClick={onClickHandler} data-title={video.title}>
+                                <Link href={customiseUrl(video.channelHref)} onClick={onClickHandler} data-title={video.title}>
                                     <span className={`${video.refrenceLinkType === "pornstar" ? "text-pink-600" : video.refrenceLinkType === "channel" ? "text-blue-600" : "text-gray-600"} text-[13px] font-inter underline`}>
                                         {video.refrenceLinkType === "search" ? `#${video.channelName}` : video.channelName}
                                     </span>
-                                </a>
+                                </Link>
                             </div>
                         )}
                 </div>
