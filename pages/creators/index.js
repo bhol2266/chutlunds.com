@@ -138,7 +138,7 @@ function Index({ finalDataArray, pages }) {
                 <PopunderAds />
 
                 <div className='flex items-center md:pr-10 pt-2 my-1  md:my-2 pl-1'>
-                    <p className=' mt-4 mb-2 lg:mb-4 2xl:my-6 text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium w-fit border-b-[3px] border-[#FFBB00]'>All Creators</p>
+                    <p className=' mt-4 mb-2 lg:mb-4 2xl:my-6 text-left lg:text-left  text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium  border-b-[3px] border-[#FFBB00]'>All Creators</p>
 
                     <p className='text-md md:text-xl  pl-1 pr-1  flex-grow font-inter  text-right text-gray-900 '>{`Page-1`}</p>
                 </div>
