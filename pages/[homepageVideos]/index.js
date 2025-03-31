@@ -91,42 +91,24 @@ export async function getStaticProps(context) {
             break;
     }
 
-    if (homepageVideos == "trending") {
+    const parcelData = { url: href };
+    const API_URL = `${process.env.BACKEND_URL}getVideos`;
 
+    const rawResponse = await fetch(API_URL, {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(parcelData),
+    });
 
-        const parcelData = { url: href };
-        const API_URL = `${process.env.BACKEND_URL}getVideos`;
+    const { finalDataArray, pages } = await rawResponse.json();
 
-        const rawResponse = await fetch(API_URL, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            method: 'POST',
-            body: JSON.stringify(parcelData),
-        });
-
-        const { finalDataArray, pages } = await rawResponse.json();
-
-        return {
-            props: {
-                video_collection: finalDataArray,
-                pages: pages
-            }
-        };
-    } else {
-
-
-        const obj = await scrapeVideos(href)
-        const finalDataArray = obj.finalDataArray
-        const pages = obj.pages
-
-        return {
-            props: {
-                video_collection: finalDataArray,
-                pages: pages
-            }
+    return {
+        props: {
+            video_collection: finalDataArray,
+            pages: pages
         }
-
-    }
+    };
 }
