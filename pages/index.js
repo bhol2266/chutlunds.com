@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import ReactCountryFlag from "react-country-flag";
 
 import BannerAds from '../components/Ads/BannerAds';
-import Sidebar from '../components/Sidebar';
+import Pagination from '../components/Pagination';
 import Videos from '../components/Videos';
 import Category_slider from '../components/category_slider';
 import Channels_slider from '../components/channels_slider';
@@ -293,7 +293,12 @@ export default function Home({ finalDataArray, trendingChannels, tags, trendingP
 
 
 
+          <Pagination data={{ url: `/`, currentPageNumberURL: "1", pages: ["1", "58"] }} />
+
         </div>
+
+
+
       </main>
 
 
