@@ -56,41 +56,43 @@ function VideoThumbnail({ details, type }) {
     };
 
     const customiseUrl = (channelHref) => {
+        let returnHref = ""
         if (video.refrenceLinkType == "channel") {
 
             const code = channelHref.substring(1, channelHref.indexOf("/channel"))
             const channelName = channelHref.substring(channelHref.indexOf("/channel/") + 9, channelHref.length - 1)
-            return `/channels/${code}/${channelName}`
+            returnHref = `/channels/${code}/${channelName}`
 
         }
         if (video.refrenceLinkType == "search") {
 
             // const searchkey = channelHref.substring(channelHref.indexOf("/s/") + 4, channelHref.length - 1)
-            return `/search/${video.channelName}` //directly pass the searach key not need to extract from the href
+            returnHref = `/search/${video.channelName}` //directly pass the searach key not need to extract from the href
 
         }
         if (video.refrenceLinkType == "creator") {
 
             const pornstarCode = channelHref.substring(1, channelHref.indexOf("/pornstar"))
             const pornstarName = channelHref.substring(channelHref.indexOf("/pornstar/") + 10, channelHref.length - 1)
-            return `/pornstar/${pornstarCode}/${pornstarName}`
+            returnHref = `/pornstar/${pornstarCode}/${pornstarName}`
 
         }
         if (video.refrenceLinkType == "pornstar") {
             const pornstarCode = channelHref.substring(1, channelHref.indexOf("/pornstar"))
             const pornstarName = channelHref.substring(channelHref.indexOf("/pornstar/") + 10, channelHref.length - 1)
-            return `/pornstar/${pornstarCode}/${pornstarName}`
-
+            returnHref = `/pornstar/${pornstarCode}/${pornstarName}`
 
         }
+        returnHref = returnHref.replace("///", "/").replace("//", "/")
 
+        return returnHref
     }
 
     return (
 
 
         <div>
-            <a className="block" href={`/video/${keyy}*${title}`}  onClick={onClickHandler}>
+            <a className="block" href={`/video/${keyy}*${title}`} onClick={onClickHandler}>
 
                 <div className="animate-fade flex flex-col items-start justify-center cursor-pointer rounded-md overflow-hidden transform transition duration-150 mb-3 2xl:mb-4">
                     <div className={`relative w-full overflow-hidden ${viewType === "grid" ? "aspect-custom md:aspect-video" : "aspect-video"}`}>
@@ -144,20 +146,20 @@ function VideoThumbnail({ details, type }) {
                             </div>
                         )}
                     </div>
-                    
-                    {video.channelName !== "" && (
-                            <div className="md:hidden flex items-center -mt-[5px]">
-                                {video.refrenceLinkType === "channel" && <PiTelevisionSimple className="icon w-[15px] h-[15px] xl:w-[25px] xl:h-[25px] text-blue-600 mt-[1px]" />}
-                                {video.refrenceLinkType === "pornstar" && <GiFemaleLegs className="icon w-[15px] h-[15px] xl:w-[25px] xl:h-[25px] text-pink-600" />}
-                                {video.refrenceLinkType === "creator" && <FaUserCheck className="icon w-[16px] h-[16px] text-gray-600" />}
 
-                                <Link href={customiseUrl(video.channelHref)} onClick={onClickHandler} data-title={video.title}>
-                                    <span className={`${video.refrenceLinkType === "pornstar" ? "text-pink-600" : video.refrenceLinkType === "channel" ? "text-blue-600" : "text-gray-600"} text-[13px] font-inter underline`}>
-                                        {video.refrenceLinkType === "search" ? `#${video.channelName}` : video.channelName}
-                                    </span>
-                                </Link>
-                            </div>
-                        )}
+                    {video.channelName !== "" && (
+                        <div className="md:hidden flex items-center -mt-[5px]">
+                            {video.refrenceLinkType === "channel" && <PiTelevisionSimple className="icon w-[15px] h-[15px] xl:w-[25px] xl:h-[25px] text-blue-600 mt-[1px]" />}
+                            {video.refrenceLinkType === "pornstar" && <GiFemaleLegs className="icon w-[15px] h-[15px] xl:w-[25px] xl:h-[25px] text-pink-600" />}
+                            {video.refrenceLinkType === "creator" && <FaUserCheck className="icon w-[16px] h-[16px] text-gray-600" />}
+
+                            <Link href={customiseUrl(video.channelHref)} onClick={onClickHandler} data-title={video.title}>
+                                <span className={`${video.refrenceLinkType === "pornstar" ? "text-pink-600" : video.refrenceLinkType === "channel" ? "text-blue-600" : "text-gray-600"} text-[13px] font-inter underline`}>
+                                    {video.refrenceLinkType === "search" ? `#${video.channelName}` : video.channelName}
+                                </span>
+                            </Link>
+                        </div>
+                    )}
                 </div>
 
                 <PopunderAds />

@@ -19,7 +19,7 @@ import videosContext from '../context/videos/videosContext';
 import Link from "next/link";
 import Creators_slider from "../components/creators_slider";
 
-export default function Home({ video_collection, trendingChannels, tags, trendingCategories, trendingPornstars, trendingCreators }) {
+export default function Home({ finalDataArray, trendingChannels, tags, trendingPornstars, trendingCreators }) {
   const { currentLocation, setcurrentLocation, viewType, setViewType } = useContext(videosContext);
   const [countryVideos, setcountryVideos] = useState([]);
   const [countryLanguage, setcountryLanguage] = useState('');
@@ -234,11 +234,9 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
       <main className="flex-row flex  mt-1 md:mt-2 md:space-x-3">
         {/* <Sidebar /> */}
         <div className='w-full overflow-hidden'>
-          <h1 className="lg:text-2xl text-lg font-semibold text-gray-800 my-3 font-inter basicMargin w-fit border-b-[3px] border-[#FFBB00]">Trending Free Porn Videos</h1>
-          <Videos data={video_collection[0].finalDataArray} />
-          <a href={`/trending`}>
-            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Trending Videos" />
-          </a>
+          <h1 className="lg:text-2xl text-lg font-semibold text-gray-800 my-3 font-inter basicMargin w-fit border-b-[3px] border-[#FFBB00]">Trending Videos</h1>
+          <Videos data={finalDataArray} />
+
 
 
 
@@ -275,33 +273,16 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
           )}
 
           <div className='md:hidden'>
+            <Homepage_Title title="Trending Categories" />
+            <Category_slider />
+          </div>
+
+          <div className='md:hidden'>
             <Homepage_Title title="Trending Pornstars" />
             <Pornstar_slider trendingPornstars={TrendingPornstars} />
           </div>
 
 
-          <Homepage_Title title="Upcoming" />
-          <Videos data={video_collection[1].finalDataArray} />
-          <a href={`/upcoming`}>
-            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Upcoming Videos" />
-          </a>
-
-          <div className='md:hidden'>
-            <Homepage_Title title="Trending Categories" />
-            <Category_slider trendingCategories={trendingCategories.slice(1)} />
-          </div>
-
-          <Homepage_Title title="Featured" />
-          <Videos data={video_collection[2].finalDataArray} />
-          <a href={`/channels`}>
-            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Featured Videos" />
-          </a>
-
-          <Homepage_Title title="Popular" />
-          <Videos data={video_collection[3].finalDataArray} />
-          <a href={`/popular`}>
-            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Popular Videos" />
-          </a>
 
           {TrendingCreators &&
             <div className='md:hidden'>
@@ -310,17 +291,8 @@ export default function Home({ video_collection, trendingChannels, tags, trendin
             </div>
           }
 
-          <Homepage_Title title="New Videos" />
-          <Videos data={video_collection[4].finalDataArray} />
-          <a href={`/new_videos`}>
-            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More New Videos" />
-          </a>
 
-          <Homepage_Title title="Random" />
-          <Videos data={video_collection[5].finalDataArray} />
-          <a href={`/random`}>
-            <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Random Videos" />
-          </a>
+
         </div>
       </main>
 
@@ -354,13 +326,13 @@ export async function getStaticProps({ req, res }) {
   const ress = await rawResponse.json();
   var trendingCreators = []
 
+
   return {
     props: {
-      video_collection: ress.result.finalDataArray_Array,
+      finalDataArray: ress.result.finalDataArray,
       trendingChannels: ress.result.trendingChannels,
       trendingCreators: trendingCreators,
       tags: ress.result.tags,
-      trendingCategories: ress.result.trendingCategories,
       trendingPornstars: ress.result.trendingPornstars,
     },
   };
