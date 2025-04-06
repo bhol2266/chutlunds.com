@@ -8,7 +8,6 @@ import Pagination from '../../../../components/Pagination';
 import Header from '../../../../components/Pornstar_Channels/Header';
 import Videos from "../../../../components/Videos";
 import pornstarNameList from "../../../../JsonData/pornstarlist/alldata.json";
-import { Scrape_Video_Item_Pornstar } from '../../../../config/Scrape_Video_Item';
 import { checkSubcribedPornstar, updateSubcribedPornstars } from '../../../../config/firebase/lib';
 import { getCookie } from 'cookies-next';
 import { UserAuth } from "@/context/AuthContext";
