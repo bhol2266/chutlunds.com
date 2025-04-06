@@ -52,7 +52,6 @@ jobs:
             yarn build
 
             # Restart PM2 process
-            # Restart PM2 process
             pm2 restart "$APP_NAME"
             pm2 save
           EOF

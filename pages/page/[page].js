@@ -4,7 +4,7 @@ import Videos from "../../components/Videos";
 import Head from 'next/head'
 import { BeatLoader } from 'react-spinners';
 import Pagination from "../../components/Pagination";
-
+import Header from "../../components/searchPage/Header";
 
 function Index({ finalDataArray, pages }) {
 
@@ -38,20 +38,10 @@ function Index({ finalDataArray, pages }) {
 
             </Head>
 
-            <div className='flex items-center md:pr-10 pt-2 my-1  md:my-2 pl-1'>
-                <div className='flex  '>
-                    <h1 className='text-xl md:text-2xl   font-semibold text-semiblack font-inter my-1  '>Trending Porn videos</h1>
+       
 
-                </div>
-                <p className='text-md md:text-xl  pl-1 pr-1  flex-grow font-inter  text-right text-gray-900 '>{`Page-${page}`}</p>
-            </div>
-
-
-            <div className="flex">
-                {/* <Sidebar /> */}
-                <Videos data={finalDataArray} />
-
-            </div>
+            <Header keyword={"trending"} pageNumber={page} />
+            <Videos data={finalDataArray} />
 
 
             {/* PAGINATION */}

@@ -18,6 +18,7 @@ import { fetchVideos, getViewChannels, getViewCreators, getViewPornstars, shuffl
 import videosContext from '../context/videos/videosContext';
 import Link from "next/link";
 import Creators_slider from "../components/creators_slider";
+import Header from "../components/searchPage/Header";
 
 export default function Home({ finalDataArray, trendingChannels, tags, trendingPornstars, trendingCreators }) {
   const { currentLocation, setcurrentLocation, viewType, setViewType } = useContext(videosContext);
@@ -220,7 +221,7 @@ export default function Home({ finalDataArray, trendingChannels, tags, trendingP
       </div>
       <Channels_slider trendingChannels={TrendingChannels} />
 
-
+{/* 
       <div className="w-full overflow-x-auto whitespace-nowrap py-2 scrollbar-hide md:hidden select-none">
         {tags.map((tag, index) => (
           <Link legacyBehavior key={tag.tag} href={`/search/${tag.tag.trim()}`} passHref>
@@ -229,12 +230,12 @@ export default function Home({ finalDataArray, trendingChannels, tags, trendingP
             </a>
           </Link>
         ))}
-      </div>
+      </div> */}
 
-      <main className="flex-row flex  mt-1 md:mt-2 md:space-x-3">
+      <main className="flex-row flex  md:mt-2 md:space-x-3">
         {/* <Sidebar /> */}
         <div className='w-full overflow-hidden'>
-          <h1 className="lg:text-2xl text-lg font-semibold text-gray-800 my-3 font-inter basicMargin w-fit border-b-[3px] border-[#FFBB00]">Trending Videos</h1>
+          <Header keyword={"trending"} pageNumber={"1"} />
           <Videos data={finalDataArray} />
 
 
@@ -243,6 +244,8 @@ export default function Home({ finalDataArray, trendingChannels, tags, trendingP
           {recommendedVideos.length > 0 &&
             <div>
               <Homepage_Title title="Recommended Videos" />
+
+
               <Videos data={recommendedVideos.slice(0, 20)} />
               {/* <a href={`/upcoming`}>
                 <img src='/more_video.png' className='mx-auto h-10 md:h-[44px] 2xl:h-[54px] mb-4 cursor-pointer hover:scale-105 transition-transform duration-300' alt="More Upcoming Videos" />
@@ -284,7 +287,7 @@ export default function Home({ finalDataArray, trendingChannels, tags, trendingP
 
 
 
-          {TrendingCreators &&
+          {TrendingCreators.length != 0 &&
             <div className='md:hidden'>
               <Homepage_Title title="Trending Creators" />
               <Creators_slider trendingCreators={TrendingCreators} />
