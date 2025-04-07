@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
 import { Scrape_Video_Item } from './Scrape_Video_Item';
-
+import fs from "fs"
 
 export const scrapeVideos = async (url) => {
 
@@ -17,7 +17,8 @@ export const scrapeVideos = async (url) => {
     const body = await response.text();
     const $ = cheerio.load(body)
 
-    
+    fs.writeFileSync('output.html', body); // 'output.html' will be the local file name
+
     finalDataArray= Scrape_Video_Item($)
 
  
