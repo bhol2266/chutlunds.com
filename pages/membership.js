@@ -37,7 +37,7 @@ const plans = [
     {
         duration: "1 month",
         offer: "",
-        price: "$2.99",
+        price: "$2.99 (INR 251)",
         amount: "251",
         type: "month",
         planCode: "1M"
@@ -45,7 +45,7 @@ const plans = [
     {
         duration: "3 months",
         offer: "20% OFF",
-        price: "$4.99",
+        price: "$4.99 (INR 420)",
         amount: "420",
         type: "month",
         planCode: "3M"
@@ -53,7 +53,7 @@ const plans = [
     {
         duration: "12 months",
         offer: "40% OFF",
-        price: "$9.99",
+        price: "$9.99 (INR 840)",
         type: "month",
         amount: "840",
         planCode: "12M"
@@ -62,7 +62,7 @@ const plans = [
     {
         duration: "Lifetime",
         offer: "USE FOREVER",
-        price: "$19.99",
+        price: "$19.99 (INR 1680)",
         amount: "1680",
         type: "once",
         planCode: "LIFETIME"
