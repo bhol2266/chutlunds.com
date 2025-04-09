@@ -110,14 +110,14 @@ export default function ContactForm({ selectedPlan }) {
                                 <select
                                     value={formData.countryCode}
                                     onChange={(e) => {
-                                        const country = countryCodes.find(item => item.dialCode === e.target.value);
-                                        handleCountryCodeChange(country.dialCode, country.flag);
+                                        const country = countryCodes.find(item => item.dial_code === e.target.value);
+                                        handleCountryCodeChange(country.dial_code, country.code);
                                     }}
                                     className="w-24 border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 >
                                     {countryCodes.map((item, index) => (
-                                        <option key={index} value={item.dialCode}>
-                                            {item.flag} {item.dialCode}
+                                        <option key={index} value={item.dial_code}>
+                                             {item.dial_code} {item.name}
                                         </option>
                                     ))}
                                 </select>
