@@ -64,6 +64,16 @@ export const SignUpForm = () => {
             authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI3}&scope=${scope}`;
 
         }
+        if (currentHost.includes("chutlunds3.com")) {
+            const REDIRECT_URI5 = "https://www.chutlunds3.com/api/auth/chutlunds3/callback"
+            authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI5}&scope=${scope}`;
+
+        }
+        if (currentHost.includes("chutlunds4.com")) {
+            const REDIRECT_URI6 = "https://www.chutlunds4.com/api/auth/chutlunds4/callback"
+            authUrl = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI6}&scope=${scope}`;
+
+        }
         window.location.href = authUrl;
 
     }

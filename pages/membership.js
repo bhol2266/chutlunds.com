@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ModalMembership from '../components/ModalMembership'
 import videosContext from '../context/videos/videosContext'
-import { setCookie, deleteCookie, getCookie } from "cookies-next";
-
+import { useRouter } from 'next/router'
+import ContactForm from '../components/ContactForm'
 const features = [
     {
         img: "/membership/noads.png",
@@ -38,26 +38,34 @@ const plans = [
         duration: "1 month",
         offer: "",
         price: "$2.99",
-        type: "month"
+        amount: "251",
+        type: "month",
+        planCode: "1M"
     },
     {
         duration: "3 months",
         offer: "20% OFF",
         price: "$4.99",
-        type: "month"
+        amount: "420",
+        type: "month",
+        planCode: "3M"
     },
     {
         duration: "12 months",
         offer: "40% OFF",
         price: "$9.99",
-        type: "month"
+        type: "month",
+        amount: "840",
+        planCode: "12M"
     },
 
     {
         duration: "Lifetime",
         offer: "USE FOREVER",
         price: "$19.99",
-        type: "once"
+        amount: "1680",
+        type: "once",
+        planCode: "LIFETIME"
     },
 ]
 const Membership = () => {
@@ -65,6 +73,7 @@ const Membership = () => {
     const [featuresSelected, setfeaturesSelected] = useState(features)
     const [width, setwidth] = useState(0);
 
+    const router = useRouter()
     useEffect(() => {
 
         const handleResize = () => {
@@ -94,6 +103,9 @@ const Membership = () => {
     const handlePlanChange = (plan) => {
         setSelectedPlan(plan);
     };
+
+
+   
 
     const { paymentModalVisible, setpaymentModalVisible, selectedPlan, setSelectedPlan } = useContext(videosContext);
     return (
@@ -135,7 +147,7 @@ const Membership = () => {
                 <div className="text-white text-[8px] lg:text-[10px] font-poppins text-center bg-black bg-opacity-50 px-2 py-0.5 w-fit mx-auto block rounded">This site is protected by reCAPTCHA and the Google <a className='underline' href="https://policies.google.com/privacy">Privacy Policy</a> and <a className='underline' href="https://policies.google.com/terms">Terms of Service</a> apply.</div>
 
 
-                <button onClick={() => setpaymentModalVisible(true)} className=' bg-theme text-white lg:px-8 lg:py-4 px-6 py-3 rounded-2xl font-poppins text-[14px] lg:text-[20px] mx-auto block  hover:scale-105 transition-all mt-4 lg:mt-6'>Get Access now!</button>
+                <button onClick={(() => setpaymentModalVisible(true))} className=' bg-theme text-white lg:px-8 lg:py-4 px-6 py-3 rounded-2xl font-poppins text-[14px] lg:text-[20px] mx-auto block  hover:scale-105 transition-all mt-4 lg:mt-6'>Get Access now!</button>
 
 
                 <div className='-z-10 absolute bottom-0 lg:fixed p-4 lg:p-6 gap-4 lg:gap-6 left-0 grid grid-cols-2 lg:grid-cols-5 bg-black bg-opacity-70  w-full'>
@@ -156,7 +168,10 @@ const Membership = () => {
                 {/* Make background darker */}
                 <div className={`bg-black bg-opacity-40 fixed inset-0 z-20  ${paymentModalVisible ? "" : "hidden"} `} />
 
-                <ModalMembership />
+                {/* <ModalMembership /> */}
+
+                <ContactForm selectedPlan={selectedPlan} />
+
 
             </div>
 
