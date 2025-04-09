@@ -15,7 +15,6 @@ import { BannedUrls } from '../JsonData/BannedUrls';
 import { useEffect } from 'react';
 import Outstreams from '../components/Ads/Outstream';
 import ClickAduBannerAds from '../components/Ads/ClickAduBannerAds';
-import 'react-phone-input-2/lib/style.css';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
