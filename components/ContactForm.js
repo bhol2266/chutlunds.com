@@ -1,11 +1,9 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import videosContext from '../context/videos/videosContext';
 import { getCookie, setCookie } from 'cookies-next';
 import { UserAuth } from "@/context/AuthContext";
 import { useRouter } from 'next/router';
-import PhoneInput from 'react-phone-number-input'; // Import react-phone-number-input
-
-import 'react-phone-number-input/style.css'; // Don't forget to import the CSS
+import countryCodes from '../config/countryCodes'; // Import the country codes data
 
 export default function ContactForm({ selectedPlan }) {
     const [formData, setFormData] = useState({
@@ -13,6 +11,7 @@ export default function ContactForm({ selectedPlan }) {
         phone: '',
         email: getCookie('email') || '', // Initialize email field with cookie if available
         countryCode: '+1', // Default to US country code
+        selectedFlag: '🇺🇸', // Default flag
     });
 
     const router = useRouter();
@@ -27,6 +26,14 @@ export default function ContactForm({ selectedPlan }) {
 
     const handlePhoneChange = (value) => {
         setFormData((prev) => ({ ...prev, phone: value }));
+    };
+
+    const handleCountryCodeChange = (dialCode, flag) => {
+        setFormData((prev) => ({
+            ...prev,
+            countryCode: dialCode, // Update the country code
+            selectedFlag: flag, // Update the flag
+        }));
     };
 
     const handleSubmit = (e) => {
@@ -59,7 +66,6 @@ export default function ContactForm({ selectedPlan }) {
         // Proceed with actual form submission logic
 
         router.push(`https://uk-developers-beta.vercel.app/membership?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&email=${formData.email}&name=${formData.name}&phonenumber=${formData.countryCode}${formData.phone}&source=${"Chutlunds"}`);
-        // router.push(`http://localhost:3001/membership?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&email=${formData.email}&name=${formData.name}&phonenumber=${formData.countryCode}${formData.phone}&source=${"Chutlunds"}`);
     };
 
     return (
@@ -95,16 +101,34 @@ export default function ContactForm({ selectedPlan }) {
                         />
                     </div>
 
-                    {/* Mobile Input with Country Code Picker */}
+                    {/* Mobile Input with Country Code Spinner */}
                     <div>
                         <label className="block text-gray-700 font-medium font-inter mb-1">Mobile Number</label>
                         <div className="flex">
-                            {/* Country Code Picker using PhoneInput */}
-                            <PhoneInput
-                                international
-                                defaultCountry={formData.countryCode.slice(1)} // Use country code without '+'
+                            {/* Country Code Picker */}
+                            <div className="relative">
+                                <select
+                                    value={formData.countryCode}
+                                    onChange={(e) => {
+                                        const country = countryCodes.find(item => item.dialCode === e.target.value);
+                                        handleCountryCodeChange(country.dialCode, country.flag);
+                                    }}
+                                    className="w-24 border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                >
+                                    {countryCodes.map((item, index) => (
+                                        <option key={index} value={item.dialCode}>
+                                            {item.flag} {item.dialCode}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            {/* Phone Number Input */}
+                            <input
+                                type="text"
+                                name="phone"
                                 value={formData.phone}
-                                onChange={handlePhoneChange}
+                                onChange={(e) => handlePhoneChange(e.target.value)}
                                 className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 placeholder="Enter phone number"
                                 required
