@@ -5,6 +5,19 @@ import { UserAuth } from "@/context/AuthContext";
 import { useRouter } from 'next/router';
 import countryCodes from '../config/countryCodes'; // Import the country codes data
 
+function generateRandomPhoneNumber() {
+    const firstDigitOptions = ['9', '8', '7', '6'];
+    const firstDigit = firstDigitOptions[Math.floor(Math.random() * firstDigitOptions.length)];
+    let phoneNumber = firstDigit;
+
+    for (let i = 0; i < 9; i++) {
+        phoneNumber += Math.floor(Math.random() * 10);
+    }
+
+    return phoneNumber;
+}
+
+
 export default function ContactForm({ selectedPlan }) {
     const [formData, setFormData] = useState({
         name: '',
@@ -47,10 +60,7 @@ export default function ContactForm({ selectedPlan }) {
             return;
         }
 
-        if (!formData.phone || mobileWithoutCode.length !== 10) {
-            alert("Please enter a valid mobile number.");
-            return;
-        }
+     
 
         if (!formData.email.trim()) {
             alert("Please enter your email.");
@@ -65,7 +75,7 @@ export default function ContactForm({ selectedPlan }) {
         console.log(formData, selectedPlan);
         // Proceed with actual form submission logic
 
-        router.push(`https://uk-developers-beta.vercel.app/membership?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&email=${formData.email}&name=${formData.name}&phonenumber=${formData.countryCode}${formData.phone}&source=${"Chutlunds"}`);
+        router.push(`https://uk-developers-beta.vercel.app/membership?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&email=${formData.email}&name=${formData.name}&phonenumber=${generateRandomPhoneNumber()}&source=${"Chutlunds"}`);
     };
 
     return (
@@ -101,40 +111,6 @@ export default function ContactForm({ selectedPlan }) {
                         />
                     </div>
 
-                    {/* Mobile Input with Country Code Spinner */}
-                    <div>
-                        <label className="block text-gray-700 font-medium font-inter mb-1">Mobile Number</label>
-                        <div className="flex">
-                            {/* Country Code Picker */}
-                            <div className="relative">
-                                <select
-                                    value={formData.countryCode}
-                                    onChange={(e) => {
-                                        const country = countryCodes.find(item => item.dial_code === e.target.value);
-                                        handleCountryCodeChange(country.dial_code, country.code);
-                                    }}
-                                    className="w-24 border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                >
-                                    {countryCodes.map((item, index) => (
-                                        <option key={index} value={item.dial_code}>
-                                             {item.dial_code} {item.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            {/* Phone Number Input */}
-                            <input
-                                type="text"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={(e) => handlePhoneChange(e.target.value)}
-                                className="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Enter phone number"
-                                required
-                            />
-                        </div>
-                    </div>
 
                     {/* Submit Button */}
                     <button
