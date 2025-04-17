@@ -13,7 +13,8 @@ export default function Home() {
         const userMessage = { text: input, sender: 'user' };
         setMessages((prev) => [...prev, userMessage]);
 
-        const response = await fetch(`https://backend.fuckvideo.live/chutlunds/chatgpt`, {
+        const response = await fetch(`https://cronjob-production-cd21.up.railway.app/chutlunds/chatgpt`, {
+        // const response = await fetch(`http://localhost:5000/chutlunds/chatgpt`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ question: input }),
