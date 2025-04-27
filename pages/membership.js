@@ -105,7 +105,6 @@ const Membership = () => {
     };
     const getAccessNowOnClick = () => {
 
-
         router.push(`https://www.ukdevelopers.org/membership?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&source=${"Chutlunds"}`);
         // router.push(`http://localhost:3000/membership?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&source=${"Chutlunds"}`);
     };
