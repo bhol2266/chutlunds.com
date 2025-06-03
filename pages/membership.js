@@ -105,8 +105,13 @@ const Membership = () => {
     };
     const getAccessNowOnClick = () => {
 
-        router.push(`https://www.ukdevelopers.org/membership?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&source=${"Chutlunds.com"}`);
-        // router.push(`http://localhost:3000/membership?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&source=${"Chutlunds"}`);
+
+        if (typeof window !== 'undefined') {
+            const domain = window.location.origin; // e.g., https://example.com
+
+            router.push(`https://www.ukdevelopers.org/membership?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&source=${domain}`);
+            // router.push(`http://localhost:3000/membership?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&source=${"Chutlunds"}`);
+        }
     };
     const activateMembership = () => {
         router.push(`/activateMembership`);
