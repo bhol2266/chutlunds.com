@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { getDocs, collection, query, where } from "firebase/firestore";
 import db from "../firebase";
 import { setCookie } from "cookies-next";
+import Link from "next/link";
 
 export default function ActivateMembership() {
   const router = useRouter();
@@ -97,9 +98,9 @@ export default function ActivateMembership() {
         {error === "Your membership has expired. Please purchase again." && (
           <div className="text-center mt-4">
             <p className="text-sm">Need a new membership?</p>
-            <a href="/membership" className="text-blue-600 underline">
+            <Link href="/membership" className="text-blue-600 underline">
               Go to Membership Page
-            </a>
+            </Link>
           </div>
         )}
       </div>
