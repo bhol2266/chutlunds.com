@@ -198,11 +198,11 @@ export function getViewPornstars() {
 }
 
 export function isMembershipActive() {
-  const membership = getCookie("Membership");
-  if (!membership) {
-    // Cookie not present
-    return false;
-  }
-  // Return true only if the cookie value is "true"
-  return membership === "true";
+    const membership = getCookie("Membership");
+    if (!membership) {
+        // Cookie not present
+        return false;
+    }
+    // Return true only if the cookie value is "true"
+    return true;
 }
