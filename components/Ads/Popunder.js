@@ -1,19 +1,21 @@
 import Script from "next/script";
+import { isMembershipActive } from "../../config/utils"; // assume this returns boolean
 
 function PopunderAds() {
     let currentHost = '';
+    let showAds = false;
 
     if (typeof window !== "undefined") {
         currentHost = window.location.host;
+        const isLocalhost = currentHost.includes('localhost');
+        const membershipActive = isMembershipActive();
+
+        showAds = !isLocalhost && !membershipActive;
     }
 
-    // Check if the app is running on localhost
-    const isLocalhost = currentHost.includes('localhost')
-
-    // Only render the Script component if not on localhost
     return (
         <div className="flex items-center justify-center">
-            {!isLocalhost && (
+            {showAds && (
                 <Script
                     type="text/javascript"
                     src="//cdn.tsyndicate.com/sdk/v1/p.js"
