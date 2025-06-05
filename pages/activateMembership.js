@@ -5,6 +5,8 @@ import { getDocs, collection, query, where } from "firebase/firestore";
 import db from "../firebase";
 import { setCookie } from "cookies-next";
 import Link from "next/link";
+import { isMembershipActive } from "../config/utils";
+import { useEffect } from "react";
 
 export default function ActivateMembership() {
   const router = useRouter();
@@ -12,6 +14,15 @@ export default function ActivateMembership() {
   const [activationCode, setActivationCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+
+  useEffect(() => {
+    const isActive = isMembershipActive();
+    if (isActive) {
+      router.push("/"); // Redirect to home or another page
+    }
+  }, [])
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,11 +55,15 @@ export default function ActivateMembership() {
         return;
       }
 
-      // Set cookie
+      // Set cookies
       setCookie("Membership", "true", { expires: expiry });
-      alert("✅ Your membership is successfully activated.");
+      setCookie("MemberEmail", data.email, { expires: expiry });
+      setCookie("MemberName", data.name || "", { expires: expiry });
+      setCookie("MembershipExpires", expiry.toISOString(), { expires: expiry }); // 👈 Add this line
 
-      router.push("/");
+
+      alert("✅ Your membership is successfully activated.");
+      router.reload();
     } catch (err) {
       console.error("Activation error:", err);
       setError("An error occurred. Please try again later.");
