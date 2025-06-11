@@ -2,6 +2,7 @@ import * as cheerio from 'cheerio';
 // Import fetch for Node.js environment
 import extractUrls from "extract-urls";
 import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';
+const fs = require('fs');
 
 export default async function handler(req, res) {
     const body_object = await req.body;
@@ -29,6 +30,9 @@ export default async function handler(req, res) {
     // Function to scrape data from the body content using Cheerio
     const scrape = async (body) => {
         const $ = cheerio.load(body);
+
+          fs.writeFileSync('home.html', body, 'utf8');
+
 
         // Example using Scrape_Video_Item function (adjust as per your actual implementation)
         relatedVideos = moveFirstNItemsToEnd(Scrape_Video_Item($), 8);
