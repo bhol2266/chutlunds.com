@@ -179,7 +179,7 @@ export default async function handler(req, res) {
     // Call scrape2 function with adjusted href
     await scrape2(href);
 
-
+ 
     const result = {
         videolink_qualities_screenshots: finalDataArray,
         preloaded_video_quality: preloaded_video_quality,
