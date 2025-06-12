@@ -162,13 +162,13 @@ const Videoplayer = () => {
             {preloadedVideoQuality.length > 0 && !noVideo ? (
                 <>
                     <Head>
-                        <title>{`${videoDetails.Title} | Chutlunds`}</title>
+                        <title>{`${noVideo ? videoTitleBackup : videoDetails.Title} - ${noVideo ? "720p" : videolinkQualitiesScreenshots.video_qualities_available[videolinkQualitiesScreenshots.video_qualities_available.length - 1].toUpperCase()}`} | Chutlunds</title>
                         <meta name="description" content={`${capitalizeFirstLetter(noVideo ? videoTitleBackup : videoDetails.Title)} sex video`} />
                         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
                         <meta name="keywords" content={tagString} />
-                        <meta property="og:title" content={`${videoDetails.Title} | Chutlunds`} />
+                        <meta property="og:title" content={`${noVideo ? videoTitleBackup : videoDetails.Title} - ${noVideo ? "720p" : videolinkQualitiesScreenshots.video_qualities_available[videolinkQualitiesScreenshots.video_qualities_available.length - 1].toUpperCase()}`} />
                         <meta property="og:description" content={`${capitalizeFirstLetter(noVideo ? videoTitleBackup : videoDetails.Title)} sex video`} />
-                        <meta name="twitter:title" content={`${videoDetails.Title} | Chutlunds`} />
+                        <meta name="twitter:title" content={`${noVideo ? videoTitleBackup : videoDetails.Title} - ${noVideo ? "720p" : videolinkQualitiesScreenshots.video_qualities_available[videolinkQualitiesScreenshots.video_qualities_available.length - 1].toUpperCase()}`} />
                         <meta name="twitter:description" content={`${capitalizeFirstLetter(noVideo ? videoTitleBackup : videoDetails.Title)} sex video`} />
                         <link rel="canonical" href={`https://www.chutlunds.com/video/${video}`} />
 

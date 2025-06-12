@@ -2,7 +2,6 @@ import * as cheerio from 'cheerio';
 // Import fetch for Node.js environment
 import extractUrls from "extract-urls";
 import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';
-const fs = require('fs');
 
 export default async function handler(req, res) {
     const body_object = await req.body;
@@ -30,9 +29,6 @@ export default async function handler(req, res) {
     // Function to scrape data from the body content using Cheerio
     const scrape = async (body) => {
         const $ = cheerio.load(body);
-
-          fs.writeFileSync('home.html', body, 'utf8');
-
 
         // Example using Scrape_Video_Item function (adjust as per your actual implementation)
         relatedVideos = moveFirstNItemsToEnd(Scrape_Video_Item($), 8);
@@ -63,9 +59,8 @@ export default async function handler(req, res) {
             });
 
             // Example logic to extract video qualities URLs
-            const cut1 = body.substring(body.indexOf('<main class="main-container">'), body.indexOf(`<main class="main-container">`) + 1000);
-            const cut2 = cut1.substring(cut1.indexOf('var stream_data'), body.indexOf("mpd"));
-            let video_qualities_url_array = extractUrls(cut2);
+           const cut1 = body.substring(body.indexOf('var stream_data'), body.indexOf(`var stream_data`) + 1000);
+            let video_qualities_url_array = extractUrls(cut1);
 
             // Filter unwanted URLs
             video_qualities_url_array = video_qualities_url_array.filter(url => {
