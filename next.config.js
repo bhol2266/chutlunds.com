@@ -19,10 +19,11 @@ module.exports = {
       'cdni.pornpics.de',
       'static-sg-cdn.eporner.com'
     ],
-  }, 
+  },
   env: {
     CLOUDFLARE_STORAGE: 'https://pub-46cdeefeaf774247ab99232ab1ebaa66.r2.dev/',
-    BACKEND_URL: 'https://cloudflare-workers-project.ukdevelopers007.workers.dev/chutlunds/',
+    // BACKEND_URL: 'https://cloudflare-workers-project.ukdevelopers007.workers.dev/chutlunds/',
+    BACKEND_URL: 'https://cloudflare-workers-project.bhola2266.workers.dev/chutlunds/',
     // BACKEND_URL: 'http://127.0.0.1:8787/chutlunds/',
     FRONTEND_URL: 'https://www.chutlunds.com/',
     // FRONTEND_URL: 'http://localhost:3000/',
