@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from "next/router";
 import Link from 'next/link';
-import categories from "../JsonData/categoryImages/data.json"
+import categories from "../JsonData/categoryList.json"
 
 function shuffle(array) {
     let currentIndex = array.length, randomIndex;
