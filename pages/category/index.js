@@ -46,16 +46,12 @@ function Index() {
                 <title>Chutlunds Categories: Find Your Favorite Free Hardcore Porn Videos</title>
                 <meta name="description" content="  Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
 
-
                 <meta name="keywords" content="blowjob, japanese, big ass, deepthroat, jav, asian" />
                 <meta property="og:title" content="Chutlunds Categories: Find Your Favorite Free Hardcore Porn Videos" />
                 <meta property="og:description" content="  Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
                 <meta name="twitter:title" content="Chutlunds Categories: Find Your Favorite Free Hardcore Porn Videos" />
                 <meta name="twitter:description" content=" Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
                 <link rel="canonical" href={`https://www.chutlunds.com/category`} />
-
-
-
 
             </Head>
 
@@ -109,7 +105,7 @@ function Index() {
                 <span className="border-b border-gray-300 w-full"></span>
             </div>
 
-            <div className={`grid grid-cols-3 py-3 sm:grid-cols-3 gap-2 md:gap-3 lg:gap-4  md:grid-cols-4 lg:grid-cols-5`}>
+            <div className={`grid grid-cols-2 py-3 sm:grid-cols-3 gap-2 md:gap-3 lg:gap-4  md:grid-cols-4 lg:grid-cols-5`}>
                 {categoryList.map(category => {
                     return (
                         <Link key={category.categoryName} href={`/category/${category.categoryName.toLowerCase().trim()}`}>
@@ -120,7 +116,7 @@ function Index() {
                                     src={category.imageUrl}
                                     loading="lazy"
                                 ></img>
-                                <h2 className='font-inter rounded-b absolute text-sm sm:text-lg px-1 bottom-0 w-full text-center z-10 text-white bg-black bg-opacity-50'>
+                                <h2 className="absolute bottom-0 w-full px-1 text-center text-white bg-black bg-opacity-50 z-10 rounded-b font-inter text-xs sm:text-sm lg:text-lg">
                                     {category.categoryName}
                                 </h2>
                             </div>
