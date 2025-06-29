@@ -1,12 +1,17 @@
 import Link from 'next/link';
-
 import Head from 'next/head';
 import PopunderAds from '../../components/Ads/Popunder';
 import categoryList from '../../JsonData/categoryList.json';
+import { useEffect, useState } from 'react';
 import { SearchIcon } from '@heroicons/react/solid';
-import { useState } from 'react';
-
 function Index() {
+    const itemsPerPage = 30;
+    const [visibleCategories, setVisibleCategories] = useState(categoryList.slice(0, itemsPerPage));
+    const [hasMore, setHasMore] = useState(true);
+    const [triggered, setTriggered] = useState(false); // to avoid multiple triggers per threshold
+
+    const [scrolledToTOP, setscrolledToTOP] = useState(false);
+
 
     const [suggestedData, setsuggestedData] = useState([])
 
@@ -38,30 +43,64 @@ function Index() {
 
     }
 
+    const loadMore = () => {
+        const currentLength = visibleCategories.length;
+        const moreItems = categoryList.slice(currentLength, currentLength + itemsPerPage);
+        setVisibleCategories(prev => [...prev, ...moreItems]);
+
+        if (currentLength + itemsPerPage >= categoryList.length) {
+            setHasMore(false);
+        }
+
+        setTriggered(false); // reset trigger after loading
+    };
+
+
+    useEffect(() => {
+
+        if (!scrolledToTOP) {
+            window.scrollTo(0, 0);
+            setscrolledToTOP(true)
+        }
+
+        const handleScroll = () => {
+            const scrollTop = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const fullHeight = document.documentElement.scrollHeight;
+
+            const scrolledPercentage = (scrollTop + windowHeight) / fullHeight;
+
+            if (scrolledPercentage >= 0.4 && hasMore && !triggered) {
+                setTriggered(true);
+                loadMore();
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [visibleCategories, hasMore, triggered]);
 
     return (
-
         <div className="basicMargin">
             <Head>
                 <title>Chutlunds Categories: Find Your Favorite Free Hardcore Porn Videos</title>
-                <meta name="description" content="  Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
-
+                <meta name="description" content="Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
                 <meta name="keywords" content="blowjob, japanese, big ass, deepthroat, jav, asian" />
                 <meta property="og:title" content="Chutlunds Categories: Find Your Favorite Free Hardcore Porn Videos" />
-                <meta property="og:description" content="  Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
+                <meta property="og:description" content="Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
                 <meta name="twitter:title" content="Chutlunds Categories: Find Your Favorite Free Hardcore Porn Videos" />
-                <meta name="twitter:description" content=" Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
-                <link rel="canonical" href={`https://www.chutlunds.com/category`} />
-
+                <meta name="twitter:description" content="Collections of free Japanese videos, Hentai porn videos, Russian porn videos, Chinese, Asian sex videos, Korean porn video and lot more" />
+                <link rel="canonical" href="https://www.chutlunds.com/category" />
             </Head>
 
-
-            <div className='flex items-center py-2 my-1 justify-between  rounded-lg'>
-                <span className='text-center lg:text-left  flex-grow text-3xl font-Dmsans'>Top Porn Categories</span>
+            <div className='flex items-center py-2 my-1 justify-between rounded-lg'>
+                <span className='text-center lg:text-left flex-grow text-3xl font-Dmsans'>Top Porn Categories</span>
             </div>
-            <h1 className="text-center lg:text-left text-sm md:text-lg  pb-2 my-1 font-inter">
+
+            <h1 className="text-center lg:text-left text-sm md:text-lg pb-2 my-1 font-inter">
                 Explore a Variety of Free Videos: Japanese, Hentai, Russian, Chinese, Asian, Korean Porn, and More
             </h1>
+
 
             {/* 🔍 Search Bar */}
             <div className=" transition ease-in-out delay-150">
@@ -84,8 +123,8 @@ function Index() {
                             <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
                                 <img
                                     className={`object-cover w-full rounded-lg  `}
+                                    alt={obj.imageUrl}
                                     src={obj.imageUrl}
-                                    alt={obj.categoryName}
                                     loading='lazy'
                                 ></img>
 
@@ -99,42 +138,39 @@ function Index() {
                 })}
             </div>
 
-            <div className=" flex items-center justify-center">
+            <div className="flex items-center justify-center">
                 <span className="border-b border-gray-300 w-full"></span>
                 <span className="mx-4 text-md text-gray-500 text-nowrap">All Categories</span>
                 <span className="border-b border-gray-300 w-full"></span>
             </div>
 
-            <div className={`grid grid-cols-2 py-3 sm:grid-cols-3 gap-2 md:gap-3 lg:gap-4  md:grid-cols-4 lg:grid-cols-5`}>
-                {categoryList.map(category => {
-                    return (
-                        <Link key={category.categoryName} href={`/category/${category.categoryName.toLowerCase().trim()}`}>
-                            <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
-                                <img
-                                    className='object-cover w-full'
-                                    alt={category.categoryName}
-                                    src={category.imageUrl}
-                                    loading="lazy"
-                                ></img>
-                                <h2 className="absolute bottom-0 w-full px-1 text-center text-white bg-black bg-opacity-50 z-10 rounded-b font-inter text-xs sm:text-sm lg:text-lg">
-                                    {category.categoryName}
-                                </h2>
-                            </div>
-                        </Link>
-                        // items[i].charAt(0).toUpperCase() + items[i].substring(1);
-
-
-                    )
-                })}
-
+            <div className="grid grid-cols-2 py-3 sm:grid-cols-3 gap-2 md:gap-3 lg:gap-4 md:grid-cols-4 lg:grid-cols-5">
+                {visibleCategories.map(category => (
+                    <Link key={category.categoryName} href={`/category/${category.categoryName.toLowerCase().trim()}`}>
+                        <div className='relative hover:scale-105 transform transition duration-150 rounded aspect-box'>
+                            <img
+                                className='object-cover w-full'
+                                alt={category.categoryName}
+                                src={category.imageUrl}
+                                loading="lazy"
+                            />
+                            <h2 className="absolute bottom-0 w-full px-1 text-center text-white bg-black bg-opacity-50 z-10 rounded-b font-inter text-xs sm:text-sm lg:text-lg">
+                                {category.categoryName}
+                            </h2>
+                        </div>
+                    </Link>
+                ))}
             </div>
-            <PopunderAds />
 
+            {!hasMore && (
+                <p className="text-center py-4 text-gray-400">
+                    <b>All categories loaded</b>
+                </p>
+            )}
+
+            <PopunderAds />
         </div>
-    )
+    );
 }
 
-
-export default Index
-
-
+export default Index;
