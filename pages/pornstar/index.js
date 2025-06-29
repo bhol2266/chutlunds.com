@@ -10,7 +10,7 @@ import {
 import PopunderAds from '../../components/Ads/Popunder';
 import pornstarNameList from '../../JsonData/pornstarlist/alldata.json';
 
-function Index() {
+function Index({ trendingModels }) {
 
     //Scroll to top
     const scrollTop = () => { window.scrollTo({ top: 0, behavior: 'smooth' }); };
@@ -117,7 +117,6 @@ function Index() {
                 </div>
             </div>
 
-            <h1 className=' mt-6  ml-1 2xl:my-3 text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium w-fit border-b-[3px] border-[#FFBB00]'>Trending Pornstars</h1>
 
 
             <div className='mt-1  grid grid-cols-3 p-1 sm:grid-cols-3 gap-2 md:gap-3 lg:gap-4  md:grid-cols-5 lg:grid-cols-6'>
@@ -155,7 +154,36 @@ function Index() {
             </div>
 
 
-            { suggestedData.length == 0 &&
+            <h1 className=' mt-6  ml-1 2xl:my-3 text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium w-fit border-b-[3px] border-[#FFBB00]'>Trending Pornstars</h1>
+
+            <div className='mt-1  grid grid-cols-3 p-1 sm:grid-cols-3 gap-2 md:gap-3 lg:gap-4  md:grid-cols-5 lg:grid-cols-6'>
+                {trendingModels.map(pornstar => {
+                    const posrnstar_Code = pornstar.href.substring(1, pornstar.href.indexOf('/pornstar'))
+                    return (
+
+                        <Link key={pornstar.Name} href={`/pornstar/${posrnstar_Code}/${pornstar.Name.trim().toLowerCase().replace(/ /g, "+")}`}>
+                            <div className='  relative hover:scale-105 transform transition duration-150 ' >
+                                <img
+                                    className={`object-cover w-full rounded-lg  `}
+                                    src={pornstar.thumbnail}
+                                    alt={pornstar.Name}
+                                    loading='lazy'
+                                ></img>
+
+                                <h2 className='rounded-b-lg absolute text-sm lg:text-lg font-inter p-1 bottom-0 w-full text-center  z-10 text-white bg-black bg-opacity-50'>{pornstar.Name}</h2>
+
+
+                            </div>
+                        </Link>
+                    )
+                })}
+            </div>
+
+
+            <h1 className=' mt-6  ml-1 2xl:my-3 text-left lg:text-left  flex-grow text-2xl lg:text-3xl font-Dmsans text-theme font-poppins font-medium w-fit border-b-[3px] border-[#FFBB00] my-2'>🔥Hottest Pornstars</h1>
+
+
+            {suggestedData.length == 0 &&
                 <InfiniteScroll
                     dataLength={data.length}
                     next={fetchMoreData}
@@ -197,6 +225,26 @@ function Index() {
 
 
 export default Index
+
+
+export async function getStaticProps() {
+
+
+    const res = await fetch(`${process.env.BACKEND_URL}getTrendingPornstars`, {
+        method: "POST",
+    });
+    const data = await res.json();
+
+    return {
+        props: {
+            trendingModels: data,
+        }
+    }
+
+}
+
+
+
 
 
 

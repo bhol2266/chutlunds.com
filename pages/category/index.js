@@ -4,9 +4,13 @@ import PopunderAds from '../../components/Ads/Popunder';
 import categoryList from '../../JsonData/categoryList.json';
 import { useEffect, useState } from 'react';
 import { SearchIcon } from '@heroicons/react/solid';
+import { shuffle } from '../../config/utils';
 function Index() {
     const itemsPerPage = 30;
-    const [visibleCategories, setVisibleCategories] = useState(categoryList.slice(0, itemsPerPage));
+
+    const [SuffledCategories] = useState(shuffle(categoryList));
+
+    const [visibleCategories, setVisibleCategories] = useState(SuffledCategories.slice(0, itemsPerPage));
     const [hasMore, setHasMore] = useState(true);
     const [triggered, setTriggered] = useState(false); // to avoid multiple triggers per threshold
 
@@ -45,10 +49,10 @@ function Index() {
 
     const loadMore = () => {
         const currentLength = visibleCategories.length;
-        const moreItems = categoryList.slice(currentLength, currentLength + itemsPerPage);
+        const moreItems = SuffledCategories.slice(currentLength, currentLength + itemsPerPage);
         setVisibleCategories(prev => [...prev, ...moreItems]);
 
-        if (currentLength + itemsPerPage >= categoryList.length) {
+        if (currentLength + itemsPerPage >= SuffledCategories.length) {
             setHasMore(false);
         }
 
@@ -61,6 +65,9 @@ function Index() {
         if (!scrolledToTOP) {
             window.scrollTo(0, 0);
             setscrolledToTOP(true)
+
+
+
         }
 
         const handleScroll = () => {
