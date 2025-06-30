@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { getDocs, collection, query, where } from "firebase/firestore";
 import db from "../firebase";
-import { setCookie } from "cookies-next";
+import { setCookie, deleteCookie } from 'cookies-next';
 import Link from "next/link";
 import { isMembershipActive } from "../config/utils";
 
