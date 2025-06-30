@@ -40,14 +40,13 @@ function classNames(...classes) {
 function Navbar() {
 
     const { user, setUser, setLoginModalVisible } = UserAuth();
-    const [isMember, setIsMember] = useState(false);
 
 
     const router = useRouter();
     const currentPath = router.pathname;
 
     const context = useContext(videosContext);
-    const { currentLocation, countryBlocked, daysLeft, setDaysLeft } = context;
+    const { currentLocation, countryBlocked, daysLeft, setDaysLeft, isMember, setIsMember } = context;
 
     const [location, setlocation] = useState(currentLocation)
     const [searchKey, setsearchKey] = useState('')

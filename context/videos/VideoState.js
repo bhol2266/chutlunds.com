@@ -63,7 +63,7 @@ const VideoState = (props) => {
 
     const [tagsContext, settagsContext] = useState([])
     const [daysLeft, setDaysLeft] = useState(null);
-
+    const [isMember, setIsMember] = useState(false);
 
     function setSpinner(boolean) {
 
@@ -84,7 +84,7 @@ const VideoState = (props) => {
 
 
     return (
-        <videosContext.Provider value={{ spinnerLoading, setSpinner, setDarkThemeFunc, DarkTheme, currentLocation, setcurrentLocation, OTPemail, setOTPemail, loggedIn, setloggedIn, tagsContext, settagsContext, paymentModalVisible, setpaymentModalVisible, selectedPlan, setSelectedPlan,viewType, setViewType,daysLeft, setDaysLeft }}>
+        <videosContext.Provider value={{ spinnerLoading, setSpinner, setDarkThemeFunc, DarkTheme, currentLocation, setcurrentLocation, OTPemail, setOTPemail, loggedIn, setloggedIn, tagsContext, settagsContext, paymentModalVisible, setpaymentModalVisible, selectedPlan, setSelectedPlan,viewType, setViewType,daysLeft, setDaysLeft,isMember, setIsMember }}>
             {props.children}
         </videosContext.Provider>
     )

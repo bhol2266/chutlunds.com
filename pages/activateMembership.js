@@ -19,7 +19,7 @@ export default function ActivateMembership() {
 
 
   const context = useContext(videosContext);
-  const { daysLeft, setDaysLeft } = context;
+  const { daysLeft, setDaysLeft, isMember, setIsMember } = context;
 
 
   useEffect(() => {
@@ -87,7 +87,7 @@ export default function ActivateMembership() {
       setMessage("✅ Membership activated successfully.");
       if (!isAuto) alert("✅ Your membership is successfully activated.");
       setDaysLeft(calculateDaysLeft());
-
+      setIsMember(true)
       router.push("/");
     } catch (err) {
       console.error("Activation error:", err);
