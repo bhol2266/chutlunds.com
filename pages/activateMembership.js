@@ -60,6 +60,8 @@ export default function ActivateMembership() {
       const now = new Date();
       const expiry = new Date(data.expiryDate);
 
+      log
+
       if (now > expiry) {
         setError("❌ Your membership has expired. Please purchase again.");
         setMessage("");
@@ -67,6 +69,12 @@ export default function ActivateMembership() {
         setLoading(false);
         return;
       }
+
+      // Clear if existing cookies
+      deleteCookie("Membership");
+      deleteCookie("MemberEmail");
+      deleteCookie("MemberName");
+      deleteCookie("MembershipExpires");
 
       // Set cookies
       setCookie("Membership", "true", { expires: expiry });
