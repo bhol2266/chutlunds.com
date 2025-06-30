@@ -4,7 +4,7 @@ import { useContext, useEffect, useRef, useState, } from 'react';
 import ReactCountryFlag from "react-country-flag";
 import { UserAuth } from "../context/AuthContext";
 import videosContext from '../context/videos/videosContext';
-import { isMembershipActive } from "../config/utils";
+import { calculateDaysLeft, isMembershipActive } from "../config/utils";
 import { Fragment } from 'react';
 
 
@@ -41,14 +41,13 @@ function Navbar() {
 
     const { user, setUser, setLoginModalVisible } = UserAuth();
     const [isMember, setIsMember] = useState(false);
-    const [daysLeft, setDaysLeft] = useState(null);
 
 
     const router = useRouter();
     const currentPath = router.pathname;
 
     const context = useContext(videosContext);
-    const { currentLocation, countryBlocked } = context;
+    const { currentLocation, countryBlocked, daysLeft, setDaysLeft } = context;
 
     const [location, setlocation] = useState(currentLocation)
     const [searchKey, setsearchKey] = useState('')
@@ -65,17 +64,7 @@ function Navbar() {
         setIsMember(isActive);
 
         if (isActive) {
-            const expiryString = getCookie('MembershipExpires');
-            console.log('====================================');
-            console.log(expiryString);
-            console.log('====================================');
-            if (expiryString) {
-                const expiryDate = new Date(expiryString);
-                const today = new Date();
-                const timeDiff = expiryDate.getTime() - today.getTime();
-                const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                setDaysLeft(daysRemaining);
-            }
+            setDaysLeft(calculateDaysLeft());
         }
 
 
