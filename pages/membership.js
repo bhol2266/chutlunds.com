@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
-import ModalMembership from '../components/ModalMembership'
-import videosContext from '../context/videos/videosContext'
-import { useRouter } from 'next/router'
-import ContactForm from '../components/ContactForm'
-import { ref, onValue } from 'firebase/database'
-import { rtdb } from '../firebase' // ✅ Realtime DB
+import React, { useContext, useEffect, useState } from 'react';
+import ModalMembership from '../components/ModalMembership';
+import videosContext from '../context/videos/videosContext';
+import { useRouter } from 'next/router';
+import ContactForm from '../components/ContactForm';
+import { ref, onValue } from 'firebase/database';
+import { rtdb } from '../firebase'; // ✅ Realtime DB
 
 const features = [
     {
@@ -39,6 +39,8 @@ const Membership = () => {
     const [width, setwidth] = useState(0);
     const [plans, setPlans] = useState([]);
     const [loadingPlans, setLoadingPlans] = useState(true);
+    const [iframeUrl, setIframeUrl] = useState(null);
+    const [iframeLoading, setIframeLoading] = useState(true);
 
     const router = useRouter();
     const { paymentModalVisible, selectedPlan, setSelectedPlan } = useContext(videosContext);
@@ -49,10 +51,7 @@ const Membership = () => {
             const data = snapshot.val();
             if (data) {
                 const fetchedPlans = Object.values(data);
-
-                // ✅ Sort by ascending price
                 const sortedPlans = fetchedPlans.sort((a, b) => parseFloat(a.amount) - parseFloat(b.amount));
-
                 setPlans(sortedPlans);
                 setSelectedPlan(sortedPlans[0]);
             }
@@ -80,12 +79,14 @@ const Membership = () => {
     const getAccessNowOnClick = () => {
         if (typeof window !== 'undefined') {
             const domain = window.location.origin;
-            router.push(`https://www.ukdevelopers.org/membership?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&source=${domain}`);
+            const url = `https://www.ukdevelopers.org/membership?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&source=${domain}`;
+            setIframeUrl(url);
+            setIframeLoading(true);
         }
     };
 
     const activateMembership = () => {
-        router.push(`/activateMembership`);
+        router.push('/activateMembership');
     };
 
     return (
@@ -157,8 +158,35 @@ const Membership = () => {
                 <div className={`bg-black bg-opacity-40 fixed inset-0 z-20 ${paymentModalVisible ? "" : "hidden"}`} />
                 <ContactForm selectedPlan={selectedPlan} />
             </div>
-        </div>
-    )
-}
 
-export default Membership
+            {iframeUrl && (
+                <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center">
+                    <div className="relative w-full h-full">
+                        <button
+                            className="absolute top-4 right-4 bg-white text-black px-4 py-2 rounded z-50"
+                            onClick={() => setIframeUrl(null)}
+                        >
+                            Close
+                        </button>
+
+                        {iframeLoading && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 z-40">
+                                <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                            </div>
+                        )}
+
+                        <iframe
+                            src={iframeUrl}
+                            className="w-full h-full border-0"
+                            allowFullScreen
+                            title="Membership Payment"
+                            onLoad={() => setIframeLoading(false)}
+                        ></iframe>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default Membership;
