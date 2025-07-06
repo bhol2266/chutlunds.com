@@ -79,7 +79,7 @@ const Membership = () => {
     const getAccessNowOnClick = () => {
         if (typeof window !== 'undefined') {
             const domain = window.location.origin;
-            const url = `https://www.ukdevelopers.org/membership?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&source=${domain}`;
+            const url = `https://www.ukdevelopers.org/membership_dark?planAmount=${selectedPlan.amount}&planDuration=${selectedPlan.duration}&planCode=${selectedPlan.planCode}&source=${domain}`;
             setIframeUrl(url);
             setIframeLoading(true);
         }
