@@ -52,33 +52,28 @@ function Navbar() {
     const [searchKey, setsearchKey] = useState('')
     const [showSuggested, setshowSuggested] = useState(false)
 
-    useEffect(() => {
+useEffect(() => {
+    // Set location from localStorage if not already set
+    if (localStorage.getItem("location") && !currentLocation) {
+        setlocation(JSON.parse(localStorage.getItem("location")));
+    }
 
-        if (localStorage.getItem("location") && !currentLocation) {
-            setlocation(JSON.parse(localStorage.getItem("location")))
-        }
+    // Check membership status
+    const isActive = isMembershipActive();
+    setIsMember(isActive);
+    if (isActive) {
+        setDaysLeft(calculateDaysLeft());
+    }
 
+    // Get email from cookie
+    const email = getCookie('email');
+    if (email) {
+        setUser(email);
+    } else {
+        setUser(null);
+    }
+}, []);
 
-        const isActive = isMembershipActive();
-        setIsMember(isActive);
-
-        if (isActive) {
-            setDaysLeft(calculateDaysLeft());
-        }
-
-
-    }, [])
-
-    useEffect(() => {
-        // Check for the email cookie using cookies-next
-        const email = getCookie('email');
-
-        if (email) {
-            setUser(email);
-        } else {
-            setUser(null);
-        }
-    }, []);
 
 
     const signOut_method = async () => {
