@@ -64,18 +64,18 @@ function Category({ video_collection, pages }) {
 
 export default Category
 
-export async function getStaticPaths() {
+// export async function getStaticPaths() {
 
 
-  return {
-    paths: [{ params: { category: 'creampie' } }],
-    fallback: 'blocking' // false or 'blocking'
-  };
-}
+//   return {
+//     paths: [{ params: { category: 'creampie' } }],
+//     fallback: 'blocking' // false or 'blocking'
+//   };
+// }
 
 
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
 
 
 
