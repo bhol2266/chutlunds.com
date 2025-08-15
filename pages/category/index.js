@@ -126,7 +126,7 @@ function Index() {
                 {suggestedData.length != 0 && suggestedData.map(obj => {
                     return (
 
-                        <Link key={obj.categoryName} href={`/category/${obj.categoryName.toLowerCase().trim()}`}>
+                        <Link prefetch={false} key={obj.categoryName} href={`/category/${obj.categoryName.toLowerCase().trim()}`}>
                             <div className='  relative hover:scale-105 transform transition duration-150 rounded   aspect-box  ' >
                                 <img
                                     className={`object-cover w-full rounded-lg  `}

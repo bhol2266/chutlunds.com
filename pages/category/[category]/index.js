@@ -69,7 +69,7 @@ export async function getStaticPaths() {
 
   return {
     paths: [{ params: { category: 'creampie' } }],
-    fallback: true // false or 'blocking'
+    fallback: 'blocking' // false or 'blocking'
   };
 }
 
