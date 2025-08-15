@@ -7,9 +7,16 @@ import Videos from "../../../components/Videos";
 import Header from '../../../components/searchPage/Header';
 import { scrapeVideos } from "../../../config/spangbang";
 
-
+import { useEffect } from 'react';
 
 function Category({ video_collection, pages }) {
+
+  
+   useEffect(() => {
+    if (video_collection?.length === 0) {
+      router.replace(`/search/${category}`);
+    }
+  }, [video_collection, category, router]);
 
 
   const router = useRouter();
@@ -64,18 +71,18 @@ function Category({ video_collection, pages }) {
 
 export default Category
 
-// export async function getStaticPaths() {
+export async function getStaticPaths() {
 
 
-//   return {
-//     paths: [{ params: { category: 'creampie' } }],
-//     fallback: 'blocking' // false or 'blocking'
-//   };
-// }
+  return {
+    paths: [{ params: { category: 'creampie' } }],
+    fallback: 'blocking' // false or 'blocking'
+  };
+}
 
 
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
 
 
 
