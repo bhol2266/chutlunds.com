@@ -153,7 +153,7 @@ function Index() {
 
             <div className="grid grid-cols-2 py-3 sm:grid-cols-3 gap-2 md:gap-3 lg:gap-4 md:grid-cols-4 lg:grid-cols-5">
                 {visibleCategories.map(category => (
-                    <Link key={category.categoryName} href={`/category/${category.categoryName.toLowerCase().trim()}`}>
+                    <Link prefetch={false} key={category.categoryName} href={`/category/${category.categoryName.toLowerCase().trim()}`}>
                         <div className='relative hover:scale-105 transform transition duration-150 rounded aspect-box'>
                             <img
                                 className='object-cover w-full'
