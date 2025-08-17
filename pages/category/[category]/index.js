@@ -5,36 +5,31 @@ import Pagination from "../../../components/Pagination";
 import Sidebar from "../../../components/Sidebar";
 import Videos from "../../../components/Videos";
 import Header from '../../../components/searchPage/Header';
-import { scrapeVideos } from "../../../config/spangbang";
-
 import { useEffect } from 'react';
 
 function Category({ video_collection, pages }) {
+  const router = useRouter();
+  const { category } = router.query;
 
-  
-   useEffect(() => {
-    if (video_collection?.length === 0) {
+  useEffect(() => {
+    if (router.isReady && video_collection?.length === 0) {
+      fetch(`/api/revalidate/revalidate_categorypage?secret=sdfsdfsafsdafsdfsdfsdfsfcxbxzcfsdaf&category=${category}`);
       router.replace(`/search/${category}`);
     }
   }, [video_collection, category, router]);
 
-
-  const router = useRouter();
   if (router.isFallback) {
     return (
-      <div className="flex justify-center mx-auto mt-10 ">
+      <div className="flex justify-center mx-auto mt-10">
         <BeatLoader loading size={25} color={'#232b2b'} />
       </div>
-    )
+    );
   }
 
-  const { category } = router.query
-  const currentPageNumberURL = '1'
+  const currentPageNumberURL = '1';
 
-  function capitalizeFirstLetter(string) {
-    
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  const capitalizeFirstLetter = (string) =>
+    string.charAt(0).toUpperCase() + string.slice(1);
 
   return (
     <>
@@ -76,7 +71,7 @@ export async function getStaticPaths() {
 
   return {
     paths: [{ params: { category: 'creampie' } }],
-    fallback: 'blocking' // false or 'blocking'
+    fallback: true // false or 'blocking'
   };
 }
 
