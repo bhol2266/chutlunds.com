@@ -202,7 +202,7 @@ useEffect(() => {
 
                                 <div className='flex items-center'>
 
-                                    <div onClick={handleSearchIconClick} className=' lg:hidden mr-2 cursor-pointer p-2  hover:bg-button hover:text-white rounded-md '>
+                                    <div onClick={handleSearchIconClick} className=' lg:hidden mr-2 cursor-pointer p-2  hover:bg-button hover:text-white rounded-md block_popunder'>
                                         <SearchIcon className='h-6 w-6' />
                                     </div>
 
@@ -319,7 +319,7 @@ useEffect(() => {
                 <div className={`flex flex-col relative p-1 ${searchBarVisibility}  transition ease-in-out delay-150 mt-2 `}>
 
 
-                    <form className="flex w-full items-center" onSubmit={goSearch}>
+                    <form className="flex w-full items-center block_popunder" onSubmit={goSearch}>
                         <div className="flex-grow mr-4">
                             <input
                                 value={searchKey}
@@ -469,7 +469,7 @@ useEffect(() => {
 
 
 
-                        <div className='relative select-none'>
+                        <div className='relative select-none block_popunder'>
                             <div className="flex  bg-semiblack items-center w-[250px] lg:w-[300px] 2xl:w-[700px]  border-[0.8px] border-[#E5E5E5] rounded-[30px] p-0.5 2xl:p-1 2xl:px-4 px-4">
                                 <SearchIcon className="h-5 2xl:h-6 text-[#E5E5E5]" />
                                 <input
